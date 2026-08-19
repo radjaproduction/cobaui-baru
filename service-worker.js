@@ -4,7 +4,7 @@
 
 const CACHE_NAME = 'radja-production-v9';
 const STATIC_CACHE = 'radja-static-v9';
-const BASE = '/inventory';
+const BASE = '/cobaui-baru';
 
 const STATIC_ASSETS = [
     BASE + '/manifest.json',
