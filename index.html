@@ -30,7 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
     <title>Radja Production - App</title>
 
-    <link rel="manifest" href="/inventory/manifest.json">
+    <link rel="manifest" href="/cobaui-baru/manifest.json">
     <meta name="theme-color" content="#F6DBB6">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -39,9 +39,9 @@
     <!-- Cegah browser Android/Chrome memunculkan toolbar pencarian -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;">
-    <link rel="apple-touch-icon" href="/inventory/icon-192.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/inventory/icon-192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/inventory/icon-512.png">
+    <link rel="apple-touch-icon" href="/cobaui-baru/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/cobaui-baru/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/cobaui-baru/icon-512.png">
 
     <script>
         // ==================== NOTIFIKASI UPDATE VERSI APLIKASI ====================
@@ -74,7 +74,7 @@
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/inventory/service-worker.js')
+                navigator.serviceWorker.register('/cobaui-baru/service-worker.js')
                     .then(reg => {
                         console.log('✅ SW registered:', reg.scope);
                         _swRegistrationGlobal = reg;
