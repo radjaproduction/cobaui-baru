@@ -1095,6 +1095,118 @@
   #tab-stok.rp-stock-screen .rp-brand-card{height:102px;min-height:102px}
 }
 </style>
+
+<style id="rp-stock-brand-horizontal-final">
+/* FINAL — STOK PER BRAND: horizontal mobile card, mengikuti referensi user */
+#tab-stok.rp-stock-screen .rp-brand-list{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:8px!important;
+  padding:0!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-card{
+  position:relative!important;
+  width:100%!important;
+  height:88px!important;
+  min-height:88px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:0!important;
+  padding:10px 12px!important;
+  border:1px solid rgba(117,150,194,.28)!important;
+  border-radius:15px!important;
+  background:linear-gradient(100deg,rgba(7,24,50,.88),rgba(7,24,50,.58))!important;
+  box-shadow:0 5px 16px rgba(0,0,0,.12)!important;
+  backdrop-filter:blur(5px)!important;
+  overflow:hidden!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-card::after{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;right:auto!important;top:0!important;bottom:0!important;
+  width:2px!important;height:auto!important;
+  background:linear-gradient(180deg,#ffb11a,#ff7900)!important;
+  opacity:1!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-icon-wrap{
+  width:78px!important;
+  flex:0 0 78px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-logo{
+  width:46px!important;height:46px!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#ffad18!important;
+  font-size:28px!important;font-weight:400!important;
+  box-shadow:none!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-line-icon{
+  font-size:29px!important;
+  line-height:1!important;
+  font-weight:400!important;
+  color:#ffad18!important;
+  filter:drop-shadow(0 2px 6px rgba(255,140,0,.12));
+}
+#tab-stok.rp-stock-screen .rp-brand-divider-vertical{
+  width:1px!important;height:58px!important;
+  flex:0 0 1px!important;
+  background:repeating-linear-gradient(to bottom,rgba(255,177,68,.85) 0 5px,transparent 5px 9px)!important;
+  margin-right:14px!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-copy{
+  min-width:0!important;
+  flex:1 1 auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-order{
+  font-size:10px!important;line-height:1!important;
+  color:#ffab18!important;font-weight:900!important;
+  margin-bottom:5px!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-name{
+  margin:0!important;height:auto!important;min-height:0!important;
+  font-size:15px!important;line-height:1.15!important;
+  font-weight:900!important;color:#f5f7fb!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+  max-width:100%!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-meta{
+  margin-top:5px!important;font-size:8px!important;line-height:1!important;
+  color:#9fb0c8!important;font-weight:800!important;
+  letter-spacing:.02em!important;
+  white-space:nowrap!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-meta span{
+  color:#ff9b0a!important;margin:0 3px!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-arrow{
+  width:29px!important;height:29px!important;flex:0 0 29px!important;
+  border-radius:50%!important;
+  background:rgba(255,255,255,.055)!important;
+  color:#91a4bf!important;font-size:8px!important;
+  margin-left:10px!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-accent,
+#tab-stok.rp-stock-screen .rp-brand-total-label,
+#tab-stok.rp-stock-screen .rp-brand-total,
+#tab-stok.rp-stock-screen .rp-brand-models,
+#tab-stok.rp-stock-screen .rp-brand-divider,
+#tab-stok.rp-stock-screen .rp-brand-status{display:none!important}
+#tab-stok.rp-stock-screen .rp-brand-card:active{transform:scale(.985)!important;border-color:rgba(255,140,0,.65)!important}
+@media (min-width:700px){
+  #tab-stok.rp-stock-screen .rp-brand-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+  #tab-stok.rp-stock-screen .rp-brand-card{height:88px!important;min-height:88px!important}
+}
+@media (min-width:1100px){
+  #tab-stok.rp-stock-screen .rp-brand-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+}
+</style>
 </head>
 <body class="w-full min-h-screen overflow-x-hidden bg-light">
     <div id="app-update-banner" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:9999998;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(90deg,#ff8c00,#ffb347);box-shadow:0 -4px 20px rgba(0,0,0,0.25);">
@@ -3714,18 +3826,18 @@ function updateSSK(tab, rowId) {
                         const isNegative = b.total < 0;
                         const initials = b.nama.replace(/[^A-Za-z0-9 ]/g, '').trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase() || '?';
                         const cardClass = isNegative ? 'rp-brand-card rp-brand-card-negative' : 'rp-brand-card';
+                        const orderNo = String(idx + 1).padStart(2, '0');
                         return `<div onclick="openBrandDetail(${b.id}, '${String(b.nama).replace(/'/g, "\\'")}')" class="${cardClass}">
-                            <div class="rp-brand-accent"></div>
-                            <div class="rp-brand-top">
-                                <div class="rp-brand-logo">${initials}</div>
-                                <div class="rp-brand-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                            <div class="rp-brand-icon-wrap">
+                                <div class="rp-brand-logo" aria-hidden="true"><i class="fa-regular fa-bookmark rp-brand-line-icon"></i></div>
                             </div>
-                            <div class="rp-brand-name">${b.nama}</div>
-                            <div class="rp-brand-total-label">Total Stok</div>
-                            <div class="rp-brand-total ${isNegative ? 'negative' : ''}">${b.total.toLocaleString('id-ID')}</div>
-                            <div class="rp-brand-models">${b.modelCount.toLocaleString('id-ID')} Model</div>
-                            <div class="rp-brand-divider"></div>
-                            <div class="rp-brand-status"><i class="fa-solid fa-cube"></i><span>${isNegative ? 'Perlu Koreksi' : 'Stok Tersedia'}</span></div>
+                            <div class="rp-brand-divider-vertical"></div>
+                            <div class="rp-brand-copy">
+                                <div class="rp-brand-order">${orderNo}</div>
+                                <div class="rp-brand-name">${b.nama}</div>
+                                <div class="rp-brand-meta">${b.total.toLocaleString('id-ID')} STOK <span>•</span> ${b.modelCount.toLocaleString('id-ID')} MODEL</div>
+                            </div>
+                            <div class="rp-brand-arrow"><i class="fa-solid fa-chevron-right"></i></div>
                         </div>`;
                     }).join('');
                 }
