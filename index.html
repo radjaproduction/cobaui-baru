@@ -980,12 +980,12 @@
 .rp-nav-toggle{position:fixed;right:26px;bottom:22px;width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:23px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .22s ease,background .22s ease,color .22s ease}
 .rp-nav-toggle:active{transform:scale(.92)}
 .rp-nav-toggle.is-open{background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;border-color:rgba(255,177,26,.8)}
-#bottom-navbar{transition:opacity .18s ease;transform:none;opacity:1;background:transparent!important;border-top:0!important;box-shadow:none!important;backdrop-filter:none!important;padding-right:66px;box-sizing:border-box}
+#bottom-navbar{transition:opacity .18s ease;transform:none;opacity:1;background:transparent!important;border-top:0!important;box-shadow:none!important;backdrop-filter:none!important;padding-right:78px;box-sizing:border-box}
 #bottom-navbar.rp-navbar-hidden{opacity:0;pointer-events:none}
 /* Pastikan navbar tetap transparan walau tab aktif berubah warna (override rule per-tab di atas) */
 body[data-active-tab] #bottom-navbar{background:transparent!important;border-top:0!important;box-shadow:none!important}
 /* Animasi berantai (stagger): tiap item (icon+teks) meluncur satu-satu dari kanan ke kiri */
-#bottom-navbar .nav-btn{opacity:0;transform:translateX(26px);transition:opacity .22s ease,transform .3s cubic-bezier(.34,1.56,.64,1)}
+#bottom-navbar .nav-btn{opacity:0;transform:translateX(26px);transition:opacity .22s ease,transform .3s cubic-bezier(.34,1.56,.64,1);min-width:52px}
 #bottom-navbar.rp-stagger-in .nav-btn{opacity:1;transform:translateX(0)}
 #bottom-navbar .nav-btn:nth-child(6){transition-delay:.08s}
 #bottom-navbar .nav-btn:nth-child(5){transition-delay:.14s}
@@ -2396,7 +2396,7 @@ END $$;</textarea>
         </div>
 
         <!-- BOTTOM NAV -->
-        <div id="bottom-navbar" class="fixed bottom-0 w-full brand-gradient-bg border-t-2 border-[#e07800] flex justify-around items-center pt-3 z-50 rp-navbar-hidden" style="padding-bottom: max(16px, env(safe-area-inset-bottom))">
+        <div id="bottom-navbar" class="fixed bottom-0 w-full brand-gradient-bg border-t-2 border-[#e07800] flex justify-center items-center pt-3 z-50 rp-navbar-hidden" style="padding-bottom: max(16px, env(safe-area-inset-bottom)); gap: 6px;">
             <div id="nav-btn-stok" onclick="switchTab('stok')" class="nav-btn active flex flex-col items-center gap-1 cursor-pointer">
                 <div class="icon-box text-[#000000] bg-black/20 border-2 border-black/20 w-10 h-8 rounded-lg flex items-center justify-center shadow-lg"><i class="fa-solid fa-boxes-stacked text-lg"></i></div>
                 <span class="nav-text text-[9px] font-black text-[#000000]">Stok</span>
