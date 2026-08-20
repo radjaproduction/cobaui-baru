@@ -796,20 +796,20 @@
            semula, tidak disentuh sama sekali.
            ============================================================================ */
         :root {
-            /* -- tema TAB INPUT DATA (merah) -- */
-            --input-accent: #c81e2c;
-            --input-gradient: linear-gradient(90deg, #e0293a 0%, #f26b6b 100%);
-            --input-bg: #FCE0DF;
-            --input-bg2: #FDEDEC;
-            --input-border: #F0918D;
-            --input-shadow: rgba(224,41,58,0.38);
-            --input-hover: #FDEEEE;
-            --input-section-bg: #FCE7E6;
-            --input-choice-active: rgba(224,41,58,0.16);
-            --input-row-bg: #FDEDEC;
-            --input-row-index-bg: rgba(224,41,58,0.14);
-            --input-row-index-border: rgba(224,41,58,0.35);
-            --input-pill-bg: #FCE0DF;
+            /* -- tema TAB INPUT DATA (navy + oranye, sama konsep dengan TAB STOK) -- */
+            --input-accent: #ff8c00;
+            --input-gradient: linear-gradient(90deg, #ffb11a 0%, #ff7900 100%);
+            --input-bg: #06142B;
+            --input-bg2: #0a1c38;
+            --input-border: rgba(118,153,201,.32);
+            --input-shadow: rgba(0,0,0,.4);
+            --input-hover: rgba(255,140,0,.10);
+            --input-section-bg: #0d2645;
+            --input-choice-active: rgba(255,140,0,.18);
+            --input-row-bg: #0a1c38;
+            --input-row-index-bg: rgba(255,140,0,.16);
+            --input-row-index-border: rgba(255,140,0,.4);
+            --input-pill-bg: #0d2645;
 
             /* -- tema TAB TRANSAKSI (dark navy blue) -- */
             --trx-accent: #0f2a5c;
@@ -843,7 +843,6 @@
         #action-bar-input .border-borderDark { border-color: var(--input-border) !important; }
         #tab-input .dashed-border-brand,
         #input-variasi-sheet .dashed-border-brand { border-color: var(--input-accent) !important; }
-        #tab-input > div:first-child { box-shadow: 0 4px 16px var(--input-shadow) !important; }
         #beban-form-wrapper > div:first-child { box-shadow: 0 2px 12px var(--input-shadow) !important; }
 
         #input-brand-selector, #input-model-selector {
@@ -868,6 +867,79 @@
         #input-variasi-sheet .input-sheet-actions { border-top-color: var(--input-border) !important; }
         #input-variasi-sheet .qty-numpad-btn { border-color: var(--input-border) !important; background: var(--input-bg) !important; }
         #input-variasi-sheet #input-sheet-added-wrap { background: var(--input-hover) !important; }
+
+        /* ---------- TAB INPUT DATA: teks putih di atas navy (konsep sama dengan TAB STOK) ---------- */
+        #tab-input.rp-input-screen .text-black,
+        #input-variasi-sheet .text-black { color: #eef3fb !important; }
+        #tab-input.rp-input-screen .text-black\/40,
+        #input-variasi-sheet .text-black\/40 { color: rgba(238,243,251,.4) !important; }
+        #tab-input.rp-input-screen .text-black\/50,
+        #input-variasi-sheet .text-black\/50 { color: rgba(238,243,251,.5) !important; }
+        #tab-input.rp-input-screen .text-black\/60,
+        #input-variasi-sheet .text-black\/60 { color: rgba(238,243,251,.6) !important; }
+        #tab-input.rp-input-screen .text-black\/80,
+        #input-variasi-sheet .text-black\/80 { color: rgba(238,243,251,.8) !important; }
+        #tab-input.rp-input-screen .placeholder-black::placeholder,
+        #input-variasi-sheet .placeholder-black::placeholder { color: rgba(238,243,251,.4) !important; }
+        #tab-input.rp-input-screen .placeholder-black\/50::placeholder,
+        #input-variasi-sheet .placeholder-black\/50::placeholder { color: rgba(238,243,251,.3) !important; }
+
+        /* ---------- TAB INPUT DATA: heading polos (mengikuti konsep rp-stock-heading) ---------- */
+        #tab-input.rp-input-screen { background: var(--input-bg) !important; padding-top: 0; }
+        .rp-input-heading { padding: 18px 2px 4px; flex-shrink: 0; }
+        .rp-input-heading h1 { font-size: 28px; line-height: 1; font-weight: 900; letter-spacing: -.04em; margin: 0; color: #fff; }
+        .rp-input-heading h1 span { color: var(--input-accent); }
+        .rp-input-heading p { margin: 9px 0 0; color: #b7c3d6; font-size: 11px; line-height: 1.65; font-weight: 600; }
+
+        /* ---------- TAB INPUT DATA: mode switcher ala kartu (ikon + judul + deskripsi + tombol panah) ---------- */
+        .rp-input-mode-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; flex-shrink: 0; }
+        .rp-input-mode-card { position: relative; text-align: left; min-height: 148px; border-radius: 18px; border: 1px solid var(--input-border); background: linear-gradient(160deg,rgba(11,35,71,.85),rgba(6,20,43,.92)); padding: 13px 10px 42px; display: flex; flex-direction: column; gap: 7px; transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease, background .12s ease; }
+        .rp-input-mode-card:active { transform: scale(.97); }
+        .rp-input-mode-card-icon { width: 38px; height: 38px; border-radius: 11px; border: 1.5px solid currentColor; color: currentColor; background: rgba(255,255,255,.03); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+        .rp-input-mode-card-title { font-size: 11.5px; font-weight: 900; color: #f4f7fb; letter-spacing: .01em; margin-top: 2px; line-height: 1.15; }
+        .rp-input-mode-card-sub { font-size: 9px; font-weight: 600; color: #8fa2bd; line-height: 1.4; }
+        .rp-input-mode-card-arrow { position: absolute; right: 10px; bottom: 10px; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; background: rgba(255,255,255,.05); border: 1.5px solid currentColor; color: currentColor; }
+        .rp-input-mode-orange { color: #ff8c00; }
+        .rp-input-mode-blue { color: #2196f3; }
+        .rp-input-mode-red { color: #ef4444; }
+        .rp-input-mode-active.rp-input-mode-orange { border-color: rgba(255,140,0,.65); background: linear-gradient(160deg,rgba(255,140,0,.16),rgba(6,20,43,.92)); box-shadow: 0 10px 24px -8px rgba(255,140,0,.5); }
+        .rp-input-mode-active.rp-input-mode-blue { border-color: rgba(33,150,243,.65); background: linear-gradient(160deg,rgba(33,150,243,.16),rgba(6,20,43,.92)); box-shadow: 0 10px 24px -8px rgba(33,150,243,.5); }
+        .rp-input-mode-active.rp-input-mode-red { border-color: rgba(239,68,68,.65); background: linear-gradient(160deg,rgba(239,68,68,.16),rgba(6,20,43,.92)); box-shadow: 0 10px 24px -8px rgba(239,68,68,.5); }
+        .rp-input-mode-active .rp-input-mode-card-icon,
+        .rp-input-mode-active .rp-input-mode-card-arrow { background: currentColor; }
+        .rp-input-mode-active .rp-input-mode-card-icon i,
+        .rp-input-mode-active .rp-input-mode-card-arrow i { color: #101010; }
+
+        /* ---------- TAB INPUT DATA: panel PILIH PRODUK (step + progress + selector hex-icon) ---------- */
+        .rp-input-select-panel { border: 1px solid var(--input-border); border-radius: 18px; background: rgba(8,27,57,.62); padding: 14px; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+        .rp-input-select-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+        .rp-input-select-step { display: flex; align-items: center; gap: 9px; }
+        .rp-input-select-step-num { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--input-accent); color: var(--input-accent); font-size: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .rp-input-select-step-title { font-size: 12px; font-weight: 900; letter-spacing: .04em; color: #f4f7fb; }
+        .rp-input-select-progress { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+        .rp-input-select-progress-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--input-accent); flex-shrink: 0; }
+        .rp-input-select-progress-bar { width: 46px; height: 3px; border-radius: 99px; background: rgba(118,153,201,.25); overflow: hidden; }
+        .rp-input-select-progress-fill { display: block; height: 100%; width: 0%; background: var(--input-gradient); border-radius: 99px; transition: width .2s ease; }
+        .rp-input-select-progress-frac { font-size: 10px; font-weight: 800; color: #8fa2bd; }
+        .rp-input-select-rows { display: flex; flex-direction: column; gap: 9px; }
+        .rp-input-select-rows { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
+        .rp-input-select-row { display: flex; align-items: center; gap: 8px; min-height: 62px; border: 1px solid var(--input-border); border-radius: 14px; background: rgba(6,20,43,.6); padding: 9px 8px; cursor: pointer; transition: transform .12s ease, border-color .12s ease; }
+        .rp-input-select-row:active { transform: scale(.985); border-color: rgba(255,140,0,.55); }
+        .rp-input-select-copy { min-width: 0; flex: 1; }
+        .rp-input-select-label { font-size: 8.5px; font-weight: 800; letter-spacing: .08em; color: #8fa2bd; }
+        .rp-input-select-value { font-size: 12px; font-weight: 900; color: var(--input-accent); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .rp-input-select-arrow { color: #7386a1; font-size: 12px; flex-shrink: 0; }
+        .rp-input-select-icon-hex { width: 36px; height: 36px; position: relative; flex-shrink: 0; }
+        .rp-input-select-icon-hex::before { content: ''; position: absolute; inset: 0; background: var(--input-accent); clip-path: polygon(25% 4%, 75% 4%, 100% 50%, 75% 96%, 25% 96%, 0% 50%); }
+        .rp-input-select-icon-hex::after { content: ''; position: absolute; inset: 2px; background: #0a1c38; clip-path: polygon(25% 4%, 75% 4%, 100% 50%, 75% 96%, 25% 96%, 0% 50%); }
+        .rp-input-select-icon-hex i { position: relative; z-index: 1; color: var(--input-accent); font-size: 14px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+
+        /* ---------- TAB INPUT DATA: panel VARIASI ITEM ala rp-stock-section-head ---------- */
+        .rp-input-variasi-card { border-radius: 18px; overflow: hidden; border: 1px solid var(--input-border); background: rgba(8,27,57,.72); }
+        .rp-input-variasi-head { background: var(--input-gradient); color: #101010; padding: 13px 16px; display: flex; align-items: center; justify-content: between; justify-content: space-between; gap: 10px; flex-shrink: 0; }
+        .rp-input-variasi-title { font-size: 13px; font-weight: 900; line-height: 1; letter-spacing: .01em; }
+        .rp-input-variasi-sub { font-size: 9px; font-weight: 700; opacity: .65; margin-top: 5px; }
+        .rp-input-add-btn { width: 100%; padding: 15px; border-radius: 12px; border: 2px dashed rgba(255,140,0,.55); color: var(--input-accent); font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 8px; background: transparent; }
 
         /* ---------- TAB TRANSAKSI: variabel brand lokal jadi UNGU ---------- */
         #tab-transaksi, #trx-variasi-sheet, #action-bar-transaksi {
@@ -909,9 +981,7 @@
         #trx-variasi-sheet .qty-numpad-btn { border-color: var(--trx-border) !important; background: var(--trx-bg) !important; }
         #trx-variasi-sheet #trx-sheet-added-wrap { background: var(--trx-hover) !important; }
 
-        /* ---------- TAB INPUT DATA (merah): teks putih di atas elemen ber-background gelap ---------- */
-        #tab-input > div:first-child,
-        #tab-input > div:first-child *,
+        /* ---------- TAB INPUT DATA (navy): teks putih di atas elemen ber-background gelap ---------- */
         #tab-input .brand-gradient-bg,
         #tab-input .brand-gradient-bg *,
         #action-bar-input .brand-gradient-bg,
@@ -1619,21 +1689,30 @@ body.rp-navbar-collapsed #action-bar-input,body.rp-navbar-collapsed #action-bar-
         </div>
 
         <!-- TAB INPUT DATA -->
-        <div id="tab-input" class="tab-content hidden flex-col p-4 gap-4 relative z-10" >
-            <div class="flex items-stretch -mx-4 mb-2 shadow-[0_4px_16px_rgba(255,140,0,0.35)] brand-gradient-bg rounded-b-2xl overflow-hidden flex-shrink-0 sticky top-0 z-30">
-                <div class="w-20 h-[72px] flex items-center justify-center flex-shrink-0 z-10 relative bg-black/5 border-r-2 border-black/10">
-                    <svg class="w-12 h-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3996.74 2715.33"><path fill="#000000" d="M1379.8 2078.49l-339.7 -450.38 -797.43 0 819.99 1087.21 369.69 0 427.79 0 778.91 0c746.73,0 1357.68,-610.94 1357.68,-1357.67 0,-746.72 -610.94,-1357.66 -1357.68,-1357.66l-685.55 0c242.92,127.17 422.11,359.81 476.47,636.83l209.08 0c396.43,0 720.83,324.36 720.83,720.83 0,396.44 -324.35,720.83 -720.83,720.83l-1259.26 0zm906.78 -104.15l-261.1 -346.23 -0.04 0 -84.57 -112.11c240.44,-141.62 402.14,-403.18 402.14,-701.94 0,-448.98 -365.11,-814.06 -814.05,-814.06l-1528.97 0 480.33 636.83 1048.65 0c97.46,0 177.22,79.74 177.22,177.22 0,97.51 -79.76,177.25 -177.22,177.25l-781.29 0 741.44 983.04 797.46 0z"/></svg>
-                </div>
-                <div class="h-[72px] flex flex-col justify-center px-4 flex-grow z-10 relative">
-                    <h1 class="text-[26px] font-black text-[#000000] leading-none tracking-wide mb-1" id="input-header-title">INPUT <span class="text-black">DATA</span></h1>
-                    <div class="w-full h-[1.5px] bg-[#ffffff]/30 mb-1"></div>
-                    <h2 class="display-brand-name text-[10px] font-bold text-[#000000] tracking-[0.15em] leading-none mt-0.5 uppercase">RADJA PRODUCTION</h2>
-                </div>
+        <div id="tab-input" class="tab-content hidden flex-col p-4 gap-4 relative z-10 rp-input-screen" >
+            <div class="rp-input-heading">
+                <h1 id="input-header-title">Input <span>Data</span></h1>
+                <p>Catat barang masuk, beban operasional, dan retur stok.</p>
             </div>
-            <div class="bg-darkBg p-1 rounded-xl flex border-2 border-borderDark gap-1 flex-shrink-0">
-                <button id="input-mode-masuk" onclick="setInputMode('masuk')" class="flex-1 py-2.5 text-xs font-bold rounded-lg brand-gradient-bg text-black shadow-sm transition-all flex items-center justify-center gap-2"><i class="fa-solid fa-arrow-down text-xs"></i> STOK MASUK</button>
-                <button id="input-mode-beban" onclick="setInputMode('beban')" class="flex-1 py-2.5 text-xs font-bold rounded-lg text-black hover:text-black flex items-center justify-center gap-2"><i class="fa-solid fa-file-invoice-dollar text-xs"></i> BEBAN</button>
-                <button id="input-mode-retur" onclick="setInputMode('retur')" class="flex-1 py-2.5 text-xs font-bold rounded-lg text-black hover:text-black transition-all flex items-center justify-center gap-2"><i class="fa-solid fa-rotate-left text-xs"></i> RETUR</button>
+            <div class="rp-input-mode-grid">
+                <button id="input-mode-masuk" onclick="setInputMode('masuk')" class="rp-input-mode-card rp-input-mode-orange rp-input-mode-active">
+                    <div class="rp-input-mode-card-icon"><i class="fa-solid fa-box"></i></div>
+                    <div class="rp-input-mode-card-title">STOK MASUK</div>
+                    <div class="rp-input-mode-card-sub">Input stok baru ke gudang</div>
+                    <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                </button>
+                <button id="input-mode-beban" onclick="setInputMode('beban')" class="rp-input-mode-card rp-input-mode-blue">
+                    <div class="rp-input-mode-card-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <div class="rp-input-mode-card-title">BEBAN</div>
+                    <div class="rp-input-mode-card-sub">Catat biaya operasional produksi</div>
+                    <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                </button>
+                <button id="input-mode-retur" onclick="setInputMode('retur')" class="rp-input-mode-card rp-input-mode-red">
+                    <div class="rp-input-mode-card-icon"><i class="fa-solid fa-rotate-left"></i></div>
+                    <div class="rp-input-mode-card-title">RETUR</div>
+                    <div class="rp-input-mode-card-sub">Catat stok yang dikembalikan</div>
+                    <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                </button>
             </div>
             <div id="retur-info-banner" class="hidden bg-red-500/10 border-2 border-red-500/30 rounded-xl px-4 py-3 flex items-start gap-3 flex-shrink-0">
                 <i class="fa-solid fa-triangle-exclamation text-red-400 mt-0.5 flex-shrink-0"></i>
@@ -1751,33 +1830,48 @@ END $$;</textarea>
                 <div id="beban-input-list" class="flex flex-col gap-2"></div>
             </div>
 
-            <div id="input-brandmodel-wrapper" class="flex flex-col gap-3 flex-shrink-0">
-                <div id="input-brand-selector" onclick="bukaDropdownInput('brand')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#7699C9] cursor-pointer hover:bg-[#133a66] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-lg brand-gradient-bg flex items-center justify-center text-black"><i class="fa-solid fa-tags text-xl"></i></div>
-                        <div><h3 class="text-sm font-bold text-black mb-1">BRAND</h3><p class="text-xs brand-text font-semibold" id="input-brand-display">Pilih brand</p></div>
+            <div id="input-brandmodel-wrapper" class="rp-input-select-panel">
+                <div class="rp-input-select-panel-head">
+                    <div class="rp-input-select-step">
+                        <span class="rp-input-select-step-num">01</span>
+                        <span class="rp-input-select-step-title">PILIH PRODUK</span>
                     </div>
-                    <i class="fa-solid fa-chevron-down brand-text text-base"></i>
+                    <div class="rp-input-select-progress">
+                        <span class="rp-input-select-progress-dot"></span>
+                        <span class="rp-input-select-progress-bar"><span id="input-select-progress-fill" class="rp-input-select-progress-fill" style="width:0%"></span></span>
+                        <span class="rp-input-select-progress-frac" id="input-select-progress-frac">0/2</span>
+                    </div>
                 </div>
-                <div id="input-model-selector" onclick="bukaDropdownInput('model')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#7699C9] cursor-pointer hover:bg-[#133a66] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-lg brand-gradient-bg flex items-center justify-center text-black"><i class="fa-solid fa-shirt text-xl"></i></div>
-                        <div><h3 class="text-sm font-bold text-black mb-1">MODEL</h3><p class="text-xs brand-text font-semibold" id="input-model-display">Pilih model</p></div>
+                <div class="rp-input-select-rows">
+                    <div id="input-brand-selector" onclick="bukaDropdownInput('brand')" class="rp-input-select-row">
+                        <div class="rp-input-select-icon-hex"><i class="fa-solid fa-tags"></i></div>
+                        <div class="rp-input-select-copy">
+                            <div class="rp-input-select-label">BRAND</div>
+                            <div class="rp-input-select-value" id="input-brand-display">Pilih brand</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down rp-input-select-arrow"></i>
                     </div>
-                    <i class="fa-solid fa-chevron-down brand-text text-base"></i>
+                    <div id="input-model-selector" onclick="bukaDropdownInput('model')" class="rp-input-select-row">
+                        <div class="rp-input-select-icon-hex"><i class="fa-solid fa-shirt"></i></div>
+                        <div class="rp-input-select-copy">
+                            <div class="rp-input-select-label">MODEL</div>
+                            <div class="rp-input-select-value" id="input-model-display">Pilih model</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down rp-input-select-arrow"></i>
+                    </div>
                 </div>
             </div>
-            <div id="input-variasi-card" class="rounded-xl overflow-hidden border-2 border-borderDark bg-cardBg variasi-card-grow">
-                <div id="input-tabel-header" class="brand-gradient-bg text-black px-4 py-3 flex items-center justify-between gap-3 flex-shrink-0">
+            <div id="input-variasi-card" class="rp-input-variasi-card variasi-card-grow">
+                <div id="input-tabel-header" class="rp-input-variasi-head">
                     <div>
-                        <div class="text-[13px] font-black leading-none">VARIASI ITEM</div>
-                        <div class="text-[9px] font-bold opacity-60 mt-1">Tap item untuk isi warna, ukuran, dan qty</div>
+                        <div class="rp-input-variasi-title">VARIASI ITEM</div>
+                        <div class="rp-input-variasi-sub">Tap item untuk isi warna, ukuran, dan qty</div>
                     </div>
                     <i class="fa-solid fa-up-right-and-down-left-from-center text-sm"></i>
                 </div>
                 <div id="input-variasi-list" class="flex flex-col gap-2 p-3 variasi-list-grow"></div>
                 <div class="p-3 flex-shrink-0">
-                    <button id="btn-tambah-variasi-input" onclick="tambahVariasiInput()" class="w-full py-4 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#133a66] opacity-40 cursor-not-allowed pointer-events-none" disabled><i class="fa-solid fa-plus"></i> Tambah Variasi</button>
+                    <button id="btn-tambah-variasi-input" onclick="tambahVariasiInput()" class="rp-input-add-btn opacity-40 cursor-not-allowed pointer-events-none" disabled><i class="fa-solid fa-plus"></i> Tambah Variasi</button>
                 </div>
             </div>
             <!-- RIWAYAT RETUR: hanya tampil saat mode RETUR aktif -->
@@ -5590,13 +5684,9 @@ function updateSSK(tab, rowId) {
         const variasiCard = document.getElementById('input-variasi-card');
         const actionBar = document.getElementById('action-bar-input');
 
-        const ACTIVE = "flex-1 py-2.5 text-xs font-bold rounded-lg brand-gradient-bg text-black shadow-sm transition-all flex items-center justify-center gap-2";
-        const ACTIVE_RETUR = "flex-1 py-2.5 text-xs font-bold rounded-lg bg-red-500/20 text-red-400 border-2 border-red-500/40 shadow-sm transition-all flex items-center justify-center gap-2";
-        const INACTIVE = "flex-1 py-2.5 text-xs font-bold rounded-lg text-black hover:text-black transition-all flex items-center justify-center gap-2";
-
-        btnMasuk.className = mode === 'masuk' ? ACTIVE : INACTIVE;
-        btnBeban.className = mode === 'beban' ? ACTIVE : INACTIVE;
-        btnRetur.className = mode === 'retur' ? ACTIVE_RETUR : INACTIVE;
+        btnMasuk.classList.toggle('rp-input-mode-active', mode === 'masuk');
+        btnBeban.classList.toggle('rp-input-mode-active', mode === 'beban');
+        btnRetur.classList.toggle('rp-input-mode-active', mode === 'retur');
 
         if (mode === 'beban') {
             banner.classList.add('hidden'); banner.classList.remove('flex');
@@ -5606,7 +5696,7 @@ function updateSSK(tab, rowId) {
             variasiCard.classList.add('hidden');
             actionBar.style.display = 'none';
             bebanWrapper.classList.remove('hidden'); bebanWrapper.classList.add('flex');
-            headerTitle.innerHTML = 'CATAT <span class="text-black">BIAYA</span>';
+            headerTitle.innerHTML = 'Catat <span>Biaya</span>';
             const tglInput = document.getElementById('beban-input-tanggal');
             if (tglInput && !tglInput.value) tglInput.value = new Date().toISOString().slice(0, 10);
             loadBebanInputList();
@@ -5625,13 +5715,13 @@ function updateSSK(tab, rowId) {
         if (mode === 'masuk') {
             banner.classList.add('hidden'); banner.classList.remove('flex');
             keteranganWrapper.classList.add('hidden'); keteranganWrapper.classList.remove('flex');
-            headerTitle.innerHTML = 'INPUT <span class="text-black">DATA</span>';
+            headerTitle.innerHTML = 'Input <span>Data</span>';
             btnText.textContent = 'SIMPAN DATA MASUK';
             if (returSection) { returSection.classList.add('hidden'); returSection.classList.remove('flex'); }
         } else {
             banner.classList.remove('hidden'); banner.classList.add('flex');
             keteranganWrapper.classList.remove('hidden'); keteranganWrapper.classList.add('flex');
-            headerTitle.innerHTML = 'RETUR <span class="text-black">STOK</span>';
+            headerTitle.innerHTML = 'Retur <span>Stok</span>';
             btnText.textContent = 'SIMPAN RETUR';
             if (returSection) { returSection.classList.remove('hidden'); returSection.classList.add('flex'); }
             _rrPage = 1; // masuk mode retur -> kembali ke halaman 1 biar tidak nyangkut di halaman lama
@@ -5953,6 +6043,11 @@ function updateSSK(tab, rowId) {
 
     function updateInputVariasiState() {
         const enabled = !!inputState.modelId;
+        const progressCount = (inputState.brandId ? 1 : 0) + (inputState.modelId ? 1 : 0);
+        const progressFill = document.getElementById('input-select-progress-fill');
+        const progressFrac = document.getElementById('input-select-progress-frac');
+        if (progressFill) progressFill.style.width = (progressCount / 2 * 100) + '%';
+        if (progressFrac) progressFrac.textContent = progressCount + '/2';
         const btnTambah = document.getElementById('btn-tambah-variasi-input');
         if (btnTambah) {
             btnTambah.disabled = !enabled;
