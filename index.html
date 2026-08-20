@@ -220,7 +220,7 @@
         .collapse-chevron { transition: transform 0.3s ease; }
         .collapse-chevron.rotated { transform: rotate(180deg); }
         .tab-content { animation: fadeIn 0.12s ease-out; }
-        .tab-content.flex { min-height: 100dvh; min-height: 100vh; }
+        .tab-content.flex { min-height: 100vh; min-height: 100dvh; }
         .variasi-card-grow {
             flex: 1 1 auto;
             display: flex;
@@ -248,10 +248,10 @@
            dijangkau/discroll kalau totalnya melebihi tinggi layar. */
         #tab-input.tab-content.flex,
         #tab-transaksi.tab-content.flex {
-            height: 100dvh;
             height: 100vh;
-            max-height: 100dvh;
+            height: 100dvh;
             max-height: 100vh;
+            max-height: 100dvh;
             min-height: 0;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
@@ -291,10 +291,10 @@
            overflow-y:auto di sini hanya fallback (mis. saat detail brand
            dibuka, kontennya absolute & bisa lebih tinggi dari layar). */
         #tab-stok.tab-content.flex {
-            height: 100dvh;
             height: 100vh;
-            max-height: 100dvh;
+            height: 100dvh;
             max-height: 100vh;
+            max-height: 100dvh;
             min-height: 0;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
@@ -323,8 +323,8 @@
         /* Body dikunci (tidak bisa scroll) selama tab INPUT DATA / TRANSAKSI aktif */
         body.lock-page-scroll {
             overflow: hidden;
-            height: 100dvh;
             height: 100vh;
+            height: 100dvh;
             position: fixed;
             top: 0;
             left: 0;
@@ -538,10 +538,10 @@
         .input-sheet-panel {
             width: 100%;
             max-width: 100%;
-            height: 100dvh;
             height: 100vh;
-            max-height: 100dvh;
+            height: 100dvh;
             max-height: 100vh;
+            max-height: 100dvh;
             background: #ffffff;
             border: none;
             border-radius: 0;
@@ -893,10 +893,10 @@
         body[data-active-tab="input"] #bottom-navbar #nav-btn-exit > div:first-child { background-color: rgba(0,0,0,0.15) !important; border-color: rgba(0,0,0,0.3) !important; }
     </style>
 <style id="radja-stock-redesign">
-#tab-stok.rp-stock-screen{--rp-navy:#06142b;--rp-navy2:#0a1c38;--rp-panel:rgba(8,25,52,.78);--rp-border:rgba(118,153,201,.28);--rp-orange:#ff8c00;--rp-blue:#2196f3;--rp-text:#f5f7fb;--rp-muted:#aebbd0;background:#06142b!important;color:var(--rp-text)!important;min-height:100dvh;overflow:hidden;padding:0 16px 96px}
-#tab-stok.rp-stock-screen::before{content:"";position:absolute;inset:0;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,.98) 0%,rgba(4,16,35,.88) 42%,rgba(4,16,35,.58) 100%),url('radja_stock_background.png');background-size:cover;background-position:center top;background-repeat:no-repeat;pointer-events:none}
-#tab-stok.rp-stock-screen::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
-#tab-stok.rp-stock-screen .rp-stock-dashboard{min-height:100dvh;gap:0;position:relative}
+#tab-stok.rp-stock-screen{--rp-navy:#06142b;--rp-navy2:#0a1c38;--rp-panel:rgba(8,25,52,.78);--rp-border:rgba(118,153,201,.28);--rp-orange:#ff8c00;--rp-blue:#2196f3;--rp-text:#f5f7fb;--rp-muted:#aebbd0;background:#06142b!important;color:var(--rp-text)!important;min-height:100vh;min-height:100dvh;overflow:hidden;padding:0 16px 96px;position:relative;isolation:isolate}
+#tab-stok.rp-stock-screen::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,.98) 0%,rgba(4,16,35,.88) 42%,rgba(4,16,35,.58) 100%),url('radja_stock_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+#tab-stok.rp-stock-screen::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
+#tab-stok.rp-stock-screen .rp-stock-dashboard{min-height:100vh;min-height:100dvh;gap:0;position:relative}
 .rp-stock-hero{padding:14px 0 18px;position:sticky;top:0;z-index:30;background:linear-gradient(180deg,rgba(5,18,39,.96),rgba(5,18,39,.84) 75%,transparent);backdrop-filter:blur(7px)}
 .rp-stock-hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.rp-stock-brand-lockup{display:flex;align-items:center;gap:9px;min-width:0}.rp-stock-logo-svg,.rp-stock-logo{width:45px;height:32px;object-fit:contain;flex-shrink:0}.rp-stock-brand-name{font-size:13px;line-height:.86;font-weight:900;letter-spacing:.02em;color:#fff}.rp-stock-brand-name span{font-size:8px;letter-spacing:.11em}.rp-stock-actions{display:flex;gap:8px}.rp-stock-icon-btn{width:38px;height:38px;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(7,25,52,.72);color:#eef3fb;display:flex;align-items:center;justify-content:center;position:relative;font-size:15px}.rp-stock-badge{position:absolute;right:-2px;top:-3px;min-width:15px;height:15px;border-radius:99px;background:var(--rp-orange);color:#111;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #06142b}
 .rp-stock-heading{padding:22px 4px 4px}.rp-stock-heading h1{font-size:30px;line-height:1;font-weight:900;letter-spacing:-.04em;margin:0;color:#fff}.rp-stock-heading h1 span{color:var(--rp-orange)}.rp-stock-heading p{margin:9px 0 0;color:#b7c3d6;font-size:11px;line-height:1.65;font-weight:600}
@@ -1206,10 +1206,6 @@
 @media (min-width:1100px){
   #tab-stok.rp-stock-screen .rp-brand-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
 }
-</style>
-<style id="rp-stock-header-right-fix">
-/* Header Tab STOK: rapatkan grup icon ke ujung kanan layar tanpa mengubah padding konten lain. */
-#tab-stok.rp-stock-screen .rp-stock-actions{margin-right:-16px!important;}
 </style>
 </head>
 <body class="w-full min-h-screen overflow-x-hidden bg-light">
