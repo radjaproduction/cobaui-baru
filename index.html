@@ -963,14 +963,6 @@
         body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar .nav-btn.active .icon-box { color: #ffffff !important; background-color: rgba(255,255,255,0.18) !important; border-color: rgba(255,255,255,0.45) !important; }
         body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar .nav-text { color: rgba(255,255,255,0.55) !important; }
         body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar .nav-btn.active .nav-text { color: #ffffff !important; }
-        body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar #nav-btn-exit i,
-        body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar #nav-btn-exit span { color: #ff5c5c !important; }
-        body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar #nav-btn-exit > div:first-child { background-color: rgba(255,92,92,0.12) !important; border-color: rgba(255,92,92,0.3) !important; }
-
-        /* ---------- Tombol EXIT: jadi hitam saat navbar tab aktif berwarna merah (Input Data) supaya tidak blend ---------- */
-        body[data-active-tab="input"] #bottom-navbar #nav-btn-exit i,
-        body[data-active-tab="input"] #bottom-navbar #nav-btn-exit span { color: #000000 !important; }
-        body[data-active-tab="input"] #bottom-navbar #nav-btn-exit > div:first-child { background-color: rgba(0,0,0,0.15) !important; border-color: rgba(0,0,0,0.3) !important; }
     </style>
 <style id="radja-stock-redesign">
 #tab-stok.rp-stock-screen{--rp-navy:#06142b;--rp-navy2:#0a1c38;--rp-panel:rgba(8,25,52,.78);--rp-border:rgba(118,153,201,.28);--rp-orange:#ff8c00;--rp-blue:#2196f3;--rp-text:#f5f7fb;--rp-muted:#aebbd0;background:#06142b!important;color:var(--rp-text)!important;min-height:100vh;min-height:100dvh;overflow:hidden;padding:0 16px 96px;position:relative;isolation:isolate}
@@ -985,7 +977,7 @@
 .rp-stock-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:10px;padding:0 2px}.rp-stock-section-head h2{font-size:15px;line-height:1;font-weight:900;color:#fff;margin:0;letter-spacing:.01em}.rp-stock-section-head p{font-size:8px;color:#7386a1;margin:5px 0 0;font-weight:600}.rp-stock-section-head button{border:0;background:transparent;color:var(--rp-orange);font-size:10px;font-weight:900;display:flex;align-items:center;gap:5px;white-space:nowrap}.rp-stock-sort-note{color:var(--rp-orange);font-size:9px;font-weight:900;display:flex;align-items:center;gap:5px;white-space:nowrap}
 .rp-brand-shell{min-height:0;background:transparent!important;border:0!important;overflow:visible!important}.rp-brand-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0!important;overflow:visible!important}.rp-brand-card{position:relative;min-height:188px;border:1px solid rgba(112,147,196,.28);border-radius:18px;background:linear-gradient(145deg,rgba(11,35,71,.92),rgba(6,20,43,.9));overflow:hidden;padding:14px 12px 12px;box-shadow:0 10px 26px rgba(0,0,0,.22);cursor:pointer;transition:transform .15s ease,border-color .15s ease}.rp-brand-card:active{transform:scale(.97);border-color:rgba(255,140,0,.6)}.rp-brand-accent{position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#ffb11a,#ff7900)}.rp-brand-card-negative .rp-brand-accent{background:#ef4444}.rp-brand-top{display:flex;align-items:center;justify-content:space-between}.rp-brand-logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#ffb21a,#ff7900);color:#101010;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 14px rgba(255,140,0,.2)}.rp-brand-arrow{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.055);color:#91a4bf;display:flex;align-items:center;justify-content:center;font-size:9px}.rp-brand-name{font-size:12px;font-weight:900;color:#f4f7fb;margin-top:12px;line-height:1.2;min-height:29px;display:flex;align-items:center}.rp-brand-total-label{font-size:8px;color:#2399ff;font-weight:800;margin-top:9px}.rp-brand-total{font-size:24px;color:#249cff;font-weight:900;line-height:1.05;margin-top:3px}.rp-brand-total.negative{color:#ef6666}.rp-brand-models{font-size:9px;color:#c1ccdc;font-weight:700;margin-top:4px}.rp-brand-divider{height:1px;background:rgba(143,168,203,.16);margin:12px 0 9px}.rp-brand-status{display:flex;align-items:center;gap:6px;color:#9eb0c7;font-size:8px;font-weight:700}.rp-brand-status i{font-size:10px}.rp-brand-loading{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;padding:22px;color:#7f92ad;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}.rp-brand-list>.skel-row{min-height:80px;grid-column:1/-1;background:rgba(8,26,53,.75)!important;border:1px solid rgba(100,135,183,.15)}
 .rp-stock-fab{position:fixed;right:18px;bottom:92px;width:72px;height:72px;border:0;border-radius:50%;background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:900;box-shadow:0 12px 28px rgba(255,115,0,.35);z-index:70}.rp-stock-fab i{font-size:21px;line-height:1}.rp-stock-fab span{font-size:8px}
-.rp-nav-toggle{position:fixed;right:29px;bottom:22px;width:50px;height:50px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .22s ease,background .22s ease,color .22s ease}
+.rp-nav-toggle{position:fixed;right:26px;bottom:22px;width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:23px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .22s ease,background .22s ease,color .22s ease}
 .rp-nav-toggle:active{transform:scale(.92)}
 .rp-nav-toggle.is-open{background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;border-color:rgba(255,177,26,.8)}
 #bottom-navbar{transition:opacity .18s ease;transform:none;opacity:1;background:transparent!important;border-top:0!important;box-shadow:none!important;backdrop-filter:none!important}
@@ -993,19 +985,15 @@
 /* Pastikan navbar tetap transparan walau tab aktif berubah warna (override rule per-tab di atas) */
 body[data-active-tab] #bottom-navbar{background:transparent!important;border-top:0!important;box-shadow:none!important}
 /* Animasi berantai (stagger): tiap item (icon+teks) meluncur satu-satu dari kanan ke kiri */
-#bottom-navbar .nav-btn,
-#bottom-navbar #nav-btn-exit{opacity:0;transform:translateX(26px);transition:opacity .22s ease,transform .3s cubic-bezier(.34,1.56,.64,1)}
-#bottom-navbar.rp-stagger-in .nav-btn,
-#bottom-navbar.rp-stagger-in #nav-btn-exit{opacity:1;transform:translateX(0)}
-#bottom-navbar #nav-btn-exit{transition-delay:.02s}
+#bottom-navbar .nav-btn{opacity:0;transform:translateX(26px);transition:opacity .22s ease,transform .3s cubic-bezier(.34,1.56,.64,1)}
+#bottom-navbar.rp-stagger-in .nav-btn{opacity:1;transform:translateX(0)}
 #bottom-navbar .nav-btn:nth-child(6){transition-delay:.08s}
 #bottom-navbar .nav-btn:nth-child(5){transition-delay:.14s}
 #bottom-navbar .nav-btn:nth-child(4){transition-delay:.2s}
 #bottom-navbar .nav-btn:nth-child(3){transition-delay:.26s}
 #bottom-navbar .nav-btn:nth-child(2){transition-delay:.32s}
 #bottom-navbar .nav-btn:nth-child(1){transition-delay:.38s}
-#bottom-navbar:not(.rp-stagger-in) .nav-btn,
-#bottom-navbar:not(.rp-stagger-in) #nav-btn-exit{transition-delay:0s!important}
+#bottom-navbar:not(.rp-stagger-in) .nav-btn{transition-delay:0s!important}
 body.rp-navbar-collapsed #action-bar-input,body.rp-navbar-collapsed #action-bar-transaksi{bottom:0!important}
 #tab-stok.rp-stock-screen .kpi-skel{min-width:30px;color:transparent!important}#tab-stok.rp-stock-screen .rp-stock-dashboard{padding-bottom:10px}@media (min-width:520px){.rp-brand-list{grid-template-columns:repeat(3,minmax(0,1fr))}.rp-stock-kpis{gap:12px}.rp-stock-heading h1{font-size:34px}}
 </style>
@@ -2439,10 +2427,6 @@ END $$;</textarea>
                 <div class="icon-box text-[#000000]/60 w-10 h-8 rounded-lg flex items-center justify-center"><i class="fa-solid fa-database text-lg"></i></div>
                 <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Master</span>
             </div>
-            <div id="nav-btn-exit" onclick="exitApp()" class="flex flex-col items-center gap-1 cursor-pointer">
-                <div class="w-10 h-8 rounded-lg flex items-center justify-center transition-all bg-red-500/20 border-2 border-red-500/30"><i class="fa-solid fa-right-from-bracket text-red-500 text-lg"></i></div>
-                <span class="text-[9px] text-red-500/70 transition-all font-normal">Exit</span>
-            </div>
         </div>
 
         <!-- FLOATING MENU TOGGLE: membuka/menutup navbar utama -->
@@ -2483,7 +2467,7 @@ END $$;</textarea>
             toggle.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
         };
         toggle.addEventListener('click', () => setOpen(!open));
-        nav.querySelectorAll('.nav-btn, #nav-btn-exit').forEach(btn => {
+        nav.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', () => setTimeout(() => setOpen(false), 120));
         });
         setOpen(false);
