@@ -455,7 +455,7 @@
         #loading-overlay {
             position: fixed;
             inset: 0;
-            background: #06142B;
+            background: #0a1c38;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -523,6 +523,7 @@
             100% { opacity:0; }
         }
         .loading-status {
+            display: none;
             min-height: 16px;
             color: #1a2942;
             font-size: 10px;
@@ -1865,6 +1866,230 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 }
 </style>
 
+
+<style id="rp-beban-retur-final-redesign">
+/* =========================================================
+   REDESIGN BEBAN + RETUR
+   Selaras dengan visual TAB STOK & TAB INPUT:
+   - navy glass panel
+   - border tipis biru-navy
+   - orange sebagai brand/action
+   - red hanya untuk status/peringatan retur
+   - form lebih padat agar scroll tidak panjang
+   ========================================================= */
+#tab-input.rp-input-screen .rp-input-mode-grid{gap:8px;margin-bottom:0}
+#tab-input.rp-input-screen .rp-input-mode-card{
+  min-height:126px;
+  border-radius:16px;
+  padding:11px 9px 38px;
+  background:linear-gradient(160deg,rgba(11,35,71,.90),rgba(6,20,43,.96));
+  box-shadow:0 7px 18px rgba(0,0,0,.16);
+}
+#tab-input.rp-input-screen .rp-input-mode-card-icon{width:34px;height:34px;border-radius:10px;font-size:13px}
+#tab-input.rp-input-screen .rp-input-mode-card-title{font-size:10.5px}
+#tab-input.rp-input-screen .rp-input-mode-card-sub{font-size:8px;line-height:1.35}
+#tab-input.rp-input-screen .rp-input-mode-card-arrow{width:24px;height:24px;right:8px;bottom:8px;font-size:9px}
+
+/* ---------- BEBAN: main panel ---------- */
+#beban-form-wrapper{gap:9px!important}
+#beban-form-wrapper>div:first-child{
+  border:1px solid rgba(118,153,201,.30)!important;
+  border-radius:18px!important;
+  background:rgba(8,27,57,.78)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.20)!important;
+  overflow:hidden;
+}
+#beban-form-wrapper>div:first-child>div:first-child{
+  min-height:48px;
+  padding:11px 14px!important;
+  background:rgba(8,27,57,.92)!important;
+  border-bottom:1px solid rgba(118,153,201,.28)!important;
+  color:#f4f7fb!important;
+  position:relative;
+}
+#beban-form-wrapper>div:first-child>div:first-child:after{
+  content:"";
+  position:absolute;
+  left:14px;right:14px;bottom:-1px;height:2px;
+  background:linear-gradient(90deg,#2196f3,rgba(33,150,243,0));
+}
+#beban-form-wrapper>div:first-child>div:first-child i{color:#2196f3!important;font-size:13px}
+#beban-form-wrapper>div:first-child>div:first-child .text-\[13px\]{font-size:11px!important;letter-spacing:.04em}
+#beban-form-wrapper>div:first-child>div:nth-child(2){padding:12px!important;gap:9px!important}
+
+/* form: foto kecil + input rapat */
+#beban-form-wrapper .flex.gap-3.items-stretch{gap:9px!important}
+#beban-form-wrapper .w-\[104px\]{width:82px!important}
+#beban-form-wrapper .w-\[104px\] label{font-size:7.5px!important;color:#9fb0c8!important}
+#beban-foto-placeholder,#beban-foto-preview-wrapper{min-height:104px!important;height:104px!important;border-radius:12px!important}
+#beban-foto-placeholder{border:1px dashed rgba(118,153,201,.45)!important;background:rgba(6,20,43,.72)}
+#beban-foto-placeholder i{color:#2196f3!important;font-size:17px!important}
+#beban-foto-placeholder span{color:#9fb0c8!important;font-size:7px!important}
+#beban-foto-preview{border:1px solid rgba(118,153,201,.45)!important;border-radius:12px!important}
+#beban-form-wrapper .flex-1.min-w-0.flex.flex-col.gap-2\.5{gap:7px!important}
+#beban-form-wrapper .flex.flex-col.gap-1{gap:3px!important}
+#beban-form-wrapper label.text-\[10px\]{font-size:8px!important;color:#aebbd0!important;letter-spacing:.07em}
+#beban-form-wrapper input[type="text"],
+#beban-form-wrapper input[type="date"]{
+  height:35px!important;
+  padding-top:0!important;padding-bottom:0!important;
+  border:1px solid rgba(118,153,201,.34)!important;
+  border-radius:9px!important;
+  background:#06142B!important;
+  color:#f4f7fb!important;
+  font-size:10px!important;
+}
+#beban-form-wrapper input::placeholder{color:#7386a1!important}
+#beban-form-wrapper input[type="date"]{padding-left:10px!important}
+#beban-form-wrapper .relative>span{color:#9fb0c8!important;font-size:10px!important}
+#beban-form-wrapper #btn-simpan-beban-input{
+  height:42px!important;
+  padding:0!important;
+  border-radius:11px!important;
+  font-size:10.5px!important;
+  background:linear-gradient(90deg,#42a5f5,#1e88e5)!important;
+  color:#111!important;
+  box-shadow:0 7px 18px rgba(33,150,243,.18)!important;
+}
+
+/* total beban: KPI compact ala TAB STOK */
+#beban-form-wrapper .summary-card{
+  min-height:78px!important;
+  border:1px solid rgba(239,68,68,.34)!important;
+  border-radius:16px!important;
+  padding:11px 13px!important;
+  background:linear-gradient(145deg,rgba(181,35,45,.96),rgba(115,22,30,.96))!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.18)!important;
+}
+#beban-form-wrapper .summary-card .text-\[9px\]{font-size:8px!important;color:rgba(255,255,255,.76)!important}
+#beban-form-wrapper .summary-card #beban-input-total{font-size:20px!important;margin-top:2px}
+#beban-form-wrapper .summary-card #beban-input-periode-label{font-size:8px!important;color:rgba(255,255,255,.62)!important}
+
+/* admin/owner compact segmented KPI */
+#beban-form-wrapper>div.bg-cardBg.rounded-xl.border-2.border-borderDark{
+  min-height:62px;
+  border:1px solid rgba(118,153,201,.30)!important;
+  border-radius:14px!important;
+  background:rgba(8,27,57,.78)!important;
+  padding:8px!important;
+}
+#beban-form-wrapper>div.bg-cardBg.rounded-xl.border-2.border-borderDark .text-\[8px\]{font-size:7px!important}
+#beban-form-wrapper>div.bg-cardBg.rounded-xl.border-2.border-borderDark .text-\[13px\]{font-size:12px!important;color:#fff!important;margin-top:2px}
+#beban-form-wrapper>div.bg-cardBg.rounded-xl.border-2.border-borderDark .w-px{background:rgba(118,153,201,.25)!important;height:32px!important}
+
+/* filter */
+#beban-form-wrapper .flex.items-center.gap-1\.5 button{
+  height:31px!important;padding:0!important;border-radius:9px!important;
+  font-size:8px!important;border-width:1px!important;
+  color:#dbe6f5!important;
+  background:#06142B!important;
+  border-color:rgba(118,153,201,.28)!important;
+}
+#beban-form-wrapper #beban-sumber-semua{background:linear-gradient(90deg,#42a5f5,#1e88e5)!important;color:#111!important;border-color:rgba(33,150,243,.55)!important}
+
+/* history heading */
+#beban-form-wrapper .flex.items-center.gap-2.px-1{padding:3px 2px 1px!important}
+#beban-form-wrapper .flex.items-center.gap-2.px-1 i{color:#2196f3!important;font-size:11px!important}
+#beban-form-wrapper .flex.items-center.gap-2.px-1 span{font-size:10px!important;color:#f4f7fb!important}
+
+/* history rows */
+#beban-input-list{gap:6px!important}
+#beban-input-list>div.bg-cardBg{
+  min-height:54px;
+  border:1px solid rgba(118,153,201,.25)!important;
+  border-radius:12px!important;
+  background:rgba(8,27,57,.76)!important;
+  padding:8px 9px!important;
+}
+#beban-input-list>div.bg-cardBg .text-\[9px\]{color:#8fa2bd!important}
+#beban-input-list>div.bg-cardBg .text-xs{font-size:9.5px!important;color:#f4f7fb!important}
+#beban-input-list>div.bg-cardBg .text-\[11px\]{font-size:10px!important;color:#2196f3!important}
+#beban-input-list>div.bg-cardBg .w-7.h-7{width:27px!important;height:27px!important;border-radius:8px!important}
+
+/* samakan tebal & warna border: panel CATAT BIAYA & warning TABEL BELUM ADA ikut style panel lain */
+#beban-form-wrapper .rounded-xl.overflow-hidden.border-2.border-\[\#2196f3\]\/40{
+  border:1px solid rgba(118,153,201,.30)!important;
+}
+#beban-input-tabel-missing{
+  border:1px solid rgba(239,68,68,.3)!important;
+}
+
+/* ---------- RETUR: compact warning + reason, selaras panel INPUT ---------- */
+#retur-info-banner{
+  margin-top:0!important;
+  border:1px solid rgba(239,68,68,.35)!important;
+  border-radius:15px!important;
+  background:linear-gradient(145deg,rgba(120,24,34,.30),rgba(8,27,57,.82))!important;
+  padding:10px 12px!important;
+  gap:9px!important;
+  box-shadow:0 7px 20px rgba(0,0,0,.16);
+}
+#retur-info-banner>i{width:28px;height:28px;border-radius:9px;background:rgba(239,68,68,.13);border:1px solid rgba(239,68,68,.35);display:flex;align-items:center;justify-content:center;color:#ff6262!important;font-size:11px!important;margin-top:0!important}
+#retur-info-banner .text-\[11px\]{font-size:9px!important;color:#ff6b6b!important;letter-spacing:.04em}
+#retur-info-banner .text-\[10px\]{font-size:8px!important;color:#9fb0c8!important;line-height:1.45}
+#retur-info-banner .text-red-500{font-size:7.5px!important;color:#ff7777!important}
+
+#retur-keterangan-wrapper{
+  padding:10px 11px!important;
+  border:1px solid rgba(118,153,201,.28)!important;
+  border-radius:14px!important;
+  background:rgba(8,27,57,.76)!important;
+  gap:5px!important;
+}
+#retur-keterangan-wrapper label{font-size:8px!important;color:#aebbd0!important;letter-spacing:.07em}
+#retur-keterangan-wrapper .relative>div i{color:#7386a1!important}
+#retur-keterangan-wrapper input{
+  height:36px!important;
+  border:1px solid rgba(118,153,201,.34)!important;
+  border-radius:9px!important;
+  background:#06142B!important;
+  color:#f4f7fb!important;
+  font-size:10px!important;
+}
+#retur-keterangan-wrapper input:focus{border-color:#ef4444!important;box-shadow:0 0 0 2px rgba(239,68,68,.08)}
+
+/* ketika retur aktif, panel PILIH PRODUK & VARIASI diberi aksen merah tipis,
+   tetapi struktur tetap sama dengan TAB INPUT */
+#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-select-panel,
+#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-variasi-card{
+  border-color:rgba(239,68,68,.28)!important;
+}
+#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-select-step-num{
+  border-color:#ef4444!important;color:#ff6666!important;
+}
+#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-select-progress-dot,
+#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-select-progress-fill{
+  background:#ef4444!important;
+}
+#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-variasi-head{
+  background:rgba(92,20,29,.24)!important;
+}
+#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-variasi-title{color:#fff!important}
+
+/* riwayat retur */
+#riwayat-retur-section{gap:7px!important}
+#riwayat-retur-section>.flex.items-center.gap-2.px-1{padding:3px 2px 1px!important}
+#riwayat-retur-section>.flex.items-center.gap-2.px-1 i{color:#ef6666!important}
+#riwayat-retur-section>.flex.items-center.gap-2.px-1 span{font-size:10px!important;color:#f4f7fb!important}
+#riwayat-retur-list{gap:6px!important}
+#riwayat-retur-list>div.bg-cardBg{
+  border:1px solid rgba(239,68,68,.25)!important;
+  border-radius:12px!important;
+  background:rgba(8,27,57,.76)!important;
+}
+#riwayat-retur-list .px-3.py-2{padding:8px 10px!important}
+#riwayat-retur-list .text-\[10px\]{font-size:9px!important;color:#f4f7fb!important}
+#riwayat-retur-list .text-\[8px\]{font-size:7px!important}
+#riwayat-retur-list .bg-darkBg{background:#06142B!important;border-color:rgba(118,153,201,.22)!important}
+#riwayat-retur-list .border-t-2{border-top-width:1px!important;border-color:rgba(118,153,201,.22)!important}
+
+@media (max-width:360px){
+  #tab-input.rp-input-screen .rp-input-mode-card{min-height:120px;padding-left:8px;padding-right:8px}
+  #beban-form-wrapper .w-\[104px\]{width:76px!important}
+  #beban-foto-placeholder,#beban-foto-preview-wrapper{height:98px!important;min-height:98px!important}
+  #beban-form-wrapper input[type="text"],#beban-form-wrapper input[type="date"]{height:34px!important}
+}
+</style>
 </head>
 <body class="w-full min-h-screen overflow-x-hidden bg-light">
     <div id="app-update-banner" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:9999998;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(90deg,#ff8c00,#ffb347);box-shadow:0 -4px 20px rgba(0,0,0,0.25);">
@@ -2189,8 +2414,14 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 
             <!-- PANEL BEBAN OPERASIONAL: hanya tampil saat mode BEBAN aktif -->
             <div id="beban-form-wrapper" class="hidden flex-col gap-3 flex-shrink-0">
-                <div class="rounded-xl overflow-hidden border-2 border-[#ff8c00]/40 bg-cardBg" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
-                    <div class="px-4 py-3 flex items-center gap-2" style="background:rgba(255,140,0,.12);border-bottom:2px solid rgba(255,140,0,.5);color:#ff8c00;">
+                <div class="summary-card rounded-xl p-4 border-2 flex flex-col gap-1" style="background:linear-gradient(135deg,#dc2626,#991b1b);border-color:#7f1d1d;">
+                    <div class="text-[9px] font-black text-white/90 tracking-wider flex items-center gap-1"><i class="fa-solid fa-arrow-trend-down text-[10px]"></i> TOTAL BEBAN (MINGGU INI)</div>
+                    <div id="beban-input-total" class="text-[22px] font-black text-white leading-none">Rp 0</div>
+                    <div id="beban-input-periode-label" class="text-[9px] font-bold text-white/70 mt-0.5"></div>
+                </div>
+
+                <div class="rounded-xl overflow-hidden border-2 border-[#2196f3]/40 bg-cardBg" style="box-shadow:0 2px 12px rgba(33,150,243,0.15)">
+                    <div class="px-4 py-3 flex items-center gap-2" style="background:rgba(33,150,243,.12);border-bottom:2px solid rgba(33,150,243,.5);color:#2196f3;">
                         <i class="fa-solid fa-file-invoice-dollar"></i>
                         <div class="text-[13px] font-black leading-none">CATAT BIAYA OPERASIONAL</div>
                     </div>
@@ -2229,14 +2460,8 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                                 </div>
                             </div>
                         </div>
-                        <button id="btn-simpan-beban-input" onclick="simpanBebanInput()" class="w-full brand-gradient-bg text-black font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 shadow-[0_4px_15px_rgba(255,140,0,0.35)]"><i class="fa-solid fa-floppy-disk"></i> SIMPAN BIAYA</button>
+                        <button id="btn-simpan-beban-input" onclick="simpanBebanInput()" class="w-full brand-gradient-bg text-black font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 shadow-[0_4px_15px_rgba(33,150,243,0.35)]"><i class="fa-solid fa-floppy-disk"></i> SIMPAN BIAYA</button>
                     </div>
-                </div>
-
-                <div class="summary-card rounded-xl p-4 border-2 flex flex-col gap-1" style="background:linear-gradient(135deg,#dc2626,#991b1b);border-color:#7f1d1d;">
-                    <div class="text-[9px] font-black text-white/90 tracking-wider flex items-center gap-1"><i class="fa-solid fa-arrow-trend-down text-[10px]"></i> TOTAL BEBAN (MINGGU INI)</div>
-                    <div id="beban-input-total" class="text-[22px] font-black text-white leading-none">Rp 0</div>
-                    <div id="beban-input-periode-label" class="text-[9px] font-bold text-white/70 mt-0.5"></div>
                 </div>
 
                 <div id="beban-input-tabel-missing" class="hidden bg-red-500/10 border-2 border-red-500/30 rounded-xl px-4 py-3">
@@ -2275,7 +2500,7 @@ END $$;</textarea>
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                    <button id="beban-sumber-semua" onclick="setBebanSumberFilterInput('semua')" class="flex-1 py-1.5 rounded-lg text-[8.5px] font-black text-black border-2 border-borderDark" style="background:linear-gradient(90deg,#ff8c00,#ffb347);">SEMUA</button>
+                    <button id="beban-sumber-semua" onclick="setBebanSumberFilterInput('semua')" class="flex-1 py-1.5 rounded-lg text-[8.5px] font-black text-black border-2 border-borderDark" style="background:linear-gradient(90deg,#2196f3,#64b5f6);">SEMUA</button>
                     <button id="beban-sumber-admin" onclick="setBebanSumberFilterInput('ADMIN')" class="flex-1 py-1.5 rounded-lg text-[8.5px] font-black text-black bg-darkBg border-2 border-borderDark">ADMIN</button>
                     <button id="beban-sumber-owner" onclick="setBebanSumberFilterInput('OWNER')" class="flex-1 py-1.5 rounded-lg text-[8.5px] font-black text-black bg-darkBg border-2 border-borderDark">OWNER</button>
                 </div>
@@ -6246,7 +6471,7 @@ function updateSSK(tab, rowId) {
             if (!btn) return;
             if (key === which) {
                 btn.className = 'flex-1 py-1.5 rounded-lg text-[8.5px] font-black text-black border-2 border-borderDark';
-                btn.style.background = 'linear-gradient(90deg,#ff8c00,#ffb347)';
+                btn.style.background = 'linear-gradient(90deg,#2196f3,#64b5f6)';
             } else {
                 btn.className = 'flex-1 py-1.5 rounded-lg text-[8.5px] font-black text-black bg-darkBg border-2 border-borderDark';
                 btn.style.background = '';
