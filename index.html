@@ -596,10 +596,6 @@
             gap: 6px;
             min-height: 0;
         }
-        .input-row-top-x {
-            display: flex;
-            justify-content: flex-end;
-        }
         .input-row-top {
             display: flex;
             align-items: center;
@@ -672,10 +668,11 @@
             gap: 7px;
         }
         .input-inline-row2.small {
-            grid-template-columns: 32px 1fr 1fr 1fr;
+            grid-template-columns: 30px 1fr 1fr 1fr 26px;
             gap: 5px;
         }
         .input-inline-row2.small .input-inline-label { font-size: 8px; }
+        .input-inline-field.delete-col { align-items: center; }
         .input-inline-select, .input-inline-qty, .input-inline-ssk {
             width: 100%;
             height: 34px;
@@ -4311,7 +4308,7 @@ function updateSSK(tab, rowId) {
         document.getElementById('input-variasi-list').innerHTML = '';
         inputRowCount = 0;
         inputState = { mode: 'masuk', brandId: null, brandNama: '', modelId: null, modelNama: '' };
-        tambahVariasiInput();
+        updateInputVariasiState();
     }
 
     function _clearTrxForm() {
@@ -6109,7 +6106,6 @@ function updateSSK(tab, rowId) {
                     document.getElementById('input-model-display').textContent = 'Pilih model';
                     document.getElementById('input-variasi-list').innerHTML = '';
                     inputRowCount = 0;
-                    tambahVariasiInput();
                 } else {
                     inputState.brandId = item.id; inputState.brandNama = item.label;
                     document.getElementById('input-brand-display').textContent = item.label;
@@ -6217,15 +6213,10 @@ function updateSSK(tab, rowId) {
         const enabledNow = !!inputState.modelId;
 
         row.innerHTML = `
-            <div class="input-row-top-x">
-                <div id="input-del-btn-${id}" ${delClick} class="${delClass}">
-                    <i class="fa-solid fa-xmark text-xs"></i>
-                </div>
-            </div>
             <div id="input-row-content-${id}" class="input-row-content-inline${enabledNow ? '' : ' opacity-40 pointer-events-none select-none'}">
                 <div class="input-inline-row2 small">
                     <div class="input-inline-field">
-                        <div class="input-inline-label">WARNA</div>
+                        <div class="input-inline-label">&nbsp;</div>
                         <button type="button" class="input-warna-trigger-compact" onclick="toggleInputWarnaSelector(${id})">
                             <span id="input-warna-dot-${id}" class="input-warna-dot" style="background:#888"></span>
                         </button>
@@ -6243,6 +6234,12 @@ function updateSSK(tab, rowId) {
                     <div class="input-inline-field">
                         <div class="input-inline-label">SSK</div>
                         <input id="input-ssk-${id}" type="text" readonly class="input-inline-ssk" style="text-transform:none;" title="Sisa Stok (otomatis)">
+                    </div>
+                    <div class="input-inline-field delete-col">
+                        <div class="input-inline-label">&nbsp;</div>
+                        <div id="input-del-btn-${id}" ${delClick} class="${delClass}">
+                            <i class="fa-solid fa-xmark text-xs"></i>
+                        </div>
                     </div>
                 </div>
                 <div id="input-warna-options-${id}" class="input-warna-scroll hidden"></div>
@@ -6688,7 +6685,7 @@ function updateSSK(tab, rowId) {
             document.getElementById('input-retur-keterangan').value = '';
             inputRowCount = 0;
             setInputMode('masuk');
-            tambahVariasiInput();
+            updateInputVariasiState();
             renderRiwayatInput();
             renderStokDashboard();
             showToast(savedMode === 'retur' ? '🔄 Retur disimpan!' : '✅ Data masuk disimpan!');
@@ -7394,7 +7391,6 @@ function updateSSK(tab, rowId) {
         document.getElementById('input-variasi-list').innerHTML = '';
         inputRowCount = 0;
         inputState = { mode: 'masuk', brandId: null, brandNama: '', modelId: null, modelNama: '' };
-        tambahVariasiInput();
         updateInputVariasiState();
     }
 
