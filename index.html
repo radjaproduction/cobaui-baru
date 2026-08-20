@@ -1199,6 +1199,14 @@
 #tab-stok.rp-stock-screen .rp-brand-divider,
 #tab-stok.rp-stock-screen .rp-brand-status{display:none!important}
 #tab-stok.rp-stock-screen .rp-brand-card:active{transform:scale(.985)!important;border-color:rgba(255,140,0,.65)!important}
+/* Perkecil panjang (lebar) kartu STOK PER BRAND, tinggi (88px) tetap dipertahankan */
+#tab-stok.rp-stock-screen .rp-brand-list{
+  align-items:flex-start!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-card{
+  width:70%!important;
+  margin:0!important;
+}
 @media (min-width:700px){
   #tab-stok.rp-stock-screen .rp-brand-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
   #tab-stok.rp-stock-screen .rp-brand-card{height:88px!important;min-height:88px!important}
