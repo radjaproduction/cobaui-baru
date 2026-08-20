@@ -985,21 +985,17 @@
         }
 
         /* ---------- TAB INPUT DATA: variabel brand lokal jadi BIRU ---------- */
-        #tab-input, #input-variasi-sheet, #action-bar-input {
+        #tab-input, #action-bar-input {
             --brand-main: var(--input-accent);
             --brand-gradient: var(--input-gradient);
         }
         #tab-input.tab-content { background: var(--input-bg) !important; }
         #tab-input .bg-darkBg,
-        #input-variasi-sheet .bg-darkBg,
         #action-bar-input .bg-darkBg { background-color: var(--input-bg) !important; }
-        #tab-input .bg-cardBg,
-        #input-variasi-sheet .bg-cardBg { background-color: var(--input-bg2) !important; }
+        #tab-input .bg-cardBg { background-color: var(--input-bg2) !important; }
         #tab-input .border-borderDark,
-        #input-variasi-sheet .border-borderDark,
         #action-bar-input .border-borderDark { border-color: var(--input-border) !important; }
-        #tab-input .dashed-border-brand,
-        #input-variasi-sheet .dashed-border-brand { border-color: var(--input-accent) !important; }
+        #tab-input .dashed-border-brand { border-color: var(--input-accent) !important; }
         #beban-form-wrapper > div:first-child { box-shadow: 0 2px 12px var(--input-shadow) !important; }
 
         #input-brand-selector, #input-model-selector {
@@ -1026,29 +1022,14 @@
         #tab-input .input-row-title { color: var(--input-accent) !important; }
         #tab-input .input-warna-swatch.active,
         #tab-input .input-ukuran-pill.active { border-color: var(--input-accent) !important; box-shadow: 0 0 0 2px var(--input-choice-active) !important; }
-        #input-variasi-sheet .input-sheet-section { background: var(--input-section-bg) !important; border-color: var(--input-border) !important; }
-        #input-variasi-sheet .input-choice-btn { background: var(--input-bg) !important; border-color: var(--input-border) !important; }
-        #input-variasi-sheet .input-choice-btn.active { background: var(--input-choice-active) !important; border-color: var(--input-accent) !important; }
-        #input-variasi-sheet .input-sheet-qty { background: var(--input-bg) !important; border-color: var(--input-border) !important; }
-        #input-variasi-sheet .input-sheet-actions { border-top-color: var(--input-border) !important; }
-        #input-variasi-sheet .qty-numpad-btn { border-color: var(--input-border) !important; background: var(--input-bg) !important; }
-        #input-variasi-sheet #input-sheet-added-wrap { background: var(--input-hover) !important; }
-
         /* ---------- TAB INPUT DATA: teks putih di atas navy (konsep sama dengan TAB STOK) ---------- */
-        #tab-input.rp-input-screen .text-black,
-        #input-variasi-sheet .text-black { color: #eef3fb !important; }
-        #tab-input.rp-input-screen .text-black\/40,
-        #input-variasi-sheet .text-black\/40 { color: rgba(238,243,251,.4) !important; }
-        #tab-input.rp-input-screen .text-black\/50,
-        #input-variasi-sheet .text-black\/50 { color: rgba(238,243,251,.5) !important; }
-        #tab-input.rp-input-screen .text-black\/60,
-        #input-variasi-sheet .text-black\/60 { color: rgba(238,243,251,.6) !important; }
-        #tab-input.rp-input-screen .text-black\/80,
-        #input-variasi-sheet .text-black\/80 { color: rgba(238,243,251,.8) !important; }
-        #tab-input.rp-input-screen .placeholder-black::placeholder,
-        #input-variasi-sheet .placeholder-black::placeholder { color: rgba(238,243,251,.4) !important; }
-        #tab-input.rp-input-screen .placeholder-black\/50::placeholder,
-        #input-variasi-sheet .placeholder-black\/50::placeholder { color: rgba(238,243,251,.3) !important; }
+        #tab-input.rp-input-screen .text-black { color: #eef3fb !important; }
+        #tab-input.rp-input-screen .text-black\/40 { color: rgba(238,243,251,.4) !important; }
+        #tab-input.rp-input-screen .text-black\/50 { color: rgba(238,243,251,.5) !important; }
+        #tab-input.rp-input-screen .text-black\/60 { color: rgba(238,243,251,.6) !important; }
+        #tab-input.rp-input-screen .text-black\/80 { color: rgba(238,243,251,.8) !important; }
+        #tab-input.rp-input-screen .placeholder-black::placeholder { color: rgba(238,243,251,.4) !important; }
+        #tab-input.rp-input-screen .placeholder-black\/50::placeholder { color: rgba(238,243,251,.3) !important; }
 
         /* ---------- TAB INPUT DATA: heading polos (mengikuti konsep rp-stock-heading) ---------- */
         #tab-input.rp-input-screen { background: var(--input-bg) !important; padding-top: 0; position: relative; isolation: isolate; }
@@ -1153,9 +1134,7 @@
         #tab-input .brand-gradient-bg,
         #tab-input .brand-gradient-bg *,
         #action-bar-input .brand-gradient-bg,
-        #action-bar-input .brand-gradient-bg *,
-        #input-variasi-sheet .brand-gradient-bg,
-        #input-variasi-sheet .brand-gradient-bg * {
+        #action-bar-input .brand-gradient-bg * {
             color: #ffffff !important;
         }
         #tab-input .brand-gradient-bg svg path[fill] { fill: #ffffff !important; }
@@ -2065,70 +2044,6 @@ END $$;</textarea>
             <button onclick="simpanInputData()" id="btn-simpan-input" class="flex-[2] text-black font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:var(--input-gradient);border-radius:16px;box-shadow:0 4px 15px var(--input-shadow);">
                 <i class="fa-solid fa-floppy-disk"></i> <span id="btn-simpan-input-text">SIMPAN DATA MASUK</span>
             </button>
-        </div>
-
-        <div id="input-variasi-sheet" class="input-sheet-overlay" onclick="if(event.target.id==='input-variasi-sheet') closeInputVariasiSheet()">
-            <div class="input-sheet-panel">
-                <div class="brand-gradient-bg text-black px-4 py-4 flex items-center justify-between flex-shrink-0">
-                    <div>
-                        <div id="input-sheet-brand" class="text-[9px] font-black tracking-wider opacity-70 mb-0.5">BRAND</div>
-                        <div class="text-[15px] font-black leading-none">DETAIL VARIASI</div>
-                        <div id="input-sheet-subtitle" class="text-[9px] font-bold opacity-60 mt-1">Pilih data item</div>
-                    </div>
-                    <button type="button" onclick="closeInputVariasiSheet()" class="w-9 h-9 rounded-full bg-black/10 flex items-center justify-center active:scale-95">
-                        <i class="fa-solid fa-xmark text-base"></i>
-                    </button>
-                </div>
-                <div class="input-sheet-body p-4 flex flex-col gap-3">
-                    <div class="w-12 h-1 rounded-full bg-gray-700 mx-auto -mt-1 mb-1"></div>
-                    <div id="input-sheet-added-wrap" class="hidden rounded-xl border-2 border-borderDark bg-[#133a66] p-2.5">
-                        <div class="text-[9px] font-black text-black/60 tracking-wider mb-1.5"><i class="fa-solid fa-list-check text-[9px] mr-1"></i>SUDAH DITAMBAHKAN (<span id="input-sheet-added-count">0</span>)</div>
-                        <div id="input-sheet-added-list" class="flex flex-col gap-1.5 max-h-[110px] overflow-y-auto pr-1"></div>
-                    </div>
-                    <div class="input-sheet-section">
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="text-[10px] font-black text-black tracking-wider">WARNA</div>
-                            <div id="input-sheet-warna-active" class="text-[10px] font-black brand-text truncate max-w-[150px]">Pilih</div>
-                        </div>
-                        <div id="input-sheet-warna-list" class="input-choice-grid"></div>
-                    </div>
-                    <div class="input-sheet-section">
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="text-[10px] font-black text-black tracking-wider">UKURAN</div>
-                            <div id="input-sheet-ukuran-active" class="text-[10px] font-black brand-text truncate max-w-[150px]">Pilih</div>
-                        </div>
-                        <div id="input-sheet-ukuran-list" class="input-choice-grid"></div>
-                    </div>
-                    <div class="input-sheet-section">
-                        <div class="text-[10px] font-black text-black tracking-wider mb-2">QTY</div>
-                        <div class="grid grid-cols-[1fr_82px] gap-2 items-center">
-                            <input id="input-sheet-qty" class="input-sheet-qty" type="text" inputmode="numeric" pattern="[0-9]*" value="0" readonly style="text-transform:none;cursor:default;">
-                            <div>
-                                <div class="text-[9px] font-black text-black mb-1 text-center">SSK</div>
-                                <div id="input-sheet-ssk" class="h-[42px] rounded-xl bg-darkBg border-2 border-borderDark flex items-center justify-center text-sm font-black text-black">-</div>
-                            </div>
-                        </div>
-                        <div class="qty-numpad-grid" id="input-sheet-numpad-grid">
-                            <button type="button" onclick="qtyNumpadPress('input','1')" class="qty-numpad-btn">1</button>
-                            <button type="button" onclick="qtyNumpadPress('input','2')" class="qty-numpad-btn">2</button>
-                            <button type="button" onclick="qtyNumpadPress('input','3')" class="qty-numpad-btn">3</button>
-                            <button type="button" onclick="qtyNumpadPress('input','4')" class="qty-numpad-btn">4</button>
-                            <button type="button" onclick="qtyNumpadPress('input','5')" class="qty-numpad-btn">5</button>
-                            <button type="button" onclick="qtyNumpadPress('input','6')" class="qty-numpad-btn">6</button>
-                            <button type="button" onclick="qtyNumpadPress('input','7')" class="qty-numpad-btn">7</button>
-                            <button type="button" onclick="qtyNumpadPress('input','8')" class="qty-numpad-btn">8</button>
-                            <button type="button" onclick="qtyNumpadPress('input','9')" class="qty-numpad-btn">9</button>
-                            <button type="button" onclick="qtyNumpadPress('input','C')" class="qty-numpad-btn qty-numpad-clear">C</button>
-                            <button type="button" onclick="qtyNumpadPress('input','0')" class="qty-numpad-btn">0</button>
-                            <button type="button" onclick="qtyNumpadPress('input','DEL')" class="qty-numpad-btn qty-numpad-del"><i class="fa-solid fa-delete-left"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-sheet-actions grid grid-cols-[0.85fr_1.15fr] gap-2">
-                    <button type="button" onclick="closeInputVariasiSheet()" class="py-3.5 rounded-xl bg-darkBg border-2 border-borderDark text-black font-black text-[12px] active:scale-95 transition-transform"><i class="fa-solid fa-arrow-left mr-1"></i> BACK</button>
-                    <button type="button" id="input-sheet-save-btn" onclick="saveInputVariasiSheet()" class="py-3.5 rounded-xl brand-gradient-bg text-black font-black text-[12px] active:scale-95 transition-transform"><i class="fa-solid fa-check mr-1"></i> TAMBAHKAN</button>
-                </div>
-            </div>
         </div>
 
         <div id="trx-variasi-sheet" class="input-sheet-overlay" onclick="if(event.target.id==='trx-variasi-sheet') closeTrxVariasiSheet()">
@@ -6434,9 +6349,6 @@ function updateSSK(tab, rowId) {
         });
     }
 
-	    let activeInputSheetRowId = null;
-	    let inputSheetDraft = null;
-
     function refreshInputRowSummary(id) {
         const qty = document.getElementById('input-qty-' + id)?.value || '0';
         const ssk = document.getElementById('input-ssk-' + id)?.value || '-';
@@ -6461,32 +6373,8 @@ function updateSSK(tab, rowId) {
         return warnaList;
     }
 
-	    function getInputRowData(rowId) {
-	        const warna = document.getElementById('input-warna-label-' + rowId)?.textContent?.trim() || 'Pilih warna';
-	        const ukuran = document.getElementById('input-ukuran-label-' + rowId)?.textContent?.trim() || 'Pilih ukuran';
-	        const qty = parseInt(document.getElementById('input-qty-' + rowId)?.value) || 0;
-	        const kode = document.getElementById('input-warna-dot-' + rowId)?.style.background || '#888';
-	        return { warna, ukuran, qty, kode };
-	    }
-
-	    function applyInputDraftToRow(rowId) {
-	        if (!inputSheetDraft) return;
-	        const dotEl = document.getElementById('input-warna-dot-' + rowId);
-	        const warnaEl = document.getElementById('input-warna-label-' + rowId);
-	        const nameEl = document.getElementById('input-warna-name-' + rowId);
-	        const ukuranEl = document.getElementById('input-ukuran-label-' + rowId);
-	        const qtyEl = document.getElementById('input-qty-' + rowId);
-	        const sskEl = document.getElementById('input-ssk-' + rowId);
-	        if (dotEl) dotEl.style.background = inputSheetDraft.kode || '#888';
-	        if (warnaEl) warnaEl.textContent = inputSheetDraft.warna;
-	        if (nameEl) nameEl.textContent = inputSheetDraft.warna;
-	        if (ukuranEl) ukuranEl.textContent = inputSheetDraft.ukuran;
-	        if (qtyEl) qtyEl.value = inputSheetDraft.qty;
-	        if (sskEl) sskEl.value = inputSheetDraft.ssk || '';
-	    }
-
 	    function getInputSheetUkuranList(rowId) {
-	        const warnaNama = inputSheetDraft?.warna || document.getElementById('input-warna-label-' + rowId)?.textContent?.trim();
+	        const warnaNama = document.getElementById('input-warna-label-' + rowId)?.textContent?.trim();
 	        let ukuranList = masterData.ukuran || [];
 	        if (inputState.mode === 'retur' && inputState.modelNama) {
 	            if (!_isInputPlaceholder(warnaNama)) {
@@ -6498,163 +6386,20 @@ function updateSSK(tab, rowId) {
         return sortUkuran(ukuranList);
     }
 
-	    function renderInputSheetOptions(rowId) {
-	        const warnaWrap = document.getElementById('input-sheet-warna-list');
-	        const ukuranWrap = document.getElementById('input-sheet-ukuran-list');
-	        const warnaAktif = inputSheetDraft?.warna || '';
-	        const ukuranAktif = inputSheetDraft?.ukuran || '';
-	        const warnaActiveLabel = document.getElementById('input-sheet-warna-active');
-	        const ukuranActiveLabel = document.getElementById('sheet-ukuran-active');
-	        if (warnaActiveLabel) warnaActiveLabel.textContent = _isInputPlaceholder(warnaAktif) ? 'Pilih' : warnaAktif;
-        if (ukuranActiveLabel) ukuranActiveLabel.textContent = _isInputPlaceholder(ukuranAktif) ? 'Pilih' : ukuranAktif;
-        updateQtyNumpadState('input', warnaAktif, ukuranAktif);
-        if (!warnaWrap || !ukuranWrap) return;
-
-        const warnaList = getInputSheetWarnaList(rowId);
-        warnaWrap.innerHTML = '';
-        warnaList.forEach(w => {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-	            btn.className = 'input-choice-btn' + (!_isInputPlaceholder(warnaAktif) && warnaAktif.toUpperCase() === w.nama.toUpperCase() ? ' active' : '');
-	            btn.innerHTML = `<span class="w-5 h-5 rounded-md border-2 border-white/20 flex-shrink-0" style="background:${w.kode}"></span><span class="truncate">${w.nama}</span>`;
-	            btn.onclick = () => {
-	                if (!inputSheetDraft) inputSheetDraft = getInputRowData(rowId);
-	                inputSheetDraft.warna = w.nama;
-	                inputSheetDraft.kode = w.kode;
-	                renderInputSheetOptions(rowId);
-	                refreshInputSheetSSK(rowId);
-	            };
-            warnaWrap.appendChild(btn);
-        });
-        if (!warnaList.length) warnaWrap.innerHTML = '<div class="col-span-2 text-[11px] text-black py-4 text-center">Warna belum tersedia</div>';
-
-        const ukuranList = getInputSheetUkuranList(rowId);
-        ukuranWrap.innerHTML = '';
-        ukuranList.forEach(u => {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-	            btn.className = 'input-choice-btn justify-center text-center' + (!_isInputPlaceholder(ukuranAktif) && ukuranAktif.toUpperCase() === u.nama.toUpperCase() ? ' active' : '');
-	            btn.textContent = u.nama;
-	            btn.onclick = () => {
-	                if (!inputSheetDraft) inputSheetDraft = getInputRowData(rowId);
-	                inputSheetDraft.ukuran = u.nama;
-	                renderInputSheetOptions(rowId);
-	                refreshInputSheetSSK(rowId);
-	            };
-            ukuranWrap.appendChild(btn);
-        });
-        if (!ukuranList.length) ukuranWrap.innerHTML = '<div class="col-span-2 text-[11px] text-black py-4 text-center">Ukuran belum tersedia</div>';
-    }
-
-	    function refreshInputSheetSSK(rowId) {
-	        if (!inputSheetDraft) inputSheetDraft = getInputRowData(rowId);
-	        const warna = inputSheetDraft.warna;
-	        const ukuran = inputSheetDraft.ukuran;
-	        let sskValue = '-';
-	        if (!_isInputPlaceholder(warna) && !_isInputPlaceholder(ukuran)) {
-	            const stokSaatIni = hitungStokItem(inputState.modelNama, warna, ukuran, inputState.brandNama, inputState.brandId);
-	            sskValue = stokSaatIni > 0 ? stokSaatIni : '-';
-	        }
-	        inputSheetDraft.ssk = sskValue === '-' ? '' : sskValue;
-	        const sheetSSK = document.getElementById('input-sheet-ssk');
-	        if (sheetSSK) sheetSSK.textContent = sskValue || '-';
-	        updateInputSheetSaveState(rowId);
-	    }
-
-	    function updateInputSheetSaveState(rowId) {
-	        const btn = document.getElementById('input-sheet-save-btn');
-	        if (!btn) return;
-	        const warna = inputSheetDraft?.warna;
-	        const ukuran = inputSheetDraft?.ukuran;
-	        const qty = parseInt(inputSheetDraft?.qty) || 0;
-	        const ready = !_isInputPlaceholder(warna) && !_isInputPlaceholder(ukuran) && qty > 0;
-	        btn.classList.toggle('opacity-50', !ready);
-	    }
-
-    function openInputVariasiSheet(rowId) {
-        if (!inputState.modelId) { showToast('⚠️ Pilih MODEL terlebih dahulu!'); return; }
-        if (masterData.warna.length === 0) { showAlert('Belum ada warna.\nTambahkan di Tab Master > Warna.', {type:'warning'}); return; }
-	        if (masterData.ukuran.length === 0) { showAlert('Belum ada ukuran.\nTambahkan di Tab Master > Ukuran.', {type:'warning'}); return; }
-	        activeInputSheetRowId = rowId;
-	        inputSheetDraft = getInputRowData(rowId);
-	        const sheet = document.getElementById('input-variasi-sheet');
-	        const qtySheet = document.getElementById('input-sheet-qty');
-	        const subtitle = document.getElementById('input-sheet-subtitle');
-	        if (subtitle) subtitle.textContent = inputState.modelNama || 'Pilih data item';
-	        const brandLabel = document.getElementById('input-sheet-brand');
-	        if (brandLabel) brandLabel.textContent = inputState.brandNama || 'BRAND';
-	        if (qtySheet) qtySheet.value = inputSheetDraft.qty || 0;
-	        renderInputSheetOptions(rowId);
-	        refreshInputSheetSSK(rowId);
-        renderInputSheetAddedList(rowId);
-        if (sheet) sheet.classList.add('active');
-        document.body.classList.add('sheet-open-lock');
-        if (qtySheet) qtySheet.focus();
-    }
-
-    function renderInputSheetAddedList(excludeId) {
-        const wrap = document.getElementById('input-sheet-added-wrap');
-        const listEl = document.getElementById('input-sheet-added-list');
-        const countEl = document.getElementById('input-sheet-added-count');
-        if (!wrap || !listEl) return;
-        const list = document.getElementById('input-variasi-list');
-        const rows = list ? Array.from(list.children) : [];
-        const items = rows
-            .map(row => row.id.replace('input-row-', ''))
-            .filter(id => id !== String(excludeId) && !_isInputRowPristine(id))
-            .map(id => ({ id, ...getInputRowData(id) }));
-        if (items.length === 0) {
-            wrap.classList.add('hidden');
-            listEl.innerHTML = '';
-            if (countEl) countEl.textContent = '0';
-            return;
-        }
-        wrap.classList.remove('hidden');
-        if (countEl) countEl.textContent = items.length;
-        listEl.innerHTML = items.map(it => `
-            <button type="button" onclick="openInputVariasiSheet(${it.id})" class="flex items-center gap-2 px-2.5 py-2 rounded-lg bg-white border-2 border-borderDark text-left hover:border-[#7699C9] transition-colors">
-                <div class="w-5 h-5 rounded-md flex-shrink-0 border border-black/10" style="background:${it.kode || '#888'}"></div>
-                <div class="min-w-0 flex-1 flex items-center gap-1 text-[10px] font-bold text-black truncate">
-                    <span class="truncate">${it.warna}</span><span class="text-black/40">/</span><span class="truncate">${it.ukuran}</span>
-                </div>
-                <span class="text-[9px] font-black brand-text flex-shrink-0">${it.qty} pcs</span>
-            </button>`).join('');
-    }
-
-
-	    function closeInputVariasiSheet() {
-	        const closingRowId = activeInputSheetRowId;
-	        const sheet = document.getElementById('input-variasi-sheet');
-	        if (sheet) sheet.classList.remove('active');
-	        document.body.classList.remove('sheet-open-lock');
-	        activeInputSheetRowId = null;
-	        inputSheetDraft = null;
-	        const list = document.getElementById('input-variasi-list');
-	        if (closingRowId && list && list.children.length > 1 && _isInputRowPristine(closingRowId)) {
-	            hapusRowInput(closingRowId);
-	        }
-	    }
-
     // ==================== NUMPAD CUSTOM UNTUK QTY (Input Data & Transaksi) ====================
     // Numpad terkunci sampai WARNA dan UKURAN sudah dipilih.
     function updateQtyNumpadState(sheetType, warnaAktif, ukuranAktif) {
-        const gridId = sheetType === 'input' ? 'input-sheet-numpad-grid' : 'sheet-numpad-grid';
-        const grid = document.getElementById(gridId);
+        const grid = document.getElementById('sheet-numpad-grid');
         if (!grid) return;
         const ready = !_isInputPlaceholder(warnaAktif) && !_isInputPlaceholder(ukuranAktif);
         grid.classList.toggle('disabled', !ready);
     }
-    // Dipanggil dari 2 tempat berbeda: qtyNumpadPress('input', key) dari sheet Input Data,
-    // dan qtyNumpadPress(key) dari sheet Transaksi. Dibedakan lewat jumlah argumen.
-    function qtyNumpadPress(a, b) {
-        const isInputSheet = (b !== undefined);
-        const key = isInputSheet ? b : a;
-        const fieldId = isInputSheet ? 'input-sheet-qty' : 'sheet-qty';
-        const qtySheet = document.getElementById(fieldId);
+    function qtyNumpadPress(key) {
+        const qtySheet = document.getElementById('sheet-qty');
         if (!qtySheet) return;
 
         // Pengaman: blokir juga di level JS, bukan cuma CSS pointer-events
-        const draft = isInputSheet ? inputSheetDraft : trxSheetDraft;
+        const draft = trxSheetDraft;
         if (_isInputPlaceholder(draft?.warna) || _isInputPlaceholder(draft?.ukuran)) {
             showToast('⚠️ Pilih warna & ukuran dulu sebelum isi qty');
             return;
@@ -6674,45 +6419,8 @@ function updateSSK(tab, rowId) {
         }
 
         qtySheet.value = val;
-        if (isInputSheet) {
-            onInputSheetQtyChange();
-        } else {
-            onTrxSheetQtyChange();
-        }
+        onTrxSheetQtyChange();
     }
-
-	    function onInputSheetQtyChange() {
-	        if (!activeInputSheetRowId) return;
-	        const qtySheet = document.getElementById('input-sheet-qty');
-	        const rawValue = String(qtySheet?.value || '').replace(/\D/g, '');
-	        const value = Math.max(0, parseInt(rawValue) || 0);
-	        if (!inputSheetDraft) inputSheetDraft = getInputRowData(activeInputSheetRowId);
-	        inputSheetDraft.qty = value;
-	        if (qtySheet) qtySheet.value = value;
-	        refreshInputSheetSSK(activeInputSheetRowId);
-	    }
-
-	    function saveInputVariasiSheet() {
-	        if (!activeInputSheetRowId) return;
-	        const id = activeInputSheetRowId;
-	        const wasPristine = _isInputRowPristine(id);
-	        const warna = inputSheetDraft?.warna?.trim();
-	        const ukuran = inputSheetDraft?.ukuran?.trim();
-	        const qty = parseInt(inputSheetDraft?.qty) || 0;
-	        if (_isInputPlaceholder(warna)) { showToast('⚠️ Pilih warna dulu'); return; }
-	        if (_isInputPlaceholder(ukuran)) { showToast('⚠️ Pilih ukuran dulu'); return; }
-	        if (qty <= 0) { showToast('⚠️ Qty tidak boleh 0'); return; }
-	        applyInputDraftToRow(id);
-	        refreshInputRowSummary(id);
-	        _updateInputRowBtn(id);
-	        document.getElementById('input-row-' + id)?.classList.remove('hidden');
-	        showToast('✅ Data ditambahkan');
-	        if (wasPristine) {
-	            tambahVariasiInput();
-	        } else {
-	            openInputVariasiSheet(id);
-	        }
-	    }
 
     let _inputIsSaving = false;
     async function simpanInputData() {
@@ -11273,10 +10981,6 @@ function updateSSK(tab, rowId) {
         if (dropdownPopup) { dropdownPopup.remove(); return; }
 
         // Tutup popup DETAIL VARIASI (full-screen) jika terbuka
-        const inputVariasiSheet = document.getElementById('input-variasi-sheet');
-        if (inputVariasiSheet && inputVariasiSheet.classList.contains('active')) {
-            closeInputVariasiSheet(); return;
-        }
         const trxVariasiSheet = document.getElementById('trx-variasi-sheet');
         if (trxVariasiSheet && trxVariasiSheet.classList.contains('active')) {
             closeTrxVariasiSheet(); return;
