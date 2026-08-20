@@ -7,12 +7,12 @@
            kebawa ke hasil print/PDF, apapun cara pencetakannya (native print, screenshot,
            atau print-service Android yang kadang tidak konsisten menerapkan @media print). */
         @media screen {
-            html,body{background-color:#F6DBB6 !important;}
-            .bg-darkBg{background-color:#F6DBB6 !important;}
-            .bg-cardBg{background-color:#FFEFDB !important;}
-            .border-borderDark{border-color:#FFB144 !important;}
-            .bg-\[\#F6DBB6\]{background-color:#F6DBB6 !important;}
-            .bg-\[\#fdf6ec\]{background-color:#fdf6ec !important;}
+            html,body{background-color:#06142B !important;}
+            .bg-darkBg{background-color:#06142B !important;}
+            .bg-cardBg{background-color:#0A1C38 !important;}
+            .border-borderDark{border-color:#7699C9 !important;}
+            .bg-\[\#06142B\]{background-color:#06142B !important;}
+            .bg-\[\#133a66\]{background-color:#133a66 !important;}
             .bg-\[\#ffffff\],.bg-white{background-color:#ffffff !important;}
             .bg-\[\#f8f8fa\]{background-color:#f8f8fa !important;}
             .bg-\[\#f0faf2\]{background-color:#f0faf2 !important;}
@@ -129,7 +129,7 @@
             theme: {
                 extend: {
                     colors: {
-                        darkBg: '#F6DBB6', cardBg: '#FFEFDB', headerBox: '#FFEFDB', borderDark: '#FFB144',
+                        darkBg: '#06142B', cardBg: '#0A1C38', headerBox: '#0A1C38', borderDark: '#7699C9',
                     }
                 }
             }
@@ -141,13 +141,77 @@
             --brand-gradient: linear-gradient(90deg, #ff8c00 0%, #ffb347 100%);
         }
         * { box-sizing: border-box; }
+        /* ===== NAVY THEME CONTRAST FIX =====
+           Cream backgrounds (darkBg/cardBg/headerBox) were converted to navy.
+           These rules keep text readable on those now-dark surfaces, without
+           touching #tab-stok (which already uses its own navy scheme) or any
+           element still sitting on a white/light surface. */
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"],
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"],
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-headerBox"] {
+            color: #eaf1fb;
+        }
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"] [class*="text-black"],
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"] [class*="text-black"],
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-headerBox"] [class*="text-black"],
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"][class*="text-black"],
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"][class*="text-black"],
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-headerBox"][class*="text-black"],
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"] [class*="placeholder-black"],
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"] [class*="placeholder-black"],
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"][class*="placeholder-black"],
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"][class*="placeholder-black"] {
+            color: #eaf1fb !important;
+        }
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"] [class*="placeholder-black"]::placeholder,
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"] [class*="placeholder-black"]::placeholder,
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"][class*="placeholder-black"]::placeholder,
+        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"][class*="placeholder-black"]::placeholder {
+            color: rgba(234,241,251,0.5) !important;
+        }
+        /* Same, but for elements using inline style="background:#06142B/#0A1C38/#133a66" instead
+           of the Tailwind bg-darkBg/bg-cardBg classes — covers same-element and nested dark text. */
+        body:not(#tab-stok):not(#tab-stok *) [style*="06142B"][style*="color:#000"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="06142B"][style*="color: #000"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="06142B"][style*="color:#1a1d24"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="06142B"][style*="color: #1a1d24"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="0A1C38"][style*="color:#000"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="0A1C38"][style*="color: #000"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="0A1C38"][style*="color:#1a1d24"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="0A1C38"][style*="color: #1a1d24"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="133a66"][style*="color:#000"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="133a66"][style*="color: #000"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="133a66"][style*="color:#1a1d24"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="133a66"][style*="color: #1a1d24"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="06142B"] [style*="color:#000"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="06142B"] [style*="color: #000"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="06142B"] [style*="color:#1a1d24"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="06142B"] [style*="color: #1a1d24"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="0A1C38"] [style*="color:#000"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="0A1C38"] [style*="color: #000"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="0A1C38"] [style*="color:#1a1d24"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="0A1C38"] [style*="color: #1a1d24"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="133a66"] [style*="color:#000"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="133a66"] [style*="color: #000"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="133a66"] [style*="color:#1a1d24"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="133a66"] [style*="color: #1a1d24"] {
+            color: #eaf1fb !important;
+        }
+        body:not(#tab-stok):not(#tab-stok *) [style*="06142B"] [class*="text-black"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="0A1C38"] [class*="text-black"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="133a66"] [class*="text-black"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="06142B"][class*="text-black"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="0A1C38"][class*="text-black"],
+        body:not(#tab-stok):not(#tab-stok *) [style*="133a66"][class*="text-black"] {
+            color: #eaf1fb !important;
+        }
         html {
             height: 100%;
             height: -webkit-fill-available;
-            background-color: #F6DBB6;
+            background-color: #06142B;
         }
         body {
-            background-color: #F6DBB6; color: #1a1d24;
+            background-color: #06142B; color: #eaf1fb;
             font-family: 'Montserrat', sans-serif;
             -webkit-tap-highlight-color: transparent;
             min-height: 100vh;
@@ -173,7 +237,7 @@
         .brand-text { color: var(--brand-main) !important; }
         .brand-bg { background-color: var(--brand-main) !important; }
         .brand-gradient-bg { background: var(--brand-gradient) !important; }
-        .dashed-border-brand { border: 2px dashed #FFB144 !important; }
+        .dashed-border-brand { border: 2px dashed #7699C9 !important; }
         .stat-watermark {
             position: absolute;
             bottom: -14px;
@@ -191,16 +255,16 @@
            toggle mode gelap/terang sudah dihapus (body permanen class .bg-light,
            lihat .border-borderDark#ff8c00 di blok style paling atas). */
 
-        .divide-borderDark > * + * { border-color: rgba(255,177,68,0.25) !important; border-color: color-mix(in srgb, #FFB144 25%, transparent) !important; }
+        .divide-borderDark > * + * { border-color: rgba(118,153,201,0.25) !important; border-color: color-mix(in srgb, #7699C9 25%, transparent) !important; }
         .border-b.border-borderDark,
-        .border-t.border-borderDark { border-color: rgba(255,177,68,0.25) !important; border-color: color-mix(in srgb, #FFB144 25%, transparent) !important; }
-        body.bg-light { background-color: #F6DBB6 !important; }
-        body.bg-light .bg-\[#F6DBB6\], body.bg-light .bg-darkBg { background-color: #EFE6D6 !important; }
+        .border-t.border-borderDark { border-color: rgba(118,153,201,0.25) !important; border-color: color-mix(in srgb, #7699C9 25%, transparent) !important; }
+        body.bg-light { background-color: #06142B !important; }
+        body.bg-light .bg-\[#06142B\], body.bg-light .bg-darkBg { background-color: #081B34 !important; }
         body.bg-light .bg-cardBg,
         body.bg-light .bg-\[#ffffff\],
-        body.bg-light .bg-\[#ffffff\] { background-color: #FFF4E3 !important; }
+        body.bg-light .bg-\[#ffffff\] { background-color: #14335C !important; }
         body.bg-light .border-borderDark,
-        body.bg-light .border-\[#FFB144\] { border-color: #FFB144 !important; }
+        body.bg-light .border-\[#7699C9\] { border-color: #7699C9 !important; }
         body.bg-light .text-black { color:#000 !important; }
         body.bg-light input,
         body.bg-light select,
@@ -390,7 +454,7 @@
         #loading-overlay {
             position: fixed;
             inset: 0;
-            background: #F6DBB6;
+            background: #06142B;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -489,8 +553,8 @@
         }
         .input-variation-card {
             width: 100%;
-            border: 1px solid #FFB144;
-            background: #fdf6ec;
+            border: 1px solid #7699C9;
+            background: #133a66;
             border-radius: 12px;
             padding: 10px;
             display: flex;
@@ -500,14 +564,14 @@
             box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
         }
         .input-variation-card.is-filled {
-            border-color: #FFB144;
-            background: linear-gradient(180deg, rgba(255,140,0,0.11), #fdf6ec 72%);
+            border-color: #7699C9;
+            background: linear-gradient(180deg, rgba(255,140,0,0.11), #133a66 72%);
         }
         .input-row-index {
             width: 24px; height: 24px;
             border-radius: 8px;
             background: rgba(255,140,0,0.12);
-            border: 1px solid rgba(255,177,68,0.35);
+            border: 1px solid rgba(118,153,201,0.35);
             color: var(--brand-main);
             display: flex; align-items: center; justify-content: center;
             font-size: 10px; font-weight: 900;
@@ -516,8 +580,8 @@
         .input-summary-pill {
             height: 24px;
             border-radius: 8px;
-            background: #F6DBB6;
-            border: 1px solid #FFB144;
+            background: #06142B;
+            border: 1px solid #7699C9;
             display: inline-flex;
             align-items: center;
             gap: 4px;
@@ -566,8 +630,8 @@
             -webkit-overflow-scrolling: touch;
         }
         .input-sheet-section {
-            background: #fdf6ec;
-            border: 1px solid #FFB144;
+            background: #133a66;
+            border: 1px solid #7699C9;
             border-radius: 14px;
             padding: 12px;
         }
@@ -581,9 +645,9 @@
         .input-choice-btn {
             min-height: 46px;
             border-radius: 10px;
-            border: 1px solid #FFB144;
-            background: #F6DBB6;
-            color: #1a1d24;
+            border: 1px solid #7699C9;
+            background: #06142B;
+            color: #eaf1fb;
             font-size: 11px;
             font-weight: 900;
             display: flex;
@@ -594,17 +658,17 @@
             text-align: left;
         }
         .input-choice-btn.active {
-            border-color: #FFB144;
+            border-color: #7699C9;
             background: rgba(255,140,0,0.14);
             color: var(--brand-main);
         }
         .input-sheet-qty {
             width: 100%;
             height: 64px;
-            background: #F6DBB6;
-            border: 1px solid #FFB144;
+            background: #06142B;
+            border: 1px solid #7699C9;
             border-radius: 16px;
-            color: #1a1d24;
+            color: #eaf1fb;
             font-size: 30px;
             font-weight: 900;
             text-align: center;
@@ -614,7 +678,7 @@
             position: sticky;
             bottom: 0;
             background: #ffffff;
-            border-top: 1px solid #FFB144;
+            border-top: 1px solid #7699C9;
             padding: 12px 16px 14px;
             flex-shrink: 0;
         }
@@ -632,9 +696,9 @@
         .qty-numpad-btn {
             min-height: 50px;
             border-radius: 12px;
-            border: 1px solid #FFB144;
-            background: #F6DBB6;
-            color: #1a1d24;
+            border: 1px solid #7699C9;
+            background: #06142B;
+            color: #eaf1fb;
             font-size: 18px;
             font-weight: 900;
             font-family: Montserrat, sans-serif;
@@ -650,7 +714,7 @@
         }
         .qty-numpad-btn:active {
             background: var(--brand-main);
-            border-color: #FFB144;
+            border-color: #7699C9;
             color: #000;
             transform: scale(0.92);
         }
@@ -664,12 +728,12 @@
             color: #ef4444;
         }
         .qty-numpad-btn.qty-numpad-del {
-            color: #1a1d24;
+            color: #eaf1fb;
             font-size: 16px;
         }
 
         #config-screen {
-            position: fixed; inset: 0; background: #F6DBB6;
+            position: fixed; inset: 0; background: #06142B;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             z-index: 9998; padding: 24px; gap: 16px;
         }
@@ -697,7 +761,7 @@
         .skel-row {
             display: flex; align-items: center; gap: 10px;
             padding: 11px 14px; border-radius: 16px;
-            background: linear-gradient(135deg,#FBE4BE 0%,#F6DBB6 100%);
+            background: linear-gradient(135deg,#0A1C38 0%,#06142B 100%);
             opacity: 0; animation: skelRowIn 0.4s ease forwards;
         }
         .skel-row:nth-child(1){ animation-delay:.03s }
@@ -1161,7 +1225,7 @@
 #tab-stok.rp-stock-screen .rp-brand-divider-vertical{
   width:1px!important;height:58px!important;
   flex:0 0 1px!important;
-  background:repeating-linear-gradient(to bottom,rgba(255,177,68,.85) 0 5px,transparent 5px 9px)!important;
+  background:repeating-linear-gradient(to bottom,rgba(118,153,201,.85) 0 5px,transparent 5px 9px)!important;
   margin-right:14px!important;
 }
 #tab-stok.rp-stock-screen .rp-brand-copy{
@@ -1239,7 +1303,7 @@
 
 
     <div id="custom-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:99999;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px);">
-        <div id="custom-modal-box" style="background:#ffffff;border-radius:20px;width:100%;max-width:340px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,177,68,0.25);animation:modalIn 0.22s cubic-bezier(0.34,1.56,0.64,1) forwards;">
+        <div id="custom-modal-box" style="background:#ffffff;border-radius:20px;width:100%;max-width:340px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.6);border:1px solid rgba(118,153,201,0.25);animation:modalIn 0.22s cubic-bezier(0.34,1.56,0.64,1) forwards;">
             <div id="custom-modal-icon-bar" style="background:linear-gradient(90deg,#ff8c00,#ffb347);padding:18px 20px 14px;display:flex;align-items:center;gap:12px;">
                 <div id="custom-modal-icon" style="width:36px;height:36px;background:rgba(0,0,0,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚠️</div>
                 <div id="custom-modal-title" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:14px;color:#000;letter-spacing:0.5px;line-height:1.2;">KONFIRMASI</div>
@@ -1256,7 +1320,7 @@
     </style>
 
     <div id="print-overlay" style="display:none;position:fixed;inset:0;z-index:99990;background:#f3f4f6;flex-direction:column;">
-        <div id="print-toolbar" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#ffffff;border-bottom:2px solid #FFB144;flex-shrink:0;">
+        <div id="print-toolbar" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#ffffff;border-bottom:2px solid #7699C9;flex-shrink:0;">
             <div style="flex:1;min-width:0;">
                 <div id="print-overlay-title" style="font-family:Montserrat,sans-serif;font-weight:900;font-size:12px;color:#000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
                 <div id="print-overlay-sub" style="font-family:Montserrat,sans-serif;font-size:9px;color:#ff8c00;margin-top:1px;"></div>
@@ -1267,7 +1331,7 @@
                 <div id="print-doc-inner" style="width:100%;max-width:740px;"></div>
             </div>
         </div>
-        <div id="print-bottom-bar" style="display:flex;align-items:center;gap:10px;padding:14px 16px;padding-bottom:calc(14px + env(safe-area-inset-bottom));background:#ffffff;border-top:2px solid #FFB144;flex-shrink:0;">
+        <div id="print-bottom-bar" style="display:flex;align-items:center;gap:10px;padding:14px 16px;padding-bottom:calc(14px + env(safe-area-inset-bottom));background:#ffffff;border-top:2px solid #7699C9;flex-shrink:0;">
             <button id="print-btn-download" onclick="printOverlayDownload()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 10px;background:linear-gradient(90deg,#ff8c00,#ffb347);border:none;border-radius:14px;color:#000;font-family:Montserrat,sans-serif;font-weight:900;font-size:14px;cursor:pointer;white-space:nowrap;">
                 <i class="fa-solid fa-download"></i> DOWNLOAD
             </button>
@@ -1348,16 +1412,16 @@
                 <div class="text-2xl font-black text-[#000000]">⚙️ SETUP SUPABASE</div>
                 <div class="text-[10px] text-[#000000]/70 font-bold mt-1">Isi konfigurasi Supabase Anda</div>
             </div>
-            <div class="bg-white rounded-xl p-4 border-2 border-[#FFB144] flex flex-col gap-3 shadow-sm">
+            <div class="bg-white rounded-xl p-4 border-2 border-[#7699C9] flex flex-col gap-3 shadow-sm">
                 <div class="flex flex-col gap-1.5">
                     <label class="text-[10px] font-bold text-black tracking-wider">SUPABASE URL</label>
                     <input id="cfg-url" type="text" placeholder="https://xxxx.supabase.co"
-                        class="w-full bg-[#f8f8fa] border-2 border-[#e5e7eb] rounded-lg px-3 py-2.5 text-xs text-[#1a1d24] placeholder-gray-400 focus:outline-none focus:border-[#FFB144]">
+                        class="w-full bg-[#f8f8fa] border-2 border-[#e5e7eb] rounded-lg px-3 py-2.5 text-xs text-[#1a1d24] placeholder-gray-400 focus:outline-none focus:border-[#7699C9]">
                 </div>
                 <div class="flex flex-col gap-1.5">
                     <label class="text-[10px] font-bold text-black tracking-wider">ANON KEY</label>
                     <input id="cfg-key" type="text" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6..."
-                        class="w-full bg-[#f8f8fa] border-2 border-[#e5e7eb] rounded-lg px-3 py-2.5 text-xs text-[#1a1d24] placeholder-gray-400 focus:outline-none focus:border-[#FFB144]">
+                        class="w-full bg-[#f8f8fa] border-2 border-[#e5e7eb] rounded-lg px-3 py-2.5 text-xs text-[#1a1d24] placeholder-gray-400 focus:outline-none focus:border-[#7699C9]">
                 </div>
                 <button onclick="autoSetupDatabase()" class="w-full bg-[#f0faf2] border-2 border-green-500/40 text-green-600 font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 hover:bg-green-500/10 transition-colors">
                     <i class="fa-solid fa-database"></i> LIHAT SQL SETUP TABEL
@@ -1473,7 +1537,7 @@
                 <button type="button" class="rp-stock-fab" onclick="switchTab('input')"><i class="fa-solid fa-plus"></i><span>Input Stok</span></button>
             </div>
 
-            <div id="stok-detail-view" class="hidden flex-col gap-4 min-h-screen pb-20 bg-[#F6DBB6] absolute top-0 left-0 w-full z-20 px-4 pt-4">
+            <div id="stok-detail-view" class="hidden flex-col gap-4 min-h-screen pb-20 bg-[#06142B] absolute top-0 left-0 w-full z-20 px-4 pt-4">
                 <div class="flex items-center justify-center mt-4">
                     <div class="w-full rounded-2xl px-5 py-3 flex flex-col items-center" style="background:linear-gradient(90deg,#ff8c00 0%,#ffb347 100%);">
                         <h1 class="text-xl font-black tracking-widest uppercase leading-tight" style="color:#111;" id="detail-brand-name">BRAND</h1>
@@ -1481,8 +1545,8 @@
                     </div>
                 </div>
                 <div class="flex gap-2 mt-1">
-                    <button id="btn-filter-stok-model" onclick="toggleStokFilterPanel('model')" class="flex-1 py-2 text-[10px] font-black rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#FFB144] transition-all flex items-center justify-center gap-1.5"><i class="fa-solid fa-tag text-[9px]"></i> MODEL</button>
-                    <button id="btn-filter-stok-size" onclick="toggleStokFilterPanel('size')" class="flex-1 py-2 text-[10px] font-black rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#FFB144] transition-all flex items-center justify-center gap-1.5"><i class="fa-solid fa-ruler text-[9px]"></i> SIZE</button>
+                    <button id="btn-filter-stok-model" onclick="toggleStokFilterPanel('model')" class="flex-1 py-2 text-[10px] font-black rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#7699C9] transition-all flex items-center justify-center gap-1.5"><i class="fa-solid fa-tag text-[9px]"></i> MODEL</button>
+                    <button id="btn-filter-stok-size" onclick="toggleStokFilterPanel('size')" class="flex-1 py-2 text-[10px] font-black rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#7699C9] transition-all flex items-center justify-center gap-1.5"><i class="fa-solid fa-ruler text-[9px]"></i> SIZE</button>
                     <button id="btn-filter-stok-reset" onclick="resetStokFilter()" class="flex-1 py-2 text-[10px] font-black rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-red-500 transition-all flex items-center justify-center gap-1.5"><i class="fa-solid fa-rotate-left text-[9px]"></i> RESET</button>
                 </div>
                 <div id="stok-warna-filter" class="flex flex-wrap gap-1.5 py-2 mt-1"></div>
@@ -1492,7 +1556,7 @@
                 <div style="height:80px;flex-shrink:0;"></div>
             </div>
 
-            <div id="action-bar-brand-detail" class="hidden fixed bottom-[84px] left-0 right-0 z-50 px-3 pb-3 pt-3 bg-[#F6DBB6]/95 backdrop-blur-md border-t-4 border-[#FFB144] flex gap-2">
+            <div id="action-bar-brand-detail" class="hidden fixed bottom-[84px] left-0 right-0 z-50 px-3 pb-3 pt-3 bg-[#06142B]/95 backdrop-blur-md border-t-4 border-[#7699C9] flex gap-2">
                 <button onclick="closeBrandDetail()" class="flex-1 text-black font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347);"><i class="fa-solid fa-chevron-left"></i> BACK</button>
             </div>
         </div>
@@ -1556,19 +1620,19 @@
                             <div class="flex-1 min-w-0 flex flex-col gap-2.5">
                                 <div class="flex flex-col gap-1">
                                     <label class="text-[10px] font-bold text-black tracking-wider">JENIS BIAYA</label>
-                                    <input id="beban-input-kategori" type="text" list="beban-kategori-datalist" placeholder="mis. Listrik, Bensin..." class="w-full bg-darkBg border-2 border-borderDark rounded-lg px-3 py-2.5 text-xs text-black placeholder-black/50 outline-none focus:border-[#FFB144]">
+                                    <input id="beban-input-kategori" type="text" list="beban-kategori-datalist" placeholder="mis. Listrik, Bensin..." class="w-full bg-darkBg border-2 border-borderDark rounded-lg px-3 py-2.5 text-xs text-black placeholder-black/50 outline-none focus:border-[#7699C9]">
                                     <datalist id="beban-kategori-datalist"></datalist>
                                 </div>
                                 <div class="flex flex-col gap-1">
                                     <label class="text-[10px] font-bold text-black tracking-wider">NOMINAL</label>
                                     <div class="relative">
                                         <span class="absolute inset-y-0 left-3 flex items-center text-black text-xs font-bold">Rp</span>
-                                        <input id="beban-input-nominal" type="text" inputmode="numeric" placeholder="0" oninput="formatRupiahInputBeban(this)" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black/50 outline-none focus:border-[#FFB144]">
+                                        <input id="beban-input-nominal" type="text" inputmode="numeric" placeholder="0" oninput="formatRupiahInputBeban(this)" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black/50 outline-none focus:border-[#7699C9]">
                                     </div>
                                 </div>
                                 <div class="flex flex-col gap-1">
                                     <label class="text-[10px] font-bold text-black tracking-wider">TANGGAL</label>
-                                    <input id="beban-input-tanggal" type="date" class="w-full bg-darkBg border-2 border-borderDark rounded-lg px-3 py-2.5 text-xs text-black outline-none focus:border-[#FFB144]">
+                                    <input id="beban-input-tanggal" type="date" class="w-full bg-darkBg border-2 border-borderDark rounded-lg px-3 py-2.5 text-xs text-black outline-none focus:border-[#7699C9]">
                                 </div>
                             </div>
                         </div>
@@ -1631,14 +1695,14 @@ END $$;</textarea>
             </div>
 
             <div id="input-brandmodel-wrapper" class="flex flex-col gap-3 flex-shrink-0">
-                <div id="input-brand-selector" onclick="bukaDropdownInput('brand')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#FFB144] cursor-pointer hover:bg-[#fdf6ec] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
+                <div id="input-brand-selector" onclick="bukaDropdownInput('brand')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#7699C9] cursor-pointer hover:bg-[#133a66] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 rounded-lg brand-gradient-bg flex items-center justify-center text-black"><i class="fa-solid fa-tags text-xl"></i></div>
                         <div><h3 class="text-sm font-bold text-black mb-1">BRAND</h3><p class="text-xs brand-text font-semibold" id="input-brand-display">Pilih brand</p></div>
                     </div>
                     <i class="fa-solid fa-chevron-down brand-text text-base"></i>
                 </div>
-                <div id="input-model-selector" onclick="bukaDropdownInput('model')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#FFB144] cursor-pointer hover:bg-[#fdf6ec] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
+                <div id="input-model-selector" onclick="bukaDropdownInput('model')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#7699C9] cursor-pointer hover:bg-[#133a66] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 rounded-lg brand-gradient-bg flex items-center justify-center text-black"><i class="fa-solid fa-shirt text-xl"></i></div>
                         <div><h3 class="text-sm font-bold text-black mb-1">MODEL</h3><p class="text-xs brand-text font-semibold" id="input-model-display">Pilih model</p></div>
@@ -1656,7 +1720,7 @@ END $$;</textarea>
                 </div>
                 <div id="input-variasi-list" class="flex flex-col gap-2 p-3 variasi-list-grow"></div>
                 <div class="p-3 flex-shrink-0">
-                    <button id="btn-tambah-variasi-input" onclick="tambahVariasiInput()" class="w-full py-4 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#fdf6ec] opacity-40 cursor-not-allowed pointer-events-none" disabled><i class="fa-solid fa-plus"></i> Tambah Variasi</button>
+                    <button id="btn-tambah-variasi-input" onclick="tambahVariasiInput()" class="w-full py-4 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#133a66] opacity-40 cursor-not-allowed pointer-events-none" disabled><i class="fa-solid fa-plus"></i> Tambah Variasi</button>
                 </div>
             </div>
             <!-- RIWAYAT RETUR: hanya tampil saat mode RETUR aktif -->
@@ -1671,7 +1735,7 @@ END $$;</textarea>
         </div>
 
         <!-- ACTION BAR: INPUT DATA (fixed above nav) -->
-        <div id="action-bar-input" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#F6DBB6]/95 backdrop-blur-md border-t-4 border-[#FFB144] flex gap-2" style="display:none">
+        <div id="action-bar-input" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#06142B]/95 backdrop-blur-md border-t-4 border-[#7699C9] flex gap-2" style="display:none">
             <button onclick="clearInputData()" class="flex-1 text-black font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347);">
                 <i class="fa-solid fa-xmark"></i> CLEAR
             </button>
@@ -1694,7 +1758,7 @@ END $$;</textarea>
                 </div>
                 <div class="input-sheet-body p-4 flex flex-col gap-3">
                     <div class="w-12 h-1 rounded-full bg-gray-700 mx-auto -mt-1 mb-1"></div>
-                    <div id="input-sheet-added-wrap" class="hidden rounded-xl border-2 border-borderDark bg-[#fdf6ec] p-2.5">
+                    <div id="input-sheet-added-wrap" class="hidden rounded-xl border-2 border-borderDark bg-[#133a66] p-2.5">
                         <div class="text-[9px] font-black text-black/60 tracking-wider mb-1.5"><i class="fa-solid fa-list-check text-[9px] mr-1"></i>SUDAH DITAMBAHKAN (<span id="input-sheet-added-count">0</span>)</div>
                         <div id="input-sheet-added-list" class="flex flex-col gap-1.5 max-h-[110px] overflow-y-auto pr-1"></div>
                     </div>
@@ -1758,7 +1822,7 @@ END $$;</textarea>
                 </div>
                 <div class="input-sheet-body p-4 flex flex-col gap-3">
                     <div class="w-12 h-1 rounded-full bg-gray-700 mx-auto -mt-1 mb-1"></div>
-                    <div id="trx-sheet-added-wrap" class="hidden rounded-xl border-2 border-borderDark bg-[#fdf6ec] p-2.5">
+                    <div id="trx-sheet-added-wrap" class="hidden rounded-xl border-2 border-borderDark bg-[#133a66] p-2.5">
                         <div class="text-[9px] font-black text-black/60 tracking-wider mb-1.5"><i class="fa-solid fa-list-check text-[9px] mr-1"></i>SUDAH DITAMBAHKAN (<span id="trx-sheet-added-count">0</span>)</div>
                         <div id="trx-sheet-added-list" class="flex flex-col gap-1.5 max-h-[110px] overflow-y-auto pr-1"></div>
                     </div>
@@ -1819,15 +1883,15 @@ END $$;</textarea>
                 </div>
             </div>
             <div class="flex flex-col gap-3">
-                <div id="trx-vendor-selector" onclick="bukaDropdownTrx('vendor')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#FFB144] cursor-pointer hover:bg-[#fdf6ec] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
+                <div id="trx-vendor-selector" onclick="bukaDropdownTrx('vendor')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#7699C9] cursor-pointer hover:bg-[#133a66] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
                     <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-lg brand-gradient-bg flex items-center justify-center text-black"><i class="fa-solid fa-truck-fast text-xl"></i></div><div><h3 class="text-sm font-bold text-black mb-1">VENDOR</h3><p class="text-xs text-black" id="trx-vendor-display">Pilih vendor</p></div></div>
                     <i class="fa-solid fa-chevron-down text-black text-base"></i>
                 </div>
-                <div id="trx-brand-selector" onclick="bukaDropdownTrx('brand')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#FFB144] cursor-pointer hover:bg-[#fdf6ec] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
+                <div id="trx-brand-selector" onclick="bukaDropdownTrx('brand')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#7699C9] cursor-pointer hover:bg-[#133a66] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
                     <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-lg brand-gradient-bg flex items-center justify-center text-black"><i class="fa-solid fa-tags text-xl"></i></div><div><h3 class="text-sm font-bold text-black mb-1">BRAND</h3><p class="text-xs text-black" id="trx-brand-display">Pilih brand</p></div></div>
                     <i class="fa-solid fa-chevron-down text-black text-base"></i>
                 </div>
-                <div id="trx-model-selector" onclick="bukaDropdownTrx('model')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#FFB144] cursor-pointer hover:bg-[#fdf6ec] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
+                <div id="trx-model-selector" onclick="bukaDropdownTrx('model')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#7699C9] cursor-pointer hover:bg-[#133a66] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
                     <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-lg brand-gradient-bg flex items-center justify-center text-black"><i class="fa-solid fa-shirt text-xl"></i></div><div><h3 class="text-sm font-bold text-black mb-1">MODEL</h3><p class="text-xs text-black" id="trx-model-display">Pilih model</p></div></div>
                     <i class="fa-solid fa-chevron-down text-black text-base"></i>
                 </div>
@@ -1842,13 +1906,13 @@ END $$;</textarea>
                     <div class="text-[9px] font-bold opacity-65 mt-1">Tap item untuk isi warna, ukuran, dan qty</div>
                 </div>
                 <div id="trx-variasi-list" class="flex flex-col gap-2 p-3 variasi-list-grow"></div>
-                <div class="p-3 flex-shrink-0"><button id="btn-tambah-variasi-trx" onclick="tambahVariasiTrx()" class="w-full py-4 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#fdf6ec] opacity-40 cursor-not-allowed pointer-events-none" disabled><i class="fa-solid fa-plus"></i> Tambah Item</button></div>
+                <div class="p-3 flex-shrink-0"><button id="btn-tambah-variasi-trx" onclick="tambahVariasiTrx()" class="w-full py-4 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#133a66] opacity-40 cursor-not-allowed pointer-events-none" disabled><i class="fa-solid fa-plus"></i> Tambah Item</button></div>
             </div>
         <div class="tab-bottom-spacer" style="height:90px;flex-shrink:0;"></div>
         </div>
 
         <!-- ACTION BAR: TRANSAKSI (fixed above nav) -->
-        <div id="action-bar-transaksi" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#F6DBB6]/95 backdrop-blur-md border-t-4 border-[#FFB144] flex gap-2" style="display:none">
+        <div id="action-bar-transaksi" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#06142B]/95 backdrop-blur-md border-t-4 border-[#7699C9] flex gap-2" style="display:none">
             <button onclick="clearTransaksi()" class="flex-1 text-black font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347);">
                 <i class="fa-solid fa-xmark"></i> CLEAR
             </button>
@@ -1900,7 +1964,7 @@ END $$;</textarea>
             <div id="riwayat-transaksi-list" class="hidden flex-col gap-2"></div>
             <div id="riwayat-pelunasan-list" class="hidden flex-col gap-3"></div>
             <div id="riwayat-bayar-sebagian-list" class="hidden flex-col gap-3"></div>
-            <div id="sticky-total-bar" class="hidden fixed bottom-[84px] left-0 right-0 w-full bg-[#F6DBB6]/95 backdrop-blur-md border-t-4 border-[#FFB144] px-3 pb-3 pt-3 flex items-center z-40 gap-2">
+            <div id="sticky-total-bar" class="hidden fixed bottom-[84px] left-0 right-0 w-full bg-[#06142B]/95 backdrop-blur-md border-t-4 border-[#7699C9] px-3 pb-3 pt-3 flex items-center z-40 gap-2">
                     <span id="selected-trx-count" class="hidden">0</span>
                     <button onclick="batalPilihSemua()" class="flex-1 justify-center text-black font-black text-[13px] py-3.5 rounded-xl flex items-center gap-2 active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347)">BATAL</button>
                     <button onclick="buatSuratTagihan()" id="btn-tagihan-terpilih" class="flex-1 justify-center text-black font-black text-[13px] py-3.5 rounded-xl flex items-center gap-2 opacity-40 cursor-not-allowed active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347)"><i class="fa-solid fa-file-invoice"></i> TAGIHAN</button>
@@ -1979,8 +2043,8 @@ END $$;</textarea>
             <div id="master-panel-vendor" class="flex flex-col gap-3">
                 <div class="bg-cardBg rounded-xl p-4 border-2 border-borderDark flex flex-col gap-3">
                     <div class="flex items-center gap-2 border-b-2 border-borderDark pb-2"><i class="fa-solid fa-truck-fast brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH VENDOR</h3></div>
-                    <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">NAMA VENDOR</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-building text-black text-xs"></i></div><input id="input-vendor-nama" type="text" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#FFB144] transition-colors" placeholder="input nama vendor..."></div></div>
-                    <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">NO. TELEPON</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-phone text-black text-xs"></i></div><input id="input-vendor-telp" type="tel" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#FFB144] transition-colors" placeholder="08xx-xxxx-xxxx"></div></div>
+                    <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">NAMA VENDOR</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-building text-black text-xs"></i></div><input id="input-vendor-nama" type="text" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors" placeholder="input nama vendor..."></div></div>
+                    <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">NO. TELEPON</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-phone text-black text-xs"></i></div><input id="input-vendor-telp" type="tel" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors" placeholder="08xx-xxxx-xxxx"></div></div>
                     <button id="btn-simpan-vendor" onclick="simpanVendor()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow mt-1"><i class="fa-solid fa-plus"></i> SIMPAN VENDOR</button>
                 </div>
                 <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
@@ -1993,7 +2057,7 @@ END $$;</textarea>
             <div id="master-panel-brand" class="hidden flex-col gap-3">
                 <div class="bg-cardBg rounded-xl p-4 border-2 border-borderDark flex flex-col gap-3">
                     <div class="flex items-center gap-2 border-b-2 border-borderDark pb-2"><i class="fa-solid fa-tags brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH BRAND</h3></div>
-                    <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">NAMA BRAND</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-tag text-black text-xs"></i></div><input id="input-brand-nama" type="text" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#FFB144] transition-colors" placeholder="input nama brand..."></div></div>
+                    <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">NAMA BRAND</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-tag text-black text-xs"></i></div><input id="input-brand-nama" type="text" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors" placeholder="input nama brand..."></div></div>
                     <button id="btn-simpan-brand" onclick="simpanBrand()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow mt-1"><i class="fa-solid fa-plus"></i> SIMPAN BRAND</button>
                 </div>
                 <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
@@ -2006,14 +2070,14 @@ END $$;</textarea>
             <div id="master-panel-model" class="hidden flex-col gap-3">
                 <div class="bg-cardBg rounded-xl p-4 border-2 border-borderDark flex flex-col gap-3">
                     <div class="flex items-center gap-2 border-b-2 border-borderDark pb-2"><i class="fa-solid fa-shirt brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH MODEL</h3></div>
-                    <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">PILIH BRAND</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-tags text-black text-xs"></i></div><select id="model-pilih-brand" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black appearance-none focus:outline-none focus:border-[#FFB144] transition-colors"><option value="">-- Pilih Brand --</option></select><div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"><i class="fa-solid fa-chevron-down text-black text-xs"></i></div></div></div>
+                    <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">PILIH BRAND</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-tags text-black text-xs"></i></div><select id="model-pilih-brand" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black appearance-none focus:outline-none focus:border-[#7699C9] transition-colors"><option value="">-- Pilih Brand --</option></select><div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"><i class="fa-solid fa-chevron-down text-black text-xs"></i></div></div></div>
                     <div class="flex flex-col gap-1.5">
                         <label class="text-[10px] font-bold text-black tracking-wider">DAFTAR MODEL & HARGA</label>
                         <div class="rounded-xl overflow-hidden border-2 border-borderDark">
                             <div class="brand-gradient-bg text-black text-[10px] font-black grid grid-cols-12 py-1.5 px-2 text-center items-center"><div class="col-span-6 text-left">NAMA MODEL</div><div class="col-span-5">HARGA (Rp)</div><div class="col-span-1"></div></div>
                             <div id="model-rows-container" class="flex flex-col divide-y divide-borderDark"></div>
                         </div>
-                        <button onclick="tambahModelRow()" class="w-full py-2.5 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#fdf6ec] mt-1"><i class="fa-solid fa-plus"></i> Tambah Model Lain</button>
+                        <button onclick="tambahModelRow()" class="w-full py-2.5 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#133a66] mt-1"><i class="fa-solid fa-plus"></i> Tambah Model Lain</button>
                     </div>
                     <button id="btn-simpan-model" onclick="simpanModel()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow"><i class="fa-solid fa-floppy-disk"></i> SIMPAN MODEL</button>
                 </div>
@@ -2031,7 +2095,7 @@ END $$;</textarea>
                         <div class="brand-gradient-bg text-black text-[10px] font-black grid grid-cols-12 py-1.5 px-2 text-center items-center"><div class="col-span-9 text-left">NAMA WARNA</div><div class="col-span-2">KODE</div><div class="col-span-1"></div></div>
                         <div id="warna-rows-container" class="flex flex-col divide-y divide-borderDark"></div>
                     </div>
-                    <button onclick="tambahWarnaRow()" class="w-full py-2.5 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#fdf6ec] mt-1"><i class="fa-solid fa-plus"></i> Tambah Warna Lain</button>
+                    <button onclick="tambahWarnaRow()" class="w-full py-2.5 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#133a66] mt-1"><i class="fa-solid fa-plus"></i> Tambah Warna Lain</button>
                     <button id="btn-simpan-warna" onclick="simpanWarna()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow"><i class="fa-solid fa-floppy-disk"></i> SIMPAN WARNA</button>
                 </div>
                 <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
@@ -2048,7 +2112,7 @@ END $$;</textarea>
                         <div class="brand-gradient-bg text-black text-[10px] font-black grid grid-cols-12 py-1.5 px-2 text-center items-center"><div class="col-span-11 text-left">NAMA UKURAN</div><div class="col-span-1"></div></div>
                         <div id="ukuran-rows-container" class="flex flex-col divide-y divide-borderDark"></div>
                     </div>
-                    <button onclick="tambahUkuranRow()" class="w-full py-2.5 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#fdf6ec] mt-1"><i class="fa-solid fa-plus"></i> Tambah Ukuran Lain</button>
+                    <button onclick="tambahUkuranRow()" class="w-full py-2.5 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#133a66] mt-1"><i class="fa-solid fa-plus"></i> Tambah Ukuran Lain</button>
                     <button id="btn-simpan-ukuran" onclick="simpanUkuran()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow"><i class="fa-solid fa-floppy-disk"></i> SIMPAN UKURAN</button>
                 </div>
                 <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
@@ -2073,27 +2137,27 @@ END $$;</textarea>
                 <div class="flex flex-col gap-2">
                     <label class="text-[10px] font-bold text-black tracking-wider">PILIH FONT</label>
                     <div class="grid grid-cols-1 gap-2" id="font-options">
-                        <div onclick="changeFont('ui-sans-serif, system-ui, -apple-system, sans-serif','Default')" class="font-option-btn flex items-center justify-between bg-darkBg border-2 border-borderDark rounded-xl px-4 py-3 cursor-pointer hover:border-[#FFB144]/50 transition-colors" data-font="Default">
+                        <div onclick="changeFont('ui-sans-serif, system-ui, -apple-system, sans-serif','Default')" class="font-option-btn flex items-center justify-between bg-darkBg border-2 border-borderDark rounded-xl px-4 py-3 cursor-pointer hover:border-[#7699C9]/50 transition-colors" data-font="Default">
                             <div><div class="text-[11px] font-bold text-black" style="font-family:ui-sans-serif,system-ui,-apple-system,sans-serif">Default System</div><div class="text-[9px] text-black mt-0.5">Font bawaan perangkat</div></div>
                             <i class="fa-solid fa-check brand-text text-xs font-opt-check hidden"></i>
                         </div>
-                        <div onclick="changeFont('Poppins, sans-serif','Poppins')" class="font-option-btn flex items-center justify-between bg-darkBg border-2 border-borderDark rounded-xl px-4 py-3 cursor-pointer hover:border-[#FFB144]/50 transition-colors" data-font="Poppins">
+                        <div onclick="changeFont('Poppins, sans-serif','Poppins')" class="font-option-btn flex items-center justify-between bg-darkBg border-2 border-borderDark rounded-xl px-4 py-3 cursor-pointer hover:border-[#7699C9]/50 transition-colors" data-font="Poppins">
                             <div><div class="text-[11px] font-bold text-black" style="font-family:Poppins,sans-serif">Poppins</div><div class="text-[9px] text-black mt-0.5">Modern & rounded — cocok untuk brand</div></div>
                             <i class="fa-solid fa-check brand-text text-xs font-opt-check hidden"></i>
                         </div>
-                        <div onclick="changeFont('Montserrat, sans-serif','Montserrat')" class="font-option-btn flex items-center justify-between bg-darkBg border-2 border-[#FFB144] rounded-xl px-4 py-3 cursor-pointer" data-font="Montserrat">
+                        <div onclick="changeFont('Montserrat, sans-serif','Montserrat')" class="font-option-btn flex items-center justify-between bg-darkBg border-2 border-[#7699C9] rounded-xl px-4 py-3 cursor-pointer" data-font="Montserrat">
                             <div><div class="text-[11px] font-bold text-black" style="font-family:Montserrat,sans-serif">Montserrat</div><div class="text-[9px] text-black mt-0.5">Tegas & profesional</div></div>
                             <i class="fa-solid fa-check brand-text text-xs font-opt-check"></i>
                         </div>
-                        <div onclick="changeFont('Inter, sans-serif','Inter')" class="font-option-btn flex items-center justify-between bg-darkBg border-2 border-borderDark rounded-xl px-4 py-3 cursor-pointer hover:border-[#FFB144]/50 transition-colors" data-font="Inter">
+                        <div onclick="changeFont('Inter, sans-serif','Inter')" class="font-option-btn flex items-center justify-between bg-darkBg border-2 border-borderDark rounded-xl px-4 py-3 cursor-pointer hover:border-[#7699C9]/50 transition-colors" data-font="Inter">
                             <div><div class="text-[11px] font-bold text-black" style="font-family:Inter,sans-serif">Inter</div><div class="text-[9px] text-black mt-0.5">Bersih & mudah dibaca</div></div>
                             <i class="fa-solid fa-check brand-text text-xs font-opt-check hidden"></i>
                         </div>
-                        <div onclick="changeFont('Nunito, sans-serif','Nunito')" class="font-option-btn flex items-center justify-between bg-darkBg border-2 border-borderDark rounded-xl px-4 py-3 cursor-pointer hover:border-[#FFB144]/50 transition-colors" data-font="Nunito">
+                        <div onclick="changeFont('Nunito, sans-serif','Nunito')" class="font-option-btn flex items-center justify-between bg-darkBg border-2 border-borderDark rounded-xl px-4 py-3 cursor-pointer hover:border-[#7699C9]/50 transition-colors" data-font="Nunito">
                             <div><div class="text-[11px] font-bold text-black" style="font-family:Nunito,sans-serif">Nunito</div><div class="text-[9px] text-black mt-0.5">Ramah & casual</div></div>
                             <i class="fa-solid fa-check brand-text text-xs font-opt-check hidden"></i>
                         </div>
-                        <div onclick="changeFont('Bebas Neue, sans-serif','Bebas Neue')" class="font-option-btn flex items-center justify-between bg-darkBg border-2 border-borderDark rounded-xl px-4 py-3 cursor-pointer hover:border-[#FFB144]/50 transition-colors" data-font="Bebas Neue">
+                        <div onclick="changeFont('Bebas Neue, sans-serif','Bebas Neue')" class="font-option-btn flex items-center justify-between bg-darkBg border-2 border-borderDark rounded-xl px-4 py-3 cursor-pointer hover:border-[#7699C9]/50 transition-colors" data-font="Bebas Neue">
                             <div><div class="text-[11px] font-bold text-black uppercase tracking-widest" style="font-family:'Bebas Neue',sans-serif">Bebas Neue</div><div class="text-[9px] text-black mt-0.5">Bold display — cocok untuk konveksi</div></div>
                             <i class="fa-solid fa-check brand-text text-xs font-opt-check hidden"></i>
                         </div>
@@ -2141,7 +2205,7 @@ END $$;</textarea>
                         <span class="text-[9px] text-black mt-0.5" id="pelunasan-limit-label">Aktif: Maks 2 minggu terakhir</span>
                     </div>
                     <!-- Toggle Switch -->
-                    <div id="pelunasan-limit-toggle" onclick="togglePelunasanLimit()" class="relative w-14 h-7 rounded-full cursor-pointer transition-all duration-300 flex items-center px-1" style="background:#d8c3a0">
+                    <div id="pelunasan-limit-toggle" onclick="togglePelunasanLimit()" class="relative w-14 h-7 rounded-full cursor-pointer transition-all duration-300 flex items-center px-1" style="background:#35507a">
                         <div id="pelunasan-limit-toggle-knob" class="w-5 h-5 rounded-full bg-white shadow-md transition-all duration-300 translate-x-0"></div>
                     </div>
                 </div>
@@ -2176,7 +2240,7 @@ END $$;</textarea>
                     <div class="bg-darkBg rounded-xl p-3 border-2 border-borderDark">
                         <div class="text-[11px] font-black text-black flex items-center gap-1.5 mb-2"><i class="fa-solid fa-shield-halved brand-text text-[10px]"></i> GANTI PIN MASTER (OWNER)</div>
                         <p class="text-[9px] text-black mb-3 leading-relaxed">PIN ini hanya diketahui owner. Diperlukan saat mengakses TAB MASTER DATA.</p>
-                        <button onclick="bukaGantiPin('master')" class="w-full py-2.5 bg-darkBg border-2 border-[#FFB144] brand-text font-black text-[11px] rounded-xl flex justify-center items-center gap-2">
+                        <button onclick="bukaGantiPin('master')" class="w-full py-2.5 bg-darkBg border-2 border-[#7699C9] brand-text font-black text-[11px] rounded-xl flex justify-center items-center gap-2">
                             <i class="fa-solid fa-rotate"></i> GANTI PIN MASTER
                         </button>
                     </div>
@@ -2197,7 +2261,7 @@ END $$;</textarea>
                             <p class="text-[9px] text-black leading-relaxed">Digunakan saat ingin clone database ke project Supabase baru. Jalankan SQL ini terlebih dahulu di project baru, baru kemudian lakukan Restore dari file backup.</p>
                         </div>
                     </div>
-                    <div class="bg-darkBg rounded-xl p-3 border-2 border-[#FFB144]/30 flex flex-col gap-2">
+                    <div class="bg-darkBg rounded-xl p-3 border-2 border-[#7699C9]/30 flex flex-col gap-2">
                         <div class="text-[10px] font-black text-black flex items-center gap-1.5 mb-1"><i class="fa-solid fa-list-ol brand-text text-[9px]"></i> LANGKAH-LANGKAH</div>
                         <div class="flex items-start gap-2"><span class="w-5 h-5 rounded-full brand-gradient-bg text-black text-[9px] font-black flex items-center justify-center flex-shrink-0 mt-0.5">1</span><p class="text-[9px] text-black leading-relaxed">Buat project baru di <span class="text-black font-bold">supabase.com</span></p></div>
                         <div class="flex items-start gap-2"><span class="w-5 h-5 rounded-full brand-gradient-bg text-black text-[9px] font-black flex items-center justify-center flex-shrink-0 mt-0.5">2</span><p class="text-[9px] text-black leading-relaxed">Klik tombol di bawah → Copy SQL → Paste & Run di <span class="text-black font-bold">SQL Editor</span> Supabase</p></div>
@@ -2710,15 +2774,15 @@ END $$;`;
         modal.id = 'sql-modal';
         modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px';
         modal.innerHTML = `
-            <div style="background:#ffffff;border:1px solid #FFB144;border-radius:16px;width:100%;max-width:480px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden">
+            <div style="background:#ffffff;border:1px solid #7699C9;border-radius:16px;width:100%;max-width:480px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden">
                 <div style="background:var(--brand-gradient);padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
                     <div style="font-size:13px;font-weight:900;color:#ffffff"><i class="fa-solid fa-database mr-2"></i>SQL SETUP — COPY & JALANKAN</div>
                     <button onclick="document.getElementById('sql-modal').remove()" style="background:rgba(0,0,0,0.2);border:none;color:#ffffff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:14px;font-weight:bold">✕</button>
                 </div>
-                <div style="padding:12px 16px;background:#F6DBB6;border-bottom:1px solid #FFB144">
+                <div style="padding:12px 16px;background:#06142B;border-bottom:1px solid #7699C9">
                     <p style="font-size:10px;color:#000;margin:0">Langkah: <span style="color:#ff8c00;font-weight:bold">1)</span> Klik tombol buka SQL Editor &nbsp;<span style="color:#ff8c00;font-weight:bold">2)</span> Copy SQL di bawah &nbsp;<span style="color:#ff8c00;font-weight:bold">3)</span> Paste & Run di Supabase</p>
                 </div>
-                <div style="display:flex;gap:8px;padding:12px 16px;border-bottom:1px solid #FFB144">
+                <div style="display:flex;gap:8px;padding:12px 16px;border-bottom:1px solid #7699C9">
                     <a href="${sqlEditorUrl}" target="_blank" style="flex:1;background:var(--brand-gradient);color:#ffffff;font-weight:900;font-size:11px;padding:10px;border-radius:10px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px"><i class="fa-solid fa-arrow-up-right-from-square"></i> BUKA SQL EDITOR</a>
                     <button onclick="copySQLSetup()" id="btn-copy-sql" style="flex:1;background:#1a2a1a;border:1px solid rgba(74,222,128,0.4);color:#4ade80;font-weight:900;font-size:11px;padding:10px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px"><i class="fa-solid fa-copy"></i> COPY SQL</button>
                 </div>
@@ -3878,7 +3942,7 @@ function updateSSK(tab, rowId) {
                 });
                 if (kpiVendorAktifEl) { kpiVendorAktifEl.textContent = Object.keys(vendorMap).length.toLocaleString('id-ID'); kpiVendorAktifEl.classList.remove('kpi-skel'); }
                 vendorListEl.innerHTML = Object.entries(vendorMap).sort(([a], [b]) => a.localeCompare(b, 'id', { sensitivity: 'base' })).map(([nama, stat]) => `
-                    <div class="rounded-xl overflow-hidden transition-all border-2 border-borderDark" style="background:#F6DBB6;">
+                    <div class="rounded-xl overflow-hidden transition-all border-2 border-borderDark" style="background:#06142B;">
                         <div class="flex items-center justify-between px-3 py-2.5">
                             <div class="flex items-center gap-2.5">
                                 <div class="w-8 h-8 rounded-xl brand-gradient-bg flex items-center justify-center flex-shrink-0">
@@ -4110,7 +4174,7 @@ function updateSSK(tab, rowId) {
             const textOnColor = luminance > 0.45 ? '#111111' : '#ffffff';
             const bgColor = warnaKode;
             const textColor = isMinus ? '#fca5a5' : textOnColor;
-            const borderStyle = isMinus ? '2px solid #ef4444' : '1.5px solid rgba(255,177,68,0.55)';
+            const borderStyle = isMinus ? '2px solid #ef4444' : '1.5px solid rgba(118,153,201,0.55)';
             const keyEsc = key.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
             return `<div class="rounded-lg overflow-hidden flex items-stretch" style="background:${bgColor}; min-height:38px; border: ${borderStyle};">
                 <div class="flex-1 flex items-center px-3 py-1.5">
@@ -4154,7 +4218,7 @@ function updateSSK(tab, rowId) {
         const btnModel = document.getElementById('btn-filter-stok-model');
         const btnSize = document.getElementById('btn-filter-stok-size');
         const activeStyle = 'flex-1 py-2 text-[10px] font-black rounded-lg brand-gradient-bg text-black transition-all flex items-center justify-center gap-1.5';
-        const inactiveStyle = 'flex-1 py-2 text-[10px] font-black rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#FFB144] transition-all flex items-center justify-center gap-1.5';
+        const inactiveStyle = 'flex-1 py-2 text-[10px] font-black rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#7699C9] transition-all flex items-center justify-center gap-1.5';
 
         // Toggle off jika klik tipe yang sama
         if (_stokFilterType === type) {
@@ -4185,7 +4249,7 @@ function updateSSK(tab, rowId) {
         const sorted = [...values].sort((a, b) => a.localeCompare(b, 'id', { sensitivity: 'base' }));
         const labelText = type === 'model' ? 'Pilih model:' : 'Pilih size:';
         panel.innerHTML = `<span class="text-[9px] text-black w-full mb-0.5">${labelText}</span>` + sorted.map(val => {
-            return `<button onclick="applyStokFilter('${type}', '${val}')" class="stok-chip px-2.5 py-1 text-[9px] font-bold rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#FFB144] transition-all">${val}</button>`;
+            return `<button onclick="applyStokFilter('${type}', '${val}')" class="stok-chip px-2.5 py-1 text-[9px] font-bold rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#7699C9] transition-all">${val}</button>`;
         }).join('');
         panel.classList.remove('hidden'); panel.classList.add('flex');
     }
@@ -4198,7 +4262,7 @@ function updateSSK(tab, rowId) {
             const isActive = c.textContent.trim() === value;
             c.className = isActive
                 ? 'stok-chip px-2.5 py-1 text-[9px] font-bold rounded-lg brand-gradient-bg text-black transition-all'
-                : 'stok-chip px-2.5 py-1 text-[9px] font-bold rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#FFB144] transition-all';
+                : 'stok-chip px-2.5 py-1 text-[9px] font-bold rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#7699C9] transition-all';
         });
         updateStokFilterLabel();
         renderDetailItems(null);
@@ -4212,7 +4276,7 @@ function updateSSK(tab, rowId) {
         if (panel) { panel.classList.add('hidden'); panel.classList.remove('flex'); }
         const btnModel = document.getElementById('btn-filter-stok-model');
         const btnSize = document.getElementById('btn-filter-stok-size');
-        const inactiveStyle = 'flex-1 py-2 text-[10px] font-black rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#FFB144] transition-all flex items-center justify-center gap-1.5';
+        const inactiveStyle = 'flex-1 py-2 text-[10px] font-black rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#7699C9] transition-all flex items-center justify-center gap-1.5';
         if (btnModel) btnModel.className = inactiveStyle;
         if (btnSize) btnSize.className = inactiveStyle;
         // Reset chip warna ke ALL
@@ -4274,7 +4338,7 @@ function updateSSK(tab, rowId) {
                 filterEl.innerHTML = '';
             } else {
                 const chips = [];
-                chips.push(`<button class="warna-chip flex items-center justify-center rounded-lg text-[8px] font-black border-2 border-[#FFB144] cursor-pointer transition-all" data-warna="" style="background:var(--brand-main); color:#000; opacity:1; box-shadow:0 0 0 2px var(--brand-main); height:28px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:0 4px;" onclick="filterByWarna(null, this)">ALL</button>`);
+                chips.push(`<button class="warna-chip flex items-center justify-center rounded-lg text-[8px] font-black border-2 border-[#7699C9] cursor-pointer transition-all" data-warna="" style="background:var(--brand-main); color:#000; opacity:1; box-shadow:0 0 0 2px var(--brand-main); height:28px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:0 4px;" onclick="filterByWarna(null, this)">ALL</button>`);
                 warnaSet.forEach((kode, nama) => {
                     const r = parseInt(kode.slice(1,3),16), g = parseInt(kode.slice(3,5),16), b = parseInt(kode.slice(5,7),16);
                     const lum = (0.299*r + 0.587*g + 0.114*b) / 255;
@@ -4605,7 +4669,7 @@ function updateSSK(tab, rowId) {
             if (label) label.textContent = 'Aktif: Tampilkan semua riwayat';
         } else {
             if (toggle) toggle.classList.remove('is-light');
-            if (toggle) toggle.style.background = '#d8c3a0';
+            if (toggle) toggle.style.background = '#35507a';
             const knob = document.getElementById('pelunasan-limit-toggle-knob');
             if (knob) knob.style.transform = 'translateX(0)';
             if (label) label.textContent = 'Aktif: Maks 2 minggu terakhir';
@@ -4637,7 +4701,7 @@ function updateSSK(tab, rowId) {
             if (knob) knob.style.transform = 'translateX(28px)';
             if (label) label.textContent = 'Aktif: Bunyi & getar saat ada pesanan baru';
         } else {
-            if (toggle) toggle.style.background = '#d8c3a0';
+            if (toggle) toggle.style.background = '#35507a';
             if (knob) knob.style.transform = 'translateX(0)';
             if (label) label.textContent = 'Nonaktif: Diam di HP ini (bel & badge tetap tampil)';
         }
@@ -4669,7 +4733,7 @@ function updateSSK(tab, rowId) {
         // Update highlight
         document.querySelectorAll('.font-option-btn').forEach(btn => {
             const isActive = btn.getAttribute('data-font') === fontName;
-            btn.classList.toggle('border-[#FFB144]', isActive);
+            btn.classList.toggle('border-[#7699C9]', isActive);
             btn.classList.toggle('border-borderDark', !isActive);
             const icon = btn.querySelector('.font-opt-check');
             if (icon) icon.classList.toggle('hidden', !isActive);
@@ -4689,7 +4753,7 @@ function updateSSK(tab, rowId) {
         activeFont = saved;
         document.querySelectorAll('.font-option-btn').forEach(btn => {
             const isActive = btn.getAttribute('data-font') === saved;
-            btn.classList.toggle('border-[#FFB144]', isActive);
+            btn.classList.toggle('border-[#7699C9]', isActive);
             btn.classList.toggle('border-borderDark', !isActive);
             const icon = btn.querySelector('.font-opt-check');
             if (icon) icon.classList.toggle('hidden', !isActive);
@@ -4837,12 +4901,12 @@ function updateSSK(tab, rowId) {
         row.id = 'model-row-' + modelRowCount;
         row.innerHTML = `
             <div class="flex gap-2 items-center">
-                <input type="text" placeholder="Nama model..." class="model-nama flex-1 min-w-0 bg-darkBg border-2 border-borderDark rounded-lg px-3 py-2.5 text-xs text-black text-center placeholder-black focus:outline-none focus:border-[#FFB144] transition-colors">
+                <input type="text" placeholder="Nama model..." class="model-nama flex-1 min-w-0 bg-darkBg border-2 border-borderDark rounded-lg px-3 py-2.5 text-xs text-black text-center placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors">
                 <button onclick="hapusModelRow(${modelRowCount})" class="w-8 h-8 flex-shrink-0 rounded-lg flex items-center justify-center border-2 border-red-500/40 bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors"><i class="fa-regular fa-trash-can text-[10px]"></i></button>
             </div>
             <div class="flex gap-2">
-                <div class="relative flex-1 min-w-0"><span class="absolute inset-y-0 left-2 flex items-center text-black text-[9px] font-bold">Rp</span><input type="number" placeholder="Harga Jual" class="model-harga w-full bg-darkBg border-2 border-borderDark rounded-lg pl-6 pr-2 py-2.5 text-xs text-black text-center placeholder-black focus:outline-none focus:border-[#FFB144] transition-colors"></div>
-                <div class="relative flex-1 min-w-0"><span class="absolute inset-y-0 left-2 flex items-center text-black text-[9px] font-bold">Rp</span><input type="number" placeholder="Harga Modal" class="model-modal w-full bg-darkBg border-2 border-borderDark rounded-lg pl-6 pr-2 py-2.5 text-xs text-black text-center placeholder-black focus:outline-none focus:border-[#FFB144] transition-colors"></div>
+                <div class="relative flex-1 min-w-0"><span class="absolute inset-y-0 left-2 flex items-center text-black text-[9px] font-bold">Rp</span><input type="number" placeholder="Harga Jual" class="model-harga w-full bg-darkBg border-2 border-borderDark rounded-lg pl-6 pr-2 py-2.5 text-xs text-black text-center placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors"></div>
+                <div class="relative flex-1 min-w-0"><span class="absolute inset-y-0 left-2 flex items-center text-black text-[9px] font-bold">Rp</span><input type="number" placeholder="Harga Modal" class="model-modal w-full bg-darkBg border-2 border-borderDark rounded-lg pl-6 pr-2 py-2.5 text-xs text-black text-center placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors"></div>
             </div>`;
         container.appendChild(row);
     }
@@ -4938,7 +5002,7 @@ function updateSSK(tab, rowId) {
         const displayEl = item.querySelector('.model-modal-display-' + id);
         displayEl.innerHTML = `<div class="flex items-center gap-1 mt-0.5">
             <span class="text-black text-[9px]">Rp</span>
-            <input type="number" value="${m.hargaModal||0}" class="edit-modal-input bg-darkBg border-2 border-[#FFB144] rounded px-1.5 py-0.5 text-[10px] text-black w-24 focus:outline-none">
+            <input type="number" value="${m.hargaModal||0}" class="edit-modal-input bg-darkBg border-2 border-[#7699C9] rounded px-1.5 py-0.5 text-[10px] text-black w-24 focus:outline-none">
             <button onclick="simpanEditModal(${id})" class="w-5 h-5 bg-green-500/20 border-2 border-green-500/40 text-green-400 rounded flex items-center justify-center"><i class="fa-solid fa-check text-[8px]"></i></button>
             <button onclick="batalEditModal(${id})" class="w-5 h-5 bg-gray-500/20 border-2 border-gray-500/40 text-black rounded flex items-center justify-center"><i class="fa-solid fa-xmark text-[8px]"></i></button>
         </div>`;
@@ -4951,7 +5015,7 @@ function updateSSK(tab, rowId) {
         if (!item || item.querySelector('.edit-nama-input')) return;
         const namaEl = item.querySelector('.model-nama-display-' + id);
         namaEl.innerHTML = `<div class="flex items-center gap-1">
-            <input type="text" value="${m.nama}" class="edit-nama-input bg-darkBg border-2 border-[#FFB144] rounded px-1.5 py-0.5 text-[10px] text-black w-36 focus:outline-none">
+            <input type="text" value="${m.nama}" class="edit-nama-input bg-darkBg border-2 border-[#7699C9] rounded px-1.5 py-0.5 text-[10px] text-black w-36 focus:outline-none">
             <button onclick="renameModel(${id})" class="w-5 h-5 bg-green-500/20 border-2 border-green-500/40 text-green-400 rounded flex items-center justify-center"><i class="fa-solid fa-check text-[8px]"></i></button>
             <button onclick="batalEditNama(${id})" class="w-5 h-5 bg-gray-500/20 border-2 border-gray-500/40 text-black rounded flex items-center justify-center"><i class="fa-solid fa-xmark text-[8px]"></i></button>
         </div>`;
@@ -5022,7 +5086,7 @@ function updateSSK(tab, rowId) {
         const displayEl = item.querySelector('.model-harga-display-' + id);
         displayEl.innerHTML = `<div class="flex items-center gap-1 mt-0.5">
             <span class="text-black text-[9px]">Rp</span>
-            <input type="number" value="${m.harga||0}" class="edit-harga-input bg-darkBg border-2 border-[#FFB144] rounded px-1.5 py-0.5 text-[10px] text-black w-24 focus:outline-none">
+            <input type="number" value="${m.harga||0}" class="edit-harga-input bg-darkBg border-2 border-[#7699C9] rounded px-1.5 py-0.5 text-[10px] text-black w-24 focus:outline-none">
             <button onclick="simpanEditHarga(${id})" class="w-5 h-5 bg-green-500/20 border-2 border-green-500/40 text-green-400 rounded flex items-center justify-center"><i class="fa-solid fa-check text-[8px]"></i></button>
             <button onclick="batalEditHarga(${id})" class="w-5 h-5 bg-gray-500/20 border-2 border-gray-500/40 text-black rounded flex items-center justify-center"><i class="fa-solid fa-xmark text-[8px]"></i></button>
         </div>`;
@@ -5069,7 +5133,7 @@ function updateSSK(tab, rowId) {
         row.innerHTML = `
             <div class="col-span-9 relative">
                 <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none"><i class="fa-solid fa-droplet text-black text-[10px]"></i></div>
-                <input type="text" class="warna-nama w-full bg-[#F6DBB6] border-2 border-borderDark rounded-lg pl-7 pr-2 py-2 text-xs text-black placeholder-black focus:outline-none focus:border-[#FFB144] transition-colors" placeholder="nama warna...">
+                <input type="text" class="warna-nama w-full bg-[#06142B] border-2 border-borderDark rounded-lg pl-7 pr-2 py-2 text-xs text-black placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors" placeholder="nama warna...">
             </div>
             <div class="col-span-2 flex justify-center">
                 <input type="color" class="warna-kode w-9 h-9 bg-darkBg border-2 border-borderDark rounded-lg cursor-pointer p-0.5" value="#ff8c00">
@@ -5178,7 +5242,7 @@ function updateSSK(tab, rowId) {
         row.innerHTML = `
             <div class="col-span-11 relative">
                 <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none"><i class="fa-solid fa-ruler-horizontal text-black text-[10px]"></i></div>
-                <input type="text" class="ukuran-nama w-full bg-[#F6DBB6] border-2 border-borderDark rounded-lg pl-7 pr-2 py-2 text-xs text-black placeholder-black focus:outline-none focus:border-[#FFB144] transition-colors" placeholder="nama ukuran...">
+                <input type="text" class="ukuran-nama w-full bg-[#06142B] border-2 border-borderDark rounded-lg pl-7 pr-2 py-2 text-xs text-black placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors" placeholder="nama ukuran...">
             </div>
             <div class="col-span-1 flex justify-center">
                 <button onclick="hapusUkuranRow(${id})" class="w-7 h-7 rounded-lg bg-red-500/10 border-2 border-red-500/30 text-red-400 flex items-center justify-center hover:bg-red-500/20 transition-colors"><i class="fa-solid fa-xmark text-[10px]"></i></button>
@@ -5349,13 +5413,13 @@ function updateSSK(tab, rowId) {
 
         const popup = document.createElement('div');
         popup.id = 'generic-dropdown-popup';
-        popup.className = 'fixed z-[999] bg-[#ffffff] border-2 border-[#FFB144] rounded-xl shadow-2xl overflow-hidden';
+        popup.className = 'fixed z-[999] bg-[#ffffff] border-2 border-[#7699C9] rounded-xl shadow-2xl overflow-hidden';
         popup.style.overflowY = 'auto';
         popup.style.WebkitOverflowScrolling = 'touch';
 
         items.forEach(item => {
             const div = document.createElement('div');
-            div.className = 'px-5 py-4 cursor-pointer hover:bg-[#F6DBB6] text-sm font-bold text-black transition-colors border-b-2 border-[#FFB144] last:border-0';
+            div.className = 'px-5 py-4 cursor-pointer hover:bg-[#06142B] text-sm font-bold text-black transition-colors border-b-2 border-[#7699C9] last:border-0';
             div.textContent = item.label;
             div.onclick = () => { onSelect(item); popup.remove(); _clearActiveDropdownRefs(); };
             popup.appendChild(div);
@@ -6060,7 +6124,7 @@ function updateSSK(tab, rowId) {
         wrap.classList.remove('hidden');
         if (countEl) countEl.textContent = items.length;
         listEl.innerHTML = items.map(it => `
-            <button type="button" onclick="openInputVariasiSheet(${it.id})" class="flex items-center gap-2 px-2.5 py-2 rounded-lg bg-white border-2 border-borderDark text-left hover:border-[#FFB144] transition-colors">
+            <button type="button" onclick="openInputVariasiSheet(${it.id})" class="flex items-center gap-2 px-2.5 py-2 rounded-lg bg-white border-2 border-borderDark text-left hover:border-[#7699C9] transition-colors">
                 <div class="w-5 h-5 rounded-md flex-shrink-0 border border-black/10" style="background:${it.kode || '#888'}"></div>
                 <div class="min-w-0 flex-1 flex items-center gap-1 text-[10px] font-bold text-black truncate">
                     <span class="truncate">${it.warna}</span><span class="text-black/40">/</span><span class="truncate">${it.ukuran}</span>
@@ -6548,7 +6612,7 @@ function updateSSK(tab, rowId) {
 	        wrap.classList.remove('hidden');
 	        if (countEl) countEl.textContent = items.length;
 	        listEl.innerHTML = items.map(it => `
-	            <button type="button" onclick="openTrxVariasiSheet(${it.id})" class="flex items-center gap-2 px-2.5 py-2 rounded-lg bg-white border-2 border-borderDark text-left hover:border-[#FFB144] transition-colors">
+	            <button type="button" onclick="openTrxVariasiSheet(${it.id})" class="flex items-center gap-2 px-2.5 py-2 rounded-lg bg-white border-2 border-borderDark text-left hover:border-[#7699C9] transition-colors">
 	                <div class="w-5 h-5 rounded-md flex-shrink-0 border border-black/10" style="background:${it.kode || '#888'}"></div>
 	                <div class="min-w-0 flex-1 flex items-center gap-1 text-[10px] font-bold text-black truncate">
 	                    <span class="truncate">${it.warna}</span><span class="text-black/40">/</span><span class="truncate">${it.ukuran}</span>
@@ -7520,7 +7584,7 @@ function updateSSK(tab, rowId) {
 
             var btnMinus = document.createElement("button");
             btnMinus.textContent = "−";
-            btnMinus.style.cssText = "width:32px;height:32px;border-radius:8px;border:1px solid #e5e7eb;background:#fdf6ec;color:#ff8c00;font-size:18px;cursor:pointer;";
+            btnMinus.style.cssText = "width:32px;height:32px;border-radius:8px;border:1px solid #e5e7eb;background:#133a66;color:#ff8c00;font-size:18px;cursor:pointer;";
             btnMinus.onclick = function() {
                 var el = document.getElementById("edit-qty-input");
                 if (el) el.value = Math.max(1, parseInt(el.value || 1) - 1);
@@ -7532,11 +7596,11 @@ function updateSSK(tab, rowId) {
             inputEl.min = minQty;
             if (maxQty < 9999) inputEl.max = maxQty;
             inputEl.value = qtyLama;
-            inputEl.style.cssText = "width:70px;text-align:center;background:#F6DBB6;border:1px solid #FFB144;border-radius:8px;color:#1a1d24;font-size:18px;font-weight:900;padding:6px;font-family:Montserrat,sans-serif;text-transform:none;";
+            inputEl.style.cssText = "width:70px;text-align:center;background:#06142B;border:1px solid #7699C9;border-radius:8px;color:#eaf1fb;font-size:18px;font-weight:900;padding:6px;font-family:Montserrat,sans-serif;text-transform:none;";
 
             var btnPlus = document.createElement("button");
             btnPlus.textContent = "+";
-            btnPlus.style.cssText = "width:32px;height:32px;border-radius:8px;border:1px solid #e5e7eb;background:#fdf6ec;color:#ff8c00;font-size:18px;cursor:pointer;";
+            btnPlus.style.cssText = "width:32px;height:32px;border-radius:8px;border:1px solid #e5e7eb;background:#133a66;color:#ff8c00;font-size:18px;cursor:pointer;";
             btnPlus.onclick = function() {
                 var el = document.getElementById("edit-qty-input");
                 if (el) el.value = Math.min(maxPlus, parseInt(el.value || 1) + 1);
@@ -7554,7 +7618,7 @@ function updateSSK(tab, rowId) {
 
             var btnBatal = document.createElement("button");
             btnBatal.textContent = "BATAL";
-            btnBatal.style.cssText = "padding:10px 20px;border:1px solid #e5e7eb;border-radius:10px;background:#fdf6ec;color:#000;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;cursor:pointer;";
+            btnBatal.style.cssText = "padding:10px 20px;border:1px solid #e5e7eb;border-radius:10px;background:#133a66;color:#000;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;cursor:pointer;";
             btnBatal.onclick = function() { _modal.close(); };
             btnsEl.appendChild(btnBatal);
 
@@ -7941,14 +8005,14 @@ function updateSSK(tab, rowId) {
             selectedTrxIds.delete(id);
             const chk = document.getElementById('chk-' + uid);
             const card = document.getElementById('card-' + uid);
-            if (chk) { chk.classList.remove('brand-bg','border-[#FFB144]'); chk.innerHTML = ''; }
-            if (card) { card.classList.remove('border-[#FFB144]'); card.classList.add('border-borderDark'); }
+            if (chk) { chk.classList.remove('brand-bg','border-[#7699C9]'); chk.innerHTML = ''; }
+            if (card) { card.classList.remove('border-[#7699C9]'); card.classList.add('border-borderDark'); }
         } else {
             selectedTrxIds.add(id);
             const chk = document.getElementById('chk-' + uid);
             const card = document.getElementById('card-' + uid);
-            if (chk) { chk.classList.add('brand-bg','border-[#FFB144]'); chk.innerHTML = '<i class="fa-solid fa-check text-black text-[9px]"></i>'; }
-            if (card) { card.classList.add('border-[#FFB144]'); card.classList.remove('border-borderDark'); }
+            if (chk) { chk.classList.add('brand-bg','border-[#7699C9]'); chk.innerHTML = '<i class="fa-solid fa-check text-black text-[9px]"></i>'; }
+            if (card) { card.classList.add('border-[#7699C9]'); card.classList.remove('border-borderDark'); }
         }
         updateCetakBar();
         updateVendorLockState();
@@ -7994,10 +8058,10 @@ function updateSSK(tab, rowId) {
             const isLocked = activeVendor && vendor !== activeVendor;
             if (isLocked) {
                 btn.classList.add('opacity-30', 'cursor-not-allowed');
-                btn.classList.remove('hover:border-[#FFB144]', 'hover:text-[color:var(--brand-main)]');
+                btn.classList.remove('hover:border-[#7699C9]', 'hover:text-[color:var(--brand-main)]');
             } else {
                 btn.classList.remove('opacity-30', 'cursor-not-allowed');
-                btn.classList.add('hover:border-[#FFB144]', 'hover:text-[color:var(--brand-main)]');
+                btn.classList.add('hover:border-[#7699C9]', 'hover:text-[color:var(--brand-main)]');
                 const allSelected = trxList.every(d => selectedTrxIds.has(d.id));
                 btn.textContent = allSelected ? '✓ Semua' : 'Pilih Semua';
             }
@@ -8202,11 +8266,11 @@ function updateSSK(tab, rowId) {
     function batalPilihSemua() {
         selectedTrxIds.clear();
         document.querySelectorAll('[id^="chk-rt-"]').forEach(chk => {
-            chk.classList.remove('brand-bg','border-[#FFB144]');
+            chk.classList.remove('brand-bg','border-[#7699C9]');
             chk.innerHTML = '';
         });
         document.querySelectorAll('[id^="card-rt-"]').forEach(card => {
-            card.classList.remove('border-[#FFB144]');
+            card.classList.remove('border-[#7699C9]');
             card.classList.add('border-borderDark');
         });
         updateCetakBar();
@@ -8232,14 +8296,14 @@ function updateSSK(tab, rowId) {
                 selectedTrxIds.delete(d.id);
                 const chk = document.getElementById('chk-' + uid);
                 const card = document.getElementById('card-' + uid);
-                if (chk) { chk.classList.remove('brand-bg','border-[#FFB144]'); chk.innerHTML = ''; }
-                if (card) { card.classList.remove('border-[#FFB144]'); card.classList.add('border-borderDark'); }
+                if (chk) { chk.classList.remove('brand-bg','border-[#7699C9]'); chk.innerHTML = ''; }
+                if (card) { card.classList.remove('border-[#7699C9]'); card.classList.add('border-borderDark'); }
             } else {
                 selectedTrxIds.add(d.id);
                 const chk = document.getElementById('chk-' + uid);
                 const card = document.getElementById('card-' + uid);
-                if (chk) { chk.classList.add('brand-bg','border-[#FFB144]'); chk.innerHTML = '<i class="fa-solid fa-check text-black text-[9px]"></i>'; }
-                if (card) { card.classList.add('border-[#FFB144]'); card.classList.remove('border-borderDark'); }
+                if (chk) { chk.classList.add('brand-bg','border-[#7699C9]'); chk.innerHTML = '<i class="fa-solid fa-check text-black text-[9px]"></i>'; }
+                if (card) { card.classList.add('border-[#7699C9]'); card.classList.remove('border-borderDark'); }
             }
         });
         updateCetakBar();
@@ -8430,19 +8494,19 @@ function updateSSK(tab, rowId) {
             const stokSaatIni = hitungStokItem(trx.model, item.warna, item.ukuran, trx.brand);
             const maxQty = stokSaatIni + item.qty;
             const row = document.createElement('div');
-            row.style.cssText = 'background:#F6DBB6;border:1px solid #FFB144;border-radius:8px;padding:8px 10px;';
+            row.style.cssText = 'background:#06142B;border:1px solid #7699C9;border-radius:8px;padding:8px 10px;';
             row.innerHTML = `
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                    <span style="color:#1a1d24;font-size:11px;font-weight:700;">${item.warna} / ${item.ukuran}</span>
-                    <span style="color:#000;font-size:9px;">Stok tersedia: <b style="color:#d97706;">${stokSaatIni}</b> + qty ini <b style="color:#16a34a;">${item.qty}</b> = maks <b style="color:#1a1d24;">${maxQty}</b></span>
+                    <span style="color:#eaf1fb;font-size:11px;font-weight:700;">${item.warna} / ${item.ukuran}</span>
+                    <span style="color:#eaf1fb;font-size:9px;">Stok tersedia: <b style="color:#d97706;">${stokSaatIni}</b> + qty ini <b style="color:#16a34a;">${item.qty}</b> = maks <b style="color:#eaf1fb;">${maxQty}</b></span>
                 </div>
                 <div style="display:flex;align-items:center;justify-content:center;gap:8px;">
                     <button onclick="var el=document.getElementById('edit-trx-qty-${idx}');if(el)el.value=Math.max(1,parseInt(el.value||1)-1);"
-                        style="width:30px;height:30px;border-radius:8px;border:1px solid #e5e7eb;background:#fdf6ec;color:#ff8c00;font-size:16px;cursor:pointer;flex-shrink:0;">−</button>
+                        style="width:30px;height:30px;border-radius:8px;border:1px solid #e5e7eb;background:#133a66;color:#ff8c00;font-size:16px;cursor:pointer;flex-shrink:0;">−</button>
                     <input id="edit-trx-qty-${idx}" type="number" min="1" max="${maxQty}" value="${item.qty}"
-                        style="width:70px;text-align:center;background:#F6DBB6;border:1px solid #FFB144;border-radius:8px;color:#1a1d24;font-size:16px;font-weight:900;padding:5px;font-family:Montserrat,sans-serif;text-transform:none;">
+                        style="width:70px;text-align:center;background:#06142B;border:1px solid #7699C9;border-radius:8px;color:#eaf1fb;font-size:16px;font-weight:900;padding:5px;font-family:Montserrat,sans-serif;text-transform:none;">
                     <button onclick="var el=document.getElementById('edit-trx-qty-${idx}');if(el)el.value=Math.min(${maxQty},parseInt(el.value||1)+1);"
-                        style="width:30px;height:30px;border-radius:8px;border:1px solid #e5e7eb;background:#fdf6ec;color:#ff8c00;font-size:16px;cursor:pointer;flex-shrink:0;">+</button>
+                        style="width:30px;height:30px;border-radius:8px;border:1px solid #e5e7eb;background:#133a66;color:#ff8c00;font-size:16px;cursor:pointer;flex-shrink:0;">+</button>
                     <span style="color:#000;font-size:9px;margin-left:4px;">/ ${maxQty} maks</span>
                 </div>`;
             itemsContainer.appendChild(row);
@@ -8456,7 +8520,7 @@ function updateSSK(tab, rowId) {
 
         const btnBatal = document.createElement('button');
         btnBatal.textContent = 'BATAL';
-        btnBatal.style.cssText = 'padding:10px 20px;border:1px solid #e5e7eb;border-radius:10px;background:#fdf6ec;color:#000;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;cursor:pointer;';
+        btnBatal.style.cssText = 'padding:10px 20px;border:1px solid #e5e7eb;border-radius:10px;background:#133a66;color:#000;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;cursor:pointer;';
         btnBatal.onclick = () => _modal.close();
         btnsEl.appendChild(btnBatal);
 
@@ -8671,8 +8735,8 @@ function updateSSK(tab, rowId) {
                             var row=document.getElementById('hapus-item-row-${idx}');
                             var lbl=document.getElementById('hapus-item-label-${idx}');
                             var sub=document.getElementById('hapus-item-sub-${idx}');
-                            row.style.borderColor=this.checked?'#dc2626':'#FFB144';
-                            row.style.background=this.checked?'#1f0a0a':'#F6DBB6';
+                            row.style.borderColor=this.checked?'#dc2626':'#7699C9';
+                            row.style.background=this.checked?'#1f0a0a':'#06142B';
                             if(lbl) lbl.style.color=this.checked?'#fff':'#1a1d24';
                             if(sub) sub.style.color=this.checked?'#e5b8b8':'#000';
                             _updateHapusTrxBtn();
@@ -8697,7 +8761,7 @@ function updateSSK(tab, rowId) {
 
             const btnBatal = document.createElement('button');
             btnBatal.textContent = 'BATAL';
-            btnBatal.style.cssText = 'padding:10px 20px;border:1px solid #e5e7eb;border-radius:10px;background:#fdf6ec;color:#000;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;cursor:pointer;';
+            btnBatal.style.cssText = 'padding:10px 20px;border:1px solid #e5e7eb;border-radius:10px;background:#133a66;color:#000;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;cursor:pointer;';
             btnBatal.onclick = () => _modal.close();
             btnsEl.appendChild(btnBatal);
 
@@ -8948,7 +9012,7 @@ function updateSSK(tab, rowId) {
                             <div class="text-[9px] font-black text-black tracking-wider mb-2">CATAT PEMBAYARAN</div>
                             <div class="flex flex-col gap-2">
                                 <input type="text" id="bayar-ket-${t.id}" placeholder="keterangan pembayaran (opsional)..."
-                                    class="w-full bg-darkBg border-2 border-borderDark rounded-lg px-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#FFB144]">
+                                    class="w-full bg-darkBg border-2 border-borderDark rounded-lg px-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#7699C9]">
                                 <button onclick="simpanPelunasan(${t.id}, '${t.vendor}', ${sisaHutang}, this)"
                                     class="w-full bg-green-500 hover:bg-green-400 text-black font-black text-xs py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
                                     <i class="fa-solid fa-circle-check"></i> <span>LUNAS PENUH — Rp ${sisaHutang.toLocaleString('id-ID')}</span>
@@ -9055,7 +9119,7 @@ function updateSSK(tab, rowId) {
         // Action bar untuk pelunasan terpilih (dibuat sekali saja, hindari duplikat tiap render)
         if (!document.getElementById('pelunasan-action-bar')) {
             list.insertAdjacentHTML('afterend', `
-                <div id="pelunasan-action-bar" class="hidden fixed bottom-[84px] left-0 right-0 w-full bg-[#F6DBB6]/95 backdrop-blur-md border-t-4 border-[#16a34a] px-3 pb-3 pt-3 z-40">
+                <div id="pelunasan-action-bar" class="hidden fixed bottom-[84px] left-0 right-0 w-full bg-[#06142B]/95 backdrop-blur-md border-t-4 border-[#16a34a] px-3 pb-3 pt-3 z-40">
                     <div id="pelunasan-action-bar-inner" class="w-full max-w-lg mx-auto flex gap-2"></div>
                 </div>
             `);
@@ -9120,7 +9184,7 @@ function updateSSK(tab, rowId) {
         overlay.id = 'popup-pilih-metode';
         overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.80);z-index:99998;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);';
         overlay.innerHTML = `
-        <div style="background:#ffffff;border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:0 0 env(safe-area-inset-bottom);border-top:2px solid rgba(255,177,68,0.4);animation:slideUpSheet 0.28s cubic-bezier(0.34,1.2,0.64,1) forwards;">
+        <div style="background:#ffffff;border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:0 0 env(safe-area-inset-bottom);border-top:2px solid rgba(118,153,201,0.4);animation:slideUpSheet 0.28s cubic-bezier(0.34,1.2,0.64,1) forwards;">
             <div style="background:linear-gradient(90deg,#ff8c00,#ffb347);padding:16px 20px 14px;border-radius:24px 24px 0 0;">
                 <div style="display:flex;align-items:center;gap:10px;">
                     <div style="width:34px;height:34px;background:rgba(0,0,0,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;">💰</div>
@@ -9147,7 +9211,7 @@ function updateSSK(tab, rowId) {
 
                 <!-- BAYAR SEBAGIAN -->
                 <button onclick="showFormBayarSebagian('${encodeURIComponent(vendor)}', ${totalHutang})"
-                    style="width:100%;background:#fdf6ec;border:2px solid rgba(255,177,68,0.35);border-radius:16px;padding:18px 16px;text-align:left;cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;">
+                    style="width:100%;background:#133a66;border:2px solid rgba(118,153,201,0.35);border-radius:16px;padding:18px 16px;text-align:left;cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;">
                     <div style="width:44px;height:44px;background:rgba(255,140,0,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                         <i class="fa-solid fa-hand-holding-dollar" style="color:#ff8c00;font-size:18px;"></i>
                     </div>
@@ -9161,7 +9225,7 @@ function updateSSK(tab, rowId) {
             </div>
             <div style="padding:8px 16px 16px;">
                 <button onclick="document.getElementById('popup-pilih-metode').remove()"
-                    style="width:100%;background:#F6DBB6;border:1px solid #FFB144;border-radius:12px;padding:13px;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;color:#000;cursor:pointer;">
+                    style="width:100%;background:#06142B;border:1px solid #7699C9;border-radius:12px;padding:13px;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;color:#eaf1fb;cursor:pointer;">
                     BATAL
                 </button>
             </div>
@@ -9187,7 +9251,7 @@ function updateSSK(tab, rowId) {
         formOverlay.id = 'popup-bayar-sebagian-form';
         formOverlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99998;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);';
         formOverlay.innerHTML = `
-        <div style="background:#ffffff;border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:0 0 env(safe-area-inset-bottom);border-top:2px solid rgba(255,177,68,0.4);animation:slideUpSheet 0.28s cubic-bezier(0.34,1.2,0.64,1) forwards;max-height:85vh;display:flex;flex-direction:column;">
+        <div style="background:#ffffff;border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:0 0 env(safe-area-inset-bottom);border-top:2px solid rgba(118,153,201,0.4);animation:slideUpSheet 0.28s cubic-bezier(0.34,1.2,0.64,1) forwards;max-height:85vh;display:flex;flex-direction:column;">
             <div style="background:linear-gradient(90deg,#ff8c00,#ffb347);padding:16px 20px 14px;border-radius:24px 24px 0 0;flex-shrink:0;">
                 <div style="display:flex;align-items:center;gap:10px;">
                     <button onclick="document.getElementById('popup-bayar-sebagian-form').remove()" style="width:32px;height:32px;background:rgba(0,0,0,0.18);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;color:#000;font-size:13px;"><i class="fa-solid fa-arrow-left"></i></button>
@@ -9200,10 +9264,10 @@ function updateSSK(tab, rowId) {
             <div style="overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;">
                 <div style="padding:16px;">
                     <!-- Ringkasan Tagihan (tanpa rincian) -->
-                    <div style="background:#F6DBB6;border-radius:12px;padding:14px;margin-bottom:14px;border:1px solid rgba(255,177,68,0.15);">
+                    <div style="background:#06142B;border-radius:12px;padding:14px;margin-bottom:14px;border:1px solid rgba(118,153,201,0.15);">
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
                             <div style="font-family:Montserrat,sans-serif;font-size:9px;font-weight:900;color:#000;letter-spacing:0.1em;">JUMLAH TRANSAKSI</div>
-                            <div style="font-family:Montserrat,sans-serif;font-weight:700;font-size:11px;color:#1a1d24;">${jumlahTransaksi} transaksi belum lunas</div>
+                            <div style="font-family:Montserrat,sans-serif;font-weight:700;font-size:11px;color:#eaf1fb;">${jumlahTransaksi} transaksi belum lunas</div>
                         </div>
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
                             <div style="font-family:Montserrat,sans-serif;font-size:9px;font-weight:900;color:#000;letter-spacing:0.1em;">SUDAH DIBAYAR</div>
@@ -9211,7 +9275,7 @@ function updateSSK(tab, rowId) {
                         </div>
                         <div style="height:1px;background:rgba(255,140,0,0.15);margin-bottom:10px;"></div>
                         <div style="display:flex;justify-content:space-between;align-items:center;">
-                            <div style="font-family:Montserrat,sans-serif;font-weight:900;font-size:11px;color:#1a1d24;">TOTAL TAGIHAN</div>
+                            <div style="font-family:Montserrat,sans-serif;font-weight:900;font-size:11px;color:#eaf1fb;">TOTAL TAGIHAN</div>
                             <div style="font-family:Montserrat,sans-serif;font-weight:900;font-size:16px;color:#ff8c00;">Rp ${totalHutang.toLocaleString('id-ID')}</div>
                         </div>
                     </div>
@@ -9223,7 +9287,7 @@ function updateSSK(tab, rowId) {
                             <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:Montserrat,sans-serif;font-weight:900;font-size:13px;color:rgba(255,140,0,0.6);">Rp</span>
                             <input type="text" inputmode="numeric" id="input-bayar-sebagian-jumlah" placeholder="0"
                                 oninput="formatInputRupiahBayar(this, ${totalHutang})"
-                                style="width:100%;background:#F6DBB6;border:2px solid rgba(255,177,68,0.35);border-radius:12px;padding:14px 16px 14px 38px;font-family:Montserrat,sans-serif;font-weight:900;font-size:16px;color:#ff8c00;outline:none;text-align:right;user-select:text;-webkit-user-select:text;">
+                                style="width:100%;background:#06142B;border:2px solid rgba(118,153,201,0.35);border-radius:12px;padding:14px 16px 14px 38px;font-family:Montserrat,sans-serif;font-weight:900;font-size:16px;color:#ff8c00;outline:none;text-align:right;user-select:text;-webkit-user-select:text;">
                         </div>
                     </div>
 
@@ -9237,7 +9301,7 @@ function updateSSK(tab, rowId) {
                     <div style="margin-bottom:16px;">
                         <label style="font-family:Montserrat,sans-serif;font-size:9px;font-weight:900;color:#000;letter-spacing:0.1em;display:block;margin-bottom:6px;">KETERANGAN (OPSIONAL)</label>
                         <input type="text" id="input-bayar-sebagian-ket" placeholder="keterangan pembayaran..."
-                            style="width:100%;background:#F6DBB6;border:1px solid rgba(255,177,68,0.25);border-radius:12px;padding:12px 16px;font-family:Montserrat,sans-serif;font-size:12px;color:#1a1d24;outline:none;user-select:text;-webkit-user-select:text;">
+                            style="width:100%;background:#06142B;border:1px solid rgba(118,153,201,0.25);border-radius:12px;padding:12px 16px;font-family:Montserrat,sans-serif;font-size:12px;color:#eaf1fb;outline:none;user-select:text;-webkit-user-select:text;">
                     </div>
 
                     <!-- Tombol Simpan -->
@@ -9492,7 +9556,7 @@ function updateSSK(tab, rowId) {
 
             // Riwayat item
             const itemsHtml = items.map(p => `
-                <div style="padding:8px 0;border-bottom:1px solid rgba(255,177,68,0.08);">
+                <div style="padding:8px 0;border-bottom:1px solid rgba(118,153,201,0.08);">
                     <div style="font-family:Montserrat,sans-serif;font-size:9px;color:#000;">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + p.keterangan : ''}</div>
                     <div style="font-family:Montserrat,sans-serif;font-weight:900;font-size:11px;color:#22c55e;">+Rp ${p.jumlah.toLocaleString('id-ID')}</div>
                 </div>`).join('');
@@ -9519,7 +9583,7 @@ function updateSSK(tab, rowId) {
                         </button>` : `<div style="background:rgba(0,0,0,0.15);border-radius:8px;padding:6px 10px;"><div style="font-family:Montserrat,sans-serif;font-weight:900;font-size:10px;color:#000;">✓ LUNAS</div></div>`}
                     </div>
                 </div>
-                <div style="background:#ffffff;border:1px solid rgba(255,177,68,0.2);border-radius:0 0 14px 14px;padding:12px;">
+                <div style="background:#ffffff;border:1px solid rgba(118,153,201,0.2);border-radius:0 0 14px 14px;padding:12px;">
                     <!-- Ringkasan -->
                     <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
                         <div>
@@ -9536,7 +9600,7 @@ function updateSSK(tab, rowId) {
                         </div>
                     </div>
                     <!-- Progress bar -->
-                    <div style="background:#F6DBB6;border-radius:6px;overflow:hidden;height:6px;margin-bottom:4px;">
+                    <div style="background:#06142B;border-radius:6px;overflow:hidden;height:6px;margin-bottom:4px;">
                         <div style="height:100%;background:linear-gradient(90deg,#22c55e,#4ade80);width:${persen}%;border-radius:6px;"></div>
                     </div>
                     <div style="font-family:Montserrat,sans-serif;font-size:8px;color:#000;text-align:right;margin-bottom:10px;">${persen}% terbayar</div>
@@ -9590,7 +9654,7 @@ function updateSSK(tab, rowId) {
 
         bar.parentElement.classList.remove('hidden');
         bar.innerHTML = `
-            <button onclick="batalPilihPelunasan()" class="flex-1 justify-center text-black font-black text-[13px] py-3.5 rounded-xl flex items-center gap-2 active:scale-95 transition-transform" style="background:#fdf6ec; border:2px solid #FFB144;">
+            <button onclick="batalPilihPelunasan()" class="flex-1 justify-center text-black font-black text-[13px] py-3.5 rounded-xl flex items-center gap-2 active:scale-95 transition-transform" style="background:#133a66; border:2px solid #7699C9;">
                 BATAL
             </button>
             <button onclick="lunasTerpilih()" class="flex-[2] justify-center text-white font-black text-[13px] py-3.5 rounded-xl flex items-center gap-2 active:scale-95 transition-transform" style="background:linear-gradient(90deg,#16a34a,#22c55e);box-shadow:0 4px 15px rgba(22,163,74,0.35)">
@@ -9962,7 +10026,7 @@ function updateSSK(tab, rowId) {
         if (!toast) {
             toast = document.createElement('div');
             toast.id = 'app-toast';
-            toast.className = 'fixed top-6 left-1/2 -translate-x-1/2 bg-[#fdf6ec] border-2 border-[#FFB144] text-black text-xs font-bold px-5 py-3 rounded-2xl shadow-2xl transition-all';
+            toast.className = 'fixed top-6 left-1/2 -translate-x-1/2 bg-[#133a66] border-2 border-[#7699C9] text-black text-xs font-bold px-5 py-3 rounded-2xl shadow-2xl transition-all';
             toast.style.cssText = 'position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:9999999;';
             document.body.appendChild(toast);
         }
@@ -10327,7 +10391,7 @@ function updateSSK(tab, rowId) {
                 el.textContent = b.label;
                 el.style.cssText = b.primary
                     ? 'padding:10px 22px;border:none;border-radius:10px;font-family:Montserrat,sans-serif;font-weight:900;font-size:12px;cursor:pointer;' + (opts.type==='danger'?'background:#dc2626;color:#fff;':'background:linear-gradient(90deg,#ff8c00,#ffb347);color:#000;')
-                    : 'padding:10px 20px;border:1px solid #e5e7eb;border-radius:10px;background:#fdf6ec;color:#000;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;cursor:pointer;';
+                    : 'padding:10px 20px;border:1px solid #e5e7eb;border-radius:10px;background:#133a66;color:#000;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;cursor:pointer;';
                 el.onclick = () => { this.close(); b.action && b.action(); };
                 this.btns.appendChild(el);
             });
@@ -10766,7 +10830,7 @@ function updateSSK(tab, rowId) {
 
     <!-- POPUP TRANSAKSI VENDOR (dibuka dari klik card VENDOR AKTIF) -->
     <div id="popup-transaksi-vendor" class="hidden fixed inset-0 z-[99998] items-center justify-center" style="background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);padding:16px;" onclick="if(event.target===this) tutupTransaksiVendor()">
-        <div style="background:#F6DBB6;border-radius:20px;width:100%;max-width:420px;max-height:80vh;border:2px solid rgba(255,177,68,0.4);overflow:hidden;display:flex;flex-direction:column;">
+        <div style="background:#06142B;border-radius:20px;width:100%;max-width:420px;max-height:80vh;border:2px solid rgba(118,153,201,0.4);overflow:hidden;display:flex;flex-direction:column;">
             <div style="background:linear-gradient(90deg,#ff8c00,#ffb347);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
                 <div style="display:flex;align-items:center;gap:10px;">
                     <div style="width:34px;height:34px;background:rgba(0,0,0,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;"><i class="fa-solid fa-handshake"></i></div>
@@ -10805,7 +10869,7 @@ function updateSSK(tab, rowId) {
                 Contoh: stok -1 → target 5 = input masuk 6 pcs dicatat otomatis.
             </div>
             <div style="display:flex;gap:10px;">
-                <button onclick="tutupKoreksiStok()" style="flex:1;padding:13px;border:1px solid #e5e7eb;border-radius:12px;background:#fdf6ec;color:#000;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;cursor:pointer;">BATAL</button>
+                <button onclick="tutupKoreksiStok()" style="flex:1;padding:13px;border:1px solid #e5e7eb;border-radius:12px;background:#133a66;color:#000;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;cursor:pointer;">BATAL</button>
                 <button id="koreksi-btn-simpan" onclick="simpanKoreksiStok()" style="flex:2;padding:13px;border:none;border-radius:12px;background:linear-gradient(90deg,#ef4444,#f87171);color:#fff;font-family:Montserrat,sans-serif;font-weight:900;font-size:12px;cursor:pointer;letter-spacing:0.5px;">SIMPAN</button>
             </div>
         </div>
@@ -10813,7 +10877,7 @@ function updateSSK(tab, rowId) {
 
     <!-- POPUP FILTER TANGGAL RIWAYAT -->
     <div id="popup-filter-tanggal" class="hidden fixed inset-0 z-[99998] items-center justify-center" style="background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);padding:16px;" onclick="if(event.target===this) tutupPopupFilterTanggal()">
-        <div style="background:#ffffff;border-radius:20px;width:100%;max-width:420px;border:2px solid rgba(255,177,68,0.4);overflow:hidden;">
+        <div style="background:#ffffff;border-radius:20px;width:100%;max-width:420px;border:2px solid rgba(118,153,201,0.4);overflow:hidden;">
             <div style="background:linear-gradient(90deg,#ff8c00,#ffb347);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">
                 <div style="display:flex;align-items:center;gap:10px;">
                     <div style="width:34px;height:34px;background:rgba(0,0,0,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;"><i class="fa-solid fa-calendar-days"></i></div>
@@ -10843,7 +10907,7 @@ function updateSSK(tab, rowId) {
 
     <!-- POPUP KONFIRMASI MASSAL PESANAN MASUK (dari bel/badge tombol nav Riwayat) -->
     <div id="popup-pesanan-konfirmasi" class="hidden fixed inset-0 z-[99998] items-center justify-center" style="background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);padding:16px;" onclick="if(event.target===this) tutupPopupPesananKonfirmasi()">
-        <div style="background:#ffffff;border-radius:20px;width:100%;max-width:380px;border:2px solid rgba(255,177,68,0.4);overflow:hidden;">
+        <div style="background:#ffffff;border-radius:20px;width:100%;max-width:380px;border:2px solid rgba(118,153,201,0.4);overflow:hidden;">
             <div style="background:linear-gradient(90deg,#ff8c00,#ffb347);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">
                 <div style="display:flex;align-items:center;gap:10px;">
                     <div style="width:34px;height:34px;background:rgba(0,0,0,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;"><i class="fa-solid fa-bell"></i></div>
