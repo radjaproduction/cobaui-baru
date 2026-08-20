@@ -662,6 +662,47 @@
             border-color: #ff8c00;
             box-shadow: 0 0 0 2px rgba(255,140,0,.35);
         }
+        .input-ukuran-trigger-compact {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 34px;
+            border-radius: 8px;
+            border: 1px solid #7699C9;
+            background: #06142B;
+            color: #ffffff;
+            -webkit-text-fill-color: #ffffff;
+            font-size: 10.5px;
+            font-weight: 900;
+            text-align: center;
+            padding: 0 3px;
+            outline: none;
+        }
+        .input-ukuran-scroll {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            padding: 3px 2px 6px;
+        }
+        .input-ukuran-scroll.hidden { display: none; }
+        .input-ukuran-pill {
+            min-width: 34px;
+            height: 34px;
+            padding: 0 10px;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,.2);
+            background: #0A1C38;
+            color: #ffffff;
+            -webkit-text-fill-color: #ffffff;
+            font-size: 10.5px;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+        .input-ukuran-pill.active {
+            border-color: #ff8c00;
+            box-shadow: 0 0 0 2px rgba(255,140,0,.35);
+        }
         .input-inline-row2 {
             display: grid;
             grid-template-columns: 44px 1fr 1fr 1fr;
@@ -961,12 +1002,15 @@
         #tab-input .input-row-index { background: var(--input-row-index-bg) !important; border-color: var(--input-row-index-border) !important; }
         #tab-input .input-summary-pill { background: var(--input-pill-bg) !important; border-color: var(--input-border) !important; }
         #tab-input .input-warna-trigger-compact,
+        #tab-input .input-ukuran-trigger-compact,
+        #tab-input .input-ukuran-pill,
         #tab-input .input-inline-select,
         #tab-input .input-inline-qty,
         #tab-input .input-inline-ssk { background: var(--input-bg) !important; border-color: var(--input-border) !important; }
         #tab-input .input-inline-label,
         #tab-input .input-row-title { color: var(--input-accent) !important; }
-        #tab-input .input-warna-swatch.active { border-color: var(--input-accent) !important; box-shadow: 0 0 0 2px var(--input-choice-active) !important; }
+        #tab-input .input-warna-swatch.active,
+        #tab-input .input-ukuran-pill.active { border-color: var(--input-accent) !important; box-shadow: 0 0 0 2px var(--input-choice-active) !important; }
         #input-variasi-sheet .input-sheet-section { background: var(--input-section-bg) !important; border-color: var(--input-border) !important; }
         #input-variasi-sheet .input-choice-btn { background: var(--input-bg) !important; border-color: var(--input-border) !important; }
         #input-variasi-sheet .input-choice-btn.active { background: var(--input-choice-active) !important; border-color: var(--input-accent) !important; }
@@ -6223,13 +6267,11 @@ function updateSSK(tab, rowId) {
                     </div>
                     <div class="input-inline-field">
                         <div class="input-inline-label">SIZE</div>
-                        <select id="input-ukuran-select-${id}" class="input-inline-select" onchange="onInputUkuranChange(${id}, this.value)">
-                            <option value="">Pilih</option>
-                        </select>
+                        <button type="button" id="input-ukuran-trigger-${id}" class="input-ukuran-trigger-compact" onclick="toggleInputUkuranSelector(${id})">Pilih</button>
                     </div>
                     <div class="input-inline-field">
                         <div class="input-inline-label">QTY</div>
-                        <input id="input-qty-${id}" type="number" inputmode="numeric" pattern="[0-9]*" min="0" value="0" class="input-inline-qty" style="text-transform:none;" oninput="onQtyInputTab(this,${id})" onblur="onQtyInputTabBlur(this,${id})">
+                        <input id="input-qty-${id}" type="number" inputmode="numeric" pattern="[0-9]*" min="0" value="0" class="input-inline-qty" style="text-transform:none;" oninput="onQtyInputTab(this,${id})" onfocus="onQtyInputTabFocus(this)" onblur="onQtyInputTabBlur(this,${id})">
                     </div>
                     <div class="input-inline-field">
                         <div class="input-inline-label">SSK</div>
@@ -6243,6 +6285,7 @@ function updateSSK(tab, rowId) {
                     </div>
                 </div>
                 <div id="input-warna-options-${id}" class="input-warna-scroll hidden"></div>
+                <div id="input-ukuran-options-${id}" class="input-ukuran-scroll hidden"></div>
                 <span id="input-warna-label-${id}" class="hidden">Pilih warna</span>
                 <span id="input-ukuran-label-${id}" class="hidden">Pilih ukuran</span>
             </div>`;
@@ -6260,6 +6303,8 @@ function updateSSK(tab, rowId) {
         if (show) {
             renderInputWarnaOptions(id);
             wrap.classList.remove('hidden');
+            const ukuranWrap = document.getElementById('input-ukuran-options-' + id);
+            if (ukuranWrap) ukuranWrap.classList.add('hidden');
         } else {
             wrap.classList.add('hidden');
         }
@@ -6295,26 +6340,58 @@ function updateSSK(tab, rowId) {
         _updateInputRowBtn(id);
     }
 
+    function toggleInputUkuranSelector(id, force) {
+        const wrap = document.getElementById('input-ukuran-options-' + id);
+        if (!wrap) return;
+        const show = force !== undefined ? force : wrap.classList.contains('hidden');
+        if (show) {
+            renderInputUkuranOptions(id);
+            wrap.classList.remove('hidden');
+            const warnaWrap = document.getElementById('input-warna-options-' + id);
+            if (warnaWrap) warnaWrap.classList.add('hidden');
+        } else {
+            wrap.classList.add('hidden');
+        }
+    }
+
     function renderInputUkuranSelect(id) {
-        const select = document.getElementById('input-ukuran-select-' + id);
+        // Sinkronkan label tombol trigger dengan ukuran yang tersimpan (kalau masih valid),
+        // dan refresh isi daftar pill kalau sedang terbuka.
+        const trigger = document.getElementById('input-ukuran-trigger-' + id);
         const labelEl = document.getElementById('input-ukuran-label-' + id);
-        if (!select) return;
+        if (!trigger) return;
         const list = getInputSheetUkuranList(id);
         const currentLabel = labelEl?.textContent?.trim();
         const stillValid = !_isInputPlaceholder(currentLabel) && list.some(u => u.nama.toUpperCase() === currentLabel.toUpperCase());
-        if (!list.length) {
-            select.innerHTML = '<option value="">Ukuran belum tersedia</option>';
-        } else {
-            select.innerHTML = '<option value="">Pilih ukuran</option>' + list.map(u =>
-                `<option value="${u.nama}"${stillValid && u.nama.toUpperCase() === currentLabel.toUpperCase() ? ' selected' : ''}>${u.nama}</option>`
-            ).join('');
-        }
         if (!stillValid && labelEl) labelEl.textContent = 'Pilih ukuran';
+        trigger.textContent = stillValid ? currentLabel : 'Pilih';
+        const wrap = document.getElementById('input-ukuran-options-' + id);
+        if (wrap && !wrap.classList.contains('hidden')) renderInputUkuranOptions(id);
     }
 
-    function onInputUkuranChange(id, val) {
+    function renderInputUkuranOptions(id) {
+        const wrap = document.getElementById('input-ukuran-options-' + id);
+        if (!wrap) return;
+        const current = document.getElementById('input-ukuran-label-' + id)?.textContent?.trim();
+        const list = getInputSheetUkuranList(id);
+        wrap.innerHTML = '';
+        list.forEach(u => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'input-ukuran-pill' + (!_isInputPlaceholder(current) && current.toUpperCase() === u.nama.toUpperCase() ? ' active' : '');
+            btn.textContent = u.nama;
+            btn.onclick = () => pilihInputUkuran(id, u.nama);
+            wrap.appendChild(btn);
+        });
+        if (!list.length) wrap.innerHTML = '<div class="text-[10px] text-black/50 px-1">Ukuran belum tersedia</div>';
+    }
+
+    function pilihInputUkuran(id, nama) {
+        const trigger = document.getElementById('input-ukuran-trigger-' + id);
         const labelEl = document.getElementById('input-ukuran-label-' + id);
-        if (labelEl) labelEl.textContent = val || 'Pilih ukuran';
+        if (trigger) trigger.textContent = nama;
+        if (labelEl) labelEl.textContent = nama;
+        toggleInputUkuranSelector(id, false);
         updateSSK('input', id);
         refreshInputRowSummary(id);
         _updateInputRowBtn(id);
@@ -7135,6 +7212,9 @@ function updateSSK(tab, rowId) {
         return Math.max(0, hitungStokEfektifTrx(modelNama, warnaNama, ukuranNama, id, trxState.brandNama, trxState.brandId));
     }
 
+    function onQtyInputTabFocus(el) {
+        if (el.value === '0') { el.value = ''; }
+    }
     function onQtyInputTab(el, id) {
         const raw = el.value;
         if (raw === '' || raw === '-') return;
