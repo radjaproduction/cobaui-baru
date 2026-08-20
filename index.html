@@ -589,6 +589,103 @@
             padding: 0 8px;
             white-space: nowrap;
         }
+        /* ---------- INLINE VARIASI: WARNA (horizontal selector) / SIZE (dropdown) / QTY / SSK ---------- */
+        .input-variation-card.inline {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 9px;
+            min-height: 0;
+        }
+        .input-row-top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .input-row-title {
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: .06em;
+            color: #7699C9;
+        }
+        .input-row-content-inline {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+        .input-inline-field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+        .input-inline-label-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+        .input-inline-label {
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: .06em;
+            color: #7699C9;
+        }
+        .input-inline-value {
+            font-size: 11px;
+            font-weight: 900;
+            color: #eaf1fb;
+            max-width: 60%;
+        }
+        .input-warna-trigger {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            min-height: 42px;
+            border-radius: 10px;
+            border: 1px solid #7699C9;
+            background: #06142B;
+            color: rgba(234,241,251,.55);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 0 10px;
+        }
+        .input-warna-dot {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,.25);
+            flex-shrink: 0;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+        }
+        .input-warna-scroll {
+            display: flex;
+            gap: 9px;
+            overflow-x: auto;
+            padding: 3px 2px 6px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .input-warna-scroll.hidden { display: none; }
+        .input-warna-swatch {
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,.2);
+            flex-shrink: 0;
+            position: relative;
+        }
+        .input-warna-swatch.active {
+            border-color: #ff8c00;
+            box-shadow: 0 0 0 2px rgba(255,140,0,.35);
+        }
+        .input-inline-row2 {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr;
+            gap: 8px;
+        }
+        .input-inline-select, .input-inline-qty, .input-inline-ssk {
+            width: 100%;
+            height: 42px;
+            border-radius: 10px;
+            border: 1px solid #7699C9;
+            background: #06142B;
+            color: #eaf1fb;
+            font-size: 12px;
+            font-weight: 900;
+            text-align: center;
+            padding: 0 4px;
+            outline: none;
+        }
+        .input-inline-select { text-align: left; padding: 0 6px; }
+        .input-inline-ssk { color: rgba(234,241,251,.6); }
         body.sheet-open-lock {
             overflow: hidden !important;
             position: fixed;
@@ -859,6 +956,13 @@
         #tab-input .input-variation-card.is-filled { background: linear-gradient(180deg, var(--input-choice-active), var(--input-row-bg) 72%) !important; }
         #tab-input .input-row-index { background: var(--input-row-index-bg) !important; border-color: var(--input-row-index-border) !important; }
         #tab-input .input-summary-pill { background: var(--input-pill-bg) !important; border-color: var(--input-border) !important; }
+        #tab-input .input-warna-trigger,
+        #tab-input .input-inline-select,
+        #tab-input .input-inline-qty,
+        #tab-input .input-inline-ssk { background: var(--input-bg) !important; border-color: var(--input-border) !important; }
+        #tab-input .input-inline-label,
+        #tab-input .input-row-title { color: var(--input-accent) !important; }
+        #tab-input .input-warna-swatch.active { border-color: var(--input-accent) !important; box-shadow: 0 0 0 2px var(--input-choice-active) !important; }
         #input-variasi-sheet .input-sheet-section { background: var(--input-section-bg) !important; border-color: var(--input-border) !important; }
         #input-variasi-sheet .input-choice-btn { background: var(--input-bg) !important; border-color: var(--input-border) !important; }
         #input-variasi-sheet .input-choice-btn.active { background: var(--input-choice-active) !important; border-color: var(--input-accent) !important; }
@@ -6068,12 +6172,14 @@ function updateSSK(tab, rowId) {
         }
         document.querySelectorAll('#input-variasi-list > div').forEach(row => {
             const rowId = row.id.replace('input-row-', '');
-            ['input-row-open-'].forEach(prefix => {
+            ['input-row-content-'].forEach(prefix => {
                 const el = document.getElementById(prefix + rowId);
                 if (!el) return;
+                const wasDisabled = el.classList.contains('pointer-events-none');
                 el.classList.toggle('opacity-40', !enabled);
                 el.classList.toggle('pointer-events-none', !enabled);
                 el.classList.toggle('select-none', !enabled);
+                if (enabled && wasDisabled) renderInputUkuranSelect(rowId);
             });
         });
     }
@@ -6084,7 +6190,8 @@ function updateSSK(tab, rowId) {
             const lastRow = listExisting.children[listExisting.children.length - 1];
             const lastId = lastRow.id.replace('input-row-', '');
             if (_isInputRowPristine(lastId)) {
-                openInputVariasiSheet(lastId);
+                lastRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                toggleInputWarnaSelector(lastId, true);
                 return;
             }
         }
@@ -6094,44 +6201,126 @@ function updateSSK(tab, rowId) {
         const isFirst = list.children.length === 0;
         const row = document.createElement('div');
         row.id = 'input-row-' + id;
-        row.className = 'input-variation-card';
+        row.className = 'input-variation-card inline';
 
         const delClass = isFirst
-            ? 'w-10 h-10 rounded-lg flex items-center justify-center border-2 border-borderDark bg-darkBg text-black/30 cursor-not-allowed transition-colors'
-            : 'w-10 h-10 rounded-lg flex items-center justify-center border-2 border-[#ef4444]/50 bg-[#ef4444]/15 text-[#ef4444] cursor-pointer hover:bg-[#ef4444]/25 transition-colors';
+            ? 'w-9 h-9 rounded-lg flex items-center justify-center border-2 border-borderDark bg-darkBg text-black/30 cursor-not-allowed transition-colors flex-shrink-0'
+            : 'w-9 h-9 rounded-lg flex items-center justify-center border-2 border-[#ef4444]/50 bg-[#ef4444]/15 text-[#ef4444] cursor-pointer hover:bg-[#ef4444]/25 transition-colors flex-shrink-0';
         const delClick = isFirst ? '' : `onclick="hapusRowInput(${id})"`;
+        const enabledNow = !!inputState.modelId;
 
         row.innerHTML = `
-            <button type="button" id="input-row-open-${id}" onclick="openInputVariasiSheet(${id})" class="min-w-0 flex-1 flex items-center gap-3 text-left opacity-40 pointer-events-none select-none">
+            <div class="input-row-top">
                 <div class="input-row-index" id="input-row-num-${id}">${id}</div>
-                <div id="input-warna-dot-${id}" class="w-11 h-11 rounded-xl flex-shrink-0 border-2 border-white/20 shadow-inner" style="background:#888"></div>
-                <div class="min-w-0 flex-1">
-                    <div class="text-[9px] font-black text-black tracking-wider mb-1">VARIASI</div>
-                    <div class="flex items-center gap-1.5 text-black font-black text-[13px] leading-tight min-w-0">
-                        <span id="input-warna-label-${id}" class="truncate">Pilih warna</span>
-                        <span class="text-black flex-shrink-0">/</span>
-                        <span id="input-ukuran-label-${id}" class="truncate">Pilih ukuran</span>
+                <div class="input-row-title flex-1">VARIASI</div>
+                <span class="input-summary-pill brand-text"><i class="fa-solid fa-boxes-stacked text-[9px]"></i> <span id="input-qty-summary-${id}">0</span> PCS</span>
+                <div id="input-del-btn-${id}" ${delClick} class="${delClass}">
+                    <i class="fa-regular fa-trash-can text-sm"></i>
+                </div>
+            </div>
+            <div id="input-row-content-${id}" class="input-row-content-inline${enabledNow ? '' : ' opacity-40 pointer-events-none select-none'}">
+                <div class="input-inline-field">
+                    <div class="input-inline-label-row">
+                        <span class="input-inline-label">WARNA</span>
+                        <span id="input-warna-label-${id}" class="input-inline-value truncate">Pilih warna</span>
                     </div>
-                    <div class="flex items-center gap-1.5 mt-2 text-[10px] font-black overflow-hidden">
-                        <span class="input-summary-pill brand-text"><i class="fa-solid fa-boxes-stacked text-[9px]"></i> <span id="input-qty-summary-${id}">0</span> PCS</span>
-                        <span class="input-summary-pill text-black"><i class="fa-solid fa-database text-[9px]"></i> SSK <span id="input-ssk-summary-${id}">-</span></span>
+                    <button type="button" class="input-warna-trigger" onclick="toggleInputWarnaSelector(${id})">
+                        <span id="input-warna-dot-${id}" class="input-warna-dot" style="background:#888"></span>
+                        <span class="flex-1 text-left">Tap untuk pilih warna</span>
+                        <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </button>
+                    <div id="input-warna-options-${id}" class="input-warna-scroll hidden"></div>
+                </div>
+                <div class="input-inline-row2">
+                    <div class="input-inline-field">
+                        <div class="input-inline-label">SIZE</div>
+                        <select id="input-ukuran-select-${id}" class="input-inline-select" onchange="onInputUkuranChange(${id}, this.value)">
+                            <option value="">Pilih</option>
+                        </select>
+                        <span id="input-ukuran-label-${id}" class="hidden">Pilih ukuran</span>
+                    </div>
+                    <div class="input-inline-field">
+                        <div class="input-inline-label">QTY</div>
+                        <input id="input-qty-${id}" type="number" inputmode="numeric" pattern="[0-9]*" min="0" value="0" class="input-inline-qty" style="text-transform:none;" oninput="onQtyInputTab(this,${id})" onblur="onQtyInputTabBlur(this,${id})">
+                    </div>
+                    <div class="input-inline-field">
+                        <div class="input-inline-label">SSK</div>
+                        <input id="input-ssk-${id}" type="text" readonly class="input-inline-ssk" style="text-transform:none;" title="Sisa Stok (otomatis)">
                     </div>
                 </div>
-                <div class="w-10 h-10 rounded-lg bg-black/20 border-2 border-borderDark brand-text flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-pen text-sm"></i>
-                </div>
-            </button>
-            <input id="input-qty-${id}" type="number" inputmode="numeric" pattern="[0-9]*" min="0" value="0" class="hidden" style="text-transform:none;" oninput="onQtyInputTab(this,${id})" onblur="onQtyInputTabBlur(this,${id})">
-            <input id="input-ssk-${id}" type="number" readonly class="hidden" style="text-transform:none;" title="Sisa Stok (otomatis)">
-            <div id="input-del-btn-${id}" ${delClick} class="${delClass}">
-                <i class="fa-regular fa-trash-can text-sm"></i>
             </div>`;
-        row.classList.add('hidden');
         list.appendChild(row);
+        if (enabledNow) renderInputUkuranSelect(id);
         updateInputVariasiState();
         refreshInputRowSummary(id);
         _renumberInputRows();
-        if (inputState.modelId) openInputVariasiSheet(id);
+    }
+
+    function toggleInputWarnaSelector(id, force) {
+        const wrap = document.getElementById('input-warna-options-' + id);
+        if (!wrap) return;
+        const show = force !== undefined ? force : wrap.classList.contains('hidden');
+        if (show) {
+            renderInputWarnaOptions(id);
+            wrap.classList.remove('hidden');
+        } else {
+            wrap.classList.add('hidden');
+        }
+    }
+
+    function renderInputWarnaOptions(id) {
+        const wrap = document.getElementById('input-warna-options-' + id);
+        if (!wrap) return;
+        const current = document.getElementById('input-warna-label-' + id)?.textContent?.trim();
+        const list = getInputSheetWarnaList(id);
+        wrap.innerHTML = '';
+        list.forEach(w => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'input-warna-swatch' + (!_isInputPlaceholder(current) && current.toUpperCase() === w.nama.toUpperCase() ? ' active' : '');
+            btn.style.background = w.kode;
+            btn.title = w.nama;
+            btn.onclick = () => pilihInputWarna(id, w.nama, w.kode);
+            wrap.appendChild(btn);
+        });
+        if (!list.length) wrap.innerHTML = '<div class="text-[10px] text-black/50 px-1">Warna belum tersedia</div>';
+    }
+
+    function pilihInputWarna(id, nama, kode) {
+        const dot = document.getElementById('input-warna-dot-' + id);
+        const label = document.getElementById('input-warna-label-' + id);
+        if (dot) dot.style.background = kode || '#888';
+        if (label) label.textContent = nama;
+        toggleInputWarnaSelector(id, false);
+        renderInputUkuranSelect(id);
+        updateSSK('input', id);
+        refreshInputRowSummary(id);
+        _updateInputRowBtn(id);
+    }
+
+    function renderInputUkuranSelect(id) {
+        const select = document.getElementById('input-ukuran-select-' + id);
+        const labelEl = document.getElementById('input-ukuran-label-' + id);
+        if (!select) return;
+        const list = getInputSheetUkuranList(id);
+        const currentLabel = labelEl?.textContent?.trim();
+        const stillValid = !_isInputPlaceholder(currentLabel) && list.some(u => u.nama.toUpperCase() === currentLabel.toUpperCase());
+        if (!list.length) {
+            select.innerHTML = '<option value="">Ukuran belum tersedia</option>';
+        } else {
+            select.innerHTML = '<option value="">Pilih ukuran</option>' + list.map(u =>
+                `<option value="${u.nama}"${stillValid && u.nama.toUpperCase() === currentLabel.toUpperCase() ? ' selected' : ''}>${u.nama}</option>`
+            ).join('');
+        }
+        if (!stillValid && labelEl) labelEl.textContent = 'Pilih ukuran';
+    }
+
+    function onInputUkuranChange(id, val) {
+        const labelEl = document.getElementById('input-ukuran-label-' + id);
+        if (labelEl) labelEl.textContent = val || 'Pilih ukuran';
+        updateSSK('input', id);
+        refreshInputRowSummary(id);
+        _updateInputRowBtn(id);
     }
     function hapusRowInput(id) {
         const el = document.getElementById('input-row-' + id);
