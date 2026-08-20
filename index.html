@@ -851,8 +851,7 @@
         }
         #input-brand-selector:hover, #input-model-selector:hover, #btn-tambah-variasi-input:hover { background-color: var(--input-hover) !important; }
 
-        #action-bar-input { background: rgba(220,234,254,0.95) !important; border-top-color: var(--input-border) !important; }
-        #action-bar-input button[onclick="clearInputData()"] { background: var(--input-gradient) !important; }
+        #action-bar-input button[onclick="clearInputData()"] { background: rgba(10,28,56,.9) !important; border: 1.5px solid var(--input-accent) !important; color: var(--input-accent) !important; box-shadow: none !important; }
         #btn-simpan-input, #btn-simpan-beban-input { box-shadow: 0 4px 15px var(--input-shadow) !important; }
         #tab-input #beban-sumber-semua[style*="linear-gradient"] { background: var(--input-gradient) !important; }
 
@@ -938,9 +937,9 @@
 
         /* ---------- TAB INPUT DATA: panel VARIASI ITEM ala rp-stock-section-head ---------- */
         .rp-input-variasi-card { border-radius: 18px; overflow: hidden; border: 1px solid var(--input-border); background: rgba(8,27,57,.72); }
-        .rp-input-variasi-head { background: var(--input-gradient); color: #101010; padding: 13px 16px; display: flex; align-items: center; justify-content: between; justify-content: space-between; gap: 10px; flex-shrink: 0; }
-        .rp-input-variasi-title { font-size: 13px; font-weight: 900; line-height: 1; letter-spacing: .01em; }
-        .rp-input-variasi-sub { font-size: 9px; font-weight: 700; opacity: .65; margin-top: 5px; }
+        .rp-input-variasi-head { background: rgba(8,27,57,.9); color: #f4f7fb; padding: 13px 16px; display: flex; align-items: center; justify-content: between; justify-content: space-between; gap: 10px; flex-shrink: 0; border-bottom: 1px solid var(--input-border); }
+        .rp-input-variasi-title { font-size: 13px; font-weight: 900; line-height: 1; letter-spacing: .01em; color: #f4f7fb; }
+        .rp-input-variasi-sub { font-size: 9px; font-weight: 700; color: #8fa2bd; margin-top: 5px; }
         .rp-input-add-btn { width: 100%; padding: 15px; border-radius: 12px; border: 2px dashed rgba(255,140,0,.55); color: var(--input-accent); font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 8px; background: transparent; }
 
         /* ---------- TAB TRANSAKSI: variabel brand lokal jadi UNGU ---------- */
@@ -988,8 +987,6 @@
         #tab-input .brand-gradient-bg *,
         #action-bar-input .brand-gradient-bg,
         #action-bar-input .brand-gradient-bg *,
-        #action-bar-input button[onclick="clearInputData()"],
-        #action-bar-input button[onclick="clearInputData()"] *,
         #input-variasi-sheet .brand-gradient-bg,
         #input-variasi-sheet .brand-gradient-bg * {
             color: #ffffff !important;
@@ -1068,7 +1065,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 #bottom-navbar .nav-btn:nth-child(2){transition-delay:.32s}
 #bottom-navbar .nav-btn:nth-child(1){transition-delay:.38s}
 #bottom-navbar:not(.rp-stagger-in) .nav-btn{transition-delay:0s!important}
-body.rp-navbar-collapsed #action-bar-input,body.rp-navbar-collapsed #action-bar-transaksi{bottom:0!important}
 #tab-stok.rp-stock-screen .kpi-skel{min-width:30px;color:transparent!important}#tab-stok.rp-stock-screen .rp-stock-dashboard{padding-bottom:10px}@media (min-width:520px){.rp-brand-list{grid-template-columns:repeat(3,minmax(0,1fr))}.rp-stock-kpis{gap:12px}.rp-stock-heading h1{font-size:34px}}
 </style>
 <style id="rp-stock-brand-simple-redesign">
@@ -1869,7 +1865,7 @@ END $$;</textarea>
                         <div class="rp-input-variasi-title">VARIASI ITEM</div>
                         <div class="rp-input-variasi-sub">Tap item untuk isi warna, ukuran, dan qty</div>
                     </div>
-                    <i class="fa-solid fa-up-right-and-down-left-from-center text-sm"></i>
+                    <i class="fa-solid fa-up-right-and-down-left-from-center text-sm" style="color:var(--input-accent);"></i>
                 </div>
                 <div id="input-variasi-list" class="flex flex-col gap-2 p-3 variasi-list-grow"></div>
                 <div class="p-3 flex-shrink-0">
@@ -1888,11 +1884,11 @@ END $$;</textarea>
         </div>
 
         <!-- ACTION BAR: INPUT DATA (fixed above nav) -->
-        <div id="action-bar-input" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#06142B]/95 backdrop-blur-md border-t-4 border-[#7699C9] flex gap-2" style="display:none">
-            <button onclick="clearInputData()" class="flex-1 text-black font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347);">
+        <div id="action-bar-input" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#06142B]/95 backdrop-blur-md border-t-0 flex gap-2" style="display:none">
+            <button onclick="clearInputData()" class="flex-1 font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:rgba(10,28,56,.9);border:1.5px solid var(--input-accent);color:var(--input-accent);border-radius:16px;">
                 <i class="fa-solid fa-xmark"></i> CLEAR
             </button>
-            <button onclick="simpanInputData()" id="btn-simpan-input" class="flex-[2] brand-gradient-bg text-black font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 shadow-[0_4px_15px_rgba(255,140,0,0.35)] active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347);box-shadow:0 4px 15px rgba(255,140,0,0.35)">
+            <button onclick="simpanInputData()" id="btn-simpan-input" class="flex-[2] text-black font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:var(--input-gradient);border-radius:16px;box-shadow:0 4px 15px var(--input-shadow);">
                 <i class="fa-solid fa-floppy-disk"></i> <span id="btn-simpan-input-text">SIMPAN DATA MASUK</span>
             </button>
         </div>
@@ -2065,7 +2061,7 @@ END $$;</textarea>
         </div>
 
         <!-- ACTION BAR: TRANSAKSI (fixed above nav) -->
-        <div id="action-bar-transaksi" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#06142B]/95 backdrop-blur-md border-t-4 border-[#7699C9] flex gap-2" style="display:none">
+        <div id="action-bar-transaksi" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#06142B]/95 backdrop-blur-md border-t-0 flex gap-2" style="display:none">
             <button onclick="clearTransaksi()" class="flex-1 text-black font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347);">
                 <i class="fa-solid fa-xmark"></i> CLEAR
             </button>
