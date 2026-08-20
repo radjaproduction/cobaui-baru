@@ -1307,6 +1307,53 @@
 }
 </style>
 
+
+<style id="fix-stok-header-seamless">
+/* TAB STOK — header menyatu dengan theme navy, tanpa garis/pemisah visual */
+#tab-stok.rp-stock-screen .rp-stock-hero {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+#tab-stok.rp-stock-screen .rp-stock-header-col {
+    background: #06142b !important;
+    border: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Samakan warna area tepat di bawah header agar tidak ada perubahan tone */
+#tab-stok.rp-stock-screen {
+    background: #06142b !important;
+}
+
+#tab-stok.rp-stock-screen::before {
+    border: 0 !important;
+}
+
+#tab-stok.rp-stock-screen::after {
+    border: 0 !important;
+}
+
+/* Hilangkan efek visual 1px/gradient yang dapat terbaca sebagai divider */
+#tab-stok.rp-stock-screen .rp-stock-header-col::before,
+#tab-stok.rp-stock-screen .rp-stock-header-col::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Pastikan elemen pertama setelah header tidak membuat garis */
+#tab-stok.rp-stock-screen .rp-stock-heading {
+    border-top: 0 !important;
+    box-shadow: none !important;
+}
+</style>
+
 </head>
 <body class="w-full min-h-screen overflow-x-hidden bg-light">
     <div id="app-update-banner" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:9999998;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(90deg,#ff8c00,#ffb347);box-shadow:0 -4px 20px rgba(0,0,0,0.25);">
