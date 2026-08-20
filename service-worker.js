@@ -2,8 +2,8 @@
 // SERVICE WORKER - RADJA PRODUCTION PWA
 // ============================================
 
-const CACHE_NAME = 'radja-production-v10';
-const STATIC_CACHE = 'radja-static-v10';
+const CACHE_NAME = 'radja-production-v10.1';
+const STATIC_CACHE = 'radja-static-v10.1';
 const BASE = '/cobaui-baru';
 
 const STATIC_ASSETS = [
@@ -14,7 +14,8 @@ const STATIC_ASSETS = [
 
 // ===== INSTALL =====
 self.addEventListener('install', event => {
-    console.log('[SW] Installing v8.1.3...');
+    console.log('[SW] Installing v10.1...');
+
     event.waitUntil(
         caches.open(STATIC_CACHE).then(cache => {
             console.log('[SW] Caching static assets');
