@@ -958,6 +958,15 @@
         body[data-active-tab="transaksi"] #bottom-navbar .nav-text { color: rgba(255,255,255,0.65) !important; }
         body[data-active-tab="transaksi"] #bottom-navbar .nav-btn.active .nav-text { color: #ffffff !important; }
 
+        /* ---------- NAVBAR BAWAH: tab STOK/RIWAYAT/LABA/MASTER pakai navy, selaras dgn konsep warna navy ---------- */
+        body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar .icon-box { color: rgba(255,255,255,0.55) !important; }
+        body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar .nav-btn.active .icon-box { color: #ffffff !important; background-color: rgba(255,255,255,0.18) !important; border-color: rgba(255,255,255,0.45) !important; }
+        body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar .nav-text { color: rgba(255,255,255,0.55) !important; }
+        body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar .nav-btn.active .nav-text { color: #ffffff !important; }
+        body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar #nav-btn-exit i,
+        body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar #nav-btn-exit span { color: #ff5c5c !important; }
+        body:not([data-active-tab="input"]):not([data-active-tab="transaksi"]) #bottom-navbar #nav-btn-exit > div:first-child { background-color: rgba(255,92,92,0.12) !important; border-color: rgba(255,92,92,0.3) !important; }
+
         /* ---------- Tombol EXIT: jadi hitam saat navbar tab aktif berwarna merah (Input Data) supaya tidak blend ---------- */
         body[data-active-tab="input"] #bottom-navbar #nav-btn-exit i,
         body[data-active-tab="input"] #bottom-navbar #nav-btn-exit span { color: #000000 !important; }
@@ -972,10 +981,33 @@
 .rp-stock-header-col{display:flex;flex-direction:column;width:calc(100% + 32px);margin:0 -16px 0;background:#0a1c38;border:0;border-radius:0;padding:calc(14px + env(safe-area-inset-top)) 16px 14px;position:sticky;top:0;z-index:40}
 .rp-stock-hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.rp-stock-brand-lockup{display:flex;align-items:center;gap:9px;min-width:0}.rp-stock-logo-svg,.rp-stock-logo{width:150px;height:34px;object-fit:contain;flex-shrink:0}.rp-stock-brand-name{font-size:13px;line-height:.86;font-weight:900;letter-spacing:.02em;color:#fff}.rp-stock-brand-name span{font-size:8px;letter-spacing:.11em}.rp-stock-actions{display:flex;gap:8px}.rp-stock-icon-btn{width:38px;height:38px;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(7,25,52,.72);color:#eef3fb;display:flex;align-items:center;justify-content:center;position:relative;font-size:15px}.rp-stock-badge{position:absolute;right:-2px;top:-3px;min-width:15px;height:15px;border-radius:99px;background:var(--rp-orange);color:#111;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #06142b}
 .rp-stock-heading{padding:22px 4px 4px}.rp-stock-heading h1{font-size:30px;line-height:1;font-weight:900;letter-spacing:-.04em;margin:0;color:#fff}.rp-stock-heading h1 span{color:var(--rp-orange)}.rp-stock-heading p{margin:9px 0 0;color:#b7c3d6;font-size:11px;line-height:1.65;font-weight:600}
-.rp-stock-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:4px 0 12px}.rp-stock-kpi{min-width:0;min-height:92px;border:1px solid var(--rp-border);border-radius:18px;background:rgba(8,27,57,.72);backdrop-filter:blur(8px);padding:11px 8px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:7px;box-shadow:0 8px 22px rgba(0,0,0,.18)}.rp-kpi-icon{width:31px;height:31px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;flex-shrink:0}.rp-kpi-orange .rp-kpi-icon{background:linear-gradient(145deg,#ffb11a,#ff7800)}.rp-kpi-blue .rp-kpi-icon{background:linear-gradient(145deg,#42a5ff,#1264da)}.rp-kpi-green .rp-kpi-icon{background:linear-gradient(145deg,#45d58b,#179c60)}.rp-kpi-label{font-size:9px;font-weight:700;color:#d6dfed;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rp-kpi-value{font-size:20px;font-weight:900;line-height:1;color:#fff;margin-top:3px}.rp-kpi-sub{font-size:7px;color:#9fb0c8;font-weight:600;margin-top:3px;white-space:nowrap}
+.rp-stock-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:4px 0 12px}.rp-stock-kpi{min-width:0;min-height:92px;border:1px solid var(--rp-border);border-radius:18px;background:rgba(8,27,57,.72);backdrop-filter:blur(8px);padding:11px 8px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:7px;box-shadow:0 8px 22px rgba(0,0,0,.18)}.rp-kpi-icon{width:31px;height:31px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;flex-shrink:0}.rp-kpi-top{display:flex;align-items:center;gap:7px}.rp-kpi-orange .rp-kpi-icon{background:linear-gradient(145deg,#ffb11a,#ff7800)}.rp-kpi-blue .rp-kpi-icon{background:linear-gradient(145deg,#42a5ff,#1264da)}.rp-kpi-green .rp-kpi-icon{background:linear-gradient(145deg,#45d58b,#179c60)}.rp-kpi-label{font-size:9px;font-weight:700;color:#d6dfed;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rp-kpi-value{font-size:20px;font-weight:900;line-height:1;color:#fff;margin-top:3px}.rp-kpi-sub{font-size:7px;color:#9fb0c8;font-weight:600;margin-top:3px;white-space:nowrap}
 .rp-stock-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:10px;padding:0 2px}.rp-stock-section-head h2{font-size:15px;line-height:1;font-weight:900;color:#fff;margin:0;letter-spacing:.01em}.rp-stock-section-head p{font-size:8px;color:#7386a1;margin:5px 0 0;font-weight:600}.rp-stock-section-head button{border:0;background:transparent;color:var(--rp-orange);font-size:10px;font-weight:900;display:flex;align-items:center;gap:5px;white-space:nowrap}.rp-stock-sort-note{color:var(--rp-orange);font-size:9px;font-weight:900;display:flex;align-items:center;gap:5px;white-space:nowrap}
 .rp-brand-shell{min-height:0;background:transparent!important;border:0!important;overflow:visible!important}.rp-brand-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0!important;overflow:visible!important}.rp-brand-card{position:relative;min-height:188px;border:1px solid rgba(112,147,196,.28);border-radius:18px;background:linear-gradient(145deg,rgba(11,35,71,.92),rgba(6,20,43,.9));overflow:hidden;padding:14px 12px 12px;box-shadow:0 10px 26px rgba(0,0,0,.22);cursor:pointer;transition:transform .15s ease,border-color .15s ease}.rp-brand-card:active{transform:scale(.97);border-color:rgba(255,140,0,.6)}.rp-brand-accent{position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#ffb11a,#ff7900)}.rp-brand-card-negative .rp-brand-accent{background:#ef4444}.rp-brand-top{display:flex;align-items:center;justify-content:space-between}.rp-brand-logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#ffb21a,#ff7900);color:#101010;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 14px rgba(255,140,0,.2)}.rp-brand-arrow{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.055);color:#91a4bf;display:flex;align-items:center;justify-content:center;font-size:9px}.rp-brand-name{font-size:12px;font-weight:900;color:#f4f7fb;margin-top:12px;line-height:1.2;min-height:29px;display:flex;align-items:center}.rp-brand-total-label{font-size:8px;color:#2399ff;font-weight:800;margin-top:9px}.rp-brand-total{font-size:24px;color:#249cff;font-weight:900;line-height:1.05;margin-top:3px}.rp-brand-total.negative{color:#ef6666}.rp-brand-models{font-size:9px;color:#c1ccdc;font-weight:700;margin-top:4px}.rp-brand-divider{height:1px;background:rgba(143,168,203,.16);margin:12px 0 9px}.rp-brand-status{display:flex;align-items:center;gap:6px;color:#9eb0c7;font-size:8px;font-weight:700}.rp-brand-status i{font-size:10px}.rp-brand-loading{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;padding:22px;color:#7f92ad;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}.rp-brand-list>.skel-row{min-height:80px;grid-column:1/-1;background:rgba(8,26,53,.75)!important;border:1px solid rgba(100,135,183,.15)}
-.rp-stock-fab{position:fixed;right:18px;bottom:92px;width:72px;height:72px;border:0;border-radius:50%;background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:900;box-shadow:0 12px 28px rgba(255,115,0,.35);z-index:70}.rp-stock-fab i{font-size:21px;line-height:1}.rp-stock-fab span{font-size:8px}#tab-stok.rp-stock-screen .kpi-skel{min-width:30px;color:transparent!important}#tab-stok.rp-stock-screen .rp-stock-dashboard{padding-bottom:10px}@media (min-width:520px){.rp-brand-list{grid-template-columns:repeat(3,minmax(0,1fr))}.rp-stock-kpis{gap:12px}.rp-stock-heading h1{font-size:34px}}
+.rp-stock-fab{position:fixed;right:18px;bottom:92px;width:72px;height:72px;border:0;border-radius:50%;background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:900;box-shadow:0 12px 28px rgba(255,115,0,.35);z-index:70}.rp-stock-fab i{font-size:21px;line-height:1}.rp-stock-fab span{font-size:8px}
+.rp-nav-toggle{position:fixed;right:29px;bottom:22px;width:50px;height:50px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .22s ease,background .22s ease,color .22s ease}
+.rp-nav-toggle:active{transform:scale(.92)}
+.rp-nav-toggle.is-open{background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;border-color:rgba(255,177,26,.8)}
+#bottom-navbar{transition:opacity .18s ease;transform:none;opacity:1;background:transparent!important;border-top:0!important;box-shadow:none!important;backdrop-filter:none!important}
+#bottom-navbar.rp-navbar-hidden{opacity:0;pointer-events:none}
+/* Pastikan navbar tetap transparan walau tab aktif berubah warna (override rule per-tab di atas) */
+body[data-active-tab] #bottom-navbar{background:transparent!important;border-top:0!important;box-shadow:none!important}
+/* Animasi berantai (stagger): tiap item (icon+teks) meluncur satu-satu dari kanan ke kiri */
+#bottom-navbar .nav-btn,
+#bottom-navbar #nav-btn-exit{opacity:0;transform:translateX(26px);transition:opacity .22s ease,transform .3s cubic-bezier(.34,1.56,.64,1)}
+#bottom-navbar.rp-stagger-in .nav-btn,
+#bottom-navbar.rp-stagger-in #nav-btn-exit{opacity:1;transform:translateX(0)}
+#bottom-navbar #nav-btn-exit{transition-delay:.02s}
+#bottom-navbar .nav-btn:nth-child(6){transition-delay:.08s}
+#bottom-navbar .nav-btn:nth-child(5){transition-delay:.14s}
+#bottom-navbar .nav-btn:nth-child(4){transition-delay:.2s}
+#bottom-navbar .nav-btn:nth-child(3){transition-delay:.26s}
+#bottom-navbar .nav-btn:nth-child(2){transition-delay:.32s}
+#bottom-navbar .nav-btn:nth-child(1){transition-delay:.38s}
+#bottom-navbar:not(.rp-stagger-in) .nav-btn,
+#bottom-navbar:not(.rp-stagger-in) #nav-btn-exit{transition-delay:0s!important}
+body.rp-navbar-collapsed #action-bar-input,body.rp-navbar-collapsed #action-bar-transaksi{bottom:0!important}
+#tab-stok.rp-stock-screen .kpi-skel{min-width:30px;color:transparent!important}#tab-stok.rp-stock-screen .rp-stock-dashboard{padding-bottom:10px}@media (min-width:520px){.rp-brand-list{grid-template-columns:repeat(3,minmax(0,1fr))}.rp-stock-kpis{gap:12px}.rp-stock-heading h1{font-size:34px}}
 </style>
 <style id="rp-stock-brand-simple-redesign">
 /* SIMPLE STOCK PER BRAND — ringkas, bersih, fokus pada brand + stok */
@@ -1091,7 +1123,7 @@
 <style id="rp-stock-brand-final-minimal">
 /* FINAL — STOK PER BRAND: mobile-first, compact, minimal */
 #tab-stok.rp-stock-screen .rp-stock-section-head{
-  margin:4px 0 9px;padding:0 1px;align-items:center;
+  margin:22px 0 9px;padding:0 1px;align-items:center;
 }
 #tab-stok.rp-stock-screen .rp-stock-section-head h2{
   font-size:14px;letter-spacing:-.01em;
@@ -1185,7 +1217,7 @@
   align-items:center!important;
   gap:0!important;
   padding:10px 12px!important;
-  border:1px solid rgba(117,150,194,.28)!important;
+  border:1px solid rgba(255,171,24,.45)!important;
   border-radius:15px!important;
   background:linear-gradient(100deg,rgba(7,24,50,.88),rgba(7,24,50,.58))!important;
   box-shadow:0 5px 16px rgba(0,0,0,.12)!important;
@@ -1220,8 +1252,12 @@
   font-size:29px!important;
   line-height:1!important;
   font-weight:400!important;
-  color:#ffad18!important;
-  filter:drop-shadow(0 2px 6px rgba(255,140,0,.12));
+  color:#ffffff!important;
+  filter:drop-shadow(0 2px 6px rgba(255,255,255,.12));
+}
+#tab-stok.rp-stock-screen svg.rp-brand-line-icon{
+  width:29px!important;height:29px!important;
+  color:#ffffff!important;
 }
 #tab-stok.rp-stock-screen .rp-brand-divider-vertical{
   width:1px!important;height:58px!important;
@@ -1236,23 +1272,32 @@
   flex-direction:column!important;
   justify-content:center!important;
 }
+#tab-stok.rp-stock-screen .rp-brand-title-row{
+  display:flex!important;align-items:baseline!important;gap:7px!important;
+  min-width:0!important;
+}
 #tab-stok.rp-stock-screen .rp-brand-order{
-  font-size:10px!important;line-height:1!important;
+  font-size:11px!important;line-height:1!important;
   color:#ffab18!important;font-weight:900!important;
-  margin-bottom:5px!important;
+  margin:0!important;flex:0 0 auto!important;
 }
 #tab-stok.rp-stock-screen .rp-brand-name{
   margin:0!important;height:auto!important;min-height:0!important;
   font-size:15px!important;line-height:1.15!important;
   font-weight:900!important;color:#f5f7fb!important;
   white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
-  max-width:100%!important;
+  max-width:100%!important;min-width:0!important;flex:0 1 auto!important;
 }
 #tab-stok.rp-stock-screen .rp-brand-meta{
-  margin-top:5px!important;font-size:8px!important;line-height:1!important;
+  margin-top:9px!important;font-size:8px!important;line-height:1!important;
   color:#9fb0c8!important;font-weight:800!important;
   letter-spacing:.02em!important;
   white-space:nowrap!important;
+}
+#tab-stok.rp-stock-screen .rp-brand-stok-count{
+  font-size:15px!important;line-height:1!important;
+  color:#f5f7fb!important;font-weight:900!important;
+  letter-spacing:0!important;
 }
 #tab-stok.rp-stock-screen .rp-brand-meta span{
   color:#ff9b0a!important;margin:0 3px!important;
@@ -1304,53 +1349,6 @@
 #tab-stok.rp-stock-screen::before,
 #tab-stok.rp-stock-screen::after {
     border-top: 0 !important;
-}
-</style>
-
-
-<style id="fix-stok-header-seamless">
-/* TAB STOK — header menyatu dengan theme navy, tanpa garis/pemisah visual */
-#tab-stok.rp-stock-screen .rp-stock-hero {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-}
-
-#tab-stok.rp-stock-screen .rp-stock-header-col {
-    background: #06142b !important;
-    border: 0 !important;
-    border-top: 0 !important;
-    border-bottom: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    outline: 0 !important;
-    margin-top: 0 !important;
-}
-
-/* Samakan warna area tepat di bawah header agar tidak ada perubahan tone */
-#tab-stok.rp-stock-screen {
-    background: #06142b !important;
-}
-
-#tab-stok.rp-stock-screen::before {
-    border: 0 !important;
-}
-
-#tab-stok.rp-stock-screen::after {
-    border: 0 !important;
-}
-
-/* Hilangkan efek visual 1px/gradient yang dapat terbaca sebagai divider */
-#tab-stok.rp-stock-screen .rp-stock-header-col::before,
-#tab-stok.rp-stock-screen .rp-stock-header-col::after {
-    content: none !important;
-    display: none !important;
-}
-
-/* Pastikan elemen pertama setelah header tidak membuat garis */
-#tab-stok.rp-stock-screen .rp-stock-heading {
-    border-top: 0 !important;
-    box-shadow: none !important;
 }
 </style>
 
@@ -1578,22 +1576,21 @@
 
                 <div class="rp-stock-kpis">
                     <div class="rp-stock-kpi rp-kpi-orange">
-                        <div class="rp-kpi-icon"><i class="fa-solid fa-cube"></i></div>
-                        <div><div class="rp-kpi-label">Total Produk</div><div id="kpi-total-produk" class="rp-kpi-value kpi-skel">0</div><div class="rp-kpi-sub">Model Terdaftar</div></div>
+                        <div class="rp-kpi-top"><div class="rp-kpi-icon"><i class="fa-solid fa-cube"></i></div><div class="rp-kpi-label">Total Produk</div></div>
+                        <div><div id="kpi-total-produk" class="rp-kpi-value kpi-skel">0</div><div class="rp-kpi-sub">Model Terdaftar</div></div>
                     </div>
                     <div class="rp-stock-kpi rp-kpi-blue">
-                        <div class="rp-kpi-icon"><i class="fa-solid fa-shirt"></i></div>
-                        <div><div class="rp-kpi-label">Total Stok</div><div id="kpi-total-stok" class="rp-kpi-value kpi-skel">0</div><div class="rp-kpi-sub">Semua Varian</div></div>
+                        <div class="rp-kpi-top"><div class="rp-kpi-icon"><i class="fa-solid fa-shirt"></i></div><div class="rp-kpi-label">Total Stok</div></div>
+                        <div><div id="kpi-total-stok" class="rp-kpi-value kpi-skel">0</div><div class="rp-kpi-sub">Semua Varian</div></div>
                     </div>
                     <div class="rp-stock-kpi rp-kpi-green">
-                        <div class="rp-kpi-icon"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
-                        <div><div class="rp-kpi-label">Barang Keluar</div><div id="kpi-total-brand" class="rp-kpi-value kpi-skel">0</div><div class="rp-kpi-sub">Total Transaksi</div></div>
+                        <div class="rp-kpi-top"><div class="rp-kpi-icon"><i class="fa-solid fa-arrow-up-right-dots"></i></div><div class="rp-kpi-label">Barang Keluar</div></div>
+                        <div><div id="kpi-total-brand" class="rp-kpi-value kpi-skel">0</div><div class="rp-kpi-sub">Total Transaksi</div></div>
                     </div>
                 </div>
 
                 <div class="rp-stock-section-head">
                     <div><h2>STOK PER BRAND</h2><p id="brand-sort-label">Stok terbanyak di atas</p></div>
-                    <span class="rp-stock-sort-note"><i class="fa-solid fa-arrow-down-wide-short"></i> Terbanyak → terkecil</span>
                 </div>
 
                 <div id="stok-brand-card" class="rp-brand-shell">
@@ -2411,7 +2408,7 @@ END $$;</textarea>
         </div>
 
         <!-- BOTTOM NAV -->
-        <div id="bottom-navbar" class="fixed bottom-0 w-full brand-gradient-bg border-t-2 border-[#e07800] flex justify-around items-center pt-3 z-50" style="padding-bottom: max(16px, env(safe-area-inset-bottom))">
+        <div id="bottom-navbar" class="fixed bottom-0 w-full brand-gradient-bg border-t-2 border-[#e07800] flex justify-around items-center pt-3 z-50 rp-navbar-hidden" style="padding-bottom: max(16px, env(safe-area-inset-bottom))">
             <div id="nav-btn-stok" onclick="switchTab('stok')" class="nav-btn active flex flex-col items-center gap-1 cursor-pointer">
                 <div class="icon-box text-[#000000] bg-black/20 border-2 border-black/20 w-10 h-8 rounded-lg flex items-center justify-center shadow-lg"><i class="fa-solid fa-boxes-stacked text-lg"></i></div>
                 <span class="nav-text text-[9px] font-black text-[#000000]">Stok</span>
@@ -2448,12 +2445,50 @@ END $$;</textarea>
             </div>
         </div>
 
+        <!-- FLOATING MENU TOGGLE: membuka/menutup navbar utama -->
+        <button type="button" id="rp-nav-toggle" class="rp-nav-toggle" aria-label="Buka menu navigasi" aria-expanded="false">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
         <!-- Bel notifikasi pesanan masuk sudah digabung ke badge tombol nav Riwayat di bawah,
              lihat #pesanan-bell-badge di dalam #nav-btn-riwayat. -->
 
     </div><!-- end #main-app -->
 
     <script>
+    // ================================================================
+    // FLOATING NAVBAR TOGGLE
+    // Navbar utama tersembunyi secara default. Tombol hamburger berada
+    // tepat di bawah FAB INPUT STOK dan membuka/menutup navbar.
+    // ================================================================
+    (function initFloatingNavbar(){
+        const nav = document.getElementById('bottom-navbar');
+        const toggle = document.getElementById('rp-nav-toggle');
+        if (!nav || !toggle) return;
+        let open = false;
+        const setOpen = (value) => {
+            open = value;
+            nav.classList.toggle('rp-navbar-hidden', !open);
+            document.body.classList.toggle('rp-navbar-collapsed', !open);
+            if (open) {
+                // reset dulu biar animasi stagger selalu replay tiap dibuka
+                nav.classList.remove('rp-stagger-in');
+                requestAnimationFrame(() => requestAnimationFrame(() => nav.classList.add('rp-stagger-in')));
+            } else {
+                nav.classList.remove('rp-stagger-in');
+            }
+            toggle.classList.toggle('is-open', open);
+            toggle.setAttribute('aria-expanded', String(open));
+            toggle.setAttribute('aria-label', open ? 'Tutup menu navigasi' : 'Buka menu navigasi');
+            toggle.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+        };
+        toggle.addEventListener('click', () => setOpen(!open));
+        nav.querySelectorAll('.nav-btn, #nav-btn-exit').forEach(btn => {
+            btn.addEventListener('click', () => setTimeout(() => setOpen(false), 120));
+        });
+        setOpen(false);
+    })();
+
     // ================================================================
     // SUPABASE CONFIG
     // Isi di sini ATAU biarkan kosong (app akan minta lewat UI saat pertama buka)
@@ -3979,13 +4014,15 @@ function updateSSK(tab, rowId) {
                         const orderNo = String(idx + 1).padStart(2, '0');
                         return `<div onclick="openBrandDetail(${b.id}, '${String(b.nama).replace(/'/g, "\\'")}')" class="${cardClass}">
                             <div class="rp-brand-icon-wrap">
-                                <div class="rp-brand-logo" aria-hidden="true"><i class="fa-regular fa-bookmark rp-brand-line-icon"></i></div>
+                                <div class="rp-brand-logo" aria-hidden="true"><svg class="rp-brand-line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 3.5 L4 6.2 L2 9.3 L4.6 11 L6 9.4 V19.5 A1 1 0 0 0 7 20.5 H17 A1 1 0 0 0 18 19.5 V9.4 L19.4 11 L22 9.3 L20 6.2 L15.5 3.5 A3.2 3.2 0 0 1 8.5 3.5 Z"/></svg></div>
                             </div>
                             <div class="rp-brand-divider-vertical"></div>
                             <div class="rp-brand-copy">
-                                <div class="rp-brand-order">${orderNo}</div>
-                                <div class="rp-brand-name">${b.nama}</div>
-                                <div class="rp-brand-meta">${b.total.toLocaleString('id-ID')} STOK <span>•</span> ${b.modelCount.toLocaleString('id-ID')} MODEL</div>
+                                <div class="rp-brand-title-row">
+                                    <span class="rp-brand-order">${orderNo}</span>
+                                    <span class="rp-brand-name">${b.nama}</span>
+                                </div>
+                                <div class="rp-brand-meta"><span class="rp-brand-stok-count">${b.total.toLocaleString('id-ID')} STOK</span> <span>•</span> ${b.modelCount.toLocaleString('id-ID')} MODEL</div>
                             </div>
                             <div class="rp-brand-arrow"><i class="fa-solid fa-chevron-right"></i></div>
                         </div>`;
