@@ -2401,20 +2401,20 @@ END $$;</textarea>
         <!-- BOTTOM NAV -->
         <div id="bottom-navbar" class="fixed bottom-0 w-full brand-gradient-bg border-t-2 border-[#e07800] flex justify-center items-center pt-3 z-50 rp-navbar-hidden" style="padding-bottom: max(16px, env(safe-area-inset-bottom)); gap: 6px;">
             <div id="nav-btn-stok" onclick="switchTab('stok')" class="nav-btn active flex flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000] bg-black/20 border-2 border-black/20 w-10 h-8 rounded-lg flex items-center justify-center shadow-lg"><i class="fa-solid fa-boxes-stacked text-lg"></i></div>
+                <div class="icon-box text-[#000000] bg-black/20 border-2 border-black/20 w-11 h-9 rounded-lg flex items-center justify-center shadow-lg"><i class="fa-solid fa-boxes-stacked text-xl"></i></div>
                 <span class="nav-text text-[9px] font-black text-[#000000]">Stok</span>
             </div>
             <div id="nav-btn-input" onclick="switchTab('input')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-10 h-8 rounded-lg flex items-center justify-center"><i class="fa-solid fa-house text-lg"></i></div>
+                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-house text-xl"></i></div>
                 <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Input Data</span>
             </div>
             <div id="nav-btn-transaksi" onclick="switchTab('transaksi')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-10 h-8 rounded-lg flex items-center justify-center"><i class="fa-solid fa-handshake text-lg"></i></div>
+                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-handshake text-xl"></i></div>
                 <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Transaksi</span>
             </div>
             <div id="nav-btn-riwayat" onclick="onNavRiwayatClick()" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-10 h-8 rounded-lg flex items-center justify-center relative">
-                    <i class="fa-solid fa-clock-rotate-left text-lg"></i>
+                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center relative">
+                    <i class="fa-solid fa-clock-rotate-left text-xl"></i>
                     <!-- Badge jumlah pesanan menunggu dari app Pesanan — gabung ke tombol Riwayat
                          supaya admin cukup satu kali tekan: langsung pindah tab Riwayat sekalian
                          "ngeh" ada pesanan baru, tanpa perlu tombol lonceng terpisah. -->
@@ -2423,11 +2423,11 @@ END $$;</textarea>
                 <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Riwayat</span>
             </div>
             <div id="nav-btn-laba" onclick="switchTab('laba')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-10 h-8 rounded-lg flex items-center justify-center"><i class="fa-solid fa-sack-dollar text-lg"></i></div>
+                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-sack-dollar text-xl"></i></div>
                 <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Laba</span>
             </div>
             <div id="nav-btn-master" onclick="switchTab('master')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-10 h-8 rounded-lg flex items-center justify-center"><i class="fa-solid fa-database text-lg"></i></div>
+                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-database text-xl"></i></div>
                 <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Master</span>
             </div>
         </div>
@@ -4156,13 +4156,13 @@ function updateSSK(tab, rowId) {
             document.getElementById('tab-' + t).classList.add('hidden');
             document.getElementById('tab-' + t).classList.remove('flex');
             let btn = document.getElementById('nav-btn-' + t);
-            btn.querySelector('.icon-box').className = "icon-box text-[#000000]/60 w-10 h-8 rounded-lg flex items-center justify-center";
+            btn.querySelector('.icon-box').className = "icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center";
             btn.querySelector('.nav-text').className = "nav-text text-[9px] text-[#000000]/60 font-normal";
         });
         document.getElementById('tab-' + tabName).classList.remove('hidden');
         document.getElementById('tab-' + tabName).classList.add('flex');
         let activeBtn = document.getElementById('nav-btn-' + tabName);
-        activeBtn.querySelector('.icon-box').className = "icon-box text-[#000000] bg-black/20 border-2 border-black/20 w-10 h-8 rounded-lg flex items-center justify-center shadow-lg";
+        activeBtn.querySelector('.icon-box').className = "icon-box text-[#000000] bg-black/20 border-2 border-black/20 w-11 h-9 rounded-lg flex items-center justify-center shadow-lg";
         activeBtn.querySelector('.nav-text').className = "nav-text text-[9px] font-black text-[#000000]";
 
         // Tampilkan/sembunyikan action bar sesuai tab aktif
