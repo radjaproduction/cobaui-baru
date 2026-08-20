@@ -139,6 +139,7 @@
         :root {
             --brand-main: #ff8c00;
             --brand-gradient: linear-gradient(90deg, #ff8c00 0%, #ffb347 100%);
+            color-scheme: dark;
         }
         * { box-sizing: border-box; }
         /* ===== NAVY THEME CONTRAST FIX =====
@@ -1483,6 +1484,7 @@
         </div>
 
         <div id="tab-stok" class="tab-content flex flex-col relative z-10 rp-stock-screen">
+            <div aria-hidden="true" style="position:fixed;left:0;right:0;top:0;height:env(safe-area-inset-top);background:#06142b;z-index:39;pointer-events:none;"></div>
             <div id="stok-dashboard-view" class="flex flex-col rp-stock-dashboard">
                 <div class="rp-stock-hero">
                     <div class="rp-stock-header-col">
