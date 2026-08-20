@@ -629,12 +629,15 @@
         .input-warna-trigger-compact {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            gap: 6px;
             width: 100%;
             height: 34px;
             border-radius: 8px;
             border: 1px solid #7699C9;
             background: #06142B;
+            padding: 0 8px;
+            overflow: hidden;
         }
         .input-warna-dot {
             width: 17px; height: 17px;
@@ -642,6 +645,18 @@
             border: 2px solid rgba(255,255,255,.25);
             flex-shrink: 0;
             box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+        }
+        .input-warna-name {
+            flex: 1;
+            min-width: 0;
+            font-size: 10.5px;
+            font-weight: 900;
+            color: #ffffff;
+            -webkit-text-fill-color: #ffffff;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .input-warna-scroll {
             display: flex;
@@ -709,7 +724,7 @@
             gap: 7px;
         }
         .input-inline-row2.small {
-            grid-template-columns: 30px 1fr 1fr 1fr 26px;
+            grid-template-columns: 1fr 50px 38px 38px 26px;
             gap: 5px;
         }
         .input-inline-row2.small .input-inline-label { font-size: 8px; }
@@ -725,7 +740,7 @@
             font-size: 10.5px;
             font-weight: 900;
             text-align: center;
-            padding: 0 3px;
+            padding: 0 2px;
             outline: none;
         }
         .input-inline-select { text-align: left; padding: 0 4px; }
@@ -6263,6 +6278,7 @@ function updateSSK(tab, rowId) {
                         <div class="input-inline-label">&nbsp;</div>
                         <button type="button" class="input-warna-trigger-compact" onclick="toggleInputWarnaSelector(${id})">
                             <span id="input-warna-dot-${id}" class="input-warna-dot" style="background:#888"></span>
+                            <span id="input-warna-name-${id}" class="input-warna-name">Pilih</span>
                         </button>
                     </div>
                     <div class="input-inline-field">
@@ -6331,8 +6347,10 @@ function updateSSK(tab, rowId) {
     function pilihInputWarna(id, nama, kode) {
         const dot = document.getElementById('input-warna-dot-' + id);
         const label = document.getElementById('input-warna-label-' + id);
+        const nameEl = document.getElementById('input-warna-name-' + id);
         if (dot) dot.style.background = kode || '#888';
         if (label) label.textContent = nama;
+        if (nameEl) nameEl.textContent = nama;
         toggleInputWarnaSelector(id, false);
         renderInputUkuranSelect(id);
         updateSSK('input', id);
@@ -6455,11 +6473,13 @@ function updateSSK(tab, rowId) {
 	        if (!inputSheetDraft) return;
 	        const dotEl = document.getElementById('input-warna-dot-' + rowId);
 	        const warnaEl = document.getElementById('input-warna-label-' + rowId);
+	        const nameEl = document.getElementById('input-warna-name-' + rowId);
 	        const ukuranEl = document.getElementById('input-ukuran-label-' + rowId);
 	        const qtyEl = document.getElementById('input-qty-' + rowId);
 	        const sskEl = document.getElementById('input-ssk-' + rowId);
 	        if (dotEl) dotEl.style.background = inputSheetDraft.kode || '#888';
 	        if (warnaEl) warnaEl.textContent = inputSheetDraft.warna;
+	        if (nameEl) nameEl.textContent = inputSheetDraft.warna;
 	        if (ukuranEl) ukuranEl.textContent = inputSheetDraft.ukuran;
 	        if (qtyEl) qtyEl.value = inputSheetDraft.qty;
 	        if (sskEl) sskEl.value = inputSheetDraft.ssk || '';
