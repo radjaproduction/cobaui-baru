@@ -1816,11 +1816,9 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
             </div>
 
             <div id="stok-detail-view" class="hidden flex-col gap-4 min-h-screen pb-20 bg-[#06142B] absolute top-0 left-0 w-full z-20 px-4 pt-4">
-                <div class="flex items-center justify-center mt-4">
-                    <div class="w-full rounded-2xl px-5 py-3 flex flex-col items-center" style="background:linear-gradient(90deg,#ff8c00 0%,#ffb347 100%);">
-                        <h1 class="text-xl font-black tracking-widest uppercase leading-tight" style="color:#111;" id="detail-brand-name">BRAND</h1>
-                        <span class="text-[11px] font-black" style="color:#111;opacity:0.65;" id="detail-brand-total">0 Pcs</span>
-                    </div>
+                <div class="rp-stock-heading" style="padding:22px 4px 4px">
+                    <h1 id="detail-brand-name">Brand <span id="detail-brand-name-text"></span></h1>
+                    <p id="detail-brand-total">0 Pcs</p>
                 </div>
                 <div class="flex gap-2 mt-1">
                     <button id="btn-filter-stok-model" onclick="toggleStokFilterPanel('model')" class="flex-1 py-2 text-[10px] font-black rounded-lg bg-darkBg border-2 border-borderDark text-black hover:text-black hover:border-[#7699C9] transition-all flex items-center justify-center gap-1.5"><i class="fa-solid fa-tag text-[9px]"></i> MODEL</button>
@@ -4597,6 +4595,10 @@ function updateSSK(tab, rowId) {
     window.applyStokFilter = applyStokFilter;
     window.resetStokFilter = resetStokFilter;
 
+    function toTitleCase(str) {
+        return String(str || '').toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+    }
+
     function openBrandDetail(brandId, brandName) {
         _detailBrandName = brandName;
         _detailBrandId = brandId;
@@ -4604,7 +4606,7 @@ function updateSSK(tab, rowId) {
         _stokFilterType = null; _stokFilterValue = null;
         const dashboard = document.getElementById('stok-dashboard-view');
         const detailView = document.getElementById('stok-detail-view');
-        document.getElementById('detail-brand-name').innerText = brandName;
+        document.getElementById('detail-brand-name-text').innerText = toTitleCase(brandName);
         _detailStokMap = hitungStokBrand(brandId);
         const totalPcs = Object.values(_detailStokMap).reduce((s, v) => s + Math.max(0, v), 0);
         document.getElementById('detail-brand-total').innerText = totalPcs.toLocaleString('id-ID') + ' Pcs';
