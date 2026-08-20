@@ -3997,13 +3997,12 @@ function updateSSK(tab, rowId) {
                 const kpiTotalBrandEl = document.getElementById('kpi-total-brand');
                 if (kpiTotalStokEl) { kpiTotalStokEl.textContent = brandStok.reduce((s, b) => s + Math.max(0, b.total), 0).toLocaleString('id-ID'); kpiTotalStokEl.classList.remove('kpi-skel'); }
                 if (kpiTotalBrandEl) { kpiTotalBrandEl.textContent = totalKeluar.toLocaleString('id-ID'); kpiTotalBrandEl.classList.remove('kpi-skel'); }
+                // Note realtime: tampil selama masih ada brand yang ke-hide (stok 0),
+                // otomatis hilang begitu SEMUA brand terdaftar sudah kebagian stok & tampil.
+                if (realtimeNoteEl) realtimeNoteEl.classList.toggle('hidden', brandStok.length >= masterData.brand.length);
                 if (brandStok.length === 0) {
                     brandListEl.innerHTML = '';
-                    // Semua brand stoknya 0 (ter-hide otomatis) -> tampilkan note realtime.
-                    if (realtimeNoteEl) realtimeNoteEl.classList.remove('hidden');
                 } else {
-                    // Sudah ada brand dengan stok > 0 -> note realtime otomatis hilang.
-                    if (realtimeNoteEl) realtimeNoteEl.classList.add('hidden');
                     brandListEl.innerHTML = brandStok.map((b, idx) => {
                         const isNegative = b.total < 0;
                         const initials = b.nama.replace(/[^A-Za-z0-9 ]/g, '').trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase() || '?';
