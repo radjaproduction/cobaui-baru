@@ -1837,6 +1837,12 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
             <div id="action-bar-brand-detail" class="hidden fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#06142B]/95 backdrop-blur-md border-t-4 border-[#7699C9] flex gap-2">
                 <button onclick="closeBrandDetail()" class="flex-1 text-black font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347);"><i class="fa-solid fa-chevron-left"></i> BACK</button>
             </div>
+            <!-- Backdrop solid khusus zona navbar (0-84px dari bawah): #bottom-navbar sengaja
+                 transparan (lihat CSS #bottom-navbar) supaya jadi navbar melayang di tab lain,
+                 tapi itu bikin baris list stok yang lagi discroll tembus terlihat lewat celah
+                 transparan-nya saat navbar dibuka. Panel ini nutup solid area itu, digambar
+                 di bawah ikon navbar (z-45 lebih kecil dari navbar z-50) tapi di atas konten (z-20). -->
+            <div id="stok-detail-nav-backdrop" class="hidden fixed bottom-0 left-0 right-0 bg-[#06142B]" style="z-index:45;height:calc(84px + env(safe-area-inset-bottom));"></div>
         </div>
 
         <!-- TAB INPUT DATA -->
@@ -4648,6 +4654,8 @@ function updateSSK(tab, rowId) {
         detailView.classList.remove('slide-out');
         const backBar = document.getElementById('action-bar-brand-detail');
         if (backBar) { backBar.classList.remove('hidden'); backBar.style.display = 'flex'; }
+        const navBackdrop = document.getElementById('stok-detail-nav-backdrop');
+        if (navBackdrop) { navBackdrop.classList.remove('hidden'); navBackdrop.style.display = 'block'; }
         window.scrollTo(0, 0);
     }
 
@@ -4656,6 +4664,8 @@ function updateSSK(tab, rowId) {
         const detailView = document.getElementById('stok-detail-view');
         const backBar = document.getElementById('action-bar-brand-detail');
         if (backBar) { backBar.classList.add('hidden'); backBar.style.display = 'none'; }
+        const navBackdrop = document.getElementById('stok-detail-nav-backdrop');
+        if (navBackdrop) { navBackdrop.classList.add('hidden'); navBackdrop.style.display = 'none'; }
         if (!detailView.classList.contains('hidden')) {
             detailView.classList.remove('slide-in');
             detailView.classList.add('slide-out');
