@@ -626,19 +626,15 @@
             color: #eaf1fb;
             max-width: 60%;
         }
-        .input-warna-trigger {
+        .input-warna-trigger-compact {
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
             width: 100%;
-            min-height: 42px;
+            height: 42px;
             border-radius: 10px;
             border: 1px solid #7699C9;
             background: #06142B;
-            color: rgba(234,241,251,.55);
-            font-size: 11px;
-            font-weight: 700;
-            padding: 0 10px;
         }
         .input-warna-dot {
             width: 22px; height: 22px;
@@ -668,8 +664,8 @@
         }
         .input-inline-row2 {
             display: grid;
-            grid-template-columns: 1.3fr 1fr 1fr;
-            gap: 8px;
+            grid-template-columns: 44px 1fr 1fr 1fr;
+            gap: 7px;
         }
         .input-inline-select, .input-inline-qty, .input-inline-ssk {
             width: 100%;
@@ -956,7 +952,7 @@
         #tab-input .input-variation-card.is-filled { background: linear-gradient(180deg, var(--input-choice-active), var(--input-row-bg) 72%) !important; }
         #tab-input .input-row-index { background: var(--input-row-index-bg) !important; border-color: var(--input-row-index-border) !important; }
         #tab-input .input-summary-pill { background: var(--input-pill-bg) !important; border-color: var(--input-border) !important; }
-        #tab-input .input-warna-trigger,
+        #tab-input .input-warna-trigger-compact,
         #tab-input .input-inline-select,
         #tab-input .input-inline-qty,
         #tab-input .input-inline-ssk { background: var(--input-bg) !important; border-color: var(--input-border) !important; }
@@ -6219,25 +6215,18 @@ function updateSSK(tab, rowId) {
                 </div>
             </div>
             <div id="input-row-content-${id}" class="input-row-content-inline${enabledNow ? '' : ' opacity-40 pointer-events-none select-none'}">
-                <div class="input-inline-field">
-                    <div class="input-inline-label-row">
-                        <span class="input-inline-label">WARNA</span>
-                        <span id="input-warna-label-${id}" class="input-inline-value truncate">Pilih warna</span>
-                    </div>
-                    <button type="button" class="input-warna-trigger" onclick="toggleInputWarnaSelector(${id})">
-                        <span id="input-warna-dot-${id}" class="input-warna-dot" style="background:#888"></span>
-                        <span class="flex-1 text-left">Tap untuk pilih warna</span>
-                        <i class="fa-solid fa-chevron-down text-[10px]"></i>
-                    </button>
-                    <div id="input-warna-options-${id}" class="input-warna-scroll hidden"></div>
-                </div>
                 <div class="input-inline-row2">
+                    <div class="input-inline-field">
+                        <div class="input-inline-label">WARNA</div>
+                        <button type="button" class="input-warna-trigger-compact" onclick="toggleInputWarnaSelector(${id})">
+                            <span id="input-warna-dot-${id}" class="input-warna-dot" style="background:#888"></span>
+                        </button>
+                    </div>
                     <div class="input-inline-field">
                         <div class="input-inline-label">SIZE</div>
                         <select id="input-ukuran-select-${id}" class="input-inline-select" onchange="onInputUkuranChange(${id}, this.value)">
                             <option value="">Pilih</option>
                         </select>
-                        <span id="input-ukuran-label-${id}" class="hidden">Pilih ukuran</span>
                     </div>
                     <div class="input-inline-field">
                         <div class="input-inline-label">QTY</div>
@@ -6248,6 +6237,9 @@ function updateSSK(tab, rowId) {
                         <input id="input-ssk-${id}" type="text" readonly class="input-inline-ssk" style="text-transform:none;" title="Sisa Stok (otomatis)">
                     </div>
                 </div>
+                <div id="input-warna-options-${id}" class="input-warna-scroll hidden"></div>
+                <span id="input-warna-label-${id}" class="hidden">Pilih warna</span>
+                <span id="input-ukuran-label-${id}" class="hidden">Pilih ukuran</span>
             </div>`;
         list.appendChild(row);
         if (enabledNow) renderInputUkuranSelect(id);
