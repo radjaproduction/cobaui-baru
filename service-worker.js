@@ -2,8 +2,8 @@
 // SERVICE WORKER - RADJA PRODUCTION PWA
 // ============================================
 
-const CACHE_NAME = 'radja-production-v9';
-const STATIC_CACHE = 'radja-static-v9';
+const CACHE_NAME = 'radja-production-v10';
+const STATIC_CACHE = 'radja-static-v10';
 const BASE = '/cobaui-baru';
 
 const STATIC_ASSETS = [
