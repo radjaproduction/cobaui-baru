@@ -1139,6 +1139,16 @@
         .rp-input-heading h1 span { color: var(--input-accent); }
         .rp-input-heading p { margin: 9px 0 0; color: #b7c3d6; font-size: 11px; line-height: 1.65; font-weight: 600; }
 
+        /* ---------- TAB RIWAYAT: heading polos (selaras dengan Input Data/Transaksi), tetap oranye ---------- */
+        .rp-riwayat-heading { padding: 18px 2px 4px; flex-shrink: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+        .rp-riwayat-heading h1 { font-size: 30px; line-height: 1; font-weight: 900; letter-spacing: -.04em; margin: 0; color: #fff; }
+        .rp-riwayat-heading h1 span { color: var(--brand-main); }
+        .rp-riwayat-heading p { margin: 9px 0 0; color: #b7c3d6; font-size: 11px; line-height: 1.65; font-weight: 600; }
+        .rp-riwayat-filter-btn { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; width: 62px; height: 62px; border-radius: 16px; border: 1.5px solid rgba(255,140,0,.4); background: rgba(255,140,0,.08); color: var(--brand-main); margin-top: 2px; }
+        .rp-riwayat-filter-btn:active { background: rgba(255,140,0,.16); }
+        .rp-riwayat-filter-btn i { font-size: 15px; }
+        .rp-riwayat-filter-btn span { font-size: 7.5px; font-weight: 900; letter-spacing: .04em; white-space: nowrap; }
+
         /* ---------- TAB INPUT DATA: mode switcher ala kartu (ikon + judul + deskripsi + tombol panah) ---------- */
         .rp-input-mode-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; flex-shrink: 0; }
         .rp-input-mode-card { position: relative; text-align: left; min-height: 148px; border-radius: 18px; border: 1px solid var(--input-border); background: linear-gradient(160deg,rgba(11,35,71,.85),rgba(6,20,43,.92)); padding: 13px 10px 42px; display: flex; flex-direction: column; gap: 7px; transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease, background .12s ease; }
@@ -1157,6 +1167,16 @@
         .rp-input-mode-active .rp-input-mode-card-arrow { background: currentColor; }
         .rp-input-mode-active .rp-input-mode-card-icon i,
         .rp-input-mode-active .rp-input-mode-card-arrow i { color: #101010; }
+        /* Zona klik kartu mode (dipisah garis diagonal): kiri = buka form, kanan = buka riwayat.
+           Elemen ini transparan (murni hit-area), visual garis/isi kartu tetap dari elemen lain. */
+        .rp-input-mode-card-zone { position: absolute; inset: 0; z-index: 2; background: transparent; border: 0; padding: 0; margin: 0; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+        .rp-input-mode-card-zone:active { background: rgba(255,255,255,.06); }
+        .rp-input-mode-card-zone-left { clip-path: polygon(0 0, 100% 0, 68% 100%, 0 100%); }
+        .rp-input-mode-card-zone-right { clip-path: polygon(58% 0, 100% 0, 100% 100%, 68% 100%); }
+
+        /* ---------- TAB RIWAYAT: saklar INPUT DATA/TRANSAKSI pakai kartu ala TAB INPUT DATA, 2 kolom ---------- */
+        .rp-riwayat-mode-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; flex-shrink: 0; }
+        .rp-riwayat-mode-grid .rp-input-mode-card { min-height: 92px; padding: 12px 10px 38px; }
 
         /* ---------- TAB INPUT DATA: panel PILIH PRODUK (step + progress + selector hex-icon) ---------- */
         .rp-input-select-panel { border: 1px solid var(--input-border); border-radius: 18px; background: rgba(8,27,57,.62); padding: 14px; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
@@ -1992,11 +2012,27 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
   padding:11px 9px 38px;
   background:linear-gradient(160deg,rgba(11,35,71,.90),rgba(6,20,43,.96));
   box-shadow:0 7px 18px rgba(0,0,0,.16);
+  overflow:hidden;
 }
-#tab-input.rp-input-screen .rp-input-mode-card-icon{width:34px;height:34px;border-radius:10px;font-size:13px}
-#tab-input.rp-input-screen .rp-input-mode-card-title{font-size:10.5px}
-#tab-input.rp-input-screen .rp-input-mode-card-sub{font-size:8px;line-height:1.35}
-#tab-input.rp-input-screen .rp-input-mode-card-arrow{width:24px;height:24px;right:8px;bottom:8px;font-size:9px}
+/* Garis diagonal pembelah kartu jadi 2 bagian: kiri (ikon+teks), kanan (kosong+panah) */
+#tab-input.rp-input-screen .rp-input-mode-card::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  top:-25%;
+  left:56%;
+  width:2px;
+  height:160%;
+  background:currentColor;
+  opacity:.5;
+  transform:rotate(14deg);
+  transform-origin:top left;
+  pointer-events:none;
+}
+#tab-input.rp-input-screen .rp-input-mode-card-icon{width:34px;height:34px;border-radius:10px;font-size:13px;position:relative;z-index:1}
+#tab-input.rp-input-screen .rp-input-mode-card-title{font-size:10.5px;position:relative;z-index:1;max-width:62%}
+#tab-input.rp-input-screen .rp-input-mode-card-sub{font-size:8px;line-height:1.35;position:relative;z-index:1;max-width:62%}
+#tab-input.rp-input-screen .rp-input-mode-card-arrow{width:24px;height:24px;right:8px;bottom:8px;font-size:9px;z-index:1}
 
 /* ---------- BEBAN: main panel ---------- */
 #beban-form-wrapper{gap:9px!important}
@@ -2507,24 +2543,30 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                 <p>Catat barang masuk, beban operasional, dan retur stok.</p>
             </div>
             <div class="rp-input-mode-grid">
-                <button id="input-mode-masuk" onclick="setInputMode('masuk')" class="rp-input-mode-card rp-input-mode-orange rp-input-mode-active">
+                <div id="input-mode-masuk" class="rp-input-mode-card rp-input-mode-orange rp-input-mode-active">
                     <div class="rp-input-mode-card-icon"><i class="fa-solid fa-box"></i></div>
                     <div class="rp-input-mode-card-title">STOK MASUK</div>
                     <div class="rp-input-mode-card-sub">Input stok baru ke gudang</div>
                     <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </button>
-                <button id="input-mode-beban" onclick="setInputMode('beban')" class="rp-input-mode-card rp-input-mode-blue">
+                    <button type="button" class="rp-input-mode-card-zone rp-input-mode-card-zone-left" onclick="setInputMode('masuk')" aria-label="Buka form STOK MASUK"></button>
+                    <button type="button" class="rp-input-mode-card-zone rp-input-mode-card-zone-right" onclick="bukaRiwayatStokMasuk()" aria-label="Lihat riwayat STOK MASUK"></button>
+                </div>
+                <div id="input-mode-beban" class="rp-input-mode-card rp-input-mode-blue">
                     <div class="rp-input-mode-card-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
                     <div class="rp-input-mode-card-title">BEBAN</div>
                     <div class="rp-input-mode-card-sub">Catat biaya operasional produksi</div>
                     <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </button>
-                <button id="input-mode-retur" onclick="setInputMode('retur')" class="rp-input-mode-card rp-input-mode-red">
+                    <button type="button" class="rp-input-mode-card-zone rp-input-mode-card-zone-left" onclick="setInputMode('beban')" aria-label="Buka form BEBAN"></button>
+                    <button type="button" class="rp-input-mode-card-zone rp-input-mode-card-zone-right" onclick="bukaRiwayatBeban()" aria-label="Lihat riwayat BEBAN"></button>
+                </div>
+                <div id="input-mode-retur" class="rp-input-mode-card rp-input-mode-red">
                     <div class="rp-input-mode-card-icon"><i class="fa-solid fa-rotate-left"></i></div>
                     <div class="rp-input-mode-card-title">RETUR</div>
                     <div class="rp-input-mode-card-sub">Catat stok yang dikembalikan</div>
                     <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </button>
+                    <button type="button" class="rp-input-mode-card-zone rp-input-mode-card-zone-left" onclick="setInputMode('retur')" aria-label="Buka form RETUR"></button>
+                    <button type="button" class="rp-input-mode-card-zone rp-input-mode-card-zone-right" onclick="bukaRiwayatRetur()" aria-label="Lihat riwayat RETUR"></button>
+                </div>
             </div>
             <div id="retur-info-banner" class="hidden bg-red-500/10 border-2 border-red-500/30 rounded-xl px-4 py-3 flex items-start gap-3 flex-shrink-0">
                 <i class="fa-solid fa-triangle-exclamation text-red-400 mt-0.5 flex-shrink-0"></i>
@@ -2856,23 +2898,55 @@ END $$;</textarea>
         <div id="trx-tab-nav-backdrop" class="fixed bottom-0 left-0 right-0 bg-[#06142B]" style="z-index:35;height:calc(112px + env(safe-area-inset-bottom));display:none;pointer-events:none;"></div>
 
         <!-- TAB RIWAYAT -->
+        <!-- TAB RIWAYAT INPUT -->
+        <div id="tab-riwayat-input" class="tab-content hidden flex-col p-4 gap-4 relative z-10" >
+            <div class="rp-input-heading">
+                <h1>Riwayat <span>Input</span></h1>
+                <p>Riwayat stok masuk yang sudah dicatat.</p>
+            </div>
+        </div>
+
+        <!-- TAB RIWAYAT BEBAN -->
+        <div id="tab-riwayat-beban" class="tab-content hidden flex-col p-4 gap-4 relative z-10" >
+            <div class="rp-input-heading">
+                <h1>Riwayat <span>Beban</span></h1>
+                <p>Riwayat beban operasional yang sudah dicatat.</p>
+            </div>
+        </div>
+
+        <!-- TAB RIWAYAT RETUR -->
+        <div id="tab-riwayat-retur" class="tab-content hidden flex-col p-4 gap-4 relative z-10" >
+            <div class="rp-input-heading">
+                <h1>Riwayat <span>Retur</span></h1>
+                <p>Riwayat retur stok yang sudah dicatat.</p>
+            </div>
+        </div>
+
         <div id="tab-riwayat" class="tab-content hidden flex-col p-4 gap-4 relative z-10" >
-            <div class="flex items-stretch -mx-4 -mt-4 mb-2 shadow-[0_4px_16px_rgba(255,140,0,0.35)] brand-gradient-bg rounded-b-2xl overflow-hidden sticky top-0 z-30">
-                <div class="w-20 h-[72px] flex items-center justify-center flex-shrink-0 z-10 relative bg-black/5 border-r-2 border-black/10"><i class="fa-solid fa-clock-rotate-left text-3xl text-[#000000]"></i></div>
-                <div class="h-[72px] flex flex-col justify-center px-4 flex-grow z-10 relative">
-                    <h1 class="text-[26px] font-black text-[#000000] leading-none tracking-wide mb-1">RIWAYAT <span class="text-black">DATA</span></h1>
-                    <div class="w-full h-[1.5px] bg-[#ffffff]/30 mb-1"></div>
-                    <h2 class="display-brand-name text-[10px] font-bold text-[#000000] tracking-[0.15em] leading-none mt-0.5 uppercase">RADJA PRODUCTION</h2>
+            <div class="rp-riwayat-heading">
+                <div>
+                    <h1>Riwayat <span>Data</span></h1>
+                    <p>Semua input, transaksi, dan pembayaran tercatat rapi di sini.</p>
                 </div>
-                <button onclick="bukaPopupFilterTanggal()" class="w-24 h-[72px] flex flex-col items-center justify-center gap-1 flex-shrink-0 z-10 relative bg-black/5 border-l-2 border-black/10 active:bg-black/10 transition-colors">
-                    <i class="fa-solid fa-calendar-days text-lg text-black"></i>
-                    <span id="filter-tanggal-badge" class="text-[8px] font-black text-black leading-none whitespace-nowrap">HARI INI</span>
+                <button onclick="bukaPopupFilterTanggal()" class="rp-riwayat-filter-btn">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span id="filter-tanggal-badge">HARI INI</span>
                 </button>
             </div>
-            <!-- LEVEL 1: Saklar utama — INPUT DATA / TRANSAKSI (satu track, dua segmen) -->
-            <div class="bg-darkBg p-1.5 rounded-2xl flex border-2 border-borderDark gap-1 shadow-[inset_0_1px_4px_rgba(0,0,0,0.10)]">
-                <button id="subtab-btn-input" onclick="switchRiwayatSubTab('input')" class="flex-1 py-4 rounded-xl text-[11px] font-black tracking-wide flex items-center justify-center gap-2 transition-all brand-gradient-bg text-black shadow-[0_3px_10px_rgba(255,140,0,0.35)]"><i class="fa-solid fa-pen-to-square text-[12px]"></i> INPUT DATA</button>
-                <button id="subtab-btn-transaksi" onclick="switchRiwayatSubTab('transaksi')" class="flex-1 py-4 rounded-xl text-[11px] font-black tracking-wide flex items-center justify-center gap-2 transition-all text-black/45"><i class="fa-solid fa-receipt text-[12px]"></i> TRANSAKSI</button>
+            <!-- LEVEL 1: Saklar utama — INPUT DATA / TRANSAKSI (kartu ala TAB INPUT DATA) -->
+            <div class="rp-riwayat-mode-grid">
+                <button id="subtab-btn-input" onclick="switchRiwayatSubTab('input')" class="rp-input-mode-card rp-input-mode-orange rp-input-mode-active">
+                    <div class="rp-input-mode-card-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+                    <div class="rp-input-mode-card-title">INPUT DATA</div>
+                    <div class="rp-input-mode-card-sub">Riwayat stok masuk, beban & retur</div>
+                    <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                </button>
+                <button id="subtab-btn-transaksi" onclick="switchRiwayatSubTab('transaksi')" class="rp-input-mode-card rp-input-mode-blue">
+                    <div class="rp-input-mode-card-icon"><i class="fa-solid fa-receipt"></i></div>
+                    <div class="rp-input-mode-card-title">TRANSAKSI</div>
+                    <div class="rp-input-mode-card-sub">Riwayat penjualan & pembayaran</div>
+                    <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                </button>
             </div>
             <!-- LEVEL 2: Status transaksi — dua kartu terpisah, warna beda arti: KREDIT (merah, menunggu) vs LUNAS (hijau, selesai) -->
             <div id="filter-transaksi-status-bar" class="hidden grid grid-cols-2 gap-2">
@@ -3288,6 +3362,18 @@ END $$;</textarea>
             <div id="nav-btn-transaksi" onclick="switchTab('transaksi')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
                 <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-handshake text-xl"></i></div>
                 <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Transaksi</span>
+            </div>
+            <div id="nav-btn-riwayat-input" onclick="switchTab('riwayat-input')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
+                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-clipboard-list text-xl"></i></div>
+                <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Riwayat Input</span>
+            </div>
+            <div id="nav-btn-riwayat-beban" onclick="switchTab('riwayat-beban')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
+                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-money-bill-wave text-xl"></i></div>
+                <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Riwayat Beban</span>
+            </div>
+            <div id="nav-btn-riwayat-retur" onclick="switchTab('riwayat-retur')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
+                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-rotate-left text-xl"></i></div>
+                <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Riwayat Retur</span>
             </div>
             <div id="nav-btn-riwayat" onclick="onNavRiwayatClick()" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
                 <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center relative">
@@ -5104,7 +5190,7 @@ function updateSSK(tab, rowId) {
     }
 
     function _doSwitchTab(tabName) {
-        const tabs = ['stok','input','transaksi','riwayat','laba','master'];
+        const tabs = ['stok','input','transaksi','riwayat-input','riwayat-beban','riwayat-retur','riwayat','laba','master'];
 
         // Tutup toast peringatan dari tab sebelumnya supaya tidak "nyangkut" ke tab baru
         hideToastNow();
@@ -5115,15 +5201,6 @@ function updateSSK(tab, rowId) {
         }
         if (_activeTab === 'transaksi' && tabName !== 'transaksi') {
             _clearTrxForm();
-        }
-        if (_activeTab === 'riwayat' && tabName !== 'riwayat') {
-            document.querySelectorAll('[id^="vg-body-"]').forEach(el => {
-                el.classList.add('hidden');
-                el.classList.remove('flex');
-            });
-            document.querySelectorAll('[id^="vg-chevron-"]').forEach(el => {
-                el.style.transform = '';
-            });
         }
         // Tandai bahwa tab Riwayat perlu direset ke default begitu dibuka lagi,
         // setiap kali tab LAIN yang aktif (bukan hanya sesaat sebelum masuk Riwayat).
@@ -5205,6 +5282,26 @@ function updateSSK(tab, rowId) {
     let _detailBrandId = null;
     let _activeWarnaFilter = null;
     let _filterInputMode = 'semua'; // 'semua' | 'masuk' | 'retur'
+
+    // ==================== SHORTCUT SISI-KANAN KARTU INPUT DATA ====================
+    // Setiap kartu STOK MASUK / BEBAN / RETUR di tab Input Data sekarang dibagi 2 zona klik:
+    // - Sisi KIRI  : buka form input seperti biasa (setInputMode).
+    // - Sisi KANAN : langsung lompat ke TAB Riwayat masing-masing (3 tab baru
+    //   di bottom nav: Riwayat Input / Riwayat Beban / Riwayat Retur).
+    function bukaRiwayatStokMasuk() {
+        switchTab('riwayat-input');
+    }
+    window.bukaRiwayatStokMasuk = bukaRiwayatStokMasuk;
+
+    function bukaRiwayatBeban() {
+        switchTab('riwayat-beban');
+    }
+    window.bukaRiwayatBeban = bukaRiwayatBeban;
+
+    function bukaRiwayatRetur() {
+        switchTab('riwayat-retur');
+    }
+    window.bukaRiwayatRetur = bukaRiwayatRetur;
 
     // Fallback warna otomatis berdasarkan nama jika kode kosong/default
     function getWarnaKode(warnaNama) {
@@ -5583,6 +5680,10 @@ function updateSSK(tab, rowId) {
         _filterTrxStatus = 'kredit';
         _updateFilterTrxStatusButtons('kredit');
         _trxShowAllOld = false;
+        // Reset filter MASUK/RETUR di sub-tab INPUT DATA ke SEMUA (default),
+        // supaya navigasi biasa ke tab Riwayat lewat nav bar tidak "nyangkut"
+        // di filter yang ditinggalkan oleh tombol pintasan kartu (mis. bukaRiwayatStokMasuk()).
+        _filterInputMode = 'semua';
         // Reset sub-tab ke INPUT DATA
         switchRiwayatSubTab('input');
     }
@@ -5616,15 +5717,12 @@ function updateSSK(tab, rowId) {
         const pelunasanBar = document.getElementById('pelunasan-action-bar');
         if (pelunasanBar) pelunasanBar.classList.add('hidden');
 
-        const inactiveClass = "flex-1 py-4 rounded-xl text-[11px] font-black tracking-wide flex items-center justify-center gap-2 transition-all text-black/45";
-        const activeClass = "flex-1 py-4 rounded-xl text-[11px] font-black tracking-wide flex items-center justify-center gap-2 transition-all brand-gradient-bg text-black shadow-[0_3px_10px_rgba(255,140,0,0.35)]";
+        // Reset tombol utama (kartu ala TAB INPUT DATA — warna tetap, cuma status aktif yang di-toggle)
+        btnInput.classList.remove('rp-input-mode-active');
+        btnTransaksi.classList.remove('rp-input-mode-active');
 
         const isLunasGroup = (subTab === 'lunas' || subTab === 'pelunasan' || subTab === 'bayar-sebagian');
         const isTransaksiGroup = (subTab === 'kredit' || isLunasGroup);
-
-        // Reset tombol utama
-        btnInput.className = inactiveClass;
-        btnTransaksi.className = inactiveClass;
 
         // Reset semua panel & filter bar
         listInput.classList.add('hidden'); listInput.classList.remove('flex');
@@ -5636,7 +5734,7 @@ function updateSSK(tab, rowId) {
         if (innerBar) innerBar.classList.add('hidden');
 
         if (subTab === 'input') {
-            btnInput.className = activeClass;
+            btnInput.classList.add('rp-input-mode-active');
             if (filterTrxBar) filterTrxBar.classList.add('hidden');
             listInput.classList.remove('hidden'); listInput.classList.add('flex');
             _updateRiwayatBottomSpacer();
@@ -5646,7 +5744,7 @@ function updateSSK(tab, rowId) {
         if (!isTransaksiGroup) { _updateRiwayatBottomSpacer(); return; }
 
         // Grup TRANSAKSI aktif (termasuk sub-tab LUNAS / PELUNASAN / BAYAR SEBAGIAN di bawah LUNAS)
-        btnTransaksi.className = activeClass;
+        btnTransaksi.classList.add('rp-input-mode-active');
         if (filterTrxBar) filterTrxBar.classList.remove('hidden');
         _updateFilterTrxStatusButtons(subTab === 'kredit' ? 'kredit' : 'lunas');
 
@@ -5710,7 +5808,7 @@ function updateSSK(tab, rowId) {
 
     // Helper: tentukan sub-tab riwayat yang sedang aktif ('input' | 'kredit' | 'lunas' | 'pelunasan' | 'bayar-sebagian')
     function getActiveRiwayatSubTab() {
-        if (document.getElementById('subtab-btn-input')?.classList.contains('brand-gradient-bg')) return 'input';
+        if (document.getElementById('subtab-btn-input')?.classList.contains('rp-input-mode-active')) return 'input';
         if (document.getElementById('inner-btn-pelunasan')?.dataset.active === 'true') return 'pelunasan';
         if (document.getElementById('inner-btn-bayar-sebagian')?.dataset.active === 'true') return 'bayar-sebagian';
         if (document.getElementById('inner-btn-lunas')?.dataset.active === 'true') return 'lunas';
@@ -8773,9 +8871,8 @@ function updateSSK(tab, rowId) {
                     const badgeClass = isRetur ? 'bg-red-500/20 text-red-400 border-red-500/40' : 'bg-green-500/20 text-green-400 border-green-500/40';
                     const badgeText = isRetur ? '↩ RETUR' : '↓ MASUK';
                     const totalQty = d.items.reduce((s, i) => s + i.qty, 0);
-                    const itemsPreview = d.items.slice(0,2).map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black">${i.warna}/${i.ukuran}:<b class="text-black">${i.qty}</b></span>`).join('') + (d.items.length > 2 ? `<span class="text-[8px] text-black">+${d.items.length-2} lagi</span>` : '');
                     cardEl.className = `flex-1 min-w-0 bg-cardBg rounded-lg border-2 ${borderClass} overflow-hidden`;
-                    cardEl.innerHTML = `<div class="flex items-center justify-between px-3 py-2 cursor-pointer select-none" onclick="toggleRiwayatCard('${uid}')">
+                    cardEl.innerHTML = `<div class="flex items-center justify-between px-3 py-2">
                         <div class="flex-1 min-w-0 mr-2">
                             <div class="flex items-center gap-1.5">
                                 <span class="text-[10px] font-black text-black truncate">${d.brand} — ${d.model}</span>
@@ -8784,21 +8881,22 @@ function updateSSK(tab, rowId) {
                             <div class="flex items-center gap-2 mt-0.5">
                                 <span class="text-[8px] text-black">${d.tanggal} ${d.jam}</span>
                                 <span class="text-[8px] brand-text font-bold">${totalQty} pcs</span>
-                                <div class="flex gap-1 flex-wrap" id="${uid}-preview">${itemsPreview}</div>
                             </div>
                         </div>
-                        <i id="${uid}-chevron" class="fa-solid fa-chevron-down text-[9px] text-black flex-shrink-0 transition-transform"></i>
                     </div>
-                    <div id="${uid}-body" class="hidden px-3 pb-2 border-t-2 border-borderDark">
-                        ${isRetur && d.keterangan ? `<div class="text-[9px] text-red-400 italic pt-1.5"><i class="fa-solid fa-comment-dots mr-1"></i>${d.keterangan}</div>` : ''}
-                        <div class="flex flex-col gap-1 pt-1.5">
+                    <div id="${uid}-body" class="px-3 pb-2.5 border-t-2 border-borderDark">
+                        ${isRetur && d.keterangan && !/^ARSIP OTOMATIS/i.test(d.keterangan) ? `<div class="text-[9px] text-red-400 italic pt-1.5"><i class="fa-solid fa-comment-dots mr-1"></i>${d.keterangan}</div>` : ''}
+                        <div class="grid grid-cols-2 gap-x-3 gap-y-2 pt-2">
                             ${d.items.map((i, iIdx) => `
-                            <div class="flex items-center justify-between bg-darkBg border-2 border-borderDark rounded px-2 py-1.5 gap-2">
-                                <span class="text-[9px] text-black flex-1">${i.warna} / ${i.ukuran}: <span class="text-black font-bold">${i.qty}</span> pcs</span>
+                            <div class="flex items-center justify-between gap-1.5 py-1 border-b border-borderDark/40">
+                                <div class="min-w-0">
+                                    <div class="text-[8.5px] text-black/55 font-bold uppercase truncate">${i.warna} / ${i.ukuran}</div>
+                                    <div class="text-[12px] text-black font-black leading-tight">${i.qty} <span class="text-[8px] font-bold text-black/45 normal-case">pcs</span></div>
+                                </div>
                                 <button onclick="event.stopPropagation();bukaModalEditInputItem(${d.id},'${d.model}','${i.warna}','${i.ukuran}',${i.qty},${iIdx},'${d.mode}')"
-                                    class="w-6 h-6 rounded bg-yellow-500/10 border-2 border-yellow-500/30 text-yellow-400 flex items-center justify-center hover:bg-yellow-500/20 transition-colors flex-shrink-0"
+                                    class="w-6 h-6 rounded-full flex items-center justify-center text-black/35 hover:text-yellow-400 hover:bg-yellow-500/10 transition-colors flex-shrink-0"
                                     title="Edit qty">
-                                    <i class="fa-solid fa-pen text-[9px]"></i>
+                                    <i class="fa-solid fa-pen text-[8.5px]"></i>
                                 </button>
                             </div>`).join('')}
                         </div>
@@ -8877,7 +8975,7 @@ function updateSSK(tab, rowId) {
                         <span class="text-[10px] font-black text-black truncate">${d.brand} — ${d.model}</span>
                         <span class="text-[8px] font-black px-1.5 py-0.5 rounded border-2 flex-shrink-0 bg-red-500/20 text-red-400 border-red-500/40">↩ RETUR</span>
                     </div>
-                    <div class="text-[9px] text-black/60 font-bold mt-0.5">${d.tanggal} ${d.jam} <span class="text-red-400">• ${totalQty} pcs</span>${d.keterangan ? ' • ' + d.keterangan : ''}</div>
+                    <div class="text-[9px] text-black/60 font-bold mt-0.5">${d.tanggal} ${d.jam} <span class="text-red-400">• ${totalQty} pcs</span>${d.keterangan && !/^ARSIP OTOMATIS/i.test(d.keterangan) ? ' • ' + d.keterangan : ''}</div>
                     <div class="flex gap-1 flex-wrap mt-1">${itemsSummary}</div>
                 </div>
                 <button onclick="bukaPilihItemRetur(${d.id})" class="w-7 h-7 rounded-lg bg-yellow-500/10 hover:bg-yellow-500/20 border-2 border-yellow-500/30 flex items-center justify-center text-yellow-400 text-[10px] flex-shrink-0" title="Edit qty">
@@ -9065,42 +9163,15 @@ function updateSSK(tab, rowId) {
         }
     }
 
-    function toggleVendorGroup(vendorKey) {
-        const body = document.getElementById('vg-body-' + vendorKey);
-        const chevron = document.getElementById('vg-chevron-' + vendorKey);
-        if (!body) return;
-        const isHidden = body.classList.contains('hidden');
-        if (isHidden) {
-            document.querySelectorAll('[id^="vg-body-"]').forEach(el => {
-                if (el.id !== 'vg-body-' + vendorKey && !el.classList.contains('hidden')) {
-                    el.classList.add('hidden');
-                    el.classList.remove('flex');
-                    const otherKey = el.id.replace('vg-body-', '');
-                    const otherChev = document.getElementById('vg-chevron-' + otherKey);
-                    if (otherChev) otherChev.style.transform = '';
-                }
-            });
-        }
-        body.classList.toggle('hidden', !isHidden);
-        body.classList.toggle('flex', isHidden);
-        if (chevron) chevron.style.transform = isHidden ? 'rotate(180deg)' : '';
-        _openVendorKey = isHidden ? vendorKey : null;
-
-        if (isHidden) {
-            
-            const vendorNama = Object.keys(_vendorGroupCache || {}).find(v => v.replace(/\s+/g,'_') === vendorKey);
-            if (vendorNama) {
-                const trxList = (_vendorGroupCache[vendorNama] || []);
-                if (trxList.length > 0) {
-                    const maxId = Math.max(...trxList.map(t => t.id));
-                    const stored = JSON.parse(localStorage.getItem('trx_seen_vendor') || '{}');
-                    stored[vendorNama] = maxId;
-                    localStorage.setItem('trx_seen_vendor', JSON.stringify(stored));
-                }
-            }
-            
-            const badge = document.getElementById('vg-badge-' + vendorKey);
-            if (badge) badge.remove();
+    // Sejak header vendor tidak lagi accordion (selalu terbuka), status "sudah dilihat"
+    // ditandai langsung saat render — bukan lagi menunggu klik buka grup.
+    function _markVendorGroupSeen(vendorNama, vendorKey) {
+        const trxList = (_vendorGroupCache[vendorNama] || []);
+        if (trxList.length > 0) {
+            const maxId = Math.max(...trxList.map(t => t.id));
+            const stored = JSON.parse(localStorage.getItem('trx_seen_vendor') || '{}');
+            stored[vendorNama] = maxId;
+            localStorage.setItem('trx_seen_vendor', JSON.stringify(stored));
         }
     }
     
@@ -9277,8 +9348,7 @@ function updateSSK(tab, rowId) {
                 : `<div id="vg-badge-${vendorKey}"></div>`;
 
             return `<div class="mb-1" data-vendor-group="${vendor}">
-                <div class="brand-gradient-bg rounded-xl px-3 py-9 flex items-center justify-between cursor-pointer select-none shadow-[0_2px_12px_rgba(255,140,0,0.25)]"
-                     onclick="toggleVendorGroup('${vendorKey}')">
+                <div class="brand-gradient-bg rounded-xl px-3 py-9 flex items-center justify-between shadow-[0_2px_12px_rgba(255,140,0,0.25)]">
                     <div class="flex items-center gap-2">
                         <i class="fa-solid fa-truck-fast text-black text-base"></i>
                         <div>
@@ -9291,14 +9361,13 @@ function updateSSK(tab, rowId) {
                     </div>
                     <div class="flex items-center gap-2">
                         ${badgeHtml}
-                        <button id="pilih-semua-${vendorKey}" onclick="event.stopPropagation();pilihSemuaVendor('${vendor}')"
+                        <button id="pilih-semua-${vendorKey}" onclick="pilihSemuaVendor('${vendor}')"
                             class="text-[11px] font-black px-2.5 py-1 rounded-lg bg-black/20 text-black hover:bg-black/30 transition-colors whitespace-nowrap">
                             ✓ Semua
                         </button>
-                        <i id="vg-chevron-${vendorKey}" class="fa-solid fa-chevron-down text-black text-sm transition-transform ml-10"></i>
                     </div>
                 </div>
-                <div id="vg-body-${vendorKey}" class="hidden flex-col gap-2 mt-2">
+                <div id="vg-body-${vendorKey}" class="flex flex-col gap-2 mt-2">
                     <div class="text-center text-black text-xs py-4">Memuat...</div>
                 </div>
             </div>`;
@@ -9333,26 +9402,23 @@ function updateSSK(tab, rowId) {
                             const totalNominal = totalQty * (d.harga || 0);
                             const uid = 'rt-' + (d.id || idx);
                             const noUrut = idx + 1;
-                            const itemsPreview = items.slice(0,2).map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black">${i.warna}/${i.ukuran}:<b class="text-black">${i.qty}</b></span>`).join('') + (items.length > 2 ? `<span class="text-[8px] text-black">+${items.length-2} lagi</span>` : '');
                             return `<div class="flex items-start gap-2">
                                 <div class="w-5 flex-shrink-0 pt-3 text-center text-[10px] font-black text-black">${noUrut}</div>
                                 <div id="card-${uid}" class="flex-1 min-w-0 bg-cardBg rounded-lg border-2 border-borderDark overflow-hidden transition-all">
                                 <div class="flex items-center gap-2.5 px-3 py-2.5">
                                     <div onclick="event.stopPropagation();togglePilihTrx(${d.id},'${uid}')" id="chk-${uid}" class="w-5 h-5 rounded border-4 border-gray-600 flex items-center justify-center flex-shrink-0 cursor-pointer transition-all"></div>
-                                    <div class="flex-1 min-w-0 cursor-pointer" onclick="toggleRiwayatCard('${uid}')">
+                                    <div class="flex-1 min-w-0">
                                         <div class="flex items-center gap-2">
                                             <span class="px-2 py-0.5 ${statusClass} border-2 text-[9px] font-black rounded tracking-wider flex-shrink-0">${isLunas ? 'LUNAS' : 'CREDIT'}</span>
                                             <span class="text-[11px] font-black text-black uppercase truncate">${d.brand || '-'} / ${d.model || '-'}</span>
                                         </div>
                                         <div class="flex items-center gap-2 mt-0.5 flex-wrap">
                                             <span class="text-[10px] brand-text font-black">${totalQty} pcs${totalNominal > 0 ? ' • Rp ' + totalNominal.toLocaleString('id-ID') : ''}</span>
-                                            <div class="flex gap-1 flex-wrap" id="${uid}-preview">${itemsPreview}</div>
                                             <span class="text-[9px] text-black ml-auto">${d.tanggal || ''} ${d.jam || ''}</span>
                                         </div>
                                     </div>
-                                    <i id="${uid}-chevron" class="fa-solid fa-chevron-down text-[10px] text-black flex-shrink-0 transition-transform cursor-pointer ml-2" onclick="toggleRiwayatCard('${uid}')"></i>
                                 </div>
-                                <div id="${uid}-body" class="hidden px-3 pb-2.5 border-t-2 border-borderDark">
+                                <div id="${uid}-body" class="px-3 pb-2.5 border-t-2 border-borderDark">
                                     <div class="flex flex-wrap gap-1 pt-2">${items.map((i, iIdx) => `<span class="text-[10px] bg-darkBg border-2 border-borderDark rounded px-2 py-0.5 text-black">${i.warna} / ${i.ukuran}: <span class="text-black font-bold">${i.qty}</span></span>`).join('')}</div>
                                     <div class="flex gap-2 mt-2.5">
                                         <button onclick="event.stopPropagation();bukaEditQtyTrx(${d.id})" class="${isLunas ? 'opacity-30 cursor-not-allowed' : 'hover:bg-blue-500/20 cursor-pointer'} flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border-2 border-blue-500/40 bg-blue-500/10 text-blue-400 text-[10px] font-bold transition-colors" ${isLunas ? 'disabled' : ''}><i class="fa-solid fa-pen-to-square text-[9px]"></i> EDIT QTY</button>
@@ -9372,6 +9438,7 @@ function updateSSK(tab, rowId) {
                         }
                     }).join('');
                     bodyEl.innerHTML = cards || '<div class="text-center text-black text-xs py-4">Tidak ada transaksi untuk vendor ini.</div>';
+                    _markVendorGroupSeen(vendor, vendorKey);
                 }
             } catch (vendorErr) {
                 console.warn('Gagal render vendor "' + vendor + '":', vendorErr.message);
@@ -9381,18 +9448,10 @@ function updateSSK(tab, rowId) {
             _renderTrxVendorTimeout = setTimeout(() => requestAnimationFrame(renderNextVendor), 16);
         }
         requestAnimationFrame(renderNextVendor);
-
-        if (_openVendorKey) {
-            const body = document.getElementById('vg-body-' + _openVendorKey);
-            const chev = document.getElementById('vg-chevron-' + _openVendorKey);
-            if (body) { body.classList.remove('hidden'); body.classList.add('flex'); }
-            if (chev) chev.style.transform = 'rotate(180deg)';
-        }
     }
 
     const selectedTrxIds = new Set();
     let _vendorGroupCache = {};
-    let _openVendorKey = null;
     let _renderTrxVendorTimeout = null;
 
     function togglePilihTrx(id, uid) {
@@ -9851,29 +9910,6 @@ function updateSSK(tab, rowId) {
         </div>`;
 
         showPrintOverlay(sjDocHtml, 'SURAT JALAN', noSJ + ' — ' + vendor, noSJ + '-' + vendor + '.jpg');
-    }
-
-    function toggleRiwayatCard(uid) {
-        const body = document.getElementById(uid + '-body');
-        const chevron = document.getElementById(uid + '-chevron');
-        const preview = document.getElementById(uid + '-preview');
-        if (!body) return;
-        const isHidden = body.classList.contains('hidden');
-        if (isHidden) {
-            document.querySelectorAll('[id$="-body"]').forEach(el => {
-                if (el.id !== uid + '-body' && !el.classList.contains('hidden')) {
-                    const otherUid = el.id.replace('-body', '');
-                    el.classList.add('hidden');
-                    const otherChevron = document.getElementById(otherUid + '-chevron');
-                    const otherPreview = document.getElementById(otherUid + '-preview');
-                    if (otherChevron) otherChevron.style.transform = '';
-                    if (otherPreview) otherPreview.style.display = '';
-                }
-            });
-        }
-        body.classList.toggle('hidden', !isHidden);
-        if (chevron) chevron.style.transform = isHidden ? 'rotate(180deg)' : '';
-        if (preview) preview.style.display = isHidden ? 'none' : '';
     }
 
     function bukaEditQtyTrx(trxId) {
@@ -10385,7 +10421,7 @@ function updateSSK(tab, rowId) {
                              id="chk-${uid}"
                              class="w-5 h-5 rounded border-4 border-gray-600 flex items-center justify-center flex-shrink-0 cursor-pointer transition-all">
                         </div>
-                        <div class="flex-1 min-w-0 cursor-pointer" onclick="toggleRiwayatCard('${uid}')">
+                        <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-2">
                                 <span class="px-2 py-0.5 ${isLunas ? 'bg-green-600 text-white border-green-700' : 'bg-red-600 text-white border-red-700'} border-2 text-[9px] font-black rounded tracking-wider flex-shrink-0">${isLunas ? 'LUNAS' : 'CREDIT'}</span>
                                 <span class="text-[11px] font-black text-black uppercase truncate">${t.brand} / ${t.model}</span>
@@ -10405,9 +10441,8 @@ function updateSSK(tab, rowId) {
                                 </div>
                             </div>` : ''}
                         </div>
-                        <i id="${uid}-chevron" class="fa-solid fa-chevron-down text-[10px] text-black flex-shrink-0 transition-transform cursor-pointer ml-2" onclick="toggleRiwayatCard('${uid}')"></i>
                     </div>
-                    <div id="${uid}-body" class="hidden border-t-2 border-borderDark px-3 pb-3">
+                    <div id="${uid}-body" class="border-t-2 border-borderDark px-3 pb-3">
                         <div class="pt-2 mb-2">
                             <div class="text-[9px] font-black text-black tracking-wider mb-1.5">RIWAYAT PEMBAYARAN</div>
                             ${riwayatBayarHtml}
@@ -10441,9 +10476,10 @@ function updateSSK(tab, rowId) {
                 ? `<div id="pvg-badge-${vendorKey}" class="vendor-notif-badge">${totalNewCount > 99 ? '99+' : totalNewCount}</div>`
                 : `<div id="pvg-badge-${vendorKey}"></div>`;
 
+            _markPelunasanVendorSeen(vendor);
+
             return `<div class="mb-1">
-                <div class="brand-gradient-bg rounded-xl px-3 py-9 flex items-center justify-between cursor-pointer select-none shadow-[0_2px_12px_rgba(255,140,0,0.25)]"
-                     onclick="togglePelunasanVendorGroup('${vendorKey}','${vendor}')">
+                <div class="brand-gradient-bg rounded-xl px-3 py-9 flex items-center justify-between shadow-[0_2px_12px_rgba(255,140,0,0.25)]">
                     <div class="flex items-center gap-2">
                         <i class="fa-solid fa-money-bill-wave text-black text-base"></i>
                         <div>
@@ -10457,16 +10493,13 @@ function updateSSK(tab, rowId) {
                     <div class="flex items-center gap-3">
                         ${badgeHtml}
                         ${totalHutang > 0 ? `
-                        <button onclick="event.stopPropagation();lunasSemuaVendor('${vendorEncoded}', ${totalHutang})"
+                        <button onclick="lunasSemuaVendor('${vendorEncoded}', ${totalHutang})"
                             class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-black/20 text-black font-black text-[12px] hover:bg-black/30 transition-colors whitespace-nowrap">
                             <i class="fa-solid fa-check-double text-[11px]"></i> LUNAS SEMUA
                         </button>` : `<span class="text-[12px] font-black text-black/70 flex items-center gap-1 bg-black/10 px-2 py-1 rounded-lg"><i class="fa-solid fa-circle-check"></i> Lunas</span>`}
-                        <div class="ml-8 w-8 h-8 flex items-center justify-center rounded-lg bg-black/20 hover:bg-black/30 transition-colors flex-shrink-0">
-                            <i id="pvg-chevron-${vendorKey}" class="fa-solid fa-chevron-down text-black text-sm transition-transform"></i>
-                        </div>
                     </div>
                 </div>
-                <div id="pvg-body-${vendorKey}" class="hidden flex-col gap-2 mt-2">
+                <div id="pvg-body-${vendorKey}" class="flex flex-col gap-2 mt-2">
                     ${riwayatBayarSebagianVendor.length > 0 ? `
                     <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden mb-1">
                         <div class="p-2 bg-yellow-500/10 border-b-2 border-borderDark text-center text-[9px] text-black font-bold">
@@ -10532,45 +10565,25 @@ function updateSSK(tab, rowId) {
     }
 
 
-    function togglePelunasanVendorGroup(vendorKey, vendor) {
-        const body = document.getElementById('pvg-body-' + vendorKey);
-        const chevron = document.getElementById('pvg-chevron-' + vendorKey);
-        if (!body) return;
-        const isHidden = body.classList.contains('hidden');
-        if (isHidden) {
-            document.querySelectorAll('[id^="pvg-body-"]').forEach(el => {
-                if (el.id !== 'pvg-body-' + vendorKey && !el.classList.contains('hidden')) {
-                    el.classList.add('hidden');
-                    el.classList.remove('flex');
-                    const otherKey = el.id.replace('pvg-body-', '');
-                    const otherChev = document.getElementById('pvg-chevron-' + otherKey);
-                    if (otherChev) otherChev.style.transform = '';
-                }
-            });
+    // Sejak header vendor Pelunasan tidak lagi accordion (selalu terbuka), status
+    // "sudah dilihat" ditandai langsung saat render — bukan lagi menunggu klik buka grup.
+    function _markPelunasanVendorSeen(vendor) {
+        if (!vendor) return;
+        const pelSeen = JSON.parse(localStorage.getItem('pel_seen_vendor') || '{}');
+        const pelVendor = appData.pelunasan.filter(p => {
+            const t = appData.riwayatTransaksi.find(t => t.id === Number(p.transaksi_id));
+            return t && t.vendor === vendor;
+        });
+        if (pelVendor.length > 0) {
+            pelSeen[vendor] = Math.max(...pelVendor.map(p => p.id));
+            localStorage.setItem('pel_seen_vendor', JSON.stringify(pelSeen));
         }
-        body.classList.toggle('hidden', !isHidden);
-        body.classList.toggle('flex', isHidden);
-        if (chevron) chevron.style.transform = isHidden ? 'rotate(180deg)' : '';
-        if (isHidden && vendor) {
-            const pelSeen = JSON.parse(localStorage.getItem('pel_seen_vendor') || '{}');
-            const pelVendor = appData.pelunasan.filter(p => {
-                const t = appData.riwayatTransaksi.find(t => t.id === Number(p.transaksi_id));
-                return t && t.vendor === vendor;
-            });
-            if (pelVendor.length > 0) {
-                pelSeen[vendor] = Math.max(...pelVendor.map(p => p.id));
-                localStorage.setItem('pel_seen_vendor', JSON.stringify(pelSeen));
-            }
-            
-            const trxSeen = JSON.parse(localStorage.getItem('pel_trx_seen_vendor') || '{}');
-            const trxVendor = appData.riwayatTransaksi.filter(t => t.vendor === vendor);
-            if (trxVendor.length > 0) {
-                trxSeen[vendor] = Math.max(...trxVendor.map(t => t.id));
-                localStorage.setItem('pel_trx_seen_vendor', JSON.stringify(trxSeen));
-            }
-            
-            const badge = document.getElementById('pvg-badge-' + vendorKey);
-            if (badge) badge.remove();
+
+        const trxSeen = JSON.parse(localStorage.getItem('pel_trx_seen_vendor') || '{}');
+        const trxVendor = appData.riwayatTransaksi.filter(t => t.vendor === vendor);
+        if (trxVendor.length > 0) {
+            trxSeen[vendor] = Math.max(...trxVendor.map(t => t.id));
+            localStorage.setItem('pel_trx_seen_vendor', JSON.stringify(trxSeen));
         }
     }
 
