@@ -2538,7 +2538,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                     <div class="p-4 flex flex-col gap-3">
                         <div class="flex gap-3 items-stretch">
                             <!-- KOLOM KIRI: FOTO KWITANSI/BON -->
-                            <div class="flex flex-col gap-1.5 w-[104px] flex-shrink-0">
+                            <div class="flex flex-col gap-1.5 w-[160px] flex-shrink-0">
                                 <label class="text-[9px] font-bold text-black tracking-wider leading-tight">FOTO KWITANSI/BON <span class="text-red-500">*wajib</span></label>
                                 <input type="file" id="beban-input-foto" accept="image/*" capture="environment" class="hidden" onchange="prosesFotoBeban(event)">
                                 <div id="beban-foto-placeholder" onclick="document.getElementById('beban-input-foto').click()" class="flex-1 w-full min-h-[132px] border-2 border-dashed border-borderDark rounded-lg flex flex-col items-center justify-center gap-1.5 cursor-pointer px-1 text-center">
@@ -2692,7 +2692,7 @@ END $$;</textarea>
              + teks hint "TERSEDIA BERBAGAI MACAM UKURAN" (.rp-size-hint) sama-sama keliatan
              tembus di celah transparan itu. Ditaruh di bawah navbar (z-35 < 50) & di bawah
              .rp-size-hint (z-90) supaya hint tetap kelihatan, tapi di atas konten (z-10). -->
-        <div id="input-tab-nav-backdrop" class="fixed bottom-0 left-0 right-0 bg-[#06142B]" style="z-index:35;height:calc(84px + env(safe-area-inset-bottom));display:none;pointer-events:none;"></div>
+        <div id="input-tab-nav-backdrop" class="fixed bottom-0 left-0 right-0 bg-[#06142B]" style="z-index:35;height:calc(112px + env(safe-area-inset-bottom));display:none;pointer-events:none;"></div>
 
         <div id="trx-variasi-sheet" class="input-sheet-overlay" onclick="if(event.target.id==='trx-variasi-sheet') closeTrxVariasiSheet()">
             <div class="input-sheet-panel" id="generic-sheet-panel">
