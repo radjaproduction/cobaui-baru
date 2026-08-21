@@ -5289,6 +5289,7 @@ function updateSSK(tab, rowId) {
     // Fokus (border/warna terang) kartu tetap dipindah ke kartu yang diklik,
     // walau yang ditekan zona kanan (bukan cuma zona kiri lewat setInputMode).
     function _setKartuInputFokus(mode) {
+        inputState.mode = mode;
         const btnMasuk = document.getElementById('input-mode-masuk');
         const btnBeban = document.getElementById('input-mode-beban');
         const btnRetur = document.getElementById('input-mode-retur');
@@ -5298,20 +5299,20 @@ function updateSSK(tab, rowId) {
     }
 
     function bukaRiwayatStokMasuk() {
-        _setKartuInputFokus('masuk');
         switchTab('riwayat-input');
+        _setKartuInputFokus('masuk');
     }
     window.bukaRiwayatStokMasuk = bukaRiwayatStokMasuk;
 
     function bukaRiwayatBeban() {
-        _setKartuInputFokus('beban');
         switchTab('riwayat-beban');
+        _setKartuInputFokus('beban');
     }
     window.bukaRiwayatBeban = bukaRiwayatBeban;
 
     function bukaRiwayatRetur() {
-        _setKartuInputFokus('retur');
         switchTab('riwayat-retur');
+        _setKartuInputFokus('retur');
     }
     window.bukaRiwayatRetur = bukaRiwayatRetur;
 
