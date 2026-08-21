@@ -2030,8 +2030,8 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
   pointer-events:none;
 }
 #tab-input.rp-input-screen .rp-input-mode-card-icon{width:34px;height:34px;border-radius:10px;font-size:13px;position:relative;z-index:1}
-#tab-input.rp-input-screen .rp-input-mode-card-title{font-size:10.5px;position:relative;z-index:1;max-width:62%}
-#tab-input.rp-input-screen .rp-input-mode-card-sub{font-size:8px;line-height:1.35;position:relative;z-index:1;max-width:62%}
+#tab-input.rp-input-screen .rp-input-mode-card-title{font-size:10.5px;position:relative;z-index:1;max-width:52%;word-break:break-word}
+#tab-input.rp-input-screen .rp-input-mode-card-sub{font-size:8px;line-height:1.35;position:relative;z-index:1;max-width:52%;word-break:break-word}
 #tab-input.rp-input-screen .rp-input-mode-card-arrow{width:24px;height:24px;right:8px;bottom:8px;font-size:9px;z-index:1}
 
 /* ---------- BEBAN: main panel ---------- */
@@ -2268,7 +2268,9 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 #riwayat-retur-list .border-t-2{border-top-width:1px!important;border-color:rgba(118,153,201,.22)!important}
 
 @media (max-width:360px){
-  #tab-input.rp-input-screen .rp-input-mode-card{min-height:120px;padding-left:8px;padding-right:8px}
+  #tab-input.rp-input-screen .rp-input-mode-card{min-height:132px;padding-left:8px;padding-right:8px}
+  #tab-input.rp-input-screen .rp-input-mode-card-title,
+  #tab-input.rp-input-screen .rp-input-mode-card-sub{max-width:48%}
   #beban-form-wrapper .w-\[104px\]{width:76px!important}
   #beban-foto-placeholder,#beban-foto-preview-wrapper{height:98px!important;min-height:98px!important}
   #beban-form-wrapper input[type="text"],#beban-form-wrapper input[type="date"]{height:34px!important}
