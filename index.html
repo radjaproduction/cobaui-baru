@@ -1222,7 +1222,7 @@
 
         /* ---------- TAB TRANSAKSI: heading polos + background hero (sama konsep TAB INPUT DATA) ---------- */
         #tab-transaksi.rp-input-screen { background: var(--trx-bg) !important; padding-top: 0; position: relative; isolation: isolate; }
-        #tab-transaksi.rp-input-screen::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_stock_background_2.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+        #tab-transaksi.rp-input-screen::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
         #tab-transaksi.rp-input-screen::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
 
         #tab-transaksi .input-variation-card { background: var(--trx-row-bg) !important; border-color: var(--trx-border) !important; }
@@ -1299,6 +1299,7 @@
 .rp-brand-realtime-note{margin:16px 4px 4px;padding:0;background:none;border:0;color:#fff;font-size:30px;line-height:1;letter-spacing:-.04em;font-weight:900;text-align:left}
 .rp-brand-realtime-note span{display:block;color:var(--rp-orange)}
 .rp-stock-fab{position:fixed;right:18px;bottom:92px;width:72px;height:72px;border:0;border-radius:50%;background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:900;box-shadow:0 12px 28px rgba(255,115,0,.35);z-index:70}.rp-stock-fab i{font-size:21px;line-height:1}.rp-stock-fab span{font-size:8px}
+.rp-stock-fab-transaksi{bottom:176px;background:linear-gradient(145deg,#1c3d7a,#0a1f45);box-shadow:0 12px 28px rgba(15,42,92,.4)}
 .rp-nav-toggle{position:fixed;right:26px;bottom:22px;width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:23px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .22s ease,background .22s ease,color .22s ease}
 .rp-nav-toggle i{position:relative;top:2px}
 .rp-nav-toggle:active{transform:scale(.92)}
@@ -2464,6 +2465,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                 </div>
                 <p id="stok-brand-realtime-note" class="rp-brand-realtime-note">Update Stok Secara <span>Realtime</span></p>
 
+                <button type="button" class="rp-stock-fab rp-stock-fab-transaksi" onclick="switchTab('transaksi')"><i class="fa-solid fa-handshake"></i><span>Transaksi</span></button>
                 <button type="button" class="rp-stock-fab" onclick="switchTab('input')"><i class="fa-solid fa-plus"></i><span>Input Stok</span></button>
             </div>
 
@@ -7542,14 +7544,16 @@ function updateSSK(tab, rowId) {
         if (progressFrac) progressFrac.textContent = progressCount + '/3';
 
 	        document.querySelectorAll('#trx-variasi-list > div').forEach(row => {
-	            const id = row.id.replace('trx-row-', '');
-	            ['trx-row-open-'].forEach(prefix => {
-	                const el = document.getElementById(prefix + id);
+	            const rowId = row.id.replace('trx-row-', '');
+	            ['trx-row-content-'].forEach(prefix => {
+	                const el = document.getElementById(prefix + rowId);
 	                if (!el) return;
+	                const wasDisabled = el.classList.contains('pointer-events-none');
 	                el.classList.toggle('opacity-40', locked);
-                el.classList.toggle('pointer-events-none', locked);
-                el.classList.toggle('select-none', locked);
-            });
+	                el.classList.toggle('pointer-events-none', locked);
+	                el.classList.toggle('select-none', locked);
+	                if (!locked && wasDisabled) renderTrxUkuranSelect(rowId);
+	            });
         });
     }
 
@@ -7813,7 +7817,8 @@ function updateSSK(tab, rowId) {
             const lastRow = listExisting.children[listExisting.children.length - 1];
             const lastId = lastRow.id.replace('trx-row-', '');
             if (_isTrxRowPristine(lastId)) {
-                openTrxVariasiSheet(lastId);
+                lastRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                toggleTrxWarnaSelector(lastId, true);
                 return;
             }
         }
@@ -7823,45 +7828,176 @@ function updateSSK(tab, rowId) {
 	        const isFirst = list.children.length === 0;
 	        const row = document.createElement('div');
 	        row.id = 'trx-row-' + id;
-	        row.className = 'input-variation-card';
+	        row.className = 'input-variation-card inline';
 
         const delClass = isFirst
-            ? 'w-10 h-10 rounded-lg flex items-center justify-center border-2 border-borderDark bg-darkBg text-black/30 cursor-not-allowed transition-colors'
-            : 'w-10 h-10 rounded-lg flex items-center justify-center border-2 border-[#ef4444]/50 bg-[#ef4444]/15 text-[#ef4444] cursor-pointer hover:bg-[#ef4444]/25 transition-colors';
+            ? 'w-6 h-6 rounded-full flex items-center justify-center border border-borderDark bg-darkBg text-black/30 cursor-not-allowed transition-colors flex-shrink-0'
+            : 'w-6 h-6 rounded-full flex items-center justify-center border border-[#ef4444]/50 bg-[#ef4444]/15 text-[#ef4444] cursor-pointer hover:bg-[#ef4444]/25 transition-colors flex-shrink-0';
 	        const delClick = isFirst ? '' : `onclick="hapusRowTrx(${id})"`;
+	        const enabledNow = !!trxState.modelId;
 
 	        row.innerHTML = `
-	            <button type="button" id="trx-row-open-${id}" onclick="openTrxVariasiSheet(${id})" class="min-w-0 flex-1 flex items-center gap-3 text-left opacity-40 pointer-events-none select-none">
-	                <div class="input-row-index" id="trx-row-num-${id}">${id}</div>
-	                <div id="trx-warna-dot-${id}" class="w-11 h-11 rounded-xl flex-shrink-0 border-2 border-white/20 shadow-inner" style="background:#888"></div>
-	                <div class="min-w-0 flex-1">
-	                    <div class="text-[9px] font-black text-black tracking-wider mb-1">VARIASI</div>
-	                    <div class="flex items-center gap-1.5 text-black font-black text-[13px] leading-tight min-w-0">
-	                        <span id="trx-warna-label-${id}" class="truncate">Pilih</span>
-	                        <span class="text-black flex-shrink-0">/</span>
-	                        <span id="trx-ukuran-label-${id}" class="truncate">Pilih</span>
+	            <div id="trx-row-content-${id}" class="input-row-content-inline${enabledNow ? '' : ' opacity-40 pointer-events-none select-none'}">
+	                <div class="input-inline-row2 small">
+	                    <div class="input-inline-field">
+	                        <div class="input-inline-label">&nbsp;</div>
+	                        <button type="button" class="input-warna-trigger-compact" onclick="toggleTrxWarnaSelector(${id})">
+	                            <span id="trx-warna-dot-${id}" class="input-warna-dot" style="background:#888"></span>
+	                            <span id="trx-warna-name-${id}" class="input-warna-name">Pilih</span>
+	                        </button>
 	                    </div>
-	                    <div class="flex items-center gap-1.5 mt-2 text-[10px] font-black overflow-hidden">
-	                        <span class="input-summary-pill brand-text"><i class="fa-solid fa-boxes-stacked text-[9px]"></i> <span id="trx-qty-summary-${id}">0</span> PCS</span>
-	                        <span class="input-summary-pill text-black"><i class="fa-solid fa-database text-[9px]"></i> SSK <span id="trx-ssk-summary-${id}">-</span></span>
+	                    <div class="input-inline-field">
+	                        <div class="input-inline-label">SIZE</div>
+	                        <button type="button" id="trx-ukuran-trigger-${id}" class="input-ukuran-trigger-compact" onclick="toggleTrxUkuranSelector(${id})">Pilih</button>
+	                    </div>
+	                    <div class="input-inline-field">
+	                        <div class="input-inline-label">QTY</div>
+	                        <input id="trx-qty-${id}" type="number" inputmode="numeric" pattern="[0-9]*" min="0" value="0" class="input-inline-qty" style="text-transform:none;" oninput="onQtyTrxInput(this,${id})" onfocus="onQtyInputTabFocus(this)" onblur="onQtyTrxBlur(this,${id})">
+	                    </div>
+	                    <div class="input-inline-field">
+	                        <div class="input-inline-label">SSK</div>
+	                        <input id="trx-ssk-${id}" type="text" readonly class="input-inline-ssk" style="text-transform:none;" title="Sisa Stok (otomatis)">
+	                    </div>
+	                    <div class="input-inline-field delete-col">
+	                        <div class="input-inline-label">&nbsp;</div>
+	                        <div id="trx-del-btn-${id}" ${delClick} class="${delClass}">
+	                            <i class="fa-solid fa-xmark text-xs"></i>
+	                        </div>
 	                    </div>
 	                </div>
-	                <div class="w-10 h-10 rounded-lg bg-black/20 border-2 border-borderDark brand-text flex items-center justify-center flex-shrink-0">
-	                    <i class="fa-solid fa-pen text-sm"></i>
-	                </div>
-	            </button>
-	            <input id="trx-qty-${id}" type="number" min="0" value="0" class="hidden" style="text-transform:none;" oninput="onQtyTrxInput(this,${id})" onblur="onQtyTrxBlur(this,${id})">
-	            <input id="trx-ssk-${id}" type="number" readonly class="hidden" style="text-transform:none;" title="Sisa Stok (otomatis)">
-	            <div id="trx-del-btn-${id}" ${delClick} class="${delClass}">
-	                <i class="fa-regular fa-trash-can text-sm"></i>
+	                <div id="trx-warna-options-${id}" class="input-warna-scroll hidden"></div>
+	                <div id="trx-ukuran-options-${id}" class="input-ukuran-scroll hidden"></div>
+	                <span id="trx-warna-label-${id}" class="hidden">Pilih</span>
+	                <span id="trx-ukuran-label-${id}" class="hidden">Pilih</span>
 	            </div>`;
-	        row.classList.add('hidden');
 	        list.appendChild(row);
 	        _invalidateTrxRowsCache();
-	        if (trxState.modelNama) _updateTrxRowsLockState();
+	        if (enabledNow) renderTrxUkuranSelect(id);
+	        _updateTrxRowsLockState();
 	        refreshTrxRowSummary(id);
 	        _renumberTrxRows();
-	        if (trxState.modelNama) openTrxVariasiSheet(id);
+
+	        if (isFirst) {
+	            setTimeout(() => {
+	                const cardEl = document.getElementById('trx-variasi-card');
+	                if (cardEl) cardEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+	            }, 50);
+	        }
+	    }
+
+	    function toggleTrxWarnaSelector(id, force) {
+	        const wrap = document.getElementById('trx-warna-options-' + id);
+	        if (!wrap) return;
+	        const show = force !== undefined ? force : wrap.classList.contains('hidden');
+	        if (show) {
+	            renderTrxWarnaOptions(id);
+	            wrap.classList.remove('hidden');
+	            const ukuranWrap = document.getElementById('trx-ukuran-options-' + id);
+	            if (ukuranWrap) ukuranWrap.classList.add('hidden');
+	        } else {
+	            wrap.classList.add('hidden');
+	        }
+	    }
+
+	    function renderTrxWarnaOptions(id) {
+	        const wrap = document.getElementById('trx-warna-options-' + id);
+	        if (!wrap) return;
+	        const current = document.getElementById('trx-warna-label-' + id)?.textContent?.trim();
+	        const list = getTrxSheetWarnaList(id);
+	        wrap.innerHTML = '';
+	        list.forEach(w => {
+	            const btn = document.createElement('button');
+	            btn.type = 'button';
+	            btn.className = 'input-warna-swatch' + (!_isInputPlaceholder(current) && current.toUpperCase() === w.nama.toUpperCase() ? ' active' : '');
+	            btn.style.background = w.kode;
+	            btn.title = w.nama;
+	            btn.onclick = () => pilihTrxWarna(id, w.nama, w.kode);
+	            wrap.appendChild(btn);
+	        });
+	        if (!list.length) wrap.innerHTML = '<div class="text-[10px] text-black/50 px-1">Warna belum tersedia</div>';
+	    }
+
+	    function pilihTrxWarna(id, nama, kode) {
+	        const dot = document.getElementById('trx-warna-dot-' + id);
+	        const label = document.getElementById('trx-warna-label-' + id);
+	        const nameEl = document.getElementById('trx-warna-name-' + id);
+	        if (dot) dot.style.background = kode || '#888';
+	        if (label) label.textContent = nama;
+	        if (nameEl) nameEl.textContent = nama;
+	        toggleTrxWarnaSelector(id, false);
+	        renderTrxUkuranSelect(id);
+	        refreshSemuaSSKTrx();
+	        _updateTrxRowBtn(id);
+	    }
+
+	    function toggleTrxUkuranSelector(id, force) {
+	        const wrap = document.getElementById('trx-ukuran-options-' + id);
+	        if (!wrap) return;
+	        const show = force !== undefined ? force : wrap.classList.contains('hidden');
+	        if (show) {
+	            renderTrxUkuranOptions(id);
+	            wrap.classList.remove('hidden');
+	            const warnaWrap = document.getElementById('trx-warna-options-' + id);
+	            if (warnaWrap) warnaWrap.classList.add('hidden');
+	        } else {
+	            wrap.classList.add('hidden');
+	        }
+	    }
+
+	    function renderTrxUkuranSelect(id) {
+	        const trigger = document.getElementById('trx-ukuran-trigger-' + id);
+	        const labelEl = document.getElementById('trx-ukuran-label-' + id);
+	        if (!trigger) return;
+	        const list = getTrxRowUkuranList(id);
+	        const currentLabel = labelEl?.textContent?.trim();
+	        const stillValid = !_isInputPlaceholder(currentLabel) && list.some(u => u.nama.toUpperCase() === currentLabel.toUpperCase());
+	        if (!stillValid && labelEl) labelEl.textContent = 'Pilih';
+	        trigger.textContent = stillValid ? currentLabel : 'Pilih';
+	        const wrap = document.getElementById('trx-ukuran-options-' + id);
+	        if (wrap && !wrap.classList.contains('hidden')) renderTrxUkuranOptions(id);
+	    }
+
+	    function renderTrxUkuranOptions(id) {
+	        const wrap = document.getElementById('trx-ukuran-options-' + id);
+	        if (!wrap) return;
+	        const current = document.getElementById('trx-ukuran-label-' + id)?.textContent?.trim();
+	        const list = getTrxRowUkuranList(id);
+	        wrap.innerHTML = '';
+	        list.forEach(u => {
+	            const btn = document.createElement('button');
+	            btn.type = 'button';
+	            btn.className = 'input-ukuran-pill' + (!_isInputPlaceholder(current) && current.toUpperCase() === u.nama.toUpperCase() ? ' active' : '');
+	            btn.textContent = u.nama;
+	            btn.onclick = () => pilihTrxUkuran(id, u.nama);
+	            wrap.appendChild(btn);
+	        });
+	        if (!list.length) wrap.innerHTML = '<div class="text-[10px] text-black/50 px-1">Ukuran belum tersedia</div>';
+	    }
+
+	    function pilihTrxUkuran(id, nama) {
+	        const trigger = document.getElementById('trx-ukuran-trigger-' + id);
+	        const labelEl = document.getElementById('trx-ukuran-label-' + id);
+	        if (trigger) trigger.textContent = nama;
+	        if (labelEl) labelEl.textContent = nama;
+	        toggleTrxUkuranSelector(id, false);
+	        refreshSemuaSSKTrx();
+	        _updateTrxRowBtn(id);
+	    }
+
+	    // Daftar ukuran untuk baris tertentu, mengikuti warna yang SUDAH dipilih di baris
+	    // itu sendiri (dibaca langsung dari DOM row, bukan draft sheet terpusat lagi —
+	    // konsep sama dengan getInputSheetUkuranList() di TAB INPUT DATA).
+	    function getTrxRowUkuranList(rowId) {
+	        const warnaNama = document.getElementById('trx-warna-label-' + rowId)?.textContent?.trim();
+	        let ukuranList = masterData.ukuran || [];
+	        if (trxState.modelNama) {
+	            if (!_isInputPlaceholder(warnaNama)) {
+	                ukuranList = ukuranList.filter(u => hitungStokEfektifTrx(trxState.modelNama, warnaNama, u.nama, rowId, trxState.brandNama, trxState.brandId) > 0);
+	            } else {
+	                ukuranList = ukuranList.filter(u => masterData.warna.some(w => hitungStokEfektifTrx(trxState.modelNama, w.nama, u.nama, rowId, trxState.brandNama, trxState.brandId) > 0));
+	            }
+	        }
+	        return sortUkuran(ukuranList);
 	    }
 	    function _renumberTrxRows() {
 	        const list = document.getElementById('trx-variasi-list');
