@@ -5285,34 +5285,25 @@ function updateSSK(tab, rowId) {
     // Setiap kartu STOK MASUK / BEBAN / RETUR di tab Input Data sekarang dibagi 2 zona klik:
     // - Sisi KIRI  : buka form input seperti biasa (setInputMode).
     // - Sisi KANAN : langsung lompat ke TAB Riwayat masing-masing (3 tab baru
-    //   di bottom nav: Riwayat Input / Riwayat Beban / Riwayat Retur).
-    // Fokus (border/warna terang) kartu tetap dipindah ke kartu yang diklik,
-    // walau yang ditekan zona kanan (bukan cuma zona kiri lewat setInputMode).
-    function _setKartuInputFokus(mode) {
-        inputState.mode = mode;
-        const btnMasuk = document.getElementById('input-mode-masuk');
-        const btnBeban = document.getElementById('input-mode-beban');
-        const btnRetur = document.getElementById('input-mode-retur');
-        if (btnMasuk) btnMasuk.classList.toggle('rp-input-mode-active', mode === 'masuk');
-        if (btnBeban) btnBeban.classList.toggle('rp-input-mode-active', mode === 'beban');
-        if (btnRetur) btnRetur.classList.toggle('rp-input-mode-active', mode === 'retur');
-    }
-
+    //   di bottom nav: Riwayat Input / Riwayat Beban / Riwayat Retur), SEKALIGUS
+    //   memindahkan panel & fokus kartu Input Data ke mode yang sama (lewat
+    //   setInputMode) supaya begitu balik ke tab Input Data, panel & fokus
+    //   sudah sesuai dengan yang terakhir dipilih.
     function bukaRiwayatStokMasuk() {
         switchTab('riwayat-input');
-        _setKartuInputFokus('masuk');
+        setInputMode('masuk');
     }
     window.bukaRiwayatStokMasuk = bukaRiwayatStokMasuk;
 
     function bukaRiwayatBeban() {
         switchTab('riwayat-beban');
-        _setKartuInputFokus('beban');
+        setInputMode('beban');
     }
     window.bukaRiwayatBeban = bukaRiwayatBeban;
 
     function bukaRiwayatRetur() {
         switchTab('riwayat-retur');
-        _setKartuInputFokus('retur');
+        setInputMode('retur');
     }
     window.bukaRiwayatRetur = bukaRiwayatRetur;
 
