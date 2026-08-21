@@ -5286,17 +5286,31 @@ function updateSSK(tab, rowId) {
     // - Sisi KIRI  : buka form input seperti biasa (setInputMode).
     // - Sisi KANAN : langsung lompat ke TAB Riwayat masing-masing (3 tab baru
     //   di bottom nav: Riwayat Input / Riwayat Beban / Riwayat Retur).
+    // Fokus (border/warna terang) kartu tetap dipindah ke kartu yang diklik,
+    // walau yang ditekan zona kanan (bukan cuma zona kiri lewat setInputMode).
+    function _setKartuInputFokus(mode) {
+        const btnMasuk = document.getElementById('input-mode-masuk');
+        const btnBeban = document.getElementById('input-mode-beban');
+        const btnRetur = document.getElementById('input-mode-retur');
+        if (btnMasuk) btnMasuk.classList.toggle('rp-input-mode-active', mode === 'masuk');
+        if (btnBeban) btnBeban.classList.toggle('rp-input-mode-active', mode === 'beban');
+        if (btnRetur) btnRetur.classList.toggle('rp-input-mode-active', mode === 'retur');
+    }
+
     function bukaRiwayatStokMasuk() {
+        _setKartuInputFokus('masuk');
         switchTab('riwayat-input');
     }
     window.bukaRiwayatStokMasuk = bukaRiwayatStokMasuk;
 
     function bukaRiwayatBeban() {
+        _setKartuInputFokus('beban');
         switchTab('riwayat-beban');
     }
     window.bukaRiwayatBeban = bukaRiwayatBeban;
 
     function bukaRiwayatRetur() {
+        _setKartuInputFokus('retur');
         switchTab('riwayat-retur');
     }
     window.bukaRiwayatRetur = bukaRiwayatRetur;
