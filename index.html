@@ -1170,9 +1170,9 @@
         /* Zona klik kartu mode (dipisah garis diagonal): kiri = buka form, kanan = buka riwayat.
            Elemen ini transparan (murni hit-area), visual garis/isi kartu tetap dari elemen lain. */
         .rp-input-mode-card-zone { position: absolute; inset: 0; z-index: 2; background: transparent; border: 0; padding: 0; margin: 0; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-        .rp-input-mode-card-zone:active { background: rgba(255,255,255,.06); }
-        .rp-input-mode-card-zone-left { clip-path: polygon(0 0, 100% 0, 68% 100%, 0 100%); }
-        .rp-input-mode-card-zone-right { clip-path: polygon(58% 0, 100% 0, 100% 100%, 68% 100%); }
+        .rp-input-mode-card-zone:active { background: transparent; }
+        .rp-input-mode-card-zone-left { clip-path: polygon(0 0, 100% 0, 78% 100%, 0 100%); }
+        .rp-input-mode-card-zone-right { clip-path: polygon(68% 0, 100% 0, 100% 100%, 78% 100%); }
 
         /* ---------- TAB RIWAYAT: saklar INPUT DATA/TRANSAKSI pakai kartu ala TAB INPUT DATA, 2 kolom ---------- */
         .rp-riwayat-mode-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; flex-shrink: 0; }
@@ -2007,9 +2007,9 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
    ========================================================= */
 #tab-input.rp-input-screen .rp-input-mode-grid{gap:8px;margin-bottom:0}
 #tab-input.rp-input-screen .rp-input-mode-card{
-  min-height:126px;
+  min-height:96px;
   border-radius:16px;
-  padding:11px 9px 38px;
+  padding:11px 9px 34px;
   background:linear-gradient(160deg,rgba(11,35,71,.90),rgba(6,20,43,.96));
   box-shadow:0 7px 18px rgba(0,0,0,.16);
   overflow:hidden;
@@ -2020,7 +2020,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
   position:absolute;
   z-index:0;
   top:-25%;
-  left:56%;
+  left:66%;
   width:2px;
   height:160%;
   background:currentColor;
@@ -2268,9 +2268,8 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 #riwayat-retur-list .border-t-2{border-top-width:1px!important;border-color:rgba(118,153,201,.22)!important}
 
 @media (max-width:360px){
-  #tab-input.rp-input-screen .rp-input-mode-card{min-height:132px;padding-left:8px;padding-right:8px}
-  #tab-input.rp-input-screen .rp-input-mode-card-title,
-  #tab-input.rp-input-screen .rp-input-mode-card-sub{max-width:48%}
+  #tab-input.rp-input-screen .rp-input-mode-card{min-height:92px;padding-left:8px;padding-right:8px}
+  #tab-input.rp-input-screen .rp-input-mode-card-title{max-width:58%}
   #beban-form-wrapper .w-\[104px\]{width:76px!important}
   #beban-foto-placeholder,#beban-foto-preview-wrapper{height:98px!important;min-height:98px!important}
   #beban-form-wrapper input[type="text"],#beban-form-wrapper input[type="date"]{height:34px!important}
@@ -2548,7 +2547,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                 <div id="input-mode-masuk" class="rp-input-mode-card rp-input-mode-orange rp-input-mode-active">
                     <div class="rp-input-mode-card-icon"><i class="fa-solid fa-box"></i></div>
                     <div class="rp-input-mode-card-title">STOK MASUK</div>
-                    <div class="rp-input-mode-card-sub">Input stok baru ke gudang</div>
                     <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
                     <button type="button" class="rp-input-mode-card-zone rp-input-mode-card-zone-left" onclick="setInputMode('masuk')" aria-label="Buka form STOK MASUK"></button>
                     <button type="button" class="rp-input-mode-card-zone rp-input-mode-card-zone-right" onclick="bukaRiwayatStokMasuk()" aria-label="Lihat riwayat STOK MASUK"></button>
@@ -2556,7 +2554,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                 <div id="input-mode-beban" class="rp-input-mode-card rp-input-mode-blue">
                     <div class="rp-input-mode-card-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
                     <div class="rp-input-mode-card-title">BEBAN</div>
-                    <div class="rp-input-mode-card-sub">Catat biaya operasional produksi</div>
                     <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
                     <button type="button" class="rp-input-mode-card-zone rp-input-mode-card-zone-left" onclick="setInputMode('beban')" aria-label="Buka form BEBAN"></button>
                     <button type="button" class="rp-input-mode-card-zone rp-input-mode-card-zone-right" onclick="bukaRiwayatBeban()" aria-label="Lihat riwayat BEBAN"></button>
@@ -2564,7 +2561,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                 <div id="input-mode-retur" class="rp-input-mode-card rp-input-mode-red">
                     <div class="rp-input-mode-card-icon"><i class="fa-solid fa-rotate-left"></i></div>
                     <div class="rp-input-mode-card-title">RETUR</div>
-                    <div class="rp-input-mode-card-sub">Catat stok yang dikembalikan</div>
                     <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
                     <button type="button" class="rp-input-mode-card-zone rp-input-mode-card-zone-left" onclick="setInputMode('retur')" aria-label="Buka form RETUR"></button>
                     <button type="button" class="rp-input-mode-card-zone rp-input-mode-card-zone-right" onclick="bukaRiwayatRetur()" aria-label="Lihat riwayat RETUR"></button>
