@@ -6998,6 +6998,20 @@ function updateSSK(tab, rowId) {
         updateInputVariasiState();
         refreshInputRowSummary(id);
         _renumberInputRows();
+
+        // FIX: sama seperti kasus popup BRAND/MODEL di bukaGenericDropdown() —
+        // di mode RETUR, banner "MODE RETUR AKTIF" + kolom "ALASAN RETUR" menambah
+        // tinggi konten di atas panel VARIASI ITEM. Baris variasi yang baru dibuat
+        // (otomatis setelah pilih MODEL) bisa jatuh di luar viewport atau ketutup
+        // action-bar SIMPAN yang fixed di bawah, kelihatan seperti "tidak muncul"
+        // padahal cuma di luar jangkauan pandang. Scroll otomatis supaya selalu
+        // kelihatan begitu baris pertama dibuat.
+        if (isFirst) {
+            setTimeout(() => {
+                const cardEl = document.getElementById('input-variasi-card');
+                if (cardEl) cardEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 50);
+        }
     }
 
     function toggleInputWarnaSelector(id, force) {
