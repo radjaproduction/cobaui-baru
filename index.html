@@ -346,7 +346,16 @@
             flex: 1 1 auto;
             display: flex;
             flex-direction: column;
-            min-height: 0;
+            /* FIX: sebelumnya min-height:0, artinya panel ini boleh diperas sampai
+               tinggi 0 kalau konten lain di kolom yang sama (banner MODE RETUR AKTIF,
+               ALASAN RETUR, RIWAYAT RETUR) totalnya melebihi tinggi layar (#tab-input
+               dikunci ke 100dvh). Karena cuma panel ini yang punya min-height:0 (satu-
+               satunya yang boleh shrink), dialah yang "dikorbankan" duluan sampai
+               hilang total — makanya di mode RETUR baris warna/size/qty kelihatan
+               "tidak ada" padahal cuma diperas ke 0px. Kasih batas minimum supaya
+               panel ini selalu kelihatan; kelebihan tinggi biar di-scroll lewat
+               #tab-input (sudah ada overflow-y:auto sebagai fallback). */
+            min-height: 260px;
         }
         .variasi-list-grow {
             flex: 1 1 auto;
@@ -1046,7 +1055,7 @@
             --input-gradient: linear-gradient(90deg, #ffb11a 0%, #ff7900 100%);
             --input-bg: #06142B;
             --input-bg2: #0a1c38;
-            --input-border: rgba(118,153,201,.32);
+            --input-border: rgba(118,153,201,.28);
             --input-shadow: rgba(0,0,0,.4);
             --input-hover: rgba(255,140,0,.10);
             --input-section-bg: #0d2645;
@@ -1126,7 +1135,7 @@
         #tab-input.rp-input-screen::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_stock_background_2.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
         #tab-input.rp-input-screen::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
         .rp-input-heading { padding: 18px 2px 4px; flex-shrink: 0; }
-        .rp-input-heading h1 { font-size: 28px; line-height: 1; font-weight: 900; letter-spacing: -.04em; margin: 0; color: #fff; }
+        .rp-input-heading h1 { font-size: 30px; line-height: 1; font-weight: 900; letter-spacing: -.04em; margin: 0; color: #fff; }
         .rp-input-heading h1 span { color: var(--input-accent); }
         .rp-input-heading p { margin: 9px 0 0; color: #b7c3d6; font-size: 11px; line-height: 1.65; font-weight: 600; }
 
@@ -1160,7 +1169,6 @@
         .rp-input-select-progress-bar { width: 46px; height: 3px; border-radius: 99px; background: rgba(118,153,201,.25); overflow: hidden; }
         .rp-input-select-progress-fill { display: block; height: 100%; width: 0%; background: var(--input-gradient); border-radius: 99px; transition: width .2s ease; }
         .rp-input-select-progress-frac { font-size: 10px; font-weight: 800; color: #8fa2bd; }
-        .rp-input-select-rows { display: flex; flex-direction: column; gap: 9px; }
         .rp-input-select-rows { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
         .rp-input-select-row { display: flex; align-items: center; gap: 8px; min-height: 62px; border: 1px solid var(--input-border); border-radius: 14px; background: rgba(6,20,43,.6); padding: 9px 8px; cursor: pointer; transition: transform .12s ease, border-color .12s ease; }
         .rp-input-select-row:active { transform: scale(.985); border-color: rgba(255,140,0,.55); }
@@ -1280,7 +1288,7 @@
 .rp-stock-heading{padding:22px 4px 4px}.rp-stock-heading h1{font-size:30px;line-height:1;font-weight:900;letter-spacing:-.04em;margin:0;color:#fff}.rp-stock-heading h1 span{color:var(--rp-orange)}.rp-stock-heading p{margin:9px 0 0;color:#b7c3d6;font-size:11px;line-height:1.65;font-weight:600}
 .rp-stock-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:4px 0 12px}.rp-stock-kpi{min-width:0;min-height:92px;border:1px solid var(--rp-border);border-radius:18px;background:rgba(8,27,57,.72);backdrop-filter:blur(8px);padding:11px 8px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:7px;box-shadow:0 8px 22px rgba(0,0,0,.18)}.rp-kpi-icon{width:31px;height:31px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;flex-shrink:0}.rp-kpi-top{display:flex;align-items:center;gap:7px}.rp-kpi-orange .rp-kpi-icon{background:linear-gradient(145deg,#ffb11a,#ff7800)}.rp-kpi-blue .rp-kpi-icon{background:linear-gradient(145deg,#42a5ff,#1264da)}.rp-kpi-green .rp-kpi-icon{background:linear-gradient(145deg,#45d58b,#179c60)}.rp-kpi-label{font-size:9px;font-weight:700;color:#d6dfed;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rp-kpi-value{font-size:20px;font-weight:900;line-height:1;color:#fff;margin-top:3px}.rp-kpi-sub{font-size:7px;color:#9fb0c8;font-weight:600;margin-top:3px;white-space:nowrap}
 .rp-stock-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:10px;padding:0 2px}.rp-stock-section-head h2{font-size:15px;line-height:1;font-weight:900;color:#fff;margin:0;letter-spacing:.01em}.rp-stock-section-head p{font-size:8px;color:#7386a1;margin:5px 0 0;font-weight:600}.rp-stock-section-head button{border:0;background:transparent;color:var(--rp-orange);font-size:10px;font-weight:900;display:flex;align-items:center;gap:5px;white-space:nowrap}.rp-stock-sort-note{color:var(--rp-orange);font-size:9px;font-weight:900;display:flex;align-items:center;gap:5px;white-space:nowrap}
-.rp-brand-shell{min-height:0;background:transparent!important;border:0!important;overflow:visible!important}.rp-brand-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0!important;overflow:visible!important}.rp-brand-card{position:relative;min-height:188px;border:1px solid rgba(112,147,196,.28);border-radius:18px;background:linear-gradient(145deg,rgba(11,35,71,.92),rgba(6,20,43,.9));overflow:hidden;padding:14px 12px 12px;box-shadow:0 10px 26px rgba(0,0,0,.22);cursor:pointer;transition:transform .15s ease,border-color .15s ease}.rp-brand-card:active{transform:scale(.97);border-color:rgba(255,140,0,.6)}.rp-brand-accent{position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#ffb11a,#ff7900)}.rp-brand-card-negative .rp-brand-accent{background:#ef4444}.rp-brand-top{display:flex;align-items:center;justify-content:space-between}.rp-brand-logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#ffb21a,#ff7900);color:#101010;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 14px rgba(255,140,0,.2)}.rp-brand-arrow{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.055);color:#91a4bf;display:flex;align-items:center;justify-content:center;font-size:9px}.rp-brand-name{font-size:12px;font-weight:900;color:#f4f7fb;margin-top:12px;line-height:1.2;min-height:29px;display:flex;align-items:center}.rp-brand-total-label{font-size:8px;color:#2399ff;font-weight:800;margin-top:9px}.rp-brand-total{font-size:24px;color:#249cff;font-weight:900;line-height:1.05;margin-top:3px}.rp-brand-total.negative{color:#ef6666}.rp-brand-models{font-size:9px;color:#c1ccdc;font-weight:700;margin-top:4px}.rp-brand-divider{height:1px;background:rgba(143,168,203,.16);margin:12px 0 9px}.rp-brand-status{display:flex;align-items:center;gap:6px;color:#9eb0c7;font-size:8px;font-weight:700}.rp-brand-status i{font-size:10px}.rp-brand-loading{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;padding:22px;color:#7f92ad;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}.rp-brand-list>.skel-row{min-height:80px;grid-column:1/-1;background:rgba(8,26,53,.75)!important;border:1px solid rgba(100,135,183,.15)}
+.rp-brand-shell{min-height:0;background:transparent!important;border:0!important;overflow:visible!important}.rp-brand-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0!important;overflow:visible!important}.rp-brand-card{position:relative;min-height:188px;border:1px solid rgba(118,153,201,.28);border-radius:18px;background:linear-gradient(145deg,rgba(11,35,71,.92),rgba(6,20,43,.9));overflow:hidden;padding:14px 12px 12px;box-shadow:0 10px 26px rgba(0,0,0,.22);cursor:pointer;transition:transform .15s ease,border-color .15s ease}.rp-brand-card:active{transform:scale(.97);border-color:rgba(255,140,0,.6)}.rp-brand-accent{position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#ffb11a,#ff7900)}.rp-brand-card-negative .rp-brand-accent{background:#ef4444}.rp-brand-top{display:flex;align-items:center;justify-content:space-between}.rp-brand-logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#ffb21a,#ff7900);color:#101010;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 14px rgba(255,140,0,.2)}.rp-brand-arrow{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.055);color:#91a4bf;display:flex;align-items:center;justify-content:center;font-size:9px}.rp-brand-name{font-size:12px;font-weight:900;color:#f4f7fb;margin-top:12px;line-height:1.2;min-height:29px;display:flex;align-items:center}.rp-brand-total-label{font-size:8px;color:#2399ff;font-weight:800;margin-top:9px}.rp-brand-total{font-size:24px;color:#249cff;font-weight:900;line-height:1.05;margin-top:3px}.rp-brand-total.negative{color:#ef6666}.rp-brand-models{font-size:9px;color:#c1ccdc;font-weight:700;margin-top:4px}.rp-brand-divider{height:1px;background:rgba(143,168,203,.16);margin:12px 0 9px}.rp-brand-status{display:flex;align-items:center;gap:6px;color:#9eb0c7;font-size:8px;font-weight:700}.rp-brand-status i{font-size:10px}.rp-brand-loading{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;padding:22px;color:#7f92ad;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}.rp-brand-list>.skel-row{min-height:80px;grid-column:1/-1;background:rgba(8,26,53,.75)!important;border:1px solid rgba(100,135,183,.15)}
 .rp-brand-realtime-note{margin:16px 4px 4px;padding:0;background:none;border:0;color:#fff;font-size:30px;line-height:1;letter-spacing:-.04em;font-weight:900;text-align:left}
 .rp-brand-realtime-note span{display:block;color:var(--rp-orange)}
 .rp-stock-fab{position:fixed;right:18px;bottom:92px;width:72px;height:72px;border:0;border-radius:50%;background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:900;box-shadow:0 12px 28px rgba(255,115,0,.35);z-index:70}.rp-stock-fab i{font-size:21px;line-height:1}.rp-stock-fab span{font-size:8px}
@@ -1308,7 +1316,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 #bottom-navbar .nav-btn:nth-child(2){transition-delay:.32s}
 #bottom-navbar .nav-btn:nth-child(1){transition-delay:.38s}
 #bottom-navbar:not(.rp-stagger-in) .nav-btn{transition-delay:0s!important}
-#tab-stok.rp-stock-screen .kpi-skel{min-width:30px;color:transparent!important}#tab-stok.rp-stock-screen .rp-stock-dashboard{padding-bottom:10px}@media (min-width:520px){.rp-brand-list{grid-template-columns:repeat(3,minmax(0,1fr))}.rp-stock-kpis{gap:12px}.rp-stock-heading h1{font-size:34px}}
+#tab-stok.rp-stock-screen .kpi-skel{min-width:30px;color:transparent!important}#tab-stok.rp-stock-screen .rp-stock-dashboard{padding-bottom:10px}@media (min-width:520px){.rp-brand-list{grid-template-columns:repeat(3,minmax(0,1fr))}.rp-stock-kpis{gap:12px}.rp-stock-heading h1{font-size:34px}.rp-input-heading h1{font-size:34px}}
 </style>
 <style id="rp-stock-brand-simple-redesign">
 /* SIMPLE STOCK PER BRAND — ringkas, bersih, fokus pada brand + stok */
@@ -2470,7 +2478,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
             </div>
 
             <div id="action-bar-brand-detail" class="hidden fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#06142B]/95 backdrop-blur-md border-t-4 border-[#7699C9] flex gap-2">
-                <button onclick="closeBrandDetail()" class="flex-1 font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:rgba(255,255,255,.12);border:2px solid #ffffff;color:#ffffff;"><i class="fa-solid fa-chevron-left"></i> BACK</button>
+                <button onclick="closeBrandDetail()" class="flex-1 font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:rgba(10,28,56,.9);border:2px solid var(--rp-orange);color:var(--rp-orange);"><i class="fa-solid fa-chevron-left"></i> BACK</button>
             </div>
             <!-- Backdrop solid khusus zona navbar (0-84px dari bawah): #bottom-navbar sengaja
                  transparan (lihat CSS #bottom-navbar) supaya jadi navbar melayang di tab lain,
@@ -2518,7 +2526,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                 <label class="text-[10px] font-bold text-black tracking-wider">ALASAN RETUR</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-comment-dots text-black text-xs"></i></div>
-                    <input id="input-retur-keterangan" type="text" class="w-full bg-cardBg border-2 border-red-500/40 rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-red-500 transition-colors" placeholder="retur...">
+                    <input id="input-retur-keterangan" type="text" oninput="_updateSimpanInputBtnState()" class="w-full bg-cardBg border-2 border-red-500/40 rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-red-500 transition-colors" placeholder="retur...">
                 </div>
             </div>
 
@@ -2682,7 +2690,7 @@ END $$;</textarea>
             <button onclick="clearInputData()" class="flex-1 font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:rgba(10,28,56,.9);border:1.5px solid var(--input-accent);color:var(--input-accent);border-radius:16px;">
                 <i class="fa-solid fa-xmark"></i> CLEAR
             </button>
-            <button onclick="simpanInputData()" id="btn-simpan-input" class="flex-[2] text-black font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:var(--input-gradient);border-radius:16px;box-shadow:0 4px 15px var(--input-shadow);">
+            <button onclick="simpanInputData()" id="btn-simpan-input" disabled class="flex-[2] text-black font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform opacity-40 cursor-not-allowed" style="background:var(--input-gradient);border-radius:16px;box-shadow:0 4px 15px var(--input-shadow);">
                 <i class="fa-solid fa-floppy-disk"></i> <span id="btn-simpan-input-text">SIMPAN DATA MASUK</span>
             </button>
         </div>
@@ -4794,10 +4802,26 @@ function updateSSK(tab, rowId) {
         if (stokSaatIni <= 0) {
             sskEl.value = '';
             sskEl.style.color = '';
-        } else {
-            sskEl.value = stokSaatIni;
-            sskEl.style.color = stokSaatIni <= 4 ? '#facc15' : '#4ade80';
+            return;
         }
+        if (inputState.mode === 'retur') {
+            // FIX: sebelumnya kolom SSK di sini cuma menampilkan stok saat ini tanpa
+            // membandingkan ke qty yang diketik, jadi user bisa ngetik qty retur lebih
+            // besar dari stok (baru ketahuan pas SIMPAN). Sekarang di-clamp langsung
+            // saat mengetik, sama seperti perilaku di tab TRANSAKSI (baris di bawah).
+            const qtyEl = document.getElementById(`${tab}-qty-${rowId}`);
+            let qty = parseInt(qtyEl?.value) || 0;
+            if (qty > stokSaatIni) {
+                qty = stokSaatIni;
+                if (qtyEl) qtyEl.value = qty;
+            }
+            const sisa = stokSaatIni - qty;
+            sskEl.value = sisa;
+            sskEl.style.color = sisa <= 0 ? '#f87171' : (sisa <= 4 ? '#facc15' : '#4ade80');
+            return;
+        }
+        sskEl.value = stokSaatIni;
+        sskEl.style.color = stokSaatIni <= 4 ? '#facc15' : '#4ade80';
         return;
     }
     
@@ -6532,6 +6556,12 @@ function updateSSK(tab, rowId) {
 
     function setInputMode(mode) {
         inputState.mode = mode;
+        // FIX: elemen-elemen ini kadang belum/tidak ada di DOM tergantung state
+        // (mis. tab lain sedang re-render, atau timing async setelah simpan data).
+        // Sebelumnya kalau salah satu null, .textContent/.classList langsung throw
+        // dan bikin proses SIMPAN yang sudah SUKSES ke Supabase malah menampilkan
+        // toast "Gagal simpan" yang menyesatkan. Sekarang setiap elemen dicek dulu
+        // sebelum dipakai, jadi fungsi ini tidak pernah melempar exception.
         const btnMasuk = document.getElementById('input-mode-masuk');
         const btnBeban = document.getElementById('input-mode-beban');
         const btnRetur = document.getElementById('input-mode-retur');
@@ -6545,9 +6575,9 @@ function updateSSK(tab, rowId) {
         const variasiCard = document.getElementById('input-variasi-card');
         const actionBar = document.getElementById('action-bar-input');
 
-        btnMasuk.classList.toggle('rp-input-mode-active', mode === 'masuk');
-        btnBeban.classList.toggle('rp-input-mode-active', mode === 'beban');
-        btnRetur.classList.toggle('rp-input-mode-active', mode === 'retur');
+        if (btnMasuk) btnMasuk.classList.toggle('rp-input-mode-active', mode === 'masuk');
+        if (btnBeban) btnBeban.classList.toggle('rp-input-mode-active', mode === 'beban');
+        if (btnRetur) btnRetur.classList.toggle('rp-input-mode-active', mode === 'retur');
         // PERF: ganti pengecekan :has() di CSS jadi class biasa di sini —
         // toggle 1x tiap ganti mode, jauh lebih murah daripada relational selector
         // yang harus dievaluasi ulang tiap ada perubahan DOM di dalam #tab-input.
@@ -6555,44 +6585,45 @@ function updateSSK(tab, rowId) {
         if (tabInputEl) tabInputEl.classList.toggle('rp-mode-retur-active', mode === 'retur');
 
         if (mode === 'beban') {
-            banner.classList.add('hidden'); banner.classList.remove('flex');
-            keteranganWrapper.classList.add('hidden'); keteranganWrapper.classList.remove('flex');
+            if (banner) { banner.classList.add('hidden'); banner.classList.remove('flex'); }
+            if (keteranganWrapper) { keteranganWrapper.classList.add('hidden'); keteranganWrapper.classList.remove('flex'); }
             if (returSection) { returSection.classList.add('hidden'); returSection.classList.remove('flex'); }
-            brandModelWrapper.classList.add('hidden');
-            variasiCard.classList.add('hidden');
-            actionBar.style.display = 'none';
-            bebanWrapper.classList.remove('hidden'); bebanWrapper.classList.add('flex');
-            headerTitle.innerHTML = 'Catat <span>Biaya</span>';
+            if (brandModelWrapper) brandModelWrapper.classList.add('hidden');
+            if (variasiCard) variasiCard.classList.add('hidden');
+            if (actionBar) actionBar.style.display = 'none';
+            if (bebanWrapper) { bebanWrapper.classList.remove('hidden'); bebanWrapper.classList.add('flex'); }
+            if (headerTitle) headerTitle.innerHTML = 'Catat <span>Biaya</span>';
             const tglInput = document.getElementById('beban-input-tanggal');
             if (tglInput && !tglInput.value) tglInput.value = new Date().toISOString().slice(0, 10);
             loadBebanInputList();
             return;
         }
 
-        brandModelWrapper.classList.remove('hidden');
-        variasiCard.classList.remove('hidden');
+        if (brandModelWrapper) brandModelWrapper.classList.remove('hidden');
+        if (variasiCard) variasiCard.classList.remove('hidden');
         // PERBAIKAN: hanya tampilkan action-bar-input kalau tab INPUT DATA memang
         // sedang aktif. Tanpa cek ini, action-bar bisa "nongol" di tab lain (misal STOK)
         // kalau setInputMode() dipanggil dari proses async (contoh: setInputMode('masuk')
         // di simpanInputData() setelah await simpan ke Supabase) yang baru selesai
-        actionBar.style.display = (_activeTab === 'input') ? 'flex' : 'none';
-        bebanWrapper.classList.add('hidden'); bebanWrapper.classList.remove('flex');
+        if (actionBar) actionBar.style.display = (_activeTab === 'input') ? 'flex' : 'none';
+        if (bebanWrapper) { bebanWrapper.classList.add('hidden'); bebanWrapper.classList.remove('flex'); }
 
         if (mode === 'masuk') {
-            banner.classList.add('hidden'); banner.classList.remove('flex');
-            keteranganWrapper.classList.add('hidden'); keteranganWrapper.classList.remove('flex');
-            headerTitle.innerHTML = 'Input <span>Data</span>';
-            btnText.textContent = 'SIMPAN DATA MASUK';
+            if (banner) { banner.classList.add('hidden'); banner.classList.remove('flex'); }
+            if (keteranganWrapper) { keteranganWrapper.classList.add('hidden'); keteranganWrapper.classList.remove('flex'); }
+            if (headerTitle) headerTitle.innerHTML = 'Input <span>Data</span>';
+            if (btnText) btnText.textContent = 'SIMPAN DATA MASUK';
             if (returSection) { returSection.classList.add('hidden'); returSection.classList.remove('flex'); }
         } else {
-            banner.classList.remove('hidden'); banner.classList.add('flex');
-            keteranganWrapper.classList.remove('hidden'); keteranganWrapper.classList.add('flex');
-            headerTitle.innerHTML = 'Retur <span>Stok</span>';
-            btnText.textContent = 'SIMPAN RETUR';
+            if (banner) { banner.classList.remove('hidden'); banner.classList.add('flex'); }
+            if (keteranganWrapper) { keteranganWrapper.classList.remove('hidden'); keteranganWrapper.classList.add('flex'); }
+            if (headerTitle) headerTitle.innerHTML = 'Retur <span>Stok</span>';
+            if (btnText) btnText.textContent = 'SIMPAN RETUR';
             if (returSection) { returSection.classList.remove('hidden'); returSection.classList.add('flex'); }
             _rrPage = 1; // masuk mode retur -> kembali ke halaman 1 biar tidak nyangkut di halaman lama
             renderRiwayatReturInline();
         }
+        _updateSimpanInputBtnState();
     }
 
     // ==================== BEBAN OPERASIONAL (tab Input Data) ====================
@@ -6906,6 +6937,41 @@ function updateSSK(tab, rowId) {
         }
     }
 
+    // FIX: tombol SIMPAN (tab INPUT DATA & RETUR) sebelumnya selalu aktif walau
+    // belum ada QTY yang diisi -- baru ketahuan invalid setelah ditekan (lewat
+    // showAlert). Sekarang tombol otomatis nonaktif sampai minimal satu variasi
+    // punya warna + ukuran + qty > 0, jadi user langsung tahu dari tampilan
+    // tombolnya, bukan dari notifikasi error setelah tap. Alasan retur (mode
+    // retur) SENGAJA tidak ikut disyaratkan di sini -- tetap divalidasi saat
+    // tombol ditekan (lewat showAlert di simpanInputData), supaya tombol tidak
+    // ambigu redup padahal qty sudah lengkap.
+    function _updateSimpanInputBtnState() {
+        const btn = document.getElementById('btn-simpan-input');
+        if (!btn) return;
+        if (_inputIsSaving) return; // sedang proses simpan -> jangan ganggu state spinner
+
+        const list = document.getElementById('input-variasi-list');
+        const rows = list ? Array.from(list.children).filter(row => {
+            const idNum = row.id.replace('input-row-', '');
+            return !_isInputRowPristine(idNum);
+        }) : [];
+
+        let ready = !!inputState.brandId && !!inputState.modelId && rows.length > 0;
+        if (ready) {
+            ready = rows.every(row => {
+                const idNum = row.id.replace('input-row-', '');
+                const warna = document.getElementById('input-warna-label-' + idNum)?.textContent;
+                const ukuran = document.getElementById('input-ukuran-label-' + idNum)?.textContent;
+                const qty = parseInt(document.getElementById('input-qty-' + idNum)?.value) || 0;
+                return !_isInputPlaceholder(warna) && !_isInputPlaceholder(ukuran) && qty > 0;
+            });
+        }
+
+        btn.disabled = !ready;
+        btn.classList.toggle('opacity-40', !ready);
+        btn.classList.toggle('cursor-not-allowed', !ready);
+    }
+
     function updateInputVariasiState() {
         const enabled = !!inputState.modelId;
         const progressCount = (inputState.brandId ? 1 : 0) + (inputState.modelId ? 1 : 0);
@@ -6932,6 +6998,7 @@ function updateSSK(tab, rowId) {
                 if (enabled && wasDisabled) renderInputUkuranSelect(rowId);
             });
         });
+        _updateSimpanInputBtnState();
     }
 
     function tambahVariasiInput() {
@@ -7058,6 +7125,7 @@ function updateSSK(tab, rowId) {
         updateSSK('input', id);
         refreshInputRowSummary(id);
         _updateInputRowBtn(id);
+        _updateSimpanInputBtnState();
     }
 
     function toggleInputUkuranSelector(id, force) {
@@ -7115,6 +7183,7 @@ function updateSSK(tab, rowId) {
         updateSSK('input', id);
         refreshInputRowSummary(id);
         _updateInputRowBtn(id);
+        _updateSimpanInputBtnState();
     }
     function hapusRowInput(id) {
         const el = document.getElementById('input-row-' + id);
@@ -7125,6 +7194,7 @@ function updateSSK(tab, rowId) {
             _updateInputRowBtn(firstId);
         }
         _renumberInputRows();
+        _updateSimpanInputBtnState();
     }
     function _renumberInputRows() {
         const list = document.getElementById('input-variasi-list');
@@ -7249,6 +7319,9 @@ function updateSSK(tab, rowId) {
         _inputIsSaving = true;
         const btnSimpanInput = document.getElementById('btn-simpan-input');
         setButtonLoading(btnSimpanInput, true, 'MENYIMPAN...');
+        // Notifikasi eksplisit supaya user tahu proses simpan sedang berjalan,
+        // selain perubahan tombol jadi spinner "MENYIMPAN...".
+        showToast(inputState.mode === 'retur' ? '⏳ Menyimpan retur...' : '⏳ Menyimpan data...');
         try {
             const now = new Date();
             const tanggal = now.toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
@@ -7257,38 +7330,78 @@ function updateSSK(tab, rowId) {
                 mode: inputState.mode, brand: inputState.brandNama, model: inputState.modelNama,
                 keterangan, tanggal, jam
             }).select().single();
-            if (riErr) { showToast('❌ Gagal simpan input'); return; }
+            if (riErr) {
+                // FIX: sebelumnya pesan error generik "Gagal simpan input" tanpa detail,
+                // jadi kalau gagal (RLS/policy, kolom tidak cocok, dll) tidak ketahuan
+                // penyebabnya sama sekali. Sekarang detail error dari Supabase ikut
+                // ditampilkan + dicatat ke console supaya bisa ditelusuri.
+                console.error('Gagal simpan riwayat_input:', riErr);
+                showToast('❌ Gagal simpan input: ' + (riErr.message || riErr.code || 'unknown error'));
+                return;
+            }
 
             const { data: insertedItems, error: itemErr } = await sbClient.from('riwayat_input_item').insert(items.map(i => ({ riwayat_input_id: ri.id, ...i }))).select();
             if (itemErr) {
+                console.error('Gagal simpan riwayat_input_item:', itemErr);
                 await sbClient.from('riwayat_input').delete().eq('id', ri.id);
-                showToast('❌ Gagal simpan detail item. Dibatalkan.');
+                showToast('❌ Gagal simpan detail item: ' + (itemErr.message || itemErr.code || 'unknown error') + ' — dibatalkan.');
                 return;
             }
             const itemsWithId = (insertedItems || []).map(i => ({ id: i.id, warna: i.warna, ukuran: i.ukuran, qty: i.qty }));
 
             appData.riwayatInput.unshift({ id: ri.id, mode: inputState.mode, brand: inputState.brandNama, model: inputState.modelNama, keterangan, tanggal, jam, items: itemsWithId.length ? itemsWithId : items });
 
-            inputState.brandId = null; inputState.brandNama = ''; inputState.modelId = null; inputState.modelNama = '';
-            document.getElementById('input-brand-display').textContent = 'Pilih brand';
-            document.getElementById('input-model-display').textContent = 'Pilih model';
+            // FIX: data sudah SUKSES tersimpan ke Supabase di titik ini. Sebelumnya,
+            // reset tampilan di bawah ini (setInputMode, dst) ada di dalam try/catch
+            // yang sama dengan proses simpan ke database — kalau salah satu elemen UI
+            // gagal ditemukan (mis. 'btnText' null saat timing tertentu), exception-nya
+            // ketangkep di catch bawah dan malah menampilkan toast "Gagal simpan" ke
+            // user, padahal datanya sudah masuk. Sekarang refresh tampilan dipisah ke
+            // try/catch sendiri: kalau ini gagal, cuma dicatat ke console + toast sukses
+            // tetap tampil, karena datanya memang sudah aman tersimpan.
             const savedMode = inputState.mode;
-            document.getElementById('input-variasi-list').innerHTML = '';
-            document.getElementById('input-retur-keterangan').value = '';
-            inputRowCount = 0;
-            setInputMode('masuk');
-            updateInputVariasiState();
-            renderRiwayatInput();
-            renderStokDashboard();
             showToast(savedMode === 'retur' ? '🔄 Retur disimpan!' : '✅ Data masuk disimpan!');
+            try {
+                inputState.brandId = null; inputState.brandNama = ''; inputState.modelId = null; inputState.modelNama = '';
+                const brandDisplay = document.getElementById('input-brand-display');
+                if (brandDisplay) brandDisplay.textContent = 'Pilih brand';
+                const modelDisplay = document.getElementById('input-model-display');
+                if (modelDisplay) modelDisplay.textContent = 'Pilih model';
+                const variasiList = document.getElementById('input-variasi-list');
+                if (variasiList) variasiList.innerHTML = '';
+                const returKeterangan = document.getElementById('input-retur-keterangan');
+                if (returKeterangan) returKeterangan.value = '';
+                inputRowCount = 0;
+                // FIX: sebelumnya selalu dipaksa balik ke setInputMode('masuk') apa pun
+                // mode yang barusan dipakai, jadi habis SIMPAN RETUR malah lompat ke
+                // tampilan "Input Data". Sekarang tetap di mode yang sama (savedMode)
+                // supaya user bisa langsung retur item berikutnya tanpa pindah mode lagi.
+                setInputMode(savedMode);
+                updateInputVariasiState();
+                renderRiwayatInput();
+                renderStokDashboard();
+            } catch (uiErr) {
+                console.error('Gagal refresh tampilan setelah simpan (data tetap tersimpan):', uiErr);
+            }
             // Cek arsip retur lama di background kalau yang baru disimpan adalah retur —
             // tidak di-await supaya tombol SIMPAN langsung selesai tanpa nunggu proses arsip.
             if (savedMode === 'retur' && typeof cekDanArsipkanReturLama === 'function') {
                 setTimeout(() => cekDanArsipkanReturLama(), 1500);
             }
+        } catch (e) {
+            // FIX: sebelumnya tidak ada blok catch sama sekali -- kalau ada exception
+            // tak terduga (mis. sbClient belum siap, error jaringan), proses gagal diam-
+            // diam tanpa pesan ke user, cuma nongol di console browser yang jarang dicek.
+            console.error('Exception saat simpanInputData:', e);
+            showToast('❌ Gagal simpan: ' + (e?.message || 'terjadi kesalahan tak terduga'));
         } finally {
             _inputIsSaving = false;
             setButtonLoading(btnSimpanInput, false);
+            // FIX: setButtonLoading(false) di atas selalu meng-enable tombol tanpa
+            // syarat. Setelah simpan sukses, form sudah kosong lagi (belum ada
+            // variasi/qty baru), jadi status disabled-nya perlu dievaluasi ulang
+            // supaya tombol tidak "nyala" tanpa data valid.
+            _updateSimpanInputBtnState();
         }
     }
 
@@ -7733,6 +7846,16 @@ function updateSSK(tab, rowId) {
     }
 
     function onQtyInputTabFocus(el) {
+        // FIX: sebelumnya cuma set value='' kalau isinya '0'. Di sebagian browser/
+        // WebView Android (mis. MIUI), keystroke digit pertama kadang "kalah cepat"
+        // sama proses set value ini pas keyboard virtual baru muncul, hasilnya "0"
+        // lama belum sempat kehapus terus digit yang diketik nempel di belakangnya
+        // (contoh: field isinya "0", user ketik "3", jadi "03" bukan "3"). Pakai
+        // select() dulu sebagai jaring pengaman utama: begitu teks "0" diseleksi,
+        // ketukan digit pertama otomatis MENGGANTI seleksi itu (perilaku bawaan
+        // browser saat mengetik ke teks yang diseleksi), jadi tidak bergantung ke
+        // timing set value='' lagi.
+        el.select();
         if (el.value === '0') { el.value = ''; }
     }
     function onQtyInputTab(el, id) {
@@ -7740,9 +7863,15 @@ function updateSSK(tab, rowId) {
         if (raw === '' || raw === '-') return;
         let val = parseInt(raw);
         if (isNaN(val) || val < 0) { el.value = 0; }
+        // FIX: jaring pengaman kedua untuk kasus leading zero ("03") kalau select()
+        // di onQtyInputTabFocus() masih kalah timing juga -- begitu ada lebih dari
+        // 1 digit dan diawali '0' (mis. "03"), tulis ulang value-nya tanpa nol di
+        // depan supaya tetap rapi walau sempat "nempel" duluan.
+        else if (raw.length > 1 && raw[0] === '0') { el.value = val; }
         updateSSK('input', id);
         refreshInputRowSummary(id);
         _updateInputRowBtn(id);
+        _updateSimpanInputBtnState();
     }
     function onQtyInputTabBlur(el, id) {
         let val = parseInt(el.value);
@@ -7751,6 +7880,7 @@ function updateSSK(tab, rowId) {
         updateSSK('input', id);
         refreshInputRowSummary(id);
         _updateInputRowBtn(id);
+        _updateSimpanInputBtnState();
     }
 	    function refreshSemuaSSKTrx() {
 	        _getTrxRows().forEach(row => {
@@ -8466,102 +8596,23 @@ function updateSSK(tab, rowId) {
     // pagination Riwayat Input — list flat, dipaginasi langsung per-item.
     let _rrPage = 1;
     const RR_PAGE_SIZE = 10;
-    // Batas TAMPILAN riwayat retur: cuma 50 data TERBARU yang dirender ke layar.
-    // Ini murni soal tampilan (biar list tidak makin panjang tak terbatas) — data lama
-    // TETAP ada di appData.riwayatInput & di database, dan TETAP dihitung penuh oleh
-    // hitungStokItem() (yang baca appData.riwayatInput apa adanya, tidak lewat batas ini).
-    // Jadi stok tidak berubah sama sekali walau retur lama tidak lagi muncul di daftar.
-    const RR_DISPLAY_LIMIT = 50;
 
-    // ==================== ARSIP OTOMATIS RETUR LAMA ====================
-    // Saat jumlah retur > RR_DISPLAY_LIMIT (50), retur yang lebih lama dari 50
-    // terbaru DIHAPUS dari database untuk hemat ruang, TAPI qty totalnya tidak ikut
-    // hilang dari stok: sebelum dihapus, retur-retur lama itu digabung (dijumlahkan
-    // per Brand+Model+Warna+Ukuran) jadi beberapa record "ARSIP OTOMATIS" yang tetap
-    // ikut dihitung hitungStokItem() persis seperti retur biasa. Yang hilang cuma
-    // detail per-transaksi (tanggal & alasan retur masing-masing baris lama) — bukan
-    // efeknya ke stok.
+    // ==================== ARSIP OTOMATIS RETUR LAMA — DINONAKTIFKAN ====================
+    // Sistem lama menggabungkan retur-retur lama (di luar 50 terbaru) jadi satu record
+    // "ARSIP OTOMATIS" per Brand+Model+Warna+Ukuran. Efeknya: alasan retur asli
+    // (kolom keterangan) & tanggal transaksi asli masing-masing baris HILANG, tertimpa
+    // teks arsip generik dan tanggal proses arsip berjalan (bukan tanggal retur
+    // sebenarnya). Ini bikin riwayat retur menyesatkan.
+    //
+    // Atas permintaan user: sistem diubah jadi PER-RETUR SAJA — setiap retur tetap
+    // jadi record tersendiri selama-lamanya, TIDAK pernah digabung/ditimpa, supaya
+    // alasan retur & tanggal aslinya selalu bisa dilihat apa adanya. Fungsi ini
+    // sengaja dibuat no-op (tidak menghapus/menggabungkan apa pun) tapi tetap
+    // dipertahankan sebagai stub supaya pemanggil lama (cekDanArsipkanReturLama())
+    // di tempat lain tidak error.
     let _arsipReturRunning = false;
     async function cekDanArsipkanReturLama() {
-        if (_arsipReturRunning) return; // cegah dobel jalan bersamaan
-        if (typeof sbClient === 'undefined' || !sbClient) return;
-        const returSorted = appData.riwayatInput.filter(d => d.mode === 'retur'); // sudah terurut terbaru dulu (by id desc)
-        if (returSorted.length <= RR_DISPLAY_LIMIT) return;
-
-        const lama = returSorted.slice(RR_DISPLAY_LIMIT); // retur di luar 100 terbaru
-        if (lama.length <= 1) return; // percuma arsipkan cuma 1 record
-
-        _arsipReturRunning = true;
-        try {
-            // Kelompokkan per Brand+Model+Warna+Ukuran, jumlahkan qty
-            const groups = {};
-            lama.forEach(d => {
-                (d.items || []).forEach(it => {
-                    const key = `${d.brand}||${d.model}||${it.warna}||${it.ukuran}`;
-                    if (!groups[key]) groups[key] = { brand: d.brand, model: d.model, warna: it.warna, ukuran: it.ukuran, qty: 0 };
-                    groups[key].qty += (Number(it.qty) || 0);
-                });
-            });
-            const groupList = Object.values(groups).filter(g => g.qty > 0);
-
-            // 1 record riwayat_input cuma boleh 1 brand+model (kolom itu di level header,
-            // bukan per item) — kalau data lama campur banyak brand/model, arsipnya dipecah
-            // jadi beberapa record riwayat_input, 1 per kombinasi brand+model.
-            const byBrandModel = {};
-            groupList.forEach(g => {
-                const bmKey = `${g.brand}||${g.model}`;
-                if (!byBrandModel[bmKey]) byBrandModel[bmKey] = { brand: g.brand, model: g.model, items: [] };
-                byBrandModel[bmKey].items.push({ warna: g.warna, ukuran: g.ukuran, qty: g.qty });
-            });
-
-            const idsLama = lama.map(d => d.id).filter(id => id !== null && id !== undefined);
-            if (idsLama.length === 0) { _arsipReturRunning = false; return; }
-
-            const now = new Date();
-            const tanggal = now.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
-            const jam = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-            const keteranganArsip = `ARSIP OTOMATIS — gabungan ${lama.length} retur lama (di luar ${RR_DISPLAY_LIMIT} data terbaru)`;
-
-            const recordBaru = [];
-            for (const key in byBrandModel) {
-                const g = byBrandModel[key];
-                if (!g.items.length) continue;
-                const { data: ri, error: riErr } = await sbClient.from('riwayat_input').insert({
-                    mode: 'retur', brand: g.brand, model: g.model,
-                    keterangan: keteranganArsip, tanggal, jam
-                }).select().single();
-                if (riErr) throw riErr;
-                const { data: insertedItems, error: itemErr } = await sbClient.from('riwayat_input_item')
-                    .insert(g.items.map(i => ({ riwayat_input_id: ri.id, warna: i.warna, ukuran: i.ukuran, qty: i.qty })))
-                    .select();
-                if (itemErr) throw itemErr;
-                recordBaru.push({
-                    id: ri.id, mode: 'retur', brand: g.brand, model: g.model,
-                    keterangan: keteranganArsip, tanggal, jam,
-                    items: (insertedItems || []).map(i => ({ id: i.id, warna: i.warna, ukuran: i.ukuran, qty: i.qty }))
-                });
-            }
-
-            // Baru setelah record arsip pengganti tersimpan sukses, hapus detail lama.
-            const { error: delItemErr } = await sbClient.from('riwayat_input_item').delete().in('riwayat_input_id', idsLama);
-            if (delItemErr) throw delItemErr;
-            const { error: delRiErr } = await sbClient.from('riwayat_input').delete().in('id', idsLama);
-            if (delRiErr) throw delRiErr;
-
-            // Sinkronkan state lokal: buang yang lama, masukkan record arsip baru.
-            appData.riwayatInput = appData.riwayatInput.filter(d => !idsLama.includes(d.id));
-            appData.riwayatInput.push(...recordBaru);
-            appData.riwayatInput.sort((a, b) => b.id - a.id);
-
-            _invalidateStokItemCache();
-            showToast(`🗄️ ${lama.length} retur lama diarsipkan otomatis (stok tidak berubah)`);
-            if (document.getElementById('riwayat-retur-list')) renderRiwayatReturInline();
-            if (document.getElementById('riwayat-input-list')) renderRiwayatInput();
-        } catch (e) {
-            console.error('Gagal arsipkan retur lama:', e);
-        } finally {
-            _arsipReturRunning = false;
-        }
+        return; // sengaja tidak melakukan apa-apa — lihat catatan di atas
     }
     window.cekDanArsipkanReturLama = cekDanArsipkanReturLama;
 
@@ -8582,14 +8633,11 @@ function updateSSK(tab, rowId) {
             return;
         }
         // returDataFull sudah terurut terbaru-dulu (appData.riwayatInput di-sort by id
-        // descending saat dimuat) — jadi slice 100 pertama = 100 retur TERBARU.
-        // Sisanya (lebih lama dari itu) sengaja tidak dirender di sini, tapi TETAP ada
-        // di returDataFull/appData.riwayatInput sehingga tetap dihitung ke stok.
-        const returHidden = Math.max(0, returDataFull.length - RR_DISPLAY_LIMIT);
-        const returData = returDataFull.slice(0, RR_DISPLAY_LIMIT);
-        // PAGINATION: returData (yang sudah dibatasi 100 terbaru) dipakai utk hitung
-        // total halaman, yang dipotong per halaman cuma pageItems (yang benar-benar
-        // di-render ke DOM).
+        // descending saat dimuat). Sistem PER-RETUR: semua retur (baru maupun lama)
+        // tetap sebagai record tersendiri dengan alasan & tanggal aslinya masing-masing
+        // — tidak ada lagi yang digabung atau disembunyikan, tinggal dijelajahi lewat
+        // pagination di bawah.
+        const returData = returDataFull;
         const rrTotalPages = Math.max(1, Math.ceil(returData.length / RR_PAGE_SIZE));
         if (_rrPage > rrTotalPages) _rrPage = rrTotalPages;
         if (_rrPage < 1) _rrPage = 1;
@@ -8620,7 +8668,7 @@ function updateSSK(tab, rowId) {
             totalItems: returData.length,
             itemLabel: 'data',
             onPageChangeFn: 'rrGoToPage'
-        }) + (returHidden > 0 ? `<div class="text-center text-[9px] text-black/50 font-bold pt-1">Menampilkan ${RR_DISPLAY_LIMIT} retur terbaru • ${returHidden} data lebih lama disembunyikan (tetap tersimpan &amp; tetap dihitung ke stok)</div>` : '');
+        });
     }
 
     function bukaPilihItemRetur(riwayatId) {
