@@ -1194,6 +1194,9 @@
             --brand-gradient: var(--trx-gradient);
         }
         #tab-transaksi.tab-content { background: var(--trx-bg) !important; }
+        /* Backdrop zona navbar khusus tab TRANSAKSI — cuma muncul saat tab TRANSAKSI aktif,
+           lihat #trx-tab-nav-backdrop untuk penjelasan lengkap. */
+        body[data-active-tab="transaksi"] #trx-tab-nav-backdrop { display: block !important; background: var(--trx-bg) !important; }
         #tab-transaksi .bg-darkBg,
         #trx-variasi-sheet .bg-darkBg,
         #action-bar-transaksi .bg-darkBg { background-color: var(--trx-bg) !important; }
@@ -2839,13 +2842,18 @@ END $$;</textarea>
 
         <!-- ACTION BAR: TRANSAKSI (fixed above nav) -->
         <div id="action-bar-transaksi" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#06142B]/95 backdrop-blur-md border-t-0 flex gap-2" style="display:none">
-            <button onclick="clearTransaksi()" class="flex-1 text-black font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347);">
+            <button onclick="clearTransaksi()" class="flex-1 font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:rgba(10,28,56,.9);border:1.5px solid var(--trx-accent);color:var(--trx-accent);border-radius:16px;">
                 <i class="fa-solid fa-xmark"></i> CLEAR
             </button>
-            <button id="btn-simpan-transaksi" onclick="simpanTransaksi()" class="flex-[2] brand-gradient-bg text-black font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 shadow-[0_4px_15px_rgba(255,140,0,0.35)] active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347);box-shadow:0 4px 15px rgba(255,140,0,0.35)">
+            <button id="btn-simpan-transaksi" onclick="simpanTransaksi()" disabled class="flex-[2] text-black font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform opacity-40 cursor-not-allowed" style="background:var(--trx-gradient);border-radius:16px;box-shadow:0 4px 15px var(--trx-shadow);">
                 <i class="fa-solid fa-check-to-slot"></i> <span>SIMPAN TRANSAKSI</span>
             </button>
         </div>
+
+        <!-- Backdrop solid khusus zona navbar tab TRANSAKSI (0-84px dari bawah): sama pola
+             dengan #input-tab-nav-backdrop di tab INPUT DATA / #stok-detail-nav-backdrop di
+             tab STOK, supaya konten yang discroll tidak tembus di celah navbar transparan. -->
+        <div id="trx-tab-nav-backdrop" class="fixed bottom-0 left-0 right-0 bg-[#06142B]" style="z-index:35;height:calc(112px + env(safe-area-inset-bottom));display:none;pointer-events:none;"></div>
 
         <!-- TAB RIWAYAT -->
         <div id="tab-riwayat" class="tab-content hidden flex-col p-4 gap-4 relative z-10" >
@@ -5079,7 +5087,7 @@ function updateSSK(tab, rowId) {
         trxRowCount = 0;
         _invalidateTrxRowsCache();
         setStatusBayar('credit');
-        tambahVariasiTrx();
+        _updateTrxRowsLockState();
     }
 
     let _tabHistoryStack = [];
@@ -7473,7 +7481,6 @@ function updateSSK(tab, rowId) {
     function _clearTrxVariasi() {
         const list = document.getElementById('trx-variasi-list');
         list.innerHTML = '';
-        tambahVariasiTrx();
         _updateTrxRowsLockState();
     }
     
@@ -7525,6 +7532,7 @@ function updateSSK(tab, rowId) {
                     trxState.modelId = item.id; trxState.modelNama = item.nama; trxState.modelHarga = item.harga || 0; trxState.modelHargaModal = item.hargaModal || 0;
                     document.getElementById('trx-model-display').textContent = item.nama;
                     _clearTrxVariasi();
+                    tambahVariasiTrx();
                 }
             });
         }
@@ -7560,6 +7568,34 @@ function updateSSK(tab, rowId) {
 	                if (!locked && wasDisabled) renderTrxUkuranSelect(rowId);
 	            });
         });
+        _updateSimpanTrxBtnState();
+    }
+
+    function _updateSimpanTrxBtnState() {
+        const btn = document.getElementById('btn-simpan-transaksi');
+        if (!btn) return;
+        if (_trxIsSaving) return; // sedang proses simpan -> jangan ganggu state spinner
+
+        const list = document.getElementById('trx-variasi-list');
+        const rows = list ? Array.from(list.children).filter(row => {
+            const idNum = row.id.replace('trx-row-', '');
+            return !_isTrxRowPristine(idNum);
+        }) : [];
+
+        let ready = !!trxState.vendorId && !!trxState.brandId && !!trxState.modelId && rows.length > 0;
+        if (ready) {
+            ready = rows.every(row => {
+                const idNum = row.id.replace('trx-row-', '');
+                const warna = document.getElementById('trx-warna-label-' + idNum)?.textContent;
+                const ukuran = document.getElementById('trx-ukuran-label-' + idNum)?.textContent;
+                const qty = parseInt(document.getElementById('trx-qty-' + idNum)?.value) || 0;
+                return !_isInputPlaceholder(warna) && !_isInputPlaceholder(ukuran) && qty > 0;
+            });
+        }
+
+        btn.disabled = !ready;
+        btn.classList.toggle('opacity-40', !ready);
+        btn.classList.toggle('cursor-not-allowed', !ready);
     }
 
     function _isTrxRowPristine(id) {
@@ -7809,6 +7845,7 @@ function updateSSK(tab, rowId) {
 	        _updateTrxRowBtn(id);
 	        document.getElementById('trx-row-' + id)?.classList.remove('hidden');
 	        showToast('✅ Item transaksi ditambahkan');
+	        _updateSimpanTrxBtnState();
 	        if (wasPristine) {
 	            tambahVariasiTrx();
 	        } else {
@@ -8079,6 +8116,7 @@ function updateSSK(tab, rowId) {
         updateSSK('trx', id);
         refreshSemuaSSKTrx();
         _updateTrxRowBtn(id);
+        _updateSimpanTrxBtnState();
     }
     function onQtyTrxInput(el, id) {
         const raw = el.value;
@@ -8103,6 +8141,7 @@ function updateSSK(tab, rowId) {
         updateSSK('trx', id);
         refreshSemuaSSKTrx();
         _updateTrxRowBtn(id);
+        _updateSimpanTrxBtnState();
     }
     function hapusRowTrx(id) {
         const el = document.getElementById('trx-row-' + id);
@@ -8114,6 +8153,7 @@ function updateSSK(tab, rowId) {
             _updateTrxRowBtn(firstId);
         }
         _renumberTrxRows();
+        _updateSimpanTrxBtnState();
     }
 
     let _trxIsSaving = false; 
@@ -8239,6 +8279,7 @@ function updateSSK(tab, rowId) {
                     );
                     setButtonLoading(_btnSimpanTrx, false);
                     _trxIsSaving = false;
+                    _updateSimpanTrxBtnState();
                     return;
                 }
                 if (item.qty > stokDB) {
@@ -8248,6 +8289,7 @@ function updateSSK(tab, rowId) {
                     );
                     setButtonLoading(_btnSimpanTrx, false);
                     _trxIsSaving = false;
+                    _updateSimpanTrxBtnState();
                     return;
                 }
             }
@@ -8262,13 +8304,14 @@ function updateSSK(tab, rowId) {
             vendor: snapVendorNama, brand: snapBrandNama, model: snapModelNama,
             harga: snapModelHarga, harga_modal: snapModelHargaModal, status: snapStatusBayar, tanggal, jam
         }).select().single();
-        if (trxErr) { showToast('❌ Gagal simpan transaksi'); setButtonLoading(_btnSimpanTrx, false); _trxIsSaving = false; return; }
+        if (trxErr) { showToast('❌ Gagal simpan transaksi'); setButtonLoading(_btnSimpanTrx, false); _trxIsSaving = false; _updateSimpanTrxBtnState(); return; }
         const { data: insertedTrxItems, error: itemErr } = await sbClient.from('transaksi_item').insert(items.map(i => ({ transaksi_id: trx.id, ...i }))).select();
         if (itemErr) {
             await sbClient.from('transaksi').delete().eq('id', trx.id);
             showToast('❌ Gagal simpan item transaksi. Dibatalkan.');
             setButtonLoading(_btnSimpanTrx, false);
             _trxIsSaving = false;
+            _updateSimpanTrxBtnState();
             return;
         }
         // PERBAIKAN: select id balik setelah insert (sama seperti simpanInputData), supaya edit/hapus qty
@@ -8284,12 +8327,13 @@ function updateSSK(tab, rowId) {
         trxRowCount = 0;
         _invalidateTrxRowsCache();
         setStatusBayar('credit');
-        tambahVariasiTrx();
+        _updateTrxRowsLockState();
         renderRiwayatTransaksi();
         renderStokDashboard();
         showToast('✅ Transaksi disimpan!');
         setButtonLoading(_btnSimpanTrx, false);
         _trxIsSaving = false;
+        _updateSimpanTrxBtnState();
     }
 
     function clearInputData() {
@@ -8313,7 +8357,6 @@ function updateSSK(tab, rowId) {
         trxRowCount = 0;
         _invalidateTrxRowsCache();
         setStatusBayar('credit');
-        tambahVariasiTrx();
         _updateTrxRowsLockState();
     }
 
