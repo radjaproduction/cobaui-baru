@@ -6453,6 +6453,18 @@ function updateSSK(tab, rowId) {
         tutupSemuaDropdownPopup();
         if (items.length === 0) { showAlert('Data belum tersedia.', {type:'warning'}); return; }
 
+        // FIX: pastikan trigger yang di-tap benar-benar kelihatan penuh di layar
+        // dulu sebelum posisi popup dihitung. Tanpa ini, di mode RETUR yang punya
+        // banner "MODE RETUR AKTIF" + field "ALASAN RETUR" ekstra di atas panel
+        // BRAND/MODEL, baris trigger bisa terdorong sampai dekat/luar viewport —
+        // popup tetap ke-render tapi posisinya jatuh di luar layar, kelihatan
+        // seperti "tidak muncul" padahal cuma ketutup/di luar jangkauan pandang.
+        const triggerRectAwal = trigger.getBoundingClientRect();
+        const viewportHAwal = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+        if (triggerRectAwal.top < 0 || triggerRectAwal.bottom > viewportHAwal) {
+            trigger.scrollIntoView({ behavior: 'auto', block: 'center' });
+        }
+
         const popup = document.createElement('div');
         popup.id = 'generic-dropdown-popup';
         popup.className = 'fixed z-[999] bg-[#ffffff] border-2 border-[#7699C9] rounded-xl shadow-2xl overflow-hidden';
