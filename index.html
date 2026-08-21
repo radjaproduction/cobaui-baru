@@ -147,27 +147,83 @@
            These rules keep text readable on those now-dark surfaces, without
            touching #tab-stok (which already uses its own navy scheme) or any
            element still sitting on a white/light surface. */
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"],
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"],
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-headerBox"] {
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox {
             color: #eaf1fb;
         }
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"] [class*="text-black"],
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"] [class*="text-black"],
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-headerBox"] [class*="text-black"],
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"][class*="text-black"],
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"][class*="text-black"],
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-headerBox"][class*="text-black"],
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"] [class*="placeholder-black"],
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"] [class*="placeholder-black"],
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"][class*="placeholder-black"],
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"][class*="placeholder-black"] {
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .text-black,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .text-black\/30,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .text-black\/40,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .text-black\/45,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .text-black\/50,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .text-black\/55,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .text-black\/60,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .text-black\/70,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .text-black\/80,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .text-black,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .text-black\/30,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .text-black\/40,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .text-black\/45,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .text-black\/50,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .text-black\/55,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .text-black\/60,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .text-black\/70,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .text-black\/80,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/30,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/40,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/45,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/50,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/55,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/60,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/70,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/80,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.text-black,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.text-black\/30,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.text-black\/40,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.text-black\/45,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.text-black\/50,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.text-black\/55,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.text-black\/60,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.text-black\/70,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.text-black\/80,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.text-black,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.text-black\/30,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.text-black\/40,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.text-black\/45,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.text-black\/50,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.text-black\/55,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.text-black\/60,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.text-black\/70,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.text-black\/80,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/30,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/40,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/45,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/50,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/55,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/60,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/70,
+        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/80,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .placeholder-black,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .placeholder-black\/50,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .placeholder-black,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .placeholder-black\/50,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.placeholder-black,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.placeholder-black\/50,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.placeholder-black,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.placeholder-black\/50 {
             color: #eaf1fb !important;
         }
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"] [class*="placeholder-black"]::placeholder,
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"] [class*="placeholder-black"]::placeholder,
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-darkBg"][class*="placeholder-black"]::placeholder,
-        body:not(#tab-stok):not(#tab-stok *) [class*="bg-cardBg"][class*="placeholder-black"]::placeholder {
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .placeholder-black::placeholder,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .placeholder-black\/50::placeholder,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .placeholder-black::placeholder,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .placeholder-black\/50::placeholder,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.placeholder-black::placeholder,
+        body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.placeholder-black\/50::placeholder,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.placeholder-black::placeholder,
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.placeholder-black\/50::placeholder {
             color: rgba(234,241,251,0.5) !important;
         }
         /* Same, but for elements using inline style="background:#06142B/#0A1C38/#133a66" instead
@@ -448,20 +504,22 @@
         }
 
         /* =========================================================
-           LOADING AWAL — SEWING MACHINE ANIMATION
+           LOADING AWAL — PROFESSIONAL BRAND LOADER
            Animasi tetap berjalan minimum beberapa detik walau koneksi cepat.
-           Proses koneksi + pemuatan data tetap berjalan di belakang layar.
+           Proses koneksi + pemuatan data tetap berjalan di belakang layar,
+           dan overlay baru ditutup setelah SEMUA render halaman pertama
+           benar-benar selesai disiapkan.
            ========================================================= */
         #loading-overlay {
             position: fixed;
             inset: 0;
-            background: #0a1c38;
+            background: radial-gradient(120% 120% at 50% 20%, #0f2749 0%, #071730 55%, #050f22 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 9990;
-            gap: 12px;
+            gap: 22px;
             opacity: 1;
             visibility: visible;
             transition: opacity .45s ease, visibility .45s ease;
@@ -471,87 +529,116 @@
             visibility: hidden;
             pointer-events: none;
         }
-        .sewing-loader {
-            width: min(220px, 58vw);
-            height: auto;
+        .rp-loader-mark {
+            position: relative;
+            width: 92px;
+            height: 92px;
             display: flex;
             align-items: center;
             justify-content: center;
-            filter: drop-shadow(0 8px 18px rgba(26,41,66,.12));
         }
-        .sewing-loader svg {
-            width: 100%;
-            height: auto;
-            overflow: visible;
+        .rp-loader-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 3px solid rgba(255,140,0,.14);
+            border-top-color: #ff8c00;
+            border-right-color: #ffb347;
+            animation: rpRingSpin .95s cubic-bezier(.55,.15,.45,.85) infinite;
         }
-        .sewing-loader .sew-wheel {
-            transform-origin: 132px 42px;
-            animation: sewWheelSpin .6s linear infinite;
+        .rp-loader-ring.rp-ring-outer {
+            inset: -12px;
+            border-width: 2px;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-bottom-color: rgba(255,179,71,.55);
+            border-left-color: rgba(255,140,0,.25);
+            animation: rpRingSpinReverse 1.9s linear infinite;
         }
-        .sewing-loader .sew-needle-group {
-            transform-origin: 67px 48px;
-            animation: sewNeedleMove .6s ease-in-out infinite;
-        }
-        .sewing-loader .sew-thread {
-            stroke-dasharray: 4 4;
-            animation: sewThreadFeed .6s linear infinite;
-        }
-        .sewing-loader .sew-dot {
-            opacity: 0;
-            transform-box: fill-box;
-            transform-origin: center;
-            animation: sewDotPop 2.4s ease-in-out infinite;
-        }
-        .sewing-loader .sew-dot:nth-child(1){animation-delay:0s}
-        .sewing-loader .sew-dot:nth-child(2){animation-delay:.4s}
-        .sewing-loader .sew-dot:nth-child(3){animation-delay:.8s}
-        .sewing-loader .sew-dot:nth-child(4){animation-delay:1.2s}
-        .sewing-loader .sew-dot:nth-child(5){animation-delay:1.6s}
-        .sewing-loader .sew-dot:nth-child(6){animation-delay:2s}
-        @keyframes sewWheelSpin { to { transform: rotate(360deg); } }
-        @keyframes sewNeedleMove {
-            0%,100% { transform: translateY(0); }
-            50% { transform: translateY(16px); }
-        }
-        @keyframes sewThreadFeed { to { stroke-dashoffset: -16; } }
-        @keyframes sewDotPop {
-            0% { opacity:0; transform:scale(.3); }
-            8% { opacity:1; transform:scale(1.15); }
-            16% { transform:scale(1); }
-            75% { opacity:1; }
-            88% { opacity:0; transform:scale(.6); }
-            100% { opacity:0; }
-        }
-        .loading-status {
-            display: none;
-            min-height: 16px;
-            color: #1a2942;
-            font-size: 10px;
+        .rp-loader-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: linear-gradient(150deg,#ffb347 0%,#ff8c00 65%,#f57300 100%);
+            box-shadow: 0 6px 20px rgba(255,140,0,.35), inset 0 1px 0 rgba(255,255,255,.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: Montserrat, sans-serif;
             font-weight: 900;
-            letter-spacing: .12em;
+            font-size: 24px;
+            color: #0a1c38;
+            letter-spacing: -.02em;
+            overflow: hidden;
+            animation: rpLogoPulse 1.9s ease-in-out infinite;
+        }
+        .rp-loader-logo-img {
+            width: 68%;
+            height: 68%;
+            object-fit: contain;
+        }
+        .rp-loader-logo-fallback {
+            display: none;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+        @keyframes rpRingSpin { to { transform: rotate(360deg); } }
+        @keyframes rpRingSpinReverse { to { transform: rotate(-360deg); } }
+        @keyframes rpLogoPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .rp-loader-brand {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .rp-loader-brand-name {
+            font-family: Montserrat, sans-serif;
+            font-weight: 900;
+            font-size: 15px;
+            letter-spacing: .16em;
+            color: #f4f7fb;
+        }
+        .rp-loader-brand-sub {
+            font-family: Montserrat, sans-serif;
+            font-weight: 700;
+            font-size: 9px;
+            letter-spacing: .28em;
+            color: #ff9d2e;
+            text-transform: uppercase;
+        }
+        .loading-status {
+            display: block;
+            min-height: 16px;
+            color: rgba(226,235,248,.82);
+            font-size: 10px;
+            font-family: Montserrat, sans-serif;
+            font-weight: 800;
+            letter-spacing: .1em;
             text-align: center;
         }
         .loading-progress {
-            width: min(190px, 52vw);
-            height: 4px;
+            position: relative;
+            width: min(200px, 55vw);
+            height: 5px;
             border-radius: 99px;
             overflow: hidden;
-            background: rgba(26,41,66,.12);
+            background: rgba(255,255,255,.08);
             margin-top: 2px;
         }
-        .loading-progress::after {
+        .loading-progress::before {
             content: '';
             display: block;
-            width: 38%;
             height: 100%;
+            width: var(--rp-progress, 8%);
             border-radius: inherit;
             background: linear-gradient(90deg,#ff8c00,#ffb347);
-            animation: loadingProgress 1.25s ease-in-out infinite;
-        }
-        @keyframes loadingProgress {
-            0% { transform: translateX(-115%); }
-            100% { transform: translateX(310%); }
+            box-shadow: 0 0 10px rgba(255,140,0,.5);
+            transition: width .35s ease;
         }
         .input-variation-card {
             width: 100%;
@@ -991,6 +1078,9 @@
             --brand-gradient: var(--input-gradient);
         }
         #tab-input.tab-content { background: var(--input-bg) !important; }
+        /* Backdrop zona navbar khusus tab INPUT — cuma muncul saat tab INPUT aktif,
+           lihat #input-tab-nav-backdrop untuk penjelasan lengkap. */
+        body[data-active-tab="input"] #input-tab-nav-backdrop { display: block !important; background: var(--input-bg) !important; }
         #tab-input .bg-darkBg,
         #action-bar-input .bg-darkBg { background-color: var(--input-bg) !important; }
         #tab-input .bg-cardBg { background-color: var(--input-bg2) !important; }
@@ -1007,7 +1097,6 @@
 
         #action-bar-input button[onclick="clearInputData()"] { background: rgba(10,28,56,.9) !important; border: 1.5px solid var(--input-accent) !important; color: var(--input-accent) !important; box-shadow: none !important; }
         #btn-simpan-input, #btn-simpan-beban-input { box-shadow: 0 4px 15px var(--input-shadow) !important; }
-        #tab-input #beban-sumber-semua[style*="linear-gradient"] { background: var(--input-gradient) !important; }
 
         #tab-input .input-variation-card { background: var(--input-row-bg) !important; border-color: var(--input-border) !important; }
         #tab-input .input-variation-card.is-filled { background: linear-gradient(180deg, var(--input-choice-active), var(--input-row-bg) 72%) !important; }
@@ -1985,7 +2074,11 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
   background:#06142B!important;
   border-color:rgba(118,153,201,.28)!important;
 }
-#beban-form-wrapper #beban-sumber-semua{background:linear-gradient(90deg,#42a5f5,#1e88e5)!important;color:#111!important;border-color:rgba(33,150,243,.55)!important}
+/* Tombol filter SEMUA/ADMIN/OWNER: yang AKTIF ditandai JS dengan MELEPAS class
+   "bg-darkBg" (lihat setBebanSumberFilterInput). Aturan ini dibuat mengikuti status
+   itu — bukan menempel permanen ke satu ID saja — supaya ADMIN & OWNER ikut berubah
+   warna biru saat diklik/aktif, sama seperti SEMUA. */
+#beban-form-wrapper .flex.items-center.gap-1\.5 button:not(.bg-darkBg){background:linear-gradient(90deg,#42a5f5,#1e88e5)!important;color:#111!important;border-color:rgba(33,150,243,.55)!important}
 
 /* history heading */
 #beban-form-wrapper .flex.items-center.gap-2.px-1{padding:3px 2px 1px!important}
@@ -2049,22 +2142,58 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 #retur-keterangan-wrapper input:focus{border-color:#ef4444!important;box-shadow:0 0 0 2px rgba(239,68,68,.08)}
 
 /* ketika retur aktif, panel PILIH PRODUK & VARIASI diberi aksen merah tipis,
-   tetapi struktur tetap sama dengan TAB INPUT */
-#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-select-panel,
-#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-variasi-card{
+   tetapi struktur tetap sama dengan TAB INPUT.
+   PERF: dulu pakai :has(#input-mode-retur.rp-input-mode-active) di root #tab-input —
+   itu bikin browser re-evaluate relational selector ke SELURUH subtree setiap kali ada
+   perubahan DOM di dalam tab (tiap ketikan nominal biaya, tiap render ulang list retur/beban).
+   Diganti jadi 1 class biasa yang di-toggle langsung oleh JS di setInputMode() —
+   class matching jauh lebih murah, tidak perlu menelusuri relasi ke elemen anak. */
+#tab-input.rp-input-screen.rp-mode-retur-active .rp-input-select-panel,
+#tab-input.rp-input-screen.rp-mode-retur-active .rp-input-variasi-card{
   border-color:rgba(239,68,68,.28)!important;
 }
-#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-select-step-num{
+/* Card STOK MASUK & BEBAN (yang TIDAK sedang aktif) ikut kena merah kalau tidak
+   di-exclude di sini, karena base rule .rp-input-mode-card pakai var(--input-border)
+   yang ditimpa merah untuk SELURUH #tab-input saat mode RETUR aktif (lihat variabel
+   di bawah). Card yang sedang aktif tetap pakai warnanya sendiri lewat
+   .rp-input-mode-active.rp-input-mode-orange/blue/red (specificity lebih tinggi),
+   jadi rule ini hanya perlu berlaku ke yang non-aktif. */
+#tab-input.rp-input-screen.rp-mode-retur-active .rp-input-mode-card:not(.rp-input-mode-active){
+  border-color:rgba(118,153,201,.32)!important;
+}
+#tab-input.rp-input-screen.rp-mode-retur-active .rp-input-select-step-num{
   border-color:#ef4444!important;color:#ff6666!important;
 }
-#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-select-progress-dot,
-#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-select-progress-fill{
+#tab-input.rp-input-screen.rp-mode-retur-active .rp-input-select-progress-dot,
+#tab-input.rp-input-screen.rp-mode-retur-active .rp-input-select-progress-fill{
   background:#ef4444!important;
 }
-#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-variasi-head{
+#tab-input.rp-input-screen.rp-mode-retur-active .rp-input-variasi-head{
   background:rgba(92,20,29,.24)!important;
 }
-#tab-input.rp-input-screen:has(#input-mode-retur.rp-input-mode-active) .rp-input-variasi-title{color:#fff!important}
+#tab-input.rp-input-screen.rp-mode-retur-active .rp-input-variasi-title{color:#fff!important}
+
+/* Header, ikon, nilai, tombol SIMPAN, dsb pada panel PILIH PRODUK & VARIASI masih
+   memakai variabel warna oranye milik TAB INPUT DATA (--input-accent/--input-gradient/
+   --input-border/dst) walau mode RETUR sedang aktif. Timpa SEMUA variabel itu jadi
+   merah di sini supaya seluruh elemen yang memakainya (judul "Retur Stok", ikon hex
+   produk, nilai brand/model/warna/ukuran, progress bar, tombol "+ Tambah Variasi",
+   sampai tombol SIMPAN RETUR) otomatis ikut merah — bukan cuma banner & kolom alasan.
+   Navbar bawah TIDAK ikut berubah karena itu representasi warna TAB (letaknya di luar
+   #tab-input), bukan representasi mode yang sedang aktif di dalam tab. */
+#tab-input.rp-input-screen.rp-mode-retur-active{
+  --input-accent:#ef4444!important;
+  --input-gradient:linear-gradient(90deg,#f87171 0%,#dc2626 100%)!important;
+  --input-border:rgba(239,68,68,.32)!important;
+  --input-shadow:rgba(120,10,10,.45)!important;
+  --input-hover:rgba(239,68,68,.10)!important;
+  --input-choice-active:rgba(239,68,68,.18)!important;
+  --input-row-index-bg:rgba(239,68,68,.16)!important;
+  --input-row-index-border:rgba(239,68,68,.4)!important;
+}
+#tab-input.rp-input-screen.rp-mode-retur-active .rp-input-add-btn{
+  border-color:rgba(239,68,68,.55)!important;
+}
 
 /* riwayat retur */
 #riwayat-retur-section{gap:7px!important}
@@ -2169,41 +2298,22 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
     </style>
 
     <div id="loading-overlay">
-        <div class="sewing-loader" aria-label="Memuat aplikasi">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" role="img">
-                <defs>
-                    <linearGradient id="sewBodyGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#ffb347"/>
-                        <stop offset="100%" stop-color="#ff8c00"/>
-                    </linearGradient>
-                </defs>
-                <rect x="10" y="118" width="170" height="10" rx="4" fill="#1a2942"/>
-                <rect x="52" y="112" width="34" height="8" rx="2" fill="#1a2942"/>
-                <line x1="18" y1="123" x2="172" y2="123" stroke="#ffb347" stroke-width="2" stroke-dasharray="5 6" opacity=".5"/>
-                <circle class="sew-dot" cx="36" cy="123" r="3.2" fill="#ff8c00"/>
-                <circle class="sew-dot" cx="52" cy="123" r="3.2" fill="#ff8c00"/>
-                <circle class="sew-dot" cx="68" cy="123" r="3.2" fill="#ff8c00"/>
-                <circle class="sew-dot" cx="84" cy="123" r="3.2" fill="#ff8c00"/>
-                <circle class="sew-dot" cx="100" cy="123" r="3.2" fill="#ff8c00"/>
-                <circle class="sew-dot" cx="116" cy="123" r="3.2" fill="#ff8c00"/>
-                <rect x="118" y="30" width="24" height="92" rx="10" fill="url(#sewBodyGrad)"/>
-                <rect x="55" y="28" width="87" height="20" rx="10" fill="url(#sewBodyGrad)"/>
-                <circle class="sew-wheel" cx="132" cy="42" r="13" fill="#1a2942" stroke="#ffb347" stroke-width="2.5"/>
-                <circle class="sew-wheel" cx="132" cy="42" r="3" fill="#ffb347"/>
-                <line class="sew-wheel" x1="132" y1="30" x2="132" y2="54" stroke="#ffb347" stroke-width="1.5"/>
-                <line class="sew-wheel" x1="120" y1="42" x2="144" y2="42" stroke="#ffb347" stroke-width="1.5"/>
-                <rect x="94" y="10" width="12" height="12" rx="2" fill="#1a2942"/>
-                <circle cx="100" cy="12" r="6" fill="#ffb347" stroke="#1a2942" stroke-width="1.5"/>
-                <path class="sew-thread" d="M100 18 C100 30, 68 30, 67 46" fill="none" stroke="#1a2942" stroke-width="1.8"/>
-                <g class="sew-needle-group">
-                    <rect x="61" y="46" width="12" height="12" rx="3" fill="#1a2942"/>
-                    <line x1="67" y1="58" x2="67" y2="96" stroke="#94a3b8" stroke-width="3.2" stroke-linecap="round"/>
-                </g>
-            </svg>
+        <div class="rp-loader-mark" aria-label="Memuat aplikasi">
+            <div class="rp-loader-ring rp-ring-outer"></div>
+            <div class="rp-loader-ring"></div>
+            <div class="rp-loader-logo">
+                <img src="lg2.svg" alt="Radja Production" class="rp-loader-logo-img"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <span class="rp-loader-logo-fallback">R</span>
+            </div>
+        </div>
+        <div class="rp-loader-brand">
+            <span class="rp-loader-brand-name">RADJA PRODUCTION</span>
+            <span class="rp-loader-brand-sub">Inventory &amp; Production System</span>
         </div>
         <span id="loading-status" class="loading-status">MENYIAPKAN APLIKASI...</span>
-        <div class="loading-progress" aria-hidden="true"></div>
-        <span id="loading-timeout-hint" style="display:none;font-size:9px;color:#1a2942;font-family:Montserrat,sans-serif;margin-top:0;text-align:center;">Koneksi lambat? Cek internet atau URL/Key Supabase.</span>
+        <div id="loading-progress" class="loading-progress" aria-hidden="true"></div>
+        <span id="loading-timeout-hint" style="display:none;font-size:9px;color:rgba(226,235,248,.6);font-family:Montserrat,sans-serif;margin-top:0;text-align:center;">Koneksi lambat? Cek internet atau URL/Key Supabase.</span>
     </div>
 
     <style>
@@ -2568,7 +2678,7 @@ END $$;</textarea>
         </div>
 
         <!-- ACTION BAR: INPUT DATA (fixed above nav) -->
-        <div id="action-bar-input" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 border-t-0 flex gap-2" style="display:none;background:transparent;backdrop-filter:none;">
+        <div id="action-bar-input" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 border-t-0 flex gap-2 bg-[#06142B]/95 backdrop-blur-md" style="display:none;">
             <button onclick="clearInputData()" class="flex-1 font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:rgba(10,28,56,.9);border:1.5px solid var(--input-accent);color:var(--input-accent);border-radius:16px;">
                 <i class="fa-solid fa-xmark"></i> CLEAR
             </button>
@@ -2576,6 +2686,13 @@ END $$;</textarea>
                 <i class="fa-solid fa-floppy-disk"></i> <span id="btn-simpan-input-text">SIMPAN DATA MASUK</span>
             </button>
         </div>
+        <!-- Backdrop solid khusus zona navbar tab INPUT (0-84px dari bawah): sama pola
+             dengan #stok-detail-nav-backdrop di tab STOK. #bottom-navbar sengaja transparan
+             (navbar melayang), jadi tanpa panel ini baris RIWAYAT RETUR yang lagi discroll
+             + teks hint "TERSEDIA BERBAGAI MACAM UKURAN" (.rp-size-hint) sama-sama keliatan
+             tembus di celah transparan itu. Ditaruh di bawah navbar (z-35 < 50) & di bawah
+             .rp-size-hint (z-90) supaya hint tetap kelihatan, tapi di atas konten (z-10). -->
+        <div id="input-tab-nav-backdrop" class="fixed bottom-0 left-0 right-0 bg-[#06142B]" style="z-index:35;height:calc(84px + env(safe-area-inset-bottom));display:none;pointer-events:none;"></div>
 
         <div id="trx-variasi-sheet" class="input-sheet-overlay" onclick="if(event.target.id==='trx-variasi-sheet') closeTrxVariasiSheet()">
             <div class="input-sheet-panel" id="generic-sheet-panel">
@@ -3246,9 +3363,24 @@ END $$;</textarea>
     window._appReady = false;
     window._appLoadingHideRequested = false;
 
-    function setLoadingStatus(text) {
+    function setLoadingStatus(text, percent) {
         const el = document.getElementById('loading-status');
         if (el) el.textContent = text;
+        if (typeof percent === 'number') setLoadingProgress(percent);
+    }
+
+    function setLoadingProgress(percent) {
+        const bar = document.getElementById('loading-progress');
+        if (bar) bar.style.setProperty('--rp-progress', Math.max(0, Math.min(100, percent)) + '%');
+    }
+
+    // Jeda satu frame render browser — dipakai supaya batch render berat (dashboard,
+    // riwayat, dll) tidak memblokir UI thread sekaligus, TAPI tetap bisa di-`await`
+    // agar loading controller tahu persis kapan semuanya benar-benar selesai.
+    function _nextFrame() {
+        return new Promise(function (resolve) {
+            requestAnimationFrame(function () { requestAnimationFrame(resolve); });
+        });
     }
 
     function hideLoadingOverlay(force) {
@@ -3281,7 +3413,7 @@ END $$;</textarea>
 
     function finishInitialLoading() {
         window._appReady = true;
-        setLoadingStatus('APLIKASI SIAP...');
+        setLoadingStatus('APLIKASI SIAP...', 100);
         hideLoadingOverlay(false);
     }
 
@@ -3291,7 +3423,7 @@ END $$;</textarea>
         // terlebih dahulu sementara animasi tetap berjalan di depan.
         if (window._loadingHintTimer) clearTimeout(window._loadingHintTimer);
 
-        setLoadingStatus('MENYIAPKAN DATA...');
+        setLoadingStatus('MENYIAPKAN DATA...', 15);
         document.getElementById('main-app').style.display = 'block';
         // Tab default saat masuk adalah 'stok'
 
@@ -3300,15 +3432,19 @@ END $$;</textarea>
         // Data master + stok dipersiapkan di belakang layar.
         await muatSemuaData();
 
-        setLoadingStatus('MENYIAPKAN TAMPILAN...');
-        initUI();
+        setLoadingStatus('MENYIAPKAN TAMPILAN...', 80);
+        // Ditunggu penuh (await) — termasuk render dashboard stok & riwayat yang
+        // sebelumnya ditunda via setTimeout — supaya saat overlay ditutup, halaman
+        // pertama yang dilihat user SUDAH benar-benar terisi, bukan skeleton kosong.
+        await initUI();
 
         // Realtime dan notifikasi langsung disiapkan sebelum loading ditutup.
-        setLoadingStatus('MENYIAPKAN NOTIFIKASI...');
+        setLoadingStatus('MENYIAPKAN NOTIFIKASI...', 95);
         initRealtimeSync();
-        initPesananNotif();
+        await initPesananNotif();
 
-        // App sudah siap. Overlay baru boleh ditutup setelah durasi minimum.
+        // App sudah siap sepenuhnya di belakang layar. Overlay baru boleh
+        // ditutup setelah durasi minimum animasi terpenuhi.
         finishInitialLoading();
     }
 
@@ -3345,7 +3481,7 @@ END $$;</textarea>
             loadingOverlay.classList.remove('is-hiding');
             loadingOverlay.style.display = 'flex';
         }
-        setLoadingStatus('MENGHUBUNGKAN KE DATABASE...');
+        setLoadingStatus('MENGHUBUNGKAN KE DATABASE...', 5);
         await konekSupabase(url, key);
     }
 
@@ -3368,8 +3504,7 @@ END $$;</textarea>
             }
 
             // Update teks loading agar user tahu sedang proses
-            const loadingText = document.getElementById('loading-status');
-            if (loadingText) loadingText.textContent = 'MENGHUBUNGKAN KE DATABASE...';
+            setLoadingStatus('MENGHUBUNGKAN KE DATABASE...', 8);
 
             // PENTING: tanpa opsi realtime di bawah ini, koneksi WebSocket Realtime bisa "silent
             // disconnect" tiap ~30-60 detik — browser men-throttle timer JS di tab (untuk hemat
@@ -3668,11 +3803,10 @@ END $$;`;
 
     // ==================== LOAD SEMUA DATA DARI SUPABASE ====================
     async function muatSemuaData() {
-        const loadingText = document.getElementById('loading-status');
-        const setLoadingText = (t) => { if (loadingText) loadingText.textContent = t; };
+        const setLoadingText = (t, p) => setLoadingStatus(t, p);
 
         try {
-            setLoadingText('MEMUAT DATA MASTER...');
+            setLoadingText('MEMUAT DATA MASTER...', 25);
             const TIMEOUT_MS = 20000;
             const [v, b, m, w, u, pengaturan] = await withTimeout(Promise.all([
                 sbClient.from('vendor').select('*').order('id'),
@@ -3695,7 +3829,7 @@ END $$;`;
             const pSec  = pengArr.find(p => p.key === 'theme_secondary');
             if (pMain && pSec) changeTheme(pMain.value, pSec.value);
 
-            setLoadingText('MEMUAT RIWAYAT TRANSAKSI...');
+            setLoadingText('MEMUAT RIWAYAT TRANSAKSI...', 45);
             const [riDataRaw, riItemsData, trxDataRaw, trxItemsData] = await withTimeout(Promise.all([
                 fetchAllRows('riwayat_input', '*'),
                 fetchAllRows('riwayat_input_item', '*'),
@@ -3720,6 +3854,9 @@ END $$;`;
                 tanggal: r.tanggal, jam: r.jam,
                 items: riItemsMap[r.id] || []
             }));
+            // Cek arsip retur lama di background — tidak di-await supaya tidak menunda
+            // loading screen (proses ini insert+delete ke DB, bisa agak lama kalau data besar).
+            if (typeof cekDanArsipkanReturLama === 'function') setTimeout(() => cekDanArsipkanReturLama(), 4000);
 
             const trxItemsMap = {};
             (trxItems.data || []).forEach(i => {
@@ -3743,7 +3880,7 @@ END $$;`;
         // Load pelunasan secara terpisah agar tidak mengganggu data utama
         // (tabel ini mungkin belum dibuat jika user belum jalankan SQL terbaru)
         try {
-            setLoadingText('MEMUAT DATA PELUNASAN...');
+            setLoadingText('MEMUAT DATA PELUNASAN...', 65);
             const pelDB = await withTimeout(
                 sbClient.from('pelunasan').select('*').order('id', { ascending: false }),
                 15000, 'Muat pelunasan'
@@ -3805,6 +3942,11 @@ END $$;`;
             tanggal: r.tanggal, jam: r.jam,
             items: riItemsMap[r.id] || []
         }));
+        // Cek arsip retur lama juga di sini (dipanggil ulang tiap ada perubahan realtime
+        // pada riwayat_input/riwayat_input_item). Aman dari loop: cekDanArsipkanReturLama
+        // sendiri juga menulis ke tabel ini, tapi setelah sekali jalan jumlah retur sudah
+        // turun ke ~100 sehingga panggilan berikutnya langsung berhenti di pengecekan awal.
+        if (typeof cekDanArsipkanReturLama === 'function') setTimeout(() => cekDanArsipkanReturLama(), 500);
     }
     async function fetchTransaksiData() {
         const [trxData, trxItemsData] = await Promise.all([
@@ -4352,7 +4494,7 @@ async function fetchBayarSebagianData() {
         }, 250);
     }
 
-    function initUI() {
+    async function initUI() {
         // Default filter = HARI INI (bukan tampilkan semua data)
         const dariEl = document.getElementById("filter-dari-tanggal");
         const sampaiEl = document.getElementById("filter-sampai-tanggal");
@@ -4384,20 +4526,25 @@ async function fetchBayarSebagianData() {
         // Load saved mute-notif-pesanan setting (per-HP)
         loadSavedPesananNotifMute();
 
-        // Render data dipecah agar tidak blokir UI sekaligus
+        // Render data dipecah per-batch (masih dijeda 1 frame antar-batch supaya UI
+        // tidak macet/nge-freeze), TAPI sekarang di-`await` sampai tuntas — bukan
+        // "lempar lalu lupa" via setTimeout seperti sebelumnya. Dengan begitu,
+        // pemanggil (masukApp) baru menutup layar loading SETELAH tab pertama
+        // (Stok) dan data riwayat benar-benar sudah ter-render, bukan skeleton kosong.
+
         // Batch 1: master data (cepat, sedikit data)
         renderVendorList(); renderBrandList(); renderModelList();
         renderWarnaList(); renderUkuranList(); renderBrandOptions();
+
         // Batch 2: tab aktif (stok) — ditunda 1 frame agar UI paint dulu
-        setTimeout(function() {
-            renderStokDashboard();
-        }, 0);
-        // Batch 3: riwayat — lebih berat, ditunda lebih lama
-        setTimeout(function() {
-            _renderRiwayatTransaksiOri();
-            _renderRiwayatInputOri();
-            _renderPelunasanViewOri();
-        }, 50);
+        await _nextFrame();
+        renderStokDashboard();
+
+        // Batch 3: riwayat — lebih berat, ditunda 1 frame lagi
+        await _nextFrame();
+        _renderRiwayatTransaksiOri();
+        _renderRiwayatInputOri();
+        _renderPelunasanViewOri();
     }
 
     // ==================== DEBUG HELPER (sementara, aman dihapus kapan saja) ====================
@@ -4480,6 +4627,63 @@ function hitungStokBrand(brandId) {
         });
     });
     return map;
+}
+
+// PERF: dipakai khusus oleh renderStokDashboard() untuk menghitung total stok +
+// jumlah model SEMUA brand sekaligus. hitungStokBrand() di atas cocok untuk 1 brand
+// (dipakai di openBrandDetail dkk), tapi kalau dipanggil per-brand dalam loop
+// (masterData.brand.map(b => hitungStokBrand(b.id))) jadi O(brand² × riwayat) karena
+// tiap baris riwayat di-scan ulang per brand, DITAMBAH tiap baris melakukan
+// masterData.brand.find() (linear scan brand lagi). Fungsi ini melakukan HANYA
+// 1x pass atas riwayatInput + 1x pass atas riwayatTransaksi untuk SEMUA brand
+// sekaligus, pakai Map nama-brand→id yang dibangun sekali di awal — hasil akhirnya
+// (angka stok & jumlah model per brand) identik dengan cara lama, cuma lebih hemat.
+// Tidak di-cache — selalu baca appData terbaru, jadi tetap realtime seperti sebelumnya.
+function hitungStokSemuaBrandDanModel() {
+    const brandNameToId = new Map();
+    masterData.brand.forEach(b => brandNameToId.set((b.nama || '').trim().toUpperCase(), b.id));
+
+    const stokMapByBrand = new Map();   // brandId -> { key: qty }
+    const modelSetByBrand = new Map();  // brandId -> Set(model)
+
+    function getBrandId(namaBrand) {
+        return brandNameToId.get((namaBrand || '').trim().toUpperCase());
+    }
+
+    appData.riwayatInput.forEach(d => {
+        const bId = getBrandId(d.brand);
+        if (bId == null) return;
+        if (d.model) {
+            if (!modelSetByBrand.has(bId)) modelSetByBrand.set(bId, new Set());
+            modelSetByBrand.get(bId).add(String(d.model).trim().toUpperCase());
+        }
+        if (!stokMapByBrand.has(bId)) stokMapByBrand.set(bId, {});
+        const map = stokMapByBrand.get(bId);
+        d.items.forEach(item => {
+            const key = `${(d.model || '').trim().toUpperCase()}||${(item.warna || '').trim().toUpperCase()}||${(item.ukuran || '').trim().toUpperCase()}`;
+            if (!map[key]) map[key] = 0;
+            map[key] += d.mode === 'retur' ? -item.qty : item.qty;
+        });
+    });
+
+    appData.riwayatTransaksi.forEach(d => {
+        const bId = getBrandId(d.brand);
+        if (bId == null) return;
+        if (!stokMapByBrand.has(bId)) stokMapByBrand.set(bId, {});
+        const map = stokMapByBrand.get(bId);
+        d.items.forEach(item => {
+            const key = `${(d.model || '').trim().toUpperCase()}||${(item.warna || '').trim().toUpperCase()}||${(item.ukuran || '').trim().toUpperCase()}`;
+            if (!map[key]) map[key] = 0;
+            map[key] -= item.qty;
+        });
+    });
+
+    return masterData.brand.map(b => {
+        const stokMap = stokMapByBrand.get(b.id) || {};
+        const total = Object.values(stokMap).reduce((s, v) => s + Math.max(0, v), 0);
+        const modelCount = (modelSetByBrand.get(b.id) || new Set()).size;
+        return { ...b, total, modelCount };
+    });
 }
 
 // Hitung stok bersih = stok DB - qty yang sudah dipakai di baris lain dalam form transaksi aktif
@@ -4688,16 +4892,10 @@ function updateSSK(tab, rowId) {
                 if (kpiTotalBrandEl0) { kpiTotalBrandEl0.textContent = totalKeluar.toLocaleString('id-ID'); kpiTotalBrandEl0.classList.remove('kpi-skel'); }
                 if (realtimeNoteEl) realtimeNoteEl.style.display = '';
             } else {
-                const brandStok = masterData.brand.map(b => {
-                    const stokMap = hitungStokBrand(b.id);
-                    const total = Object.values(stokMap).reduce((s, v) => s + Math.max(0, v), 0);
-                    const modelSet = new Set();
-                    appData.riwayatInput.forEach(d => {
-                        const sameBrand = (d.brand || '').trim().toUpperCase() === (b.nama || '').trim().toUpperCase();
-                        if (sameBrand && d.model) modelSet.add(String(d.model).trim().toUpperCase());
-                    });
-                    return { ...b, total, modelCount: modelSet.size };
-                })
+                // PERF: dulu masterData.brand.map(b => hitungStokBrand(b.id) + full scan
+                // riwayatInput lagi per brand) — sekarang 1x hitung untuk semua brand sekaligus,
+                // hasil angkanya identik (lihat catatan di hitungStokSemuaBrandDanModel()).
+                const brandStok = hitungStokSemuaBrandDanModel()
                 // Hanya tampilkan brand yang benar-benar masih memiliki stok.
                 // Brand dengan stok 0 otomatis disembunyikan dari grid.
                 .filter(b => b.total > 0)
@@ -6338,6 +6536,11 @@ function updateSSK(tab, rowId) {
         btnMasuk.classList.toggle('rp-input-mode-active', mode === 'masuk');
         btnBeban.classList.toggle('rp-input-mode-active', mode === 'beban');
         btnRetur.classList.toggle('rp-input-mode-active', mode === 'retur');
+        // PERF: ganti pengecekan :has() di CSS jadi class biasa di sini —
+        // toggle 1x tiap ganti mode, jauh lebih murah daripada relational selector
+        // yang harus dievaluasi ulang tiap ada perubahan DOM di dalam #tab-input.
+        const tabInputEl = document.getElementById('tab-input');
+        if (tabInputEl) tabInputEl.classList.toggle('rp-mode-retur-active', mode === 'retur');
 
         if (mode === 'beban') {
             banner.classList.add('hidden'); banner.classList.remove('flex');
@@ -7052,6 +7255,11 @@ function updateSSK(tab, rowId) {
             renderRiwayatInput();
             renderStokDashboard();
             showToast(savedMode === 'retur' ? '🔄 Retur disimpan!' : '✅ Data masuk disimpan!');
+            // Cek arsip retur lama di background kalau yang baru disimpan adalah retur —
+            // tidak di-await supaya tombol SIMPAN langsung selesai tanpa nunggu proses arsip.
+            if (savedMode === 'retur' && typeof cekDanArsipkanReturLama === 'function') {
+                setTimeout(() => cekDanArsipkanReturLama(), 1500);
+            }
         } finally {
             _inputIsSaving = false;
             setButtonLoading(btnSimpanInput, false);
@@ -8232,6 +8440,104 @@ function updateSSK(tab, rowId) {
     // pagination Riwayat Input — list flat, dipaginasi langsung per-item.
     let _rrPage = 1;
     const RR_PAGE_SIZE = 10;
+    // Batas TAMPILAN riwayat retur: cuma 50 data TERBARU yang dirender ke layar.
+    // Ini murni soal tampilan (biar list tidak makin panjang tak terbatas) — data lama
+    // TETAP ada di appData.riwayatInput & di database, dan TETAP dihitung penuh oleh
+    // hitungStokItem() (yang baca appData.riwayatInput apa adanya, tidak lewat batas ini).
+    // Jadi stok tidak berubah sama sekali walau retur lama tidak lagi muncul di daftar.
+    const RR_DISPLAY_LIMIT = 50;
+
+    // ==================== ARSIP OTOMATIS RETUR LAMA ====================
+    // Saat jumlah retur > RR_DISPLAY_LIMIT (50), retur yang lebih lama dari 50
+    // terbaru DIHAPUS dari database untuk hemat ruang, TAPI qty totalnya tidak ikut
+    // hilang dari stok: sebelum dihapus, retur-retur lama itu digabung (dijumlahkan
+    // per Brand+Model+Warna+Ukuran) jadi beberapa record "ARSIP OTOMATIS" yang tetap
+    // ikut dihitung hitungStokItem() persis seperti retur biasa. Yang hilang cuma
+    // detail per-transaksi (tanggal & alasan retur masing-masing baris lama) — bukan
+    // efeknya ke stok.
+    let _arsipReturRunning = false;
+    async function cekDanArsipkanReturLama() {
+        if (_arsipReturRunning) return; // cegah dobel jalan bersamaan
+        if (typeof sbClient === 'undefined' || !sbClient) return;
+        const returSorted = appData.riwayatInput.filter(d => d.mode === 'retur'); // sudah terurut terbaru dulu (by id desc)
+        if (returSorted.length <= RR_DISPLAY_LIMIT) return;
+
+        const lama = returSorted.slice(RR_DISPLAY_LIMIT); // retur di luar 100 terbaru
+        if (lama.length <= 1) return; // percuma arsipkan cuma 1 record
+
+        _arsipReturRunning = true;
+        try {
+            // Kelompokkan per Brand+Model+Warna+Ukuran, jumlahkan qty
+            const groups = {};
+            lama.forEach(d => {
+                (d.items || []).forEach(it => {
+                    const key = `${d.brand}||${d.model}||${it.warna}||${it.ukuran}`;
+                    if (!groups[key]) groups[key] = { brand: d.brand, model: d.model, warna: it.warna, ukuran: it.ukuran, qty: 0 };
+                    groups[key].qty += (Number(it.qty) || 0);
+                });
+            });
+            const groupList = Object.values(groups).filter(g => g.qty > 0);
+
+            // 1 record riwayat_input cuma boleh 1 brand+model (kolom itu di level header,
+            // bukan per item) — kalau data lama campur banyak brand/model, arsipnya dipecah
+            // jadi beberapa record riwayat_input, 1 per kombinasi brand+model.
+            const byBrandModel = {};
+            groupList.forEach(g => {
+                const bmKey = `${g.brand}||${g.model}`;
+                if (!byBrandModel[bmKey]) byBrandModel[bmKey] = { brand: g.brand, model: g.model, items: [] };
+                byBrandModel[bmKey].items.push({ warna: g.warna, ukuran: g.ukuran, qty: g.qty });
+            });
+
+            const idsLama = lama.map(d => d.id).filter(id => id !== null && id !== undefined);
+            if (idsLama.length === 0) { _arsipReturRunning = false; return; }
+
+            const now = new Date();
+            const tanggal = now.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+            const jam = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            const keteranganArsip = `ARSIP OTOMATIS — gabungan ${lama.length} retur lama (di luar ${RR_DISPLAY_LIMIT} data terbaru)`;
+
+            const recordBaru = [];
+            for (const key in byBrandModel) {
+                const g = byBrandModel[key];
+                if (!g.items.length) continue;
+                const { data: ri, error: riErr } = await sbClient.from('riwayat_input').insert({
+                    mode: 'retur', brand: g.brand, model: g.model,
+                    keterangan: keteranganArsip, tanggal, jam
+                }).select().single();
+                if (riErr) throw riErr;
+                const { data: insertedItems, error: itemErr } = await sbClient.from('riwayat_input_item')
+                    .insert(g.items.map(i => ({ riwayat_input_id: ri.id, warna: i.warna, ukuran: i.ukuran, qty: i.qty })))
+                    .select();
+                if (itemErr) throw itemErr;
+                recordBaru.push({
+                    id: ri.id, mode: 'retur', brand: g.brand, model: g.model,
+                    keterangan: keteranganArsip, tanggal, jam,
+                    items: (insertedItems || []).map(i => ({ id: i.id, warna: i.warna, ukuran: i.ukuran, qty: i.qty }))
+                });
+            }
+
+            // Baru setelah record arsip pengganti tersimpan sukses, hapus detail lama.
+            const { error: delItemErr } = await sbClient.from('riwayat_input_item').delete().in('riwayat_input_id', idsLama);
+            if (delItemErr) throw delItemErr;
+            const { error: delRiErr } = await sbClient.from('riwayat_input').delete().in('id', idsLama);
+            if (delRiErr) throw delRiErr;
+
+            // Sinkronkan state lokal: buang yang lama, masukkan record arsip baru.
+            appData.riwayatInput = appData.riwayatInput.filter(d => !idsLama.includes(d.id));
+            appData.riwayatInput.push(...recordBaru);
+            appData.riwayatInput.sort((a, b) => b.id - a.id);
+
+            _invalidateStokItemCache();
+            showToast(`🗄️ ${lama.length} retur lama diarsipkan otomatis (stok tidak berubah)`);
+            if (document.getElementById('riwayat-retur-list')) renderRiwayatReturInline();
+            if (document.getElementById('riwayat-input-list')) renderRiwayatInput();
+        } catch (e) {
+            console.error('Gagal arsipkan retur lama:', e);
+        } finally {
+            _arsipReturRunning = false;
+        }
+    }
+    window.cekDanArsipkanReturLama = cekDanArsipkanReturLama;
 
     function rrGoToPage(page) {
         _rrPage = page;
@@ -8244,13 +8550,20 @@ function updateSSK(tab, rowId) {
     function renderRiwayatReturInline() {
         const list = document.getElementById('riwayat-retur-list');
         if (!list) return;
-        const returData = appData.riwayatInput.filter(d => d.mode === 'retur');
-        if (returData.length === 0) {
+        const returDataFull = appData.riwayatInput.filter(d => d.mode === 'retur');
+        if (returDataFull.length === 0) {
             list.innerHTML = '<div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada data retur.</div>';
             return;
         }
-        // PAGINATION: returData tetap lengkap (dipakai utk hitung total halaman),
-        // yang dipotong per halaman cuma pageItems (yang benar-benar di-render ke DOM).
+        // returDataFull sudah terurut terbaru-dulu (appData.riwayatInput di-sort by id
+        // descending saat dimuat) — jadi slice 100 pertama = 100 retur TERBARU.
+        // Sisanya (lebih lama dari itu) sengaja tidak dirender di sini, tapi TETAP ada
+        // di returDataFull/appData.riwayatInput sehingga tetap dihitung ke stok.
+        const returHidden = Math.max(0, returDataFull.length - RR_DISPLAY_LIMIT);
+        const returData = returDataFull.slice(0, RR_DISPLAY_LIMIT);
+        // PAGINATION: returData (yang sudah dibatasi 100 terbaru) dipakai utk hitung
+        // total halaman, yang dipotong per halaman cuma pageItems (yang benar-benar
+        // di-render ke DOM).
         const rrTotalPages = Math.max(1, Math.ceil(returData.length / RR_PAGE_SIZE));
         if (_rrPage > rrTotalPages) _rrPage = rrTotalPages;
         if (_rrPage < 1) _rrPage = 1;
@@ -8258,37 +8571,22 @@ function updateSSK(tab, rowId) {
 
         list.innerHTML = pageItems.map((d, idx) => {
             const totalQty = d.items.reduce((s, i) => s + i.qty, 0);
-            const uid = 'rr-' + (d.id || idx);
-            const itemsPreview = d.items.slice(0,2).map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black">${i.warna}/${i.ukuran}:<b class="text-black">${i.qty}</b></span>`).join('') + (d.items.length > 2 ? `<span class="text-[8px] text-black">+${d.items.length-2} lagi</span>` : '');
-            return `<div class="bg-cardBg rounded-lg border-2 border-red-500/40 overflow-hidden">
-                <div class="flex items-center justify-between px-3 py-2 cursor-pointer select-none" onclick="toggleRiwayatCard('${uid}')">
-                    <div class="flex-1 min-w-0 mr-2">
-                        <div class="flex items-center gap-1.5">
-                            <span class="text-[10px] font-black text-black truncate">${d.brand} — ${d.model}</span>
-                            <span class="text-[8px] font-black px-1.5 py-0.5 rounded border-2 flex-shrink-0 bg-red-500/20 text-red-400 border-red-500/40">↩ RETUR</span>
-                        </div>
-                        <div class="flex items-center gap-2 mt-0.5">
-                            <span class="text-[8px] text-black">${d.tanggal} ${d.jam}</span>
-                            <span class="text-[8px] text-red-400 font-bold">${totalQty} pcs</span>
-                            <div class="flex gap-1 flex-wrap" id="${uid}-preview">${itemsPreview}</div>
-                        </div>
+            // REDESIGN: 1 baris flat per retur (mirip list BEBAN) — jauh lebih sedikit
+            // node DOM per kartu, tidak nambah proporsional ke jumlah item di dalamnya.
+            // Edit qty per item dipindah ke modal picker (langsung ke item kalau cuma 1).
+            const itemsSummary = d.items.map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black whitespace-nowrap">${i.warna}/${i.ukuran}:<b class="text-black">${i.qty}</b></span>`).join('');
+            return `<div class="bg-cardBg rounded-xl p-3 flex items-start justify-between gap-2 border-2 border-red-500/40">
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-[10px] font-black text-black truncate">${d.brand} — ${d.model}</span>
+                        <span class="text-[8px] font-black px-1.5 py-0.5 rounded border-2 flex-shrink-0 bg-red-500/20 text-red-400 border-red-500/40">↩ RETUR</span>
                     </div>
-                    <i id="${uid}-chevron" class="fa-solid fa-chevron-down text-[9px] text-black flex-shrink-0 transition-transform"></i>
+                    <div class="text-[9px] text-black/60 font-bold mt-0.5">${d.tanggal} ${d.jam} <span class="text-red-400">• ${totalQty} pcs</span>${d.keterangan ? ' • ' + d.keterangan : ''}</div>
+                    <div class="flex gap-1 flex-wrap mt-1">${itemsSummary}</div>
                 </div>
-                <div id="${uid}-body" class="hidden px-3 pb-2 border-t-2 border-borderDark">
-                    ${d.keterangan ? `<div class="text-[9px] text-red-400 italic pt-1.5"><i class="fa-solid fa-comment-dots mr-1"></i>${d.keterangan}</div>` : ''}
-                    <div class="flex flex-col gap-1 pt-1.5">
-                        ${d.items.map((i, iIdx) => `
-                        <div class="flex items-center justify-between bg-darkBg border-2 border-borderDark rounded px-2 py-1.5 gap-2">
-                            <span class="text-[9px] text-black flex-1">${i.warna} / ${i.ukuran}: <span class="text-black font-bold">${i.qty}</span> pcs</span>
-                            <button onclick="event.stopPropagation();bukaModalEditInputItem(${d.id},'${d.model}','${i.warna}','${i.ukuran}',${i.qty},${iIdx},'${d.mode}')"
-                                class="w-6 h-6 rounded bg-yellow-500/10 border-2 border-yellow-500/30 text-yellow-400 flex items-center justify-center hover:bg-yellow-500/20 transition-colors flex-shrink-0"
-                                title="Edit qty">
-                                <i class="fa-solid fa-pen text-[9px]"></i>
-                            </button>
-                        </div>`).join('')}
-                    </div>
-                </div>
+                <button onclick="bukaPilihItemRetur(${d.id})" class="w-7 h-7 rounded-lg bg-yellow-500/10 hover:bg-yellow-500/20 border-2 border-yellow-500/30 flex items-center justify-center text-yellow-400 text-[10px] flex-shrink-0" title="Edit qty">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
             </div>`;
         }).join('') + _renderPaginationControls({
             currentPage: _rrPage,
@@ -8296,8 +8594,58 @@ function updateSSK(tab, rowId) {
             totalItems: returData.length,
             itemLabel: 'data',
             onPageChangeFn: 'rrGoToPage'
-        });
+        }) + (returHidden > 0 ? `<div class="text-center text-[9px] text-black/50 font-bold pt-1">Menampilkan ${RR_DISPLAY_LIMIT} retur terbaru • ${returHidden} data lebih lama disembunyikan (tetap tersimpan &amp; tetap dihitung ke stok)</div>` : '');
     }
+
+    function bukaPilihItemRetur(riwayatId) {
+        const record = appData.riwayatInput.find(d => d.id === riwayatId);
+        if (!record) { showToast('Data tidak ditemukan.'); return; }
+
+        // Kalau cuma 1 item, langsung ke modal edit qty — tidak perlu tahap pemilihan.
+        if (record.items.length === 1) {
+            const i = record.items[0];
+            bukaModalEditInputItem(record.id, record.model, i.warna, i.ukuran, i.qty, 0, record.mode);
+            return;
+        }
+
+        // Lebih dari 1 item: tampilkan daftar dulu, baru pilih mana yang mau diedit.
+        _modal.show({ title: 'PILIH ITEM', msg: '', type: 'warning', icon: '✏️', buttons: [] });
+
+        setTimeout(() => {
+            const msgEl = document.getElementById('custom-modal-msg');
+            const btnsEl = document.getElementById('custom-modal-btns');
+            if (!msgEl || !btnsEl) return;
+
+            const info = document.createElement('div');
+            info.style.cssText = 'font-size:11px;color:#000;margin-bottom:10px;';
+            info.innerHTML = `<b style="color:#fff;">${record.brand} — ${record.model}</b><br><span style="font-size:9px;color:#9fb0c8;">Pilih item yang mau diedit qty-nya:</span>`;
+
+            const listWrap = document.createElement('div');
+            listWrap.style.cssText = 'display:flex;flex-direction:column;gap:6px;max-height:260px;overflow-y:auto;';
+            record.items.forEach((i, iIdx) => {
+                const row = document.createElement('div');
+                row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:8px;background:#06142B;border:1px solid rgba(118,153,201,.34);border-radius:8px;padding:8px 10px;cursor:pointer;';
+                row.innerHTML = `<span style="font-size:11px;color:#eaf1fb;">${i.warna} / ${i.ukuran}: <b>${i.qty}</b> pcs</span><i class="fa-solid fa-chevron-right" style="font-size:9px;color:#7699C9;"></i>`;
+                row.onclick = () => {
+                    _modal.close();
+                    setTimeout(() => bukaModalEditInputItem(record.id, record.model, i.warna, i.ukuran, i.qty, iIdx, record.mode), 200);
+                };
+                listWrap.appendChild(row);
+            });
+
+            msgEl.innerHTML = '';
+            msgEl.appendChild(info);
+            msgEl.appendChild(listWrap);
+
+            btnsEl.innerHTML = '';
+            const btnBatal = document.createElement('button');
+            btnBatal.textContent = 'TUTUP';
+            btnBatal.style.cssText = 'padding:10px 20px;border:1px solid #e5e7eb;border-radius:10px;background:#133a66;color:#000;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;cursor:pointer;';
+            btnBatal.onclick = () => _modal.close();
+            btnsEl.appendChild(btnBatal);
+        }, 30);
+    }
+    window.bukaPilihItemRetur = bukaPilihItemRetur;
 
     function bukaModalEditInputItem(riwayatId, modelNama, warna, ukuran, qtyLama, itemIdx, mode) {
         var key = modelNama + "||" + warna + "||" + ukuran;
@@ -8409,6 +8757,11 @@ function updateSSK(tab, rowId) {
             _modal.close();
             renderRiwayatInput();
             renderStokDashboard();
+            // Refresh juga kolom RIWAYAT RETUR (tab Input Data mode retur) kalau lagi kebuka,
+            // karena baris ringkasan qty di situ dibangun dari innerHTML, bukan live-bind.
+            if (typeof renderRiwayatReturInline === 'function' && document.getElementById('riwayat-retur-list')) {
+                renderRiwayatReturInline();
+            }
             showToast("Qty diperbarui: " + qtyLama + " pcs ke " + qtyBaru + " pcs");
         } catch(e) {
             showToast("Gagal update: " + (e.message || e));
