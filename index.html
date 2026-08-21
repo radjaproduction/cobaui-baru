@@ -5082,10 +5082,15 @@ function updateSSK(tab, rowId) {
         tambahVariasiTrx();
     }
 
-    function switchTab(tabName) {
+    let _tabHistoryStack = [];
+
+    function switchTab(tabName, _fromBack) {
         if (_trxIsSaving && tabName !== 'transaksi') {
             showToast('⏳ Sedang menyimpan transaksi, harap tunggu...');
             return;
+        }
+        if (!_fromBack && tabName !== _activeTab) {
+            _tabHistoryStack.push(_activeTab);
         }
         _doSwitchTab(tabName);
     }
@@ -12084,10 +12089,6 @@ function updateSSK(tab, rowId) {
         initApp();
     });
 
-    function exitApp() {
-        switchTab('stok');
-    }
-
     const _blockBrowserKeys = function(e) {
         const tag = document.activeElement ? document.activeElement.tagName : '';
         const isEditable = document.activeElement && (document.activeElement.isContentEditable);
@@ -12174,9 +12175,15 @@ function updateSSK(tab, rowId) {
             return;
         }
 
-        showConfirm('Keluar dari aplikasi?', function() {
-            exitApp();
-        });
+        // Mundur ke tab sebelumnya jika ada riwayat navigasi tab
+        if (_tabHistoryStack.length > 0) {
+            const prevTab = _tabHistoryStack.pop();
+            switchTab(prevTab, true);
+            return;
+        }
+
+        // Tidak ada lagi yang bisa di-back-kan; tombol back tidak melakukan apa-apa
+        // (fungsi keluar aplikasi via tombol back dihapus sesuai permintaan).
     });
 
     </script>
