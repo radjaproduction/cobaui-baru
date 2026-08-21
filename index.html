@@ -1065,20 +1065,20 @@
             --input-row-index-border: rgba(255,140,0,.4);
             --input-pill-bg: #0d2645;
 
-            /* -- tema TAB TRANSAKSI (dark navy blue) -- */
-            --trx-accent: #0f2a5c;
-            --trx-gradient: linear-gradient(90deg, #0a1f45 0%, #1c3d7a 100%);
-            --trx-bg: #E4E9F5;
-            --trx-bg2: #EEF2FA;
-            --trx-border: #4B679E;
-            --trx-shadow: rgba(15,42,92,0.38);
-            --trx-hover: #E7ECF8;
-            --trx-section-bg: #E7ECF8;
-            --trx-choice-active: rgba(15,42,92,0.16);
-            --trx-row-bg: #EEF2FA;
-            --trx-row-index-bg: rgba(15,42,92,0.14);
-            --trx-row-index-border: rgba(15,42,92,0.35);
-            --trx-pill-bg: #E4E9F5;
+            /* -- tema TAB TRANSAKSI: disamakan dengan TAB INPUT DATA (navy + oranye) -- */
+            --trx-accent: var(--input-accent);
+            --trx-gradient: var(--input-gradient);
+            --trx-bg: var(--input-bg);
+            --trx-bg2: var(--input-bg2);
+            --trx-border: var(--input-border);
+            --trx-shadow: var(--input-shadow);
+            --trx-hover: var(--input-hover);
+            --trx-section-bg: var(--input-section-bg);
+            --trx-choice-active: var(--input-choice-active);
+            --trx-row-bg: var(--input-row-bg);
+            --trx-row-index-bg: var(--input-row-index-bg);
+            --trx-row-index-border: var(--input-row-index-border);
+            --trx-pill-bg: var(--input-pill-bg);
         }
 
         /* ---------- TAB INPUT DATA: variabel brand lokal jadi BIRU ---------- */
@@ -1204,17 +1204,26 @@
         #action-bar-transaksi .border-borderDark { border-color: var(--trx-border) !important; }
         #tab-transaksi .dashed-border-brand,
         #trx-variasi-sheet .dashed-border-brand { border-color: var(--trx-accent) !important; }
-        #tab-transaksi > div:first-child { box-shadow: 0 4px 16px var(--trx-shadow) !important; }
 
-        #trx-vendor-selector, #trx-brand-selector, #trx-model-selector {
-            border-color: var(--trx-border) !important;
-            box-shadow: 0 2px 12px var(--trx-shadow) !important;
-        }
         #trx-vendor-selector:hover, #trx-brand-selector:hover, #trx-model-selector:hover, #btn-tambah-variasi-trx:hover { background-color: var(--trx-hover) !important; }
 
-        #action-bar-transaksi { background: rgba(243,227,255,0.95) !important; border-top-color: var(--trx-border) !important; }
-        #action-bar-transaksi button[onclick="clearTransaksi()"] { background: var(--trx-gradient) !important; }
+        #action-bar-transaksi { background: rgba(10,28,56,.95) !important; border-top-color: var(--trx-border) !important; }
+        #action-bar-transaksi button[onclick="clearTransaksi()"] { background: rgba(10,28,56,.9) !important; border: 1.5px solid var(--trx-accent) !important; color: var(--trx-accent) !important; box-shadow: none !important; }
         #btn-simpan-transaksi { box-shadow: 0 4px 15px var(--trx-shadow) !important; }
+
+        /* ---------- TAB TRANSAKSI: teks putih di atas navy (sama seperti TAB INPUT DATA) ---------- */
+        #tab-transaksi.rp-input-screen .text-black { color: #eef3fb !important; }
+        #tab-transaksi.rp-input-screen .text-black\/40 { color: rgba(238,243,251,.4) !important; }
+        #tab-transaksi.rp-input-screen .text-black\/50 { color: rgba(238,243,251,.5) !important; }
+        #tab-transaksi.rp-input-screen .text-black\/60 { color: rgba(238,243,251,.6) !important; }
+        #tab-transaksi.rp-input-screen .text-black\/80 { color: rgba(238,243,251,.8) !important; }
+        #tab-transaksi.rp-input-screen .placeholder-black::placeholder { color: rgba(238,243,251,.4) !important; }
+        #tab-transaksi.rp-input-screen .placeholder-black\/50::placeholder { color: rgba(238,243,251,.3) !important; }
+
+        /* ---------- TAB TRANSAKSI: heading polos + background hero (sama konsep TAB INPUT DATA) ---------- */
+        #tab-transaksi.rp-input-screen { background: var(--trx-bg) !important; padding-top: 0; position: relative; isolation: isolate; }
+        #tab-transaksi.rp-input-screen::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_stock_background_2.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+        #tab-transaksi.rp-input-screen::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
 
         #tab-transaksi .input-variation-card { background: var(--trx-row-bg) !important; border-color: var(--trx-border) !important; }
         #tab-transaksi .input-variation-card.is-filled { background: linear-gradient(180deg, var(--trx-choice-active), var(--trx-row-bg) 72%) !important; }
@@ -1239,8 +1248,6 @@
         #tab-transaksi .brand-gradient-bg svg path[fill] { fill: #ffffff !important; }
 
         /* ---------- TAB TRANSAKSI (navy): teks putih di atas elemen ber-background gelap ---------- */
-        #tab-transaksi > div:first-child,
-        #tab-transaksi > div:first-child *,
         #tab-transaksi .brand-gradient-bg,
         #tab-transaksi .brand-gradient-bg *,
         #action-bar-transaksi .brand-gradient-bg,
@@ -2767,40 +2774,63 @@ END $$;</textarea>
         </div>
 
         <!-- TAB TRANSAKSI -->
-        <div id="tab-transaksi" class="tab-content hidden flex-col p-4 gap-4 relative z-10" >
-            <div class="flex items-stretch -mx-4 mb-2 shadow-[0_4px_16px_rgba(255,140,0,0.35)] brand-gradient-bg rounded-b-2xl overflow-hidden flex-shrink-0 sticky top-0 z-30">
-                <div class="w-20 h-[72px] flex items-center justify-center flex-shrink-0 z-10 relative bg-black/5 border-r-2 border-black/10"><i class="fa-solid fa-handshake text-3xl text-[#000000]"></i></div>
-                <div class="h-[72px] flex flex-col justify-center px-4 flex-grow z-10 relative">
-                    <h1 class="text-[26px] font-black text-[#000000] leading-none tracking-wide mb-1">TRANSAKSI</h1>
-                    <div class="w-full h-[1.5px] bg-[#ffffff]/30 mb-1"></div>
-                    <h2 class="display-brand-name text-[10px] font-bold text-[#000000] tracking-[0.15em] leading-none mt-0.5 uppercase">RADJA PRODUCTION</h2>
-                </div>
+        <div id="tab-transaksi" class="tab-content hidden flex-col p-4 gap-4 relative z-10 rp-input-screen" >
+            <div class="rp-input-heading">
+                <h1 id="trx-header-title">Input <span>Transaksi</span></h1>
+                <p>Catat transaksi penjualan/keluar barang ke vendor.</p>
             </div>
-            <div class="flex flex-col gap-3">
-                <div id="trx-vendor-selector" onclick="bukaDropdownTrx('vendor')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#7699C9] cursor-pointer hover:bg-[#133a66] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
-                    <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-lg brand-gradient-bg flex items-center justify-center text-black"><i class="fa-solid fa-truck-fast text-xl"></i></div><div><h3 class="text-sm font-bold text-black mb-1">VENDOR</h3><p class="text-xs text-black" id="trx-vendor-display">Pilih vendor</p></div></div>
-                    <i class="fa-solid fa-chevron-down text-black text-base"></i>
+            <div id="trx-select-panel" class="rp-input-select-panel">
+                <div class="rp-input-select-panel-head">
+                    <div class="rp-input-select-step">
+                        <span class="rp-input-select-step-num">01</span>
+                        <span class="rp-input-select-step-title">PILIH TUJUAN</span>
+                    </div>
+                    <div class="rp-input-select-progress">
+                        <span class="rp-input-select-progress-dot"></span>
+                        <span class="rp-input-select-progress-bar"><span id="trx-select-progress-fill" class="rp-input-select-progress-fill" style="width:0%"></span></span>
+                        <span class="rp-input-select-progress-frac" id="trx-select-progress-frac">0/3</span>
+                    </div>
                 </div>
-                <div id="trx-brand-selector" onclick="bukaDropdownTrx('brand')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#7699C9] cursor-pointer hover:bg-[#133a66] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
-                    <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-lg brand-gradient-bg flex items-center justify-center text-black"><i class="fa-solid fa-tags text-xl"></i></div><div><h3 class="text-sm font-bold text-black mb-1">BRAND</h3><p class="text-xs text-black" id="trx-brand-display">Pilih brand</p></div></div>
-                    <i class="fa-solid fa-chevron-down text-black text-base"></i>
-                </div>
-                <div id="trx-model-selector" onclick="bukaDropdownTrx('model')" class="bg-cardBg rounded-xl p-5 flex items-center justify-between border-2 border-[#7699C9] cursor-pointer hover:bg-[#133a66] transition-colors" style="box-shadow:0 2px 12px rgba(255,140,0,0.15)">
-                    <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-lg brand-gradient-bg flex items-center justify-center text-black"><i class="fa-solid fa-shirt text-xl"></i></div><div><h3 class="text-sm font-bold text-black mb-1">MODEL</h3><p class="text-xs text-black" id="trx-model-display">Pilih model</p></div></div>
-                    <i class="fa-solid fa-chevron-down text-black text-base"></i>
+                <div class="rp-input-select-rows">
+                    <div id="trx-vendor-selector" onclick="bukaDropdownTrx('vendor')" class="rp-input-select-row">
+                        <div class="rp-input-select-icon-hex"><i class="fa-solid fa-truck-fast"></i></div>
+                        <div class="rp-input-select-copy">
+                            <div class="rp-input-select-label">VENDOR</div>
+                            <div class="rp-input-select-value" id="trx-vendor-display">Pilih vendor</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down rp-input-select-arrow"></i>
+                    </div>
+                    <div id="trx-brand-selector" onclick="bukaDropdownTrx('brand')" class="rp-input-select-row">
+                        <div class="rp-input-select-icon-hex"><i class="fa-solid fa-tags"></i></div>
+                        <div class="rp-input-select-copy">
+                            <div class="rp-input-select-label">BRAND</div>
+                            <div class="rp-input-select-value" id="trx-brand-display">Pilih brand</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down rp-input-select-arrow"></i>
+                    </div>
+                    <div id="trx-model-selector" onclick="bukaDropdownTrx('model')" class="rp-input-select-row">
+                        <div class="rp-input-select-icon-hex"><i class="fa-solid fa-shirt"></i></div>
+                        <div class="rp-input-select-copy">
+                            <div class="rp-input-select-label">MODEL</div>
+                            <div class="rp-input-select-value" id="trx-model-display">Pilih model</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down rp-input-select-arrow"></i>
+                    </div>
                 </div>
                 <div style="display:none">
                     <button id="trx-status-lunas" onclick="setStatusBayar('lunas')"></button>
                     <button id="trx-status-credit" onclick="setStatusBayar('credit')"></button>
                 </div>
             </div>
-            <div class="rounded-xl overflow-hidden border-2 border-borderDark bg-cardBg variasi-card-grow">
-                <div class="brand-gradient-bg text-black px-4 py-3 flex-shrink-0">
-                    <div class="text-[13px] font-black leading-none">VARIASI ITEM</div>
-                    <div class="text-[9px] font-bold opacity-65 mt-1">Tap item untuk isi warna, ukuran, dan qty</div>
+            <div id="trx-variasi-card" class="rp-input-variasi-card variasi-card-grow">
+                <div id="trx-tabel-header" class="rp-input-variasi-head">
+                    <div>
+                        <div class="rp-input-variasi-title">VARIASI ITEM</div>
+                        <div class="rp-input-variasi-sub">Tap item untuk isi warna, ukuran, dan qty</div>
+                    </div>
                 </div>
                 <div id="trx-variasi-list" class="flex flex-col gap-2 p-3 variasi-list-grow"></div>
-                <div class="p-3 flex-shrink-0"><button id="btn-tambah-variasi-trx" onclick="tambahVariasiTrx()" class="w-full py-4 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#133a66] opacity-40 cursor-not-allowed pointer-events-none" disabled><i class="fa-solid fa-plus"></i> Tambah Item</button></div>
+                <div class="p-3 flex-shrink-0"><button id="btn-tambah-variasi-trx" onclick="tambahVariasiTrx()" class="rp-input-add-btn opacity-40 cursor-not-allowed pointer-events-none" disabled><i class="fa-solid fa-plus"></i> Tambah Item</button></div>
             </div>
         <div class="tab-bottom-spacer" style="height:90px;flex-shrink:0;"></div>
         </div>
@@ -7502,6 +7532,14 @@ function updateSSK(tab, rowId) {
             btnTambah.classList.toggle('cursor-not-allowed', locked);
             btnTambah.classList.toggle('pointer-events-none', locked);
         }
+
+        // Progress bar VENDOR/BRAND/MODEL — sama pola dengan progress BRAND/MODEL di
+        // TAB INPUT DATA (lihat updateInputVariasiState), cuma 3 langkah bukan 2.
+        const progressCount = (trxState.vendorId ? 1 : 0) + (trxState.brandId ? 1 : 0) + (trxState.modelId ? 1 : 0);
+        const progressFill = document.getElementById('trx-select-progress-fill');
+        const progressFrac = document.getElementById('trx-select-progress-frac');
+        if (progressFill) progressFill.style.width = (progressCount / 3 * 100) + '%';
+        if (progressFrac) progressFrac.textContent = progressCount + '/3';
 
 	        document.querySelectorAll('#trx-variasi-list > div').forEach(row => {
 	            const id = row.id.replace('trx-row-', '');
