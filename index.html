@@ -3279,7 +3279,7 @@ END $$;</textarea>
         <!-- TOMBOL BACK: di sebelah kiri tombol menu hamburger. Otomatis hilang
              (rp-back-hidden) saat menu navbar dibuka, lihat initFloatingNavbar(). -->
         <button type="button" id="rp-back-toggle" class="rp-back-toggle" aria-label="Kembali">
-            <i class="fa-solid fa-arrow-left"></i>
+            <i class="fa-solid fa-house"></i>
         </button>
 
         <!-- FLOATING MENU TOGGLE: membuka/menutup navbar utama -->
@@ -3388,6 +3388,33 @@ END $$;</textarea>
     }
 
     // =========================================================
+    // PRELOAD GAMBAR BACKGROUND TAB
+    // CSS ::before background-image (lihat #tab-stok.rp-stock-screen dkk) baru
+    // di-fetch browser PERTAMA KALI saat class-nya ditambahkan lewat switchTab().
+    // Kalau user pindah ke tab itu sebelum sempat ke-cache, background sesaat
+    // kosong/lambat muncul. Supaya SEMUA background sudah siap di cache SEBELUM
+    // overlay loading ditutup, mulai fetch di sini juga — paralel dengan
+    // muatSemuaData() — lalu ditunggu (dengan batas waktu) sebelum app dianggap
+    // benar-benar siap. Cuma 2 file unik dipakai di semua tab (lihat CSS):
+    // radja_stock_background.png (tab Stok) & radja_transaksi_background.png
+    // (Input, Transaksi, Riwayat, Laba, Master).
+    function _preloadImage(src, timeoutMs) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            let done = false;
+            const finish = () => { if (!done) { done = true; resolve(); } };
+            img.onload = finish;
+            img.onerror = finish; // 1 gambar gagal jangan sampai bikin loading nyangkut selamanya
+            setTimeout(finish, timeoutMs || 6000);
+            img.src = src;
+        });
+    }
+    const _bgImagesPreloadPromise = Promise.all([
+        _preloadImage('radja_stock_background.png'),
+        _preloadImage('radja_transaksi_background.png'),
+    ]);
+
+    // =========================================================
     // LOADING CONTROLLER
     // Animasi harus terlihat dulu. Proses database tetap berjalan
     // bersamaan, tetapi overlay baru ditutup setelah:
@@ -3472,7 +3499,11 @@ END $$;</textarea>
         // Ditunggu penuh (await) — termasuk render dashboard stok & riwayat yang
         // sebelumnya ditunda via setTimeout — supaya saat overlay ditutup, halaman
         // pertama yang dilihat user SUDAH benar-benar terisi, bukan skeleton kosong.
-        await initUI();
+        // _bgImagesPreloadPromise ditunggu di sini juga (sudah mulai fetch dari awal,
+        // paralel dengan muatSemuaData, jadi biasanya sudah selesai duluan) — supaya
+        // SEMUA background tab sudah ada di cache sebelum overlay hilang, tidak ada
+        // lagi tab yang "gambar background-nya masih ngeload" pas pertama dibuka.
+        await Promise.all([initUI(), _bgImagesPreloadPromise]);
 
         // Realtime dan notifikasi langsung disiapkan sebelum loading ditutup.
         setLoadingStatus('MENYIAPKAN NOTIFIKASI...', 95);
