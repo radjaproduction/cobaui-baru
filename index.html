@@ -4704,6 +4704,7 @@ async function fetchBayarSebagianData() {
     function _reconnectRealtimeSync() {
         if (!sbClient || _realtimeReconnecting) return;
         _realtimeReconnecting = true; // tetap true sampai subscribe() baru selesai (lihat initRealtimeSync)
+        _realtimeIsConnected = false;
         try {
             if (_realtimeChannel) {
                 sbClient.removeChannel(_realtimeChannel);
@@ -4733,6 +4734,15 @@ async function fetchBayarSebagianData() {
         }, 250);
     }
 
+    // Lacak status koneksi Realtime SAAT INI, supaya reconnect (yang mahal: putus channel +
+    // tandai SEMUA grup kotor + fetch & render ulang SEMUANYA) HANYA dijalankan kalau memang
+    // benar-benar perlu. Sebelumnya, _reconnectRealtimeSync() dipanggil TANPA CEK KONEKSI setiap
+    // kali tab kembali visible — di desktop ini sering banget kejadian (alt-tab / pindah tab
+    // browser sebentar lalu balik lagi), jadi list ke-render ulang total berkali-kali tanpa ada
+    // perubahan data apapun -> terlihat "berkedip". Di HP jarang kelihatan karena app biasanya
+    // dipakai fullscreen, jarang pindah-pindah tab/app.
+    let _realtimeIsConnected = false;
+
     function initRealtimeSync() {
         if (!sbClient || _realtimeChannel) return; // belum konek atau sudah aktif
         // Nama channel dibuat UNIK tiap percobaan (bukan 'radja-realtime-sync' tetap) — supaya kalau
@@ -4749,12 +4759,14 @@ async function fetchBayarSebagianData() {
         ch.subscribe((status) => {
             if (status === 'SUBSCRIBED') {
                 console.log('✅ Realtime sync aktif');
+                _realtimeIsConnected = true;
                 // Konek sukses: reset backoff & bersihkan jadwal reconnect yang mungkin masih tertunda
                 _realtimeReconnectDelay = 1000;
                 if (_realtimeReconnectTimer) { clearTimeout(_realtimeReconnectTimer); _realtimeReconnectTimer = null; }
                 _realtimeReconnecting = false; // baru boleh dianggap "selesai reconnect" setelah benar-benar SUBSCRIBED
             } else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT' || status === 'CLOSED') {
                 console.warn('⚠️ Realtime sync gagal terhubung:', status);
+                _realtimeIsConnected = false;
                 _realtimeChannel = null; // supaya initRealtimeSync() berikutnya tidak nge-block karena dianggap "sudah aktif"
                 _realtimeReconnecting = false; // lepas guard supaya _scheduleRealtimeReconnect bisa jalan lagi
                 _scheduleRealtimeReconnect(status);
@@ -4763,17 +4775,18 @@ async function fetchBayarSebagianData() {
         _realtimeChannel = ch;
     }
 
-    // Reconnect juga saat tab kembali aktif (user balik dari app lain / kunci layar dibuka)
-    // atau saat browser mendeteksi internet baru nyambung lagi — dua situasi paling umum
-    // yang bikin koneksi WebSocket Realtime putus diam-diam di HP.
+    // Reconnect HANYA kalau koneksi Realtime memang sedang TERPUTUS. Cek _realtimeIsConnected
+    // dulu sebelum memanggil _reconnectRealtimeSync() yang mahal (full refetch + full render
+    // semua grup) — supaya sekadar pindah tab/app sebentar lalu balik (umum di desktop) tidak
+    // memicu render ulang total kalau koneksinya sebenarnya baik-baik saja.
     document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && sbClient) {
+        if (document.visibilityState === 'visible' && sbClient && !_realtimeIsConnected) {
             _realtimeReconnectDelay = 1000; // tab aktif lagi = coba langsung, tanpa nunggu backoff lama
             _reconnectRealtimeSync();
         }
     });
     window.addEventListener('online', () => {
-        if (sbClient) {
+        if (sbClient && !_realtimeIsConnected) {
             _realtimeReconnectDelay = 1000;
             _reconnectRealtimeSync();
         }
