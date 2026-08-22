@@ -1061,6 +1061,12 @@
         #tab-riwayat.rp-lunas-heading .rp-riwayat-heading h1 span { color: #22c55e; }
         #tab-riwayat.rp-lunas-heading .rp-riwayat-heading .rp-riwayat-filter-btn { border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.08); color: #22c55e; }
         #tab-riwayat.rp-lunas-heading .rp-riwayat-heading .rp-riwayat-filter-btn:active { background: rgba(34,197,94,.16); }
+        /* TAB RIWAYAT RETUR: judul "Retur" & tombol filter periode (kanan atas)
+           aslinya ikut warna oranye default (var(--brand-main)) -- diganti merah
+           supaya serasi dengan tema RETUR, khusus di tab ini saja. */
+        #tab-riwayat-retur .rp-riwayat-heading h1 span { color: #ef4444; }
+        #tab-riwayat-retur .rp-riwayat-filter-btn { border-color: rgba(239,68,68,.4); background: rgba(239,68,68,.08); color: #ef4444; }
+        #tab-riwayat-retur .rp-riwayat-filter-btn:active { background: rgba(239,68,68,.16); }
 
         /* ---------- TAB RIWAYAT TRANSAKSI (redesign): status toggle, gaya kartu sama dgn KPI TAB STOK ---------- */
         .rp-status-toggle { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin-top: 4px; flex-shrink: 0; }
@@ -2227,6 +2233,17 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 #beban-form-wrapper .summary-card #beban-input-total{font-size:20px!important;margin-top:2px}
 #beban-form-wrapper .summary-card #beban-input-periode-label{font-size:8px!important;color:rgba(255,255,255,.62)!important}
 
+/* Judul "Beban" & label "TOTAL DARI OWNER": aslinya oranye/ungu (warna default
+   TAB INPUT DATA & Tailwind purple-600), diganti biru muda supaya serasi dengan
+   tema biru di tab RIWAYAT BEBAN ini saja -- tidak menyentuh var(--input-accent)
+   global, jadi tab lain (INPUT DATA/TRANSAKSI) tetap oranye seperti biasa. */
+#tab-riwayat-beban .rp-input-heading h1 span{color:#64b5f6!important}
+/* Scoped ke kartu KPI TOTAL DARI ADMIN/OWNER saja -- SENGAJA tidak pakai
+   selector .text-purple-600 polos, karena class yang sama juga dipakai badge
+   "OWNER" per-baris di riwayat (lihat renderBebanInputList), yang warna ungunya
+   harus tetap dipertahankan sebagai penanda sumber biaya. */
+#tab-riwayat-beban>div.bg-cardBg.rounded-xl.border-2.border-borderDark .text-purple-600{color:#64b5f6!important}
+
 /* admin/owner compact segmented KPI */
 #tab-riwayat-beban>div.bg-cardBg.rounded-xl.border-2.border-borderDark{
   min-height:62px;
@@ -2364,6 +2381,14 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 }
 #tab-input.rp-input-screen.rp-mode-retur-active .rp-input-add-btn{
   border-color:rgba(239,68,68,.55)!important;
+}
+
+/* Mode BEBAN (tab INPUT DATA): judul "Catat Biaya" aslinya oranye (ikut
+   var(--input-accent) default) -- diganti biru muda khusus di panel ini saja,
+   tidak menyentuh var(--input-accent) global sehingga mode MASUK & RETUR
+   tetap oranye/merah seperti biasa. */
+#tab-input.rp-input-screen.rp-mode-beban-active .rp-input-heading h1 span{
+  color:#64b5f6!important;
 }
 
 @media (max-width:360px){
@@ -2782,7 +2807,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
         <!-- ACTION BAR: INPUT DATA — bulat, sejajar tombol back (bottom:14px), rata kiri.
              Sama treatment-nya dgn #action-bar-transaksi / #sticky-total-bar. -->
         <div id="action-bar-input" class="fixed left-0 items-center gap-3" style="bottom:14px;z-index:100;padding-left:26px;display:none;">
-            <button onclick="clearInputData()" class="rp-cetak-circle-btn rp-cetak-circle-btn-orange" title="Clear">
+            <button id="btn-clear-input" onclick="clearInputData()" disabled class="rp-cetak-circle-btn rp-cetak-circle-btn-orange opacity-40 cursor-not-allowed" title="Clear">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <button onclick="simpanInputData()" id="btn-simpan-input" disabled class="rp-cetak-circle-btn rp-cetak-circle-btn-orange opacity-40 cursor-not-allowed" title="Simpan Data Masuk">
@@ -2884,7 +2909,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
         <!-- ACTION BAR: TRANSAKSI — bulat, sejajar tombol back (bottom:14px), rata kiri.
              Sama treatment-nya dgn #sticky-total-bar di tab RIWAYAT TRANSAKSI. -->
         <div id="action-bar-transaksi" class="fixed left-0 items-center gap-3" style="bottom:14px;z-index:100;padding-left:26px;display:none">
-            <button onclick="clearTransaksi()" class="rp-cetak-circle-btn rp-cetak-circle-btn-orange" title="Clear">
+            <button id="btn-clear-transaksi" onclick="clearTransaksi()" disabled class="rp-cetak-circle-btn rp-cetak-circle-btn-orange opacity-40 cursor-not-allowed" title="Clear">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <button id="btn-simpan-transaksi" onclick="simpanTransaksi()" disabled class="rp-cetak-circle-btn rp-cetak-circle-btn-orange opacity-40 cursor-not-allowed" title="Simpan Transaksi">
@@ -5972,10 +5997,18 @@ function updateSSK(tab, rowId) {
         activeBtn.querySelector('.icon-box').className = "icon-box text-[#000000] bg-black/20 border-2 border-black/20 w-12 h-12 rounded-full flex items-center justify-center shadow-lg";
         activeBtn.querySelector('.nav-text').className = "nav-text text-[10px] font-black text-[#000000]";
 
-        // Tampilkan/sembunyikan action bar sesuai tab aktif
+        // Tampilkan/sembunyikan action bar sesuai tab aktif. Khusus tab 'input',
+        // action-bar-input (tombol CLEAR/SIMPAN bulat) HANYA milik mode STOK
+        // MASUK & RETUR -- mode BEBAN punya tombol SIMPAN sendiri di dalam form,
+        // jadi action-bar-input harus tetap disembunyikan walau tab aktifnya
+        // 'input'. Tanpa cek inputState.mode di sini, baris ini akan menimpa
+        // paksa jadi display:flex setiap kali _doSwitchTab('input') jalan --
+        // termasuk saat tombol BACK dipakai buat kembali dari RIWAYAT BEBAN ke
+        // tab INPUT DATA yang mode-nya masih 'beban' -- sehingga tombol CLEAR
+        // ikut nongol nyasar di atas panel CATAT BIAYA OPERASIONAL. (BUG FIX)
         const barInput = document.getElementById('action-bar-input');
         const barTrx = document.getElementById('action-bar-transaksi');
-        if (barInput) barInput.style.display = tabName === 'input' ? 'flex' : 'none';
+        if (barInput) barInput.style.display = (tabName === 'input' && inputState.mode !== 'beban') ? 'flex' : 'none';
         if (barTrx) barTrx.style.display = tabName === 'transaksi' ? 'flex' : 'none';
 
         // Kunci scroll halaman khusus tab INPUT DATA, TRANSAKSI, & STOK,
@@ -7436,6 +7469,11 @@ function updateSSK(tab, rowId) {
         // yang harus dievaluasi ulang tiap ada perubahan DOM di dalam #tab-input.
         const tabInputEl = document.getElementById('tab-input');
         if (tabInputEl) tabInputEl.classList.toggle('rp-mode-retur-active', mode === 'retur');
+        // Sama polanya dengan rp-mode-retur-active di atas: dipakai sebagai
+        // "kait" CSS supaya judul "Catat Biaya" bisa diwarnai biru muda khusus
+        // saat mode BEBAN aktif, tanpa menyentuh var(--input-accent) global
+        // (yang tetap dipakai mode MASUK & warna merah mode RETUR).
+        if (tabInputEl) tabInputEl.classList.toggle('rp-mode-beban-active', mode === 'beban');
         // Tombol CLEAR/SIMPAN bulat (action-bar-input) ikut jadi merah saat mode RETUR
         // aktif, biar serasi dengan tema merah RETUR STOK; kembali orange di mode lain.
         if (actionBar) actionBar.classList.toggle('rp-cetak-circle-btn-red-mode', mode === 'retur');
@@ -7821,6 +7859,34 @@ function updateSSK(tab, rowId) {
         btn.disabled = !ready;
         btn.classList.toggle('opacity-40', !ready);
         btn.classList.toggle('cursor-not-allowed', !ready);
+
+        _updateClearInputBtnState();
+    }
+
+    // Tombol CLEAR (action-bar-input) nonaktif selama form INPUT DATA masih
+    // kosong/pristine (belum ada brand/model dipilih, belum ada variasi diisi,
+    // dan -- khusus mode RETUR -- belum ada keterangan diketik). Begitu user
+    // memilih/mengisi apa saja di tab ini, tombol otomatis aktif. Dipanggil
+    // dari dalam _updateSimpanInputBtnState() supaya ikut semua titik panggil
+    // yang sudah ada (ganti brand/model, tambah/isi/hapus variasi, ketik
+    // keterangan retur, dll) tanpa perlu menambah panggilan baru di tiap tempat.
+    function _updateClearInputBtnState() {
+        const btn = document.getElementById('btn-clear-input');
+        if (!btn) return;
+
+        const list = document.getElementById('input-variasi-list');
+        const hasVariasi = list ? Array.from(list.children).some(row => {
+            const idNum = row.id.replace('input-row-', '');
+            return !_isInputRowPristine(idNum);
+        }) : false;
+        const keterangan = document.getElementById('input-retur-keterangan')?.value.trim() || '';
+
+        const dirty = !!inputState.brandId || !!inputState.modelId || hasVariasi
+            || (inputState.mode === 'retur' && keterangan.length > 0);
+
+        btn.disabled = !dirty;
+        btn.classList.toggle('opacity-40', !dirty);
+        btn.classList.toggle('cursor-not-allowed', !dirty);
     }
 
     function updateInputVariasiState() {
@@ -8426,6 +8492,30 @@ function updateSSK(tab, rowId) {
         btn.disabled = !ready;
         btn.classList.toggle('opacity-40', !ready);
         btn.classList.toggle('cursor-not-allowed', !ready);
+
+        _updateClearTrxBtnState();
+    }
+
+    // Sama konsepnya dengan _updateClearInputBtnState() di TAB INPUT DATA:
+    // tombol CLEAR nonaktif selama vendor/brand/model belum dipilih dan belum
+    // ada variasi item yang diisi, lalu otomatis aktif begitu user memilih
+    // atau mengisi apa saja. Dipanggil dari dalam _updateSimpanTrxBtnState()
+    // supaya ikut semua titik panggil yang sudah ada.
+    function _updateClearTrxBtnState() {
+        const btn = document.getElementById('btn-clear-transaksi');
+        if (!btn) return;
+
+        const list = document.getElementById('trx-variasi-list');
+        const hasVariasi = list ? Array.from(list.children).some(row => {
+            const idNum = row.id.replace('trx-row-', '');
+            return !_isTrxRowPristine(idNum);
+        }) : false;
+
+        const dirty = !!trxState.vendorId || !!trxState.brandId || !!trxState.modelId || hasVariasi;
+
+        btn.disabled = !dirty;
+        btn.classList.toggle('opacity-40', !dirty);
+        btn.classList.toggle('cursor-not-allowed', !dirty);
     }
 
     function _isTrxRowPristine(id) {
