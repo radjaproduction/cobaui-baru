@@ -4356,33 +4356,25 @@ async function fetchBayarSebagianData() {
             .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
 
-    const PESANAN_SELESAI_LOCAL_KEY = 'rp_pesanan_selesai_local';
-    function _getPesananSelesaiSet() {
-        try {
-            const raw = localStorage.getItem(PESANAN_SELESAI_LOCAL_KEY);
-            const arr = raw ? JSON.parse(raw) : [];
-            return new Set(Array.isArray(arr) ? arr : []);
-        } catch (e) { return new Set(); }
-    }
-    function _addPesananSelesaiLocal(orderCode) {
-        try {
-            const set = _getPesananSelesaiSet();
-            set.add(orderCode);
-            // Jaga daftar tidak membengkak selamanya — cukup simpan 300 kode terakhir.
-            let arr = Array.from(set);
-            if (arr.length > 300) arr = arr.slice(arr.length - 300);
-            localStorage.setItem(PESANAN_SELESAI_LOCAL_KEY, JSON.stringify(arr));
-        } catch (e) { console.warn('Gagal simpan status selesai lokal:', e.message); }
-    }
+    // Status "selesai disiapkan" disimpan LANGSUNG DI DATABASE (kolom disiapkan_selesai
+    // pada produksi_orders), BUKAN di localStorage lagi. Sebelumnya status ini cuma
+    // tersimpan di localStorage HP yang mengklik tombolnya — akibatnya (a) order yang
+    // sama muncul lagi sebagai "belum selesai" di HP/browser lain, dan (b) di beberapa
+    // browser (terutama saat file dibuka langsung dari file:// alih-alih lewat server),
+    // localStorage bisa tidak persisten antar reload sama sekali, jadi tombol "Disiapkan"
+    // yang sudah diklik seolah "tidak nyimpen" dan popup selalu muncul lagi tiap refresh.
+    // Dengan kolom DB, statusnya otomatis konsisten di semua device & tahan reload/refresh.
+    // CATATAN: kolom ini perlu ditambahkan dulu ke tabel produksi_orders lewat migration
+    // SQL (ALTER TABLE ... ADD COLUMN disiapkan_selesai boolean NOT NULL DEFAULT false)
+    // sebelum kode ini dipakai, kalau belum query di bawah akan error "column not found".
 
     // Ambil semua order yang masih "aktif" (stage 0 = Menunggu, atau stage 1 = Diterima/
-    // sedang disiapkan) — lalu di sisi client, order yang sudah ditandai selesai lokal
-    // difilter keluar (query DB tidak tahu soal status lokal ini).
+    // sedang disiapkan) — disiapkan_selesai diikutkan supaya bisa difilter di render.
     async function _fetchAktifPesananOrders() {
         if (!sbClient) return [];
         const { data, error } = await sbClient
             .from(PESANAN_TABLE)
-            .select('order_code, items, note, stage, created_at')
+            .select('order_code, items, note, stage, created_at, disiapkan_selesai')
             .in('stage', [0, 1])
             .order('created_at', { ascending: false });
         if (error) { console.warn('Gagal ambil daftar pesanan aktif:', error.message); return []; }
@@ -4401,8 +4393,7 @@ async function fetchBayarSebagianData() {
     function _renderRincianPesananList(orders) {
         const wrap = document.getElementById('rincian-pesanan-list');
         if (!wrap) return;
-        const selesaiSet = _getPesananSelesaiSet();
-        const aktif = (orders || []).filter(o => !selesaiSet.has(o.order_code));
+        const aktif = (orders || []).filter(o => !o.disiapkan_selesai);
         if (aktif.length === 0) {
             wrap.innerHTML = '<div style="padding:30px 10px;text-align:center;color:#888;font-size:12px;">Tidak ada pesanan aktif saat ini 🎉</div>';
             return;
@@ -4474,13 +4465,24 @@ async function fetchBayarSebagianData() {
                 if (btnEl) { btnEl.disabled = false; btnEl.innerHTML = '<i class="fa-solid fa-check"></i> Konfirmasi'; }
             }
         } else if (action === 'disiapkan') {
-            // Selesai disiapkan cukup ditandai lokal — tidak menyentuh DB/stage, supaya
-            // app Pesanan (yang cuma kenal stage 0/1) tidak terpengaruh sama sekali.
-            _addPesananSelesaiLocal(orderCode);
-            showToast('📦 ' + orderCode + ' ditandai selesai disiapkan');
-            const orders = await _fetchAktifPesananOrders();
-            _renderRincianPesananList(orders);
-            _refreshFabPesananBadge();
+            // Ditandai selesai LANGSUNG DI DATABASE (kolom disiapkan_selesai) — bukan
+            // stage-nya yang diubah (tetap 1, app Pesanan tidak terpengaruh), supaya
+            // statusnya konsisten di semua device & tidak hilang saat refresh/reload.
+            if (!sbClient) { showToast('❌ Tidak ada koneksi ke server'); return; }
+            if (btnEl) { btnEl.disabled = true; btnEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>'; }
+            try {
+                const { error } = await sbClient.from(PESANAN_TABLE)
+                    .update({ disiapkan_selesai: true }).eq('order_code', orderCode);
+                if (error) throw error;
+                showToast('📦 ' + orderCode + ' ditandai selesai disiapkan');
+                const orders = await _fetchAktifPesananOrders();
+                _renderRincianPesananList(orders);
+                _refreshFabPesananBadge();
+            } catch (e) {
+                console.error('Gagal menandai selesai disiapkan:', e);
+                showToast('❌ Gagal menandai selesai, coba lagi');
+                if (btnEl) { btnEl.disabled = false; btnEl.innerHTML = '<i class="fa-solid fa-box"></i> Disiapkan'; }
+            }
         }
     }
 
@@ -4495,7 +4497,7 @@ async function fetchBayarSebagianData() {
     });
 
     // Badge di FAB "Pesanan" = jumlah order aktif (stage 0/1) DIKURANGI yang sudah
-    // ditandai selesai lokal di HP ini — beda dari pesananMenungguCount (badge lonceng)
+    // ditandai selesai_disiapkan di DB — beda dari pesananMenungguCount (badge lonceng)
     // yang cuma hitung stage 0. Di-refresh setiap _updatePesananBellBadge() dipanggil
     // (realtime change) supaya tetap akurat tanpa polling terpisah.
     async function _refreshFabPesananBadge() {
@@ -4503,8 +4505,7 @@ async function fetchBayarSebagianData() {
         if (!badge || !sbClient) return;
         try {
             const orders = await _fetchAktifPesananOrders();
-            const selesaiSet = _getPesananSelesaiSet();
-            const aktifCount = orders.filter(o => !selesaiSet.has(o.order_code)).length;
+            const aktifCount = orders.filter(o => !o.disiapkan_selesai).length;
             if (aktifCount > 0) {
                 badge.textContent = aktifCount > 99 ? '99+' : String(aktifCount);
                 badge.classList.remove('hidden');
@@ -4927,9 +4928,41 @@ async function fetchBayarSebagianData() {
     // dan HANYA grup yang benar-benar berubah — bukan semua 11 tabel & semua tampilan.
     let _dirtyGroups = new Set();
     let _realtimePayloadQueue = [];
+
+    // ==================== ANTI-FLICKER: GEMA REALTIME DARI TULISAN SENDIRI ====================
+    // Bug: saat edit qty transaksi (simpanEditQtyTrx) mengubah >1 warna/ukuran sekaligus,
+    // tiap update() ke transaksi_item memicu event Realtime yang dipantulkan BALIK ke diri
+    // sendiri. Karena jeda jaringan tiap update tidak sama, gema-gema ini sering jatuh di
+    // window debounce (250ms) yang BERBEDA-BEDA → list Riwayat Transaksi di-render ulang
+    // penuh (innerHTML rebuild) berkali-kali dalam <1 detik → terlihat "berkedip".
+    // Fix: tandai (id item + qty baru) yang baru saja KITA tulis sendiri. Kalau gema
+    // Realtime yang datang persis cocok dengan tanda ini, jangan ikut memicu render —
+    // data di layar sudah benar (sudah di-update manual di appData saat menulis), jadi
+    // render dari gema itu cuma duplikat percuma.
+    const _pendingOwnQtyWrites = new Set();
+    function _markOwnQtyWrite(itemId, qty) {
+        if (!itemId) return; // tidak bisa dilacak tanpa id pasti — biarkan render seperti biasa
+        const key = itemId + ':' + qty;
+        _pendingOwnQtyWrites.add(key);
+        // Auto-bersihkan kalau gemanya ternyata tidak pernah datang (mis. Realtime lagi
+        // terputus), supaya Set ini tidak membengkak terus-menerus.
+        setTimeout(() => _pendingOwnQtyWrites.delete(key), 5000);
+    }
+
     function onRealtimeChange(payload) {
         const group = REALTIME_TABLE_GROUP[payload.table];
         if (group) _dirtyGroups.add(group);
+
+        // Tandai payload ini sebagai gema tulisan sendiri (kalau cocok) SEBELUM masuk antrean,
+        // supaya nanti gampang difilter saat debounce selesai.
+        if (payload.table === 'transaksi_item' && payload.eventType === 'UPDATE' && payload.new) {
+            const key = payload.new.id + ':' + payload.new.qty;
+            if (_pendingOwnQtyWrites.has(key)) {
+                _pendingOwnQtyWrites.delete(key);
+                payload._isOwnEcho = true;
+            }
+        }
+
         _realtimePayloadQueue.push(payload);
         clearTimeout(_realtimeDebounceTimer);
         _realtimeDebounceTimer = setTimeout(async () => {
@@ -4938,19 +4971,28 @@ async function fetchBayarSebagianData() {
             const payloads = _realtimePayloadQueue;
             _realtimePayloadQueue = [];
             try {
+                // 0) Grup yang SEMUA payload penyebabnya adalah gema tulisan sendiri: lewati
+                // total (skip patch, fetch, dan render) — datanya sudah benar di appData,
+                // merender ulang di sini cuma bikin list "berkedip" tanpa ada perubahan nyata
+                // yang perlu ditampilkan.
+                const groupsToProcess = groups.filter(g => {
+                    const groupPayloads = payloads.filter(p => REALTIME_TABLE_GROUP[p.table] === g);
+                    return groupPayloads.length === 0 || !groupPayloads.every(p => p._isOwnEcho);
+                });
+
                 // 1) Grup yang bisa ditambal langsung dari payload (tanpa network fetch)
                 const patchedOk = new Set();
-                groups.forEach(g => {
+                groupsToProcess.forEach(g => {
                     if (INCREMENTAL_PATCH_GROUPS.has(g)) {
                         const groupPayloads = payloads.filter(p => REALTIME_TABLE_GROUP[p.table] === g);
                         if (_applyIncrementalPatch(g, groupPayloads)) patchedOk.add(g);
                     }
                 });
                 // 2) Sisanya (termasuk yang gagal ditambal & butuh fallback) tetap full-fetch
-                const groupsToFetch = groups.filter(g => !patchedOk.has(g));
+                const groupsToFetch = groupsToProcess.filter(g => !patchedOk.has(g));
                 await Promise.all(groupsToFetch.map(g => REALTIME_GROUP_HANDLERS[g]?.fetch?.()));
-                // 3) Render semua grup yang berubah (baik yang ditambal maupun yang di-fetch ulang)
-                groups.forEach(g => REALTIME_GROUP_HANDLERS[g]?.render?.());
+                // 3) Render semua grup yang benar-benar perlu di-refresh
+                groupsToProcess.forEach(g => REALTIME_GROUP_HANDLERS[g]?.render?.());
             } catch (e) {
                 console.warn('Realtime refresh gagal:', e.message);
             }
@@ -10435,6 +10477,7 @@ function updateSSK(tab, rowId) {
             for (const { item, qtyBaru } of updates) {
                 let error;
                 if (item.id) {
+                    _markOwnQtyWrite(item.id, qtyBaru); // tandai dulu SEBELUM update, biar gema Realtime-nya kekejar
                     ({ error } = await sbClient.from('transaksi_item').update({ qty: qtyBaru }).eq('id', item.id));
                 } else {
                     ({ error } = await sbClient.from('transaksi_item')
