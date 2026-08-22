@@ -1369,6 +1369,10 @@
 .rp-stock-fab-transaksi{bottom:176px;background:linear-gradient(145deg,#2955a3,#123566);box-shadow:0 12px 28px rgba(15,42,92,.4)}
 .rp-stock-fab-transaksi i{color:#fff}
 .rp-stock-fab-transaksi span{color:#fff}
+.rp-stock-fab-pesanan{bottom:260px;background:linear-gradient(145deg,#e6396b,#a3123f);box-shadow:0 12px 28px rgba(163,18,63,.4)}
+.rp-stock-fab-pesanan i{color:#fff}
+.rp-stock-fab-pesanan span{color:#fff}
+.rp-stock-fab-pesanan .vendor-notif-badge{position:absolute;top:-4px;right:-4px;}
 .rp-nav-toggle{position:fixed;right:26px;bottom:14px;width:66px;height:66px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .22s ease,background .22s ease,color .22s ease}
 .rp-nav-toggle i{position:relative;top:2px}
 .rp-nav-toggle:active{transform:scale(.92)}
@@ -2609,6 +2613,10 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                 </div>
                 <p id="stok-brand-realtime-note" class="rp-brand-realtime-note">Update Stok Secara <span>Realtime</span></p>
 
+                <button type="button" id="fab-pesanan" class="rp-stock-fab rp-stock-fab-pesanan" onclick="bukaPopupRincianPesanan()">
+                    <i class="fa-solid fa-box-open"></i><span>Pesanan</span>
+                    <div id="fab-pesanan-badge" class="vendor-notif-badge hidden">0</div>
+                </button>
                 <button type="button" class="rp-stock-fab rp-stock-fab-transaksi" onclick="switchTab('transaksi')"><i class="fa-solid fa-handshake"></i><span>Transaksi</span></button>
                 <button type="button" class="rp-stock-fab" onclick="switchTab('input')"><i class="fa-solid fa-plus"></i><span>Input Stok</span></button>
             </div>
@@ -4447,6 +4455,10 @@ async function fetchBayarSebagianData() {
             if (pesananMenungguCount <= 0) tutupPopupPesananKonfirmasi();
             else _renderPopupPesananKonfirmasi();
         }
+        // FAB "Pesanan" (badge jumlah aktif = menunggu + disiapkan yang belum ditandai
+        // selesai lokal) punya sumber data sendiri (fetch, bukan cuma count), jadi
+        // di-refresh lewat fungsi terpisah — lihat _refreshFabPesananBadge().
+        _refreshFabPesananBadge();
     }
 
     // Dipanggil dari tombol nav Riwayat (yang menyatu dengan bel/badge pesanan). Kalau masih
@@ -4502,6 +4514,172 @@ async function fetchBayarSebagianData() {
             showToast('❌ Gagal konfirmasi pesanan, coba lagi');
             if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-check-double"></i> KONFIRMASI SEMUA (' + jumlah + ')'; }
         }
+    }
+
+    // ================================================================
+    // POPUP RINCIAN PESANAN (FAB "Pesanan"): daftar per-order dengan detail item,
+    // beda dari popup-pesanan-konfirmasi yang cuma konfirmasi massal tanpa detail.
+    // Alur per order: Menunggu (stage 0) --Konfirmasi--> stage diubah jadi 1 di DB
+    // (ini yang mematikan alarm & badge lonceng, sama seperti Konfirmasi Semua) -->
+    // "📦 Disiapkan" --klik lagi--> ditandai selesai HANYA secara lokal (localStorage
+    // di HP ini), tanpa perlu kolom stage ke-3 di DB, supaya tidak mengubah skema yang
+    // sudah dipakai app Pesanan (STAGES di sana cuma kenal 2 elemen: 0 dan 1).
+    // ================================================================
+
+    function _escPesanan(str) {
+        return String(str == null ? '' : str)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    const PESANAN_SELESAI_LOCAL_KEY = 'rp_pesanan_selesai_local';
+    function _getPesananSelesaiSet() {
+        try {
+            const raw = localStorage.getItem(PESANAN_SELESAI_LOCAL_KEY);
+            const arr = raw ? JSON.parse(raw) : [];
+            return new Set(Array.isArray(arr) ? arr : []);
+        } catch (e) { return new Set(); }
+    }
+    function _addPesananSelesaiLocal(orderCode) {
+        try {
+            const set = _getPesananSelesaiSet();
+            set.add(orderCode);
+            // Jaga daftar tidak membengkak selamanya — cukup simpan 300 kode terakhir.
+            let arr = Array.from(set);
+            if (arr.length > 300) arr = arr.slice(arr.length - 300);
+            localStorage.setItem(PESANAN_SELESAI_LOCAL_KEY, JSON.stringify(arr));
+        } catch (e) { console.warn('Gagal simpan status selesai lokal:', e.message); }
+    }
+
+    // Ambil semua order yang masih "aktif" (stage 0 = Menunggu, atau stage 1 = Diterima/
+    // sedang disiapkan) — lalu di sisi client, order yang sudah ditandai selesai lokal
+    // difilter keluar (query DB tidak tahu soal status lokal ini).
+    async function _fetchAktifPesananOrders() {
+        if (!sbClient) return [];
+        const { data, error } = await sbClient
+            .from(PESANAN_TABLE)
+            .select('order_code, items, note, stage, created_at')
+            .in('stage', [0, 1])
+            .order('created_at', { ascending: false });
+        if (error) { console.warn('Gagal ambil daftar pesanan aktif:', error.message); return []; }
+        return data || [];
+    }
+
+    function _formatItemPesanan(it) {
+        const nama = it.name || it.nama || it.productName || it.pid || 'Item';
+        const warna = it.color || it.warna || '';
+        const ukuran = it.size || it.ukuran || '';
+        const qty = it.qty || 0;
+        const rincian = [warna, ukuran].filter(Boolean).join(', ');
+        return _escPesanan(nama) + (rincian ? ' — ' + _escPesanan(rincian) : '') + ' x' + qty;
+    }
+
+    function _renderRincianPesananList(orders) {
+        const wrap = document.getElementById('rincian-pesanan-list');
+        if (!wrap) return;
+        const selesaiSet = _getPesananSelesaiSet();
+        const aktif = (orders || []).filter(o => !selesaiSet.has(o.order_code));
+        if (aktif.length === 0) {
+            wrap.innerHTML = '<div style="padding:30px 10px;text-align:center;color:#888;font-size:12px;">Tidak ada pesanan aktif saat ini 🎉</div>';
+            return;
+        }
+        wrap.innerHTML = aktif.map(o => {
+            const items = Array.isArray(o.items) ? o.items : [];
+            const itemsHtml = items.length
+                ? items.map(it => '<div style="font-size:11px;color:#333;padding:1px 0;">• ' + _formatItemPesanan(it) + '</div>').join('')
+                : '<div style="font-size:11px;color:#999;">(tidak ada rincian item)</div>';
+            const isMenunggu = (o.stage || 0) === 0;
+            const noteHtml = o.note ? '<div style="font-size:10.5px;color:#a3123f;margin-top:4px;"><i class="fa-solid fa-note-sticky"></i> ' + _escPesanan(o.note) + '</div>' : '';
+            const btnHtml = isMenunggu
+                ? '<button type="button" class="rp-rincian-pesanan-btn" data-action="konfirmasi" data-code="' + _escPesanan(o.order_code) + '" style="background:linear-gradient(90deg,#16a34a,#22c55e);color:#fff;border:none;border-radius:10px;padding:9px 14px;font-size:11px;font-weight:900;white-space:nowrap;cursor:pointer;"><i class="fa-solid fa-check"></i> Konfirmasi</button>'
+                : '<button type="button" class="rp-rincian-pesanan-btn" data-action="disiapkan" data-code="' + _escPesanan(o.order_code) + '" style="background:linear-gradient(90deg,#ff8c00,#ffb347);color:#fff;border:none;border-radius:10px;padding:9px 14px;font-size:11px;font-weight:900;white-space:nowrap;cursor:pointer;"><i class="fa-solid fa-box"></i> Disiapkan</button>';
+            return '<div style="background:#f7f8fa;border:1.5px solid ' + (isMenunggu ? '#fca5a5' : '#fdba74') + ';border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px;">'
+                + '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">'
+                + '<span style="font-size:12px;font-weight:900;color:#111;">' + _escPesanan(o.order_code) + '</span>'
+                + '<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:999px;background:' + (isMenunggu ? '#fee2e2;color:#b91c1c' : '#ffedd5;color:#c2410c') + ';">' + (isMenunggu ? 'MENUNGGU' : 'DISIAPKAN') + '</span>'
+                + '</div>'
+                + '<div>' + itemsHtml + '</div>'
+                + noteHtml
+                + '<div style="display:flex;justify-content:flex-end;margin-top:2px;">' + btnHtml + '</div>'
+                + '</div>';
+        }).join('');
+    }
+
+    async function bukaPopupRincianPesanan() {
+        const el = document.getElementById('popup-rincian-pesanan');
+        if (el) { el.classList.remove('hidden'); el.classList.add('flex'); }
+        const wrap = document.getElementById('rincian-pesanan-list');
+        if (wrap) wrap.innerHTML = '<div style="padding:30px 10px;text-align:center;color:#888;font-size:12px;"><i class="fa-solid fa-spinner fa-spin"></i> Memuat pesanan...</div>';
+        const orders = await _fetchAktifPesananOrders();
+        _renderRincianPesananList(orders);
+    }
+
+    function tutupPopupRincianPesanan() {
+        const el = document.getElementById('popup-rincian-pesanan');
+        if (el) { el.classList.add('hidden'); el.classList.remove('flex'); }
+    }
+
+    // Event delegation pada wrapper list — aman dari note yang mengandung tanda kutip,
+    // karena order_code diambil dari atribut data-* bukan diselipkan ke string JS inline.
+    async function _prosesRincianPesanan(action, orderCode, btnEl) {
+        if (!orderCode) return;
+        if (action === 'konfirmasi') {
+            if (!sbClient) { showToast('❌ Tidak ada koneksi ke server'); return; }
+            if (btnEl) { btnEl.disabled = true; btnEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>'; }
+            try {
+                const { error } = await sbClient.from(PESANAN_TABLE).update({ stage: 1 }).eq('order_code', orderCode);
+                if (error) throw error;
+                showToast('✅ Pesanan ' + orderCode + ' dikonfirmasi');
+                // pesananMenungguCount & badge lonceng ikut ter-update otomatis lewat
+                // onPesananRealtimeChange (event UPDATE stage 0 -> 1).
+                const orders = await _fetchAktifPesananOrders();
+                _renderRincianPesananList(orders);
+            } catch (e) {
+                console.error('Gagal konfirmasi pesanan:', e);
+                showToast('❌ Gagal konfirmasi, coba lagi');
+                if (btnEl) { btnEl.disabled = false; btnEl.innerHTML = '<i class="fa-solid fa-check"></i> Konfirmasi'; }
+            }
+        } else if (action === 'disiapkan') {
+            // Selesai disiapkan cukup ditandai lokal — tidak menyentuh DB/stage, supaya
+            // app Pesanan (yang cuma kenal stage 0/1) tidak terpengaruh sama sekali.
+            _addPesananSelesaiLocal(orderCode);
+            showToast('📦 ' + orderCode + ' ditandai selesai disiapkan');
+            const orders = await _fetchAktifPesananOrders();
+            _renderRincianPesananList(orders);
+            _refreshFabPesananBadge();
+        }
+    }
+
+    // Delegasi dipasang di document (bukan langsung di #rincian-pesanan-list), karena
+    // markup popup ini berada SETELAH tag <script> ini di HTML — elemennya belum ada di
+    // DOM saat baris ini dieksekusi. Klik pada tombol di dalam list tetap ke-bubble
+    // sampai document, jadi delegation di sini aman dipasang kapan saja.
+    document.addEventListener('click', (ev) => {
+        const btn = ev.target.closest('.rp-rincian-pesanan-btn');
+        if (!btn) return;
+        _prosesRincianPesanan(btn.dataset.action, btn.dataset.code, btn);
+    });
+
+    // Badge di FAB "Pesanan" = jumlah order aktif (stage 0/1) DIKURANGI yang sudah
+    // ditandai selesai lokal di HP ini — beda dari pesananMenungguCount (badge lonceng)
+    // yang cuma hitung stage 0. Di-refresh setiap _updatePesananBellBadge() dipanggil
+    // (realtime change) supaya tetap akurat tanpa polling terpisah.
+    async function _refreshFabPesananBadge() {
+        const badge = document.getElementById('fab-pesanan-badge');
+        if (!badge || !sbClient) return;
+        try {
+            const orders = await _fetchAktifPesananOrders();
+            const selesaiSet = _getPesananSelesaiSet();
+            const aktifCount = orders.filter(o => !selesaiSet.has(o.order_code)).length;
+            if (aktifCount > 0) {
+                badge.textContent = aktifCount > 99 ? '99+' : String(aktifCount);
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+            const fabBtn = document.getElementById('fab-pesanan');
+            if (fabBtn) fabBtn.classList.toggle('pesanan-bell-ring', pesananMenungguCount > 0);
+        } catch (e) { console.warn('Gagal refresh badge FAB pesanan:', e.message); }
     }
 
     async function _requestPesananNotifPermission() {
@@ -12451,6 +12629,24 @@ function updateSSK(tab, rowId) {
                 <button onclick="tutupPopupPesananKonfirmasi();switchTab('riwayat')" style="background:none;border:none;color:#666;font-size:11px;font-weight:700;text-decoration:underline;cursor:pointer;padding:2px;">
                     Lihat detail di tab Riwayat
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP RINCIAN PESANAN (dari FAB "Pesanan"): daftar tiap order + item + tombol
+         Konfirmasi/Disiapkan per order, dipakai event delegation supaya aman dari note
+         yang mengandung tanda kutip. -->
+    <div id="popup-rincian-pesanan" class="hidden fixed inset-0 z-[99998] items-center justify-center" style="background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);padding:16px;" onclick="if(event.target===this) tutupPopupRincianPesanan()">
+        <div style="background:#ffffff;border-radius:20px;width:100%;max-width:420px;max-height:85vh;border:2px solid rgba(118,153,201,.4);overflow:hidden;display:flex;flex-direction:column;">
+            <div style="background:linear-gradient(90deg,#e6396b,#a3123f);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-radius:18px 18px 0 0;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:34px;height:34px;background:rgba(0,0,0,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;color:#fff;"><i class="fa-solid fa-box-open"></i></div>
+                    <span style="font-family:Montserrat,sans-serif;font-weight:900;font-size:13px;color:#fff;letter-spacing:0.5px;">RINCIAN PESANAN</span>
+                </div>
+                <button onclick="tutupPopupRincianPesanan()" style="width:32px;height:32px;background:rgba(0,0,0,0.18);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:14px;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="rincian-pesanan-list" style="padding:14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;flex:1;">
+                <!-- Diisi oleh _renderRincianPesananList() -->
             </div>
         </div>
     </div>
