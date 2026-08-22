@@ -3711,7 +3711,35 @@ BEGIN
     BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE transaksi; EXCEPTION WHEN duplicate_object THEN NULL; END;
     BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE transaksi_item; EXCEPTION WHEN duplicate_object THEN NULL; END;
     BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE pelunasan; EXCEPTION WHEN duplicate_object THEN NULL; END;
-END $$;`;
+END $$;
+
+-- ============================================
+-- PERBAIKAN SEQUENCE ID SETELAH RESTORE (wajib, dipanggil otomatis oleh app tiap
+-- selesai RESTORE DATABASE dari Pengaturan) — tanpa ini, transaksi/data baru yang
+-- diinput setelah restore bisa gagal simpan dengan error "duplicate key value
+-- violates unique constraint ..._pkey" karena sequence auto-increment tidak ikut
+-- naik saat restore memasukkan baris dengan id asli dari file backup.
+-- ============================================
+CREATE OR REPLACE FUNCTION public.fix_id_sequences()
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $fn$
+BEGIN
+    PERFORM setval(pg_get_serial_sequence('vendor','id'), COALESCE((SELECT MAX(id) FROM vendor), 1));
+    PERFORM setval(pg_get_serial_sequence('brand','id'), COALESCE((SELECT MAX(id) FROM brand), 1));
+    PERFORM setval(pg_get_serial_sequence('warna','id'), COALESCE((SELECT MAX(id) FROM warna), 1));
+    PERFORM setval(pg_get_serial_sequence('ukuran','id'), COALESCE((SELECT MAX(id) FROM ukuran), 1));
+    PERFORM setval(pg_get_serial_sequence('model','id'), COALESCE((SELECT MAX(id) FROM model), 1));
+    PERFORM setval(pg_get_serial_sequence('riwayat_input','id'), COALESCE((SELECT MAX(id) FROM riwayat_input), 1));
+    PERFORM setval(pg_get_serial_sequence('riwayat_input_item','id'), COALESCE((SELECT MAX(id) FROM riwayat_input_item), 1));
+    PERFORM setval(pg_get_serial_sequence('transaksi','id'), COALESCE((SELECT MAX(id) FROM transaksi), 1));
+    PERFORM setval(pg_get_serial_sequence('transaksi_item','id'), COALESCE((SELECT MAX(id) FROM transaksi_item), 1));
+    PERFORM setval(pg_get_serial_sequence('pelunasan','id'), COALESCE((SELECT MAX(id) FROM pelunasan), 1));
+END;
+$fn$;
+
+GRANT EXECUTE ON FUNCTION public.fix_id_sequences() TO anon, authenticated;`;
 
     function tampilkanModalSQL(fromConfig) {
         // Hapus modal lama jika ada
@@ -8606,11 +8634,19 @@ function updateSSK(tab, rowId) {
             vendor: snapVendorNama, brand: snapBrandNama, model: snapModelNama,
             harga: snapModelHarga, harga_modal: snapModelHargaModal, status: snapStatusBayar, tanggal, jam
         }).select().single();
-        if (trxErr) { showToast('❌ Gagal simpan transaksi'); setButtonLoading(_btnSimpanTrx, false); _trxIsSaving = false; _updateSimpanTrxBtnState(); return; }
+        // PERBAIKAN: sebelumnya toast cuma bilang "Gagal simpan transaksi" tanpa alasan, jadi
+        // susah didiagnosa (mis. project Supabase FREE lagi paused, API key tidak valid, dst).
+        // Sekarang pesan error asli dari Supabase ikut ditampilkan & di-log ke console.
+        if (trxErr) {
+            console.error('[simpanTransaksi] Insert transaksi gagal:', trxErr);
+            showToast('❌ Gagal simpan transaksi: ' + (trxErr.message || trxErr.code || 'unknown error'));
+            setButtonLoading(_btnSimpanTrx, false); _trxIsSaving = false; _updateSimpanTrxBtnState(); return;
+        }
         const { data: insertedTrxItems, error: itemErr } = await sbClient.from('transaksi_item').insert(items.map(i => ({ transaksi_id: trx.id, ...i }))).select();
         if (itemErr) {
+            console.error('[simpanTransaksi] Insert transaksi_item gagal:', itemErr);
             await sbClient.from('transaksi').delete().eq('id', trx.id);
-            showToast('❌ Gagal simpan item transaksi. Dibatalkan.');
+            showToast('❌ Gagal simpan item transaksi: ' + (itemErr.message || itemErr.code || 'unknown error') + '. Dibatalkan.');
             setButtonLoading(_btnSimpanTrx, false);
             _trxIsSaving = false;
             _updateSimpanTrxBtnState();
@@ -12362,6 +12398,21 @@ function updateSSK(tab, rowId) {
                                     const { error: pengaturanErr } = await sbClient.from('pengaturan').upsert(safePengaturan, { onConflict: 'key' });
                                     if (pengaturanErr) throw new Error(`Gagal restore pengaturan: ${pengaturanErr.message}`);
                                 }
+                            }
+
+                            // PERBAIKAN: baris di atas di-insert dengan `id` ASLI dari file backup (wajib,
+                            // supaya relasi transaksi_item.transaksi_id dst tetap benar) — tapi sequence
+                            // auto-increment Postgres untuk kolom id tidak otomatis ikut naik ke id
+                            // tertinggi yang baru saja dimasukkan manual ini. Tanpa baris ini, transaksi
+                            // BARU yang diinput lewat form setelah restore bisa nabrak id lama yang sudah
+                            // dipakai backup -> error "duplicate key value violates unique constraint
+                            // transaksi_pkey" (atau tabel lain). Panggil fungsi SQL fix_id_sequences()
+                            // (lihat file fix_sequences.sql) untuk menyamakan sequence ke MAX(id) tiap tabel.
+                            try {
+                                const { error: seqErr } = await sbClient.rpc('fix_id_sequences');
+                                if (seqErr) console.warn('Gagal sinkronkan sequence id setelah restore:', seqErr.message);
+                            } catch (seqEx) {
+                                console.warn('Gagal sinkronkan sequence id setelah restore:', seqEx.message);
                             }
 
                             showToast('✅ Restore selesai! Memuat ulang data...');
