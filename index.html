@@ -691,7 +691,7 @@
             justify-content: flex-start;
             gap: 6px;
             width: 100%;
-            height: 34px;
+            height: 44px;
             border-radius: 8px;
             border: 1px solid #7699C9;
             background: #06142B;
@@ -699,7 +699,7 @@
             overflow: hidden;
         }
         .input-warna-dot {
-            width: 17px; height: 17px;
+            width: 21px; height: 21px;
             border-radius: 50%;
             border: 2px solid rgba(255,255,255,.25);
             flex-shrink: 0;
@@ -708,7 +708,7 @@
         .input-warna-name {
             flex: 1;
             min-width: 0;
-            font-size: 10.5px;
+            font-size: 12px;
             font-weight: 900;
             color: #ffffff;
             -webkit-text-fill-color: #ffffff;
@@ -741,13 +741,13 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            height: 34px;
+            height: 44px;
             border-radius: 8px;
             border: 1px solid #7699C9;
             background: #06142B;
             color: #ffffff;
             -webkit-text-fill-color: #ffffff;
-            font-size: 10.5px;
+            font-size: 12px;
             font-weight: 900;
             text-align: center;
             padding: 0 3px;
@@ -790,13 +790,13 @@
         .input-inline-field.delete-col { align-items: center; }
         .input-inline-qty, .input-inline-ssk {
             width: 100%;
-            height: 34px;
+            height: 44px;
             border-radius: 8px;
             border: 1px solid #7699C9;
             background: #06142B;
             color: #ffffff;
             -webkit-text-fill-color: #ffffff;
-            font-size: 10.5px;
+            font-size: 13px;
             font-weight: 900;
             text-align: center;
             padding: 0 2px;
@@ -808,95 +808,8 @@
             position: fixed;
             width: 100%;
         }
-        .input-sheet-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 99980;
-            background: rgba(0,0,0,0.7);
-            display: none;
-            align-items: stretch;
-            justify-content: stretch;
-            padding: 0;
-            backdrop-filter: blur(4px);
-        }
-        .input-sheet-overlay.active { display: flex; }
-        .input-sheet-panel {
-            width: 100%;
-            max-width: 100%;
-            height: 100vh;
-            height: 100dvh;
-            max-height: 100vh;
-            max-height: 100dvh;
-            background: #ffffff;
-            border: none;
-            border-radius: 0;
-            box-shadow: none;
-            overflow: hidden;
-            animation: inputSheetIn 0.22s ease-out;
-            display: flex;
-            flex-direction: column;
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: env(safe-area-inset-bottom);
-        }
         @keyframes inputSheetIn { from { transform: translateY(28px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .input-sheet-body {
-            flex: 1 1 auto;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        .input-sheet-section {
-            background: #133a66;
-            border: 1px solid #7699C9;
-            border-radius: 14px;
-            padding: 12px;
-        }
-        .input-choice-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 8px;
-            max-height: 156px;
-            overflow-y: auto;
-        }
-        .input-choice-btn {
-            min-height: 46px;
-            border-radius: 10px;
-            border: 1px solid #7699C9;
-            background: #06142B;
-            color: #eaf1fb;
-            font-size: 11px;
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 8px;
-            padding: 10px;
-            text-align: left;
-        }
-        .input-choice-btn.active {
-            border-color: #7699C9;
-            background: rgba(255,140,0,0.14);
-            color: var(--brand-main);
-        }
-        .input-sheet-qty {
-            width: 100%;
-            height: 64px;
-            background: #06142B;
-            border: 1px solid #7699C9;
-            border-radius: 16px;
-            color: #eaf1fb;
-            font-size: 30px;
-            font-weight: 900;
-            text-align: center;
-            outline: none;
-        }
-        .input-sheet-actions {
-            position: sticky;
-            bottom: 0;
-            background: #ffffff;
-            border-top: 1px solid #7699C9;
-            padding: 12px 16px 14px;
-            flex-shrink: 0;
-        }
+
 
         .qty-numpad-grid {
             display: grid;
@@ -1245,7 +1158,7 @@
         .rp-input-add-btn { width: 100%; padding: 15px; border-radius: 12px; border: 2px dashed rgba(255,140,0,.55); color: var(--input-accent); font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 8px; background: transparent; }
 
         /* ---------- TAB TRANSAKSI: variabel brand lokal jadi UNGU ---------- */
-        #tab-transaksi, #trx-variasi-sheet, #action-bar-transaksi {
+        #tab-transaksi, #action-bar-transaksi {
             --brand-main: var(--trx-accent);
             --brand-gradient: var(--trx-gradient);
         }
@@ -1254,15 +1167,11 @@
            lihat #trx-tab-nav-backdrop untuk penjelasan lengkap. */
         body[data-active-tab="transaksi"] #trx-tab-nav-backdrop { display: block !important; background: var(--trx-bg) !important; }
         #tab-transaksi .bg-darkBg,
-        #trx-variasi-sheet .bg-darkBg,
         #action-bar-transaksi .bg-darkBg { background-color: var(--trx-bg) !important; }
-        #tab-transaksi .bg-cardBg,
-        #trx-variasi-sheet .bg-cardBg { background-color: var(--trx-bg2) !important; }
+        #tab-transaksi .bg-cardBg { background-color: var(--trx-bg2) !important; }
         #tab-transaksi .border-borderDark,
-        #trx-variasi-sheet .border-borderDark,
         #action-bar-transaksi .border-borderDark { border-color: var(--trx-border) !important; }
-        #tab-transaksi .dashed-border-brand,
-        #trx-variasi-sheet .dashed-border-brand { border-color: var(--trx-accent) !important; }
+        #tab-transaksi .dashed-border-brand { border-color: var(--trx-accent) !important; }
 
         #trx-vendor-selector:hover, #trx-brand-selector:hover, #trx-model-selector:hover, #btn-tambah-variasi-trx:hover { background-color: var(--trx-hover) !important; }
 
@@ -1296,13 +1205,6 @@
         #tab-transaksi .input-inline-label { color: var(--trx-accent) !important; }
         #tab-transaksi .input-warna-swatch.active,
         #tab-transaksi .input-ukuran-pill.active { border-color: var(--trx-accent) !important; box-shadow: 0 0 0 2px var(--trx-choice-active) !important; }
-        #trx-variasi-sheet .input-sheet-section { background: var(--trx-section-bg) !important; border-color: var(--trx-border) !important; }
-        #trx-variasi-sheet .input-choice-btn { background: var(--trx-bg) !important; border-color: var(--trx-border) !important; }
-        #trx-variasi-sheet .input-choice-btn.active { background: var(--trx-choice-active) !important; border-color: var(--trx-accent) !important; }
-        #trx-variasi-sheet .input-sheet-qty { background: var(--trx-bg) !important; border-color: var(--trx-border) !important; }
-        #trx-variasi-sheet .input-sheet-actions { border-top-color: var(--trx-border) !important; }
-        #trx-variasi-sheet .qty-numpad-btn { border-color: var(--trx-border) !important; background: var(--trx-bg) !important; }
-        #trx-variasi-sheet #trx-sheet-added-wrap { background: var(--trx-hover) !important; }
 
         /* ---------- TAB INPUT DATA (navy): teks putih di atas elemen ber-background gelap ---------- */
         #tab-input .brand-gradient-bg,
@@ -1318,9 +1220,7 @@
         #tab-transaksi .brand-gradient-bg,
         #tab-transaksi .brand-gradient-bg *,
         #action-bar-transaksi .brand-gradient-bg,
-        #action-bar-transaksi .brand-gradient-bg *,
-        #trx-variasi-sheet .brand-gradient-bg,
-        #trx-variasi-sheet .brand-gradient-bg * {
+        #action-bar-transaksi .brand-gradient-bg * {
             color: #ffffff !important;
         }
 
@@ -2919,69 +2819,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                 <button type="button" class="qty-numpad-done-btn" onclick="closeQtyCustomNumpad()">SELESAI</button>
             </div>
         </div>
-        <div id="trx-variasi-sheet" class="input-sheet-overlay" onclick="if(event.target.id==='trx-variasi-sheet') closeTrxVariasiSheet()">
-            <div class="input-sheet-panel" id="generic-sheet-panel">
-                <div class="brand-gradient-bg text-black px-4 py-4 flex items-center justify-between flex-shrink-0">
-                    <div>
-                        <div id="sheet-brand" class="text-[9px] font-black tracking-wider opacity-70 mb-0.5">BRAND</div>
-                        <div id="sheet-title" class="text-[15px] font-black leading-none">DETAIL VARIASI</div>
-                        <div id="sheet-subtitle" class="text-[9px] font-bold opacity-60 mt-1">Pilih data item</div>
-                    </div>
-                    <button type="button" onclick="closeTrxVariasiSheet()" class="w-9 h-9 rounded-full bg-black/10 flex items-center justify-center active:scale-95">
-                        <i class="fa-solid fa-xmark text-base"></i>
-                    </button>
-                </div>
-                <div class="input-sheet-body p-4 flex flex-col gap-3">
-                    <div class="w-12 h-1 rounded-full bg-gray-700 mx-auto -mt-1 mb-1"></div>
-                    <div id="trx-sheet-added-wrap" class="hidden rounded-xl border-2 border-borderDark bg-[#133a66] p-2.5">
-                        <div class="text-[9px] font-black text-black/60 tracking-wider mb-1.5"><i class="fa-solid fa-list-check text-[9px] mr-1"></i>SUDAH DITAMBAHKAN (<span id="trx-sheet-added-count">0</span>)</div>
-                        <div id="trx-sheet-added-list" class="flex flex-col gap-1.5 max-h-[110px] overflow-y-auto pr-1"></div>
-                    </div>
-                    <div class="input-sheet-section">
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="text-[10px] font-black text-black tracking-wider">WARNA</div>
-                            <div id="sheet-warna-active" class="text-[10px] font-black brand-text truncate max-w-[150px]">Pilih</div>
-                        </div>
-                        <div id="sheet-warna-list" class="input-choice-grid"></div>
-                    </div>
-                    <div class="input-sheet-section">
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="text-[10px] font-black text-black tracking-wider">UKURAN</div>
-                            <div id="sheet-ukuran-active" class="text-[10px] font-black brand-text truncate max-w-[150px]">Pilih</div>
-                        </div>
-                        <div id="sheet-ukuran-list" class="input-choice-grid"></div>
-                    </div>
-                    <div class="input-sheet-section">
-                        <div class="text-[10px] font-black text-black tracking-wider mb-2">QTY</div>
-                        <div class="grid grid-cols-[1fr_82px] gap-2 items-center">
-                            <input id="sheet-qty" class="input-sheet-qty" type="text" inputmode="numeric" pattern="[0-9]*" value="0" readonly style="text-transform:none;cursor:default;">
-                            <div>
-                                <div class="text-[9px] font-black text-black mb-1 text-center">SSK</div>
-                                <div id="sheet-ssk" class="h-[42px] rounded-xl bg-darkBg border-2 border-borderDark flex items-center justify-center text-sm font-black text-black">-</div>
-                            </div>
-                        </div>
-                        <div class="qty-numpad-grid" id="sheet-numpad-grid">
-                            <button type="button" onclick="qtyNumpadPress('1')" class="qty-numpad-btn">1</button>
-                            <button type="button" onclick="qtyNumpadPress('2')" class="qty-numpad-btn">2</button>
-                            <button type="button" onclick="qtyNumpadPress('3')" class="qty-numpad-btn">3</button>
-                            <button type="button" onclick="qtyNumpadPress('4')" class="qty-numpad-btn">4</button>
-                            <button type="button" onclick="qtyNumpadPress('5')" class="qty-numpad-btn">5</button>
-                            <button type="button" onclick="qtyNumpadPress('6')" class="qty-numpad-btn">6</button>
-                            <button type="button" onclick="qtyNumpadPress('7')" class="qty-numpad-btn">7</button>
-                            <button type="button" onclick="qtyNumpadPress('8')" class="qty-numpad-btn">8</button>
-                            <button type="button" onclick="qtyNumpadPress('9')" class="qty-numpad-btn">9</button>
-                            <button type="button" onclick="qtyNumpadPress('C')" class="qty-numpad-btn qty-numpad-clear">C</button>
-                            <button type="button" onclick="qtyNumpadPress('0')" class="qty-numpad-btn">0</button>
-                            <button type="button" onclick="qtyNumpadPress('DEL')" class="qty-numpad-btn qty-numpad-del"><i class="fa-solid fa-delete-left"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-sheet-actions">
-                    <button type="button" id="sheet-save-btn" onclick="saveTrxVariasiSheet()" class="w-full py-3.5 rounded-xl brand-gradient-bg text-black font-black text-[12px] active:scale-95 transition-transform"><i class="fa-solid fa-check mr-1"></i> TAMBAHKAN</button>
-                </div>
-            </div>
-        </div>
-
         <!-- TAB TRANSAKSI -->
         <div id="tab-transaksi" class="tab-content hidden flex-col p-4 gap-4 relative z-10 rp-input-screen" >
             <div class="rp-input-heading">
@@ -8207,14 +8044,6 @@ function updateSSK(tab, rowId) {
         return sortUkuran(ukuranList);
     }
 
-    // ==================== NUMPAD CUSTOM UNTUK QTY (Input Data & Transaksi) ====================
-    // Numpad terkunci sampai WARNA dan UKURAN sudah dipilih.
-    function updateQtyNumpadState(sheetType, warnaAktif, ukuranAktif) {
-        const grid = document.getElementById('sheet-numpad-grid');
-        if (!grid) return;
-        const ready = !_isInputPlaceholder(warnaAktif) && !_isInputPlaceholder(ukuranAktif);
-        grid.classList.toggle('disabled', !ready);
-    }
     // ==================== NUMPAD CUSTOM UNTUK KOLOM QTY INLINE (Input Data & Transaksi) ====================
     let _qtyNumpadTarget = null; // { type: 'input' | 'trx', id }
     function openQtyCustomNumpad(type, id) {
@@ -8268,34 +8097,6 @@ function updateSSK(tab, rowId) {
     window.openQtyCustomNumpad = openQtyCustomNumpad;
     window.closeQtyCustomNumpad = closeQtyCustomNumpad;
     window.qtyCustomNumpadPress = qtyCustomNumpadPress;
-
-    function qtyNumpadPress(key) {
-        const qtySheet = document.getElementById('sheet-qty');
-        if (!qtySheet) return;
-
-        // Pengaman: blokir juga di level JS, bukan cuma CSS pointer-events
-        const draft = trxSheetDraft;
-        if (_isInputPlaceholder(draft?.warna) || _isInputPlaceholder(draft?.ukuran)) {
-            showToast('⚠️ Pilih warna & ukuran dulu sebelum isi qty');
-            return;
-        }
-
-        let val = String(qtySheet.value || '0').replace(/\D/g, '') || '0';
-
-        if (key === 'C') {
-            val = '0';
-        } else if (key === 'DEL') {
-            val = val.slice(0, -1);
-            if (val === '') val = '0';
-        } else {
-            // digit 0-9
-            val = (val === '0') ? key : val + key;
-            if (val.length > 5) val = val.slice(0, 5); // batasi maksimal 5 digit
-        }
-
-        qtySheet.value = val;
-        onTrxSheetQtyChange();
-    }
 
     let _inputIsSaving = false;
     async function simpanInputData() {
@@ -8593,10 +8394,7 @@ function updateSSK(tab, rowId) {
         }
     }
 
-	    let activeTrxSheetRowId = null;
-	    let trxSheetDraft = null;
-
-	    function refreshTrxRowSummary(id) {
+    function refreshTrxRowSummary(id) {
 	        const qty = document.getElementById('trx-qty-' + id)?.value || '0';
 	        const ssk = document.getElementById('trx-ssk-' + id)?.value || '-';
 	        const qtySummary = document.getElementById('trx-qty-summary-' + id);
@@ -8608,222 +8406,6 @@ function updateSSK(tab, rowId) {
 	        if (qtySummary) qtySummary.textContent = qty;
 	        if (sskSummary) sskSummary.textContent = ssk || '-';
 	        if (row) row.classList.toggle('is-filled', filled);
-	    }
-
-	    function getTrxRowData(rowId) {
-	        const warna = document.getElementById('trx-warna-label-' + rowId)?.textContent?.trim() || 'Pilih';
-	        const ukuran = document.getElementById('trx-ukuran-label-' + rowId)?.textContent?.trim() || 'Pilih';
-	        const qty = parseInt(document.getElementById('trx-qty-' + rowId)?.value) || 0;
-	        const kode = document.getElementById('trx-warna-dot-' + rowId)?.style.background || '#888';
-	        return { warna, ukuran, qty, kode, ssk: document.getElementById('trx-ssk-' + rowId)?.value || '' };
-	    }
-
-	    function applyTrxDraftToRow(rowId) {
-	        if (!trxSheetDraft) return;
-	        const dotEl = document.getElementById('trx-warna-dot-' + rowId);
-	        const warnaEl = document.getElementById('trx-warna-label-' + rowId);
-	        const ukuranEl = document.getElementById('trx-ukuran-label-' + rowId);
-	        const qtyEl = document.getElementById('trx-qty-' + rowId);
-	        const sskEl = document.getElementById('trx-ssk-' + rowId);
-	        if (dotEl) dotEl.style.background = trxSheetDraft.kode || '#888';
-	        if (warnaEl) warnaEl.textContent = trxSheetDraft.warna;
-	        if (ukuranEl) ukuranEl.textContent = trxSheetDraft.ukuran;
-	        if (qtyEl) qtyEl.value = trxSheetDraft.qty;
-	        if (sskEl) sskEl.value = trxSheetDraft.ssk || '';
-	    }
-
-	    function getTrxSheetWarnaList(rowId) {
-	        if (!trxState.modelNama) return [];
-	        return (masterData.warna || []).filter(w => {
-	            return masterData.ukuran.some(u => hitungStokEfektifTrx(trxState.modelNama, w.nama, u.nama, rowId, trxState.brandNama, trxState.brandId) > 0);
-	        });
-	    }
-
-	    function getTrxSheetUkuranList(rowId) {
-	        const warnaNama = trxSheetDraft?.warna || '';
-	        let ukuranList = masterData.ukuran || [];
-	        if (trxState.modelNama) {
-	            if (!_isInputPlaceholder(warnaNama)) {
-	                ukuranList = ukuranList.filter(u => hitungStokEfektifTrx(trxState.modelNama, warnaNama, u.nama, rowId, trxState.brandNama, trxState.brandId) > 0);
-	            } else {
-	                ukuranList = ukuranList.filter(u => masterData.warna.some(w => hitungStokEfektifTrx(trxState.modelNama, w.nama, u.nama, rowId, trxState.brandNama, trxState.brandId) > 0));
-	            }
-	        }
-	        return sortUkuran(ukuranList);
-	    }
-
-	    function renderTrxSheetOptions(rowId) {
-	        const warnaWrap = document.getElementById('sheet-warna-list');
-	        const ukuranWrap = document.getElementById('sheet-ukuran-list');
-	        const warnaAktif = trxSheetDraft?.warna || '';
-	        const ukuranAktif = trxSheetDraft?.ukuran || '';
-	        const warnaActiveLabel = document.getElementById('sheet-warna-active');
-	        const ukuranActiveLabel = document.getElementById('sheet-ukuran-active');
-	        if (warnaActiveLabel) warnaActiveLabel.textContent = _isInputPlaceholder(warnaAktif) ? 'Pilih' : warnaAktif;
-	        if (ukuranActiveLabel) ukuranActiveLabel.textContent = _isInputPlaceholder(ukuranAktif) ? 'Pilih' : ukuranAktif;
-	        updateQtyNumpadState('trx', warnaAktif, ukuranAktif);
-	        if (!warnaWrap || !ukuranWrap) return;
-
-	        const warnaList = getTrxSheetWarnaList(rowId);
-	        warnaWrap.innerHTML = '';
-	        warnaList.forEach(w => {
-	            const btn = document.createElement('button');
-	            btn.type = 'button';
-	            btn.className = 'input-choice-btn' + (!_isInputPlaceholder(warnaAktif) && warnaAktif.toUpperCase() === w.nama.toUpperCase() ? ' active' : '');
-	            btn.innerHTML = `<span class="w-5 h-5 rounded-md border-2 border-white/20 flex-shrink-0" style="background:${w.kode}"></span><span class="truncate">${w.nama}</span>`;
-	            btn.onclick = () => {
-	                if (!trxSheetDraft) trxSheetDraft = getTrxRowData(rowId);
-	                trxSheetDraft.warna = w.nama;
-	                trxSheetDraft.kode = w.kode;
-	                renderTrxSheetOptions(rowId);
-	                refreshTrxSheetSSK(rowId);
-	            };
-	            warnaWrap.appendChild(btn);
-	        });
-	        if (!warnaList.length) warnaWrap.innerHTML = '<div class="col-span-2 text-[11px] text-black py-4 text-center">Tidak ada warna dengan stok</div>';
-
-	        const ukuranList = getTrxSheetUkuranList(rowId);
-	        ukuranWrap.innerHTML = '';
-	        ukuranList.forEach(u => {
-	            const btn = document.createElement('button');
-	            btn.type = 'button';
-	            btn.className = 'input-choice-btn justify-center text-center' + (!_isInputPlaceholder(ukuranAktif) && ukuranAktif.toUpperCase() === u.nama.toUpperCase() ? ' active' : '');
-	            btn.textContent = u.nama;
-	            btn.onclick = () => {
-	                if (!trxSheetDraft) trxSheetDraft = getTrxRowData(rowId);
-	                trxSheetDraft.ukuran = u.nama;
-	                renderTrxSheetOptions(rowId);
-	                refreshTrxSheetSSK(rowId);
-	            };
-	            ukuranWrap.appendChild(btn);
-	        });
-	        if (!ukuranList.length) ukuranWrap.innerHTML = '<div class="col-span-2 text-[11px] text-black py-4 text-center">Tidak ada ukuran dengan stok</div>';
-	    }
-
-	    function refreshTrxSheetSSK(rowId) {
-	        if (!trxSheetDraft) trxSheetDraft = getTrxRowData(rowId);
-	        const warna = trxSheetDraft.warna;
-	        const ukuran = trxSheetDraft.ukuran;
-	        let sskValue = '-';
-	        if (!_isInputPlaceholder(warna) && !_isInputPlaceholder(ukuran)) {
-	            const maxStok = Math.max(0, hitungStokEfektifTrx(trxState.modelNama, warna, ukuran, rowId, trxState.brandNama, trxState.brandId));
-	            if ((parseInt(trxSheetDraft.qty) || 0) > maxStok) {
-	                trxSheetDraft.qty = maxStok;
-	                const qtySheet = document.getElementById('sheet-qty');
-	                if (qtySheet) qtySheet.value = maxStok;
-	            }
-	            sskValue = maxStok - (parseInt(trxSheetDraft.qty) || 0);
-	        }
-	        trxSheetDraft.ssk = sskValue === '-' ? '' : sskValue;
-	        const sheetSSK = document.getElementById('sheet-ssk');
-	        if (sheetSSK) sheetSSK.textContent = sskValue;
-	        updateTrxSheetSaveState();
-	    }
-
-	    function updateTrxSheetSaveState() {
-	        const btn = document.getElementById('sheet-save-btn');
-	        if (!btn) return;
-	        const warna = trxSheetDraft?.warna;
-	        const ukuran = trxSheetDraft?.ukuran;
-	        const qty = parseInt(trxSheetDraft?.qty) || 0;
-	        const ready = !_isInputPlaceholder(warna) && !_isInputPlaceholder(ukuran) && qty > 0;
-	        btn.classList.toggle('opacity-50', !ready);
-	    }
-
-	    function openTrxVariasiSheet(rowId) {
-	        if (!trxState.modelNama) { showToast('⚠️ Pilih MODEL terlebih dahulu!'); return; }
-	        activeTrxSheetRowId = rowId;
-	        trxSheetDraft = getTrxRowData(rowId);
-	        const sheet = document.getElementById('generic-sheet-panel').parentElement;
-	        const qtySheet = document.getElementById('sheet-qty');
-	        const subtitle = document.getElementById('sheet-subtitle');
-	        if (subtitle) subtitle.textContent = trxState.modelNama || 'Pilih data item';
-	        const brandLabel = document.getElementById('sheet-brand');
-	        if (brandLabel) brandLabel.textContent = trxState.brandNama || 'BRAND';
-	        if (qtySheet) qtySheet.value = trxSheetDraft.qty || 0;
-	        renderTrxSheetOptions(rowId);
-	        refreshTrxSheetSSK(rowId);
-	        renderTrxSheetAddedList(rowId);
-	        if (sheet) sheet.classList.add('active');
-	        document.body.classList.add('sheet-open-lock');
-	        if (qtySheet) qtySheet.focus();
-	    }
-
-	    function renderTrxSheetAddedList(excludeId) {
-	        const wrap = document.getElementById('trx-sheet-added-wrap');
-	        const listEl = document.getElementById('trx-sheet-added-list');
-	        const countEl = document.getElementById('trx-sheet-added-count');
-	        if (!wrap || !listEl) return;
-	        const list = document.getElementById('trx-variasi-list');
-	        const rows = list ? Array.from(list.children) : [];
-	        const items = rows
-	            .map(row => row.id.replace('trx-row-', ''))
-	            .filter(id => id !== String(excludeId) && !_isTrxRowPristine(id))
-	            .map(id => ({ id, ...getTrxRowData(id) }));
-	        if (items.length === 0) {
-	            wrap.classList.add('hidden');
-	            listEl.innerHTML = '';
-	            if (countEl) countEl.textContent = '0';
-	            return;
-	        }
-	        wrap.classList.remove('hidden');
-	        if (countEl) countEl.textContent = items.length;
-	        listEl.innerHTML = items.map(it => `
-	            <button type="button" onclick="openTrxVariasiSheet(${it.id})" class="flex items-center gap-2 px-2.5 py-2 rounded-lg bg-white border-2 border-borderDark text-left hover:border-[#7699C9] transition-colors">
-	                <div class="w-5 h-5 rounded-md flex-shrink-0 border border-black/10" style="background:${it.kode || '#888'}"></div>
-	                <div class="min-w-0 flex-1 flex items-center gap-1 text-[10px] font-bold text-black truncate">
-	                    <span class="truncate">${it.warna}</span><span class="text-black/40">/</span><span class="truncate">${it.ukuran}</span>
-	                </div>
-	                <span class="text-[9px] font-black brand-text flex-shrink-0">${it.qty} pcs</span>
-	            </button>`).join('');
-	    }
-
-	    function closeTrxVariasiSheet() {
-	        const closingRowId = activeTrxSheetRowId;
-	        const sheet = document.getElementById('generic-sheet-panel').parentElement;
-	        if (sheet) sheet.classList.remove('active');
-	        document.body.classList.remove('sheet-open-lock');
-	        activeTrxSheetRowId = null;
-	        trxSheetDraft = null;
-	        const list = document.getElementById('trx-variasi-list');
-	        if (closingRowId && list && list.children.length > 1 && _isTrxRowPristine(closingRowId)) {
-	            hapusRowTrx(closingRowId);
-	        }
-	    }
-
-	    function onTrxSheetQtyChange(rowId) {
-	        if (!activeTrxSheetRowId) return;
-	        const qtySheet = document.getElementById('sheet-qty');
-	        const rawValue = String(qtySheet?.value || '').replace(/\D/g, '');
-	        const value = Math.max(0, parseInt(rawValue) || 0);
-	        if (!trxSheetDraft) trxSheetDraft = getTrxRowData(activeTrxSheetRowId);
-	        trxSheetDraft.qty = value;
-	        if (qtySheet) qtySheet.value = value;
-	        refreshTrxSheetSSK(activeTrxSheetRowId);
-	    }
-
-	    function saveTrxVariasiSheet() {
-	        if (!activeTrxSheetRowId) return;
-	        const id = activeTrxSheetRowId;
-	        const wasPristine = _isTrxRowPristine(id);
-	        const warna = trxSheetDraft?.warna?.trim();
-	        const ukuran = trxSheetDraft?.ukuran?.trim();
-	        const qty = parseInt(trxSheetDraft?.qty) || 0;
-	        if (_isInputPlaceholder(warna)) { showToast('⚠️ Pilih warna dulu'); return; }
-	        if (_isInputPlaceholder(ukuran)) { showToast('⚠️ Pilih ukuran dulu'); return; }
-	        if (qty <= 0) { showToast('⚠️ Qty tidak boleh 0'); return; }
-	        applyTrxDraftToRow(id);
-	        refreshTrxRowSummary(id);
-	        refreshSemuaSSKTrx();
-	        _updateTrxRowBtn(id);
-	        document.getElementById('trx-row-' + id)?.classList.remove('hidden');
-	        showToast('✅ Item transaksi ditambahkan');
-	        _updateSimpanTrxBtnState();
-	        if (wasPristine) {
-	            tambahVariasiTrx();
-	        } else {
-	            openTrxVariasiSheet(id);
-	        }
 	    }
 
 	    function tambahVariasiTrx() {
@@ -8915,11 +8497,20 @@ function updateSSK(tab, rowId) {
 	        }
 	    }
 
-	    function renderTrxWarnaOptions(id) {
+	    // Daftar warna untuk baris tertentu (dibaca langsung dari DOM row, konsisten
+    // dengan getTrxRowUkuranList() di bawah).
+    function getTrxRowWarnaList(rowId) {
+        if (!trxState.modelNama) return [];
+        return (masterData.warna || []).filter(w => {
+            return masterData.ukuran.some(u => hitungStokEfektifTrx(trxState.modelNama, w.nama, u.nama, rowId, trxState.brandNama, trxState.brandId) > 0);
+        });
+    }
+
+    function renderTrxWarnaOptions(id) {
 	        const wrap = document.getElementById('trx-warna-options-' + id);
 	        if (!wrap) return;
 	        const current = document.getElementById('trx-warna-label-' + id)?.textContent?.trim();
-	        const list = getTrxSheetWarnaList(id);
+	        const list = getTrxRowWarnaList(id);
 	        wrap.innerHTML = '';
 	        list.forEach(w => {
 	            const btn = document.createElement('button');
@@ -13260,10 +12851,10 @@ function updateSSK(tab, rowId) {
                               document.getElementById('generic-dropdown-popup');
         if (dropdownPopup) { dropdownPopup.remove(); return; }
 
-        // Tutup popup DETAIL VARIASI (full-screen) jika terbuka
-        const trxVariasiSheet = document.getElementById('trx-variasi-sheet');
-        if (trxVariasiSheet && trxVariasiSheet.classList.contains('active')) {
-            closeTrxVariasiSheet(); return;
+        // Tutup panel numpad custom (QTY) jika terbuka
+        const qtyNumpadOverlay = document.getElementById('qty-custom-numpad-overlay');
+        if (qtyNumpadOverlay && qtyNumpadOverlay.classList.contains('active')) {
+            closeQtyCustomNumpad(); return;
         }
 
         const modalOverlay = document.getElementById('custom-modal-overlay');
