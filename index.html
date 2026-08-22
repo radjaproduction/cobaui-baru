@@ -2969,8 +2969,11 @@ END $$;</textarea>
                     <button id="laba-quick-bulan-ini" onclick="setLabaFilterBulanIni()" class="py-2.5 rounded-lg text-[8.5px] font-black text-black bg-darkBg border-2 border-borderDark">BULAN INI</button>
                     <button id="laba-quick-semua" onclick="resetLabaFilter()" class="py-2.5 rounded-lg text-[8.5px] font-black text-black bg-darkBg border-2 border-borderDark">SEMUA</button>
                 </div>
-                <div class="flex flex-col gap-2">
-                    <div class="text-[8px] font-black text-black tracking-wider">ATAU PILIH PERIODE MANUAL:</div>
+                <div class="flex items-center justify-between cursor-pointer select-none -mb-1" onclick="toggleCollapse('laba-filter-manual-collapse','laba-filter-manual-chevron')">
+                    <div class="text-[8px] font-black text-black tracking-wider">ATAU PILIH PERIODE MANUAL</div>
+                    <i id="laba-filter-manual-chevron" class="fa-solid fa-chevron-down brand-text text-[10px] collapse-chevron"></i>
+                </div>
+                <div id="laba-filter-manual-collapse" class="collapse-body collapsed flex flex-col gap-2">
                     <div class="flex gap-2">
                         <div class="flex flex-col flex-1 min-w-0"><label class="text-[8px] text-black font-bold mb-0.5 leading-none">DARI</label><input type="date" id="laba-filter-dari" class="w-full bg-darkBg text-black text-[11px] px-2 py-2.5 rounded-lg border-2 border-borderDark outline-none"></div>
                         <div class="flex flex-col flex-1 min-w-0"><label class="text-[8px] text-black font-bold mb-0.5 leading-none">SAMPAI</label><input type="date" id="laba-filter-sampai" class="w-full bg-darkBg text-black text-[11px] px-2 py-2.5 rounded-lg border-2 border-borderDark outline-none"></div>
@@ -3006,11 +3009,16 @@ END $$;</textarea>
 
             <!-- PANEL VENDOR -->
             <div id="master-panel-vendor" class="flex flex-col gap-3">
-                <div class="bg-cardBg rounded-xl p-4 border-2 border-borderDark flex flex-col gap-3">
-                    <div class="flex items-center gap-2 border-b-2 border-borderDark pb-2"><i class="fa-solid fa-truck-fast brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH VENDOR</h3></div>
+                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden flex flex-col">
+                    <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('vendor-tambah-collapse','vendor-tambah-chevron')">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-truck-fast brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH VENDOR</h3></div>
+                        <i id="vendor-tambah-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+                    </div>
+                    <div id="vendor-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4">
                     <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">NAMA VENDOR</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-building text-black text-xs"></i></div><input id="input-vendor-nama" type="text" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors" placeholder="input nama vendor..." style="color:#1a1d24"></div></div>
                     <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">NO. TELEPON</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-phone text-black text-xs"></i></div><input id="input-vendor-telp" type="tel" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors" placeholder="08xx-xxxx-xxxx" style="color:#1a1d24"></div></div>
                     <button id="btn-simpan-vendor" onclick="simpanVendor()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow mt-1"><i class="fa-solid fa-plus"></i> SIMPAN VENDOR</button>
+                    </div>
                 </div>
                 <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
                     <div class="brand-gradient-bg text-black text-[10px] font-black flex items-center justify-between px-4 py-2"><span><i class="fa-solid fa-list mr-1"></i>DAFTAR VENDOR</span><span id="vendor-count" class="bg-black/20 px-2 py-0.5 rounded-full text-[9px]">0 data</span></div>
@@ -3020,10 +3028,15 @@ END $$;</textarea>
 
             <!-- PANEL BRAND -->
             <div id="master-panel-brand" class="hidden flex-col gap-3">
-                <div class="bg-cardBg rounded-xl p-4 border-2 border-borderDark flex flex-col gap-3">
-                    <div class="flex items-center gap-2 border-b-2 border-borderDark pb-2"><i class="fa-solid fa-tags brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH BRAND</h3></div>
+                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden flex flex-col">
+                    <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('brand-tambah-collapse','brand-tambah-chevron')">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-tags brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH BRAND</h3></div>
+                        <i id="brand-tambah-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+                    </div>
+                    <div id="brand-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4">
                     <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">NAMA BRAND</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-tag text-black text-xs"></i></div><input id="input-brand-nama" type="text" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors" placeholder="input nama brand..." style="color:#1a1d24"></div></div>
                     <button id="btn-simpan-brand" onclick="simpanBrand()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow mt-1"><i class="fa-solid fa-plus"></i> SIMPAN BRAND</button>
+                    </div>
                 </div>
                 <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
                     <div class="brand-gradient-bg text-black text-[10px] font-black flex items-center justify-between px-4 py-2"><span><i class="fa-solid fa-list mr-1"></i>DAFTAR BRAND</span><span id="brand-count" class="bg-black/20 px-2 py-0.5 rounded-full text-[9px]">0 data</span></div>
@@ -3033,8 +3046,12 @@ END $$;</textarea>
 
             <!-- PANEL MODEL -->
             <div id="master-panel-model" class="hidden flex-col gap-3">
-                <div class="bg-cardBg rounded-xl p-4 border-2 border-borderDark flex flex-col gap-3">
-                    <div class="flex items-center gap-2 border-b-2 border-borderDark pb-2"><i class="fa-solid fa-shirt brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH MODEL</h3></div>
+                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden flex flex-col">
+                    <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('model-tambah-collapse','model-tambah-chevron')">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-shirt brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH MODEL</h3></div>
+                        <i id="model-tambah-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+                    </div>
+                    <div id="model-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4">
                     <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">PILIH BRAND</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-tags text-black text-xs"></i></div><select id="model-pilih-brand" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black appearance-none focus:outline-none focus:border-[#7699C9] transition-colors" style="color:#1a1d24"><option value="">-- Pilih Brand --</option></select><div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"><i class="fa-solid fa-chevron-down text-black text-xs"></i></div></div></div>
                     <div class="flex flex-col gap-1.5">
                         <label class="text-[10px] font-bold text-black tracking-wider">DAFTAR MODEL & HARGA</label>
@@ -3045,6 +3062,7 @@ END $$;</textarea>
                         <button onclick="tambahModelRow()" class="w-full py-2.5 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#133a66] mt-1"><i class="fa-solid fa-plus"></i> Tambah Model Lain</button>
                     </div>
                     <button id="btn-simpan-model" onclick="simpanModel()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow"><i class="fa-solid fa-floppy-disk"></i> SIMPAN MODEL</button>
+                    </div>
                 </div>
                 <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
                     <div class="brand-gradient-bg text-black text-[10px] font-black flex items-center justify-between px-4 py-2"><span><i class="fa-solid fa-list mr-1"></i>DAFTAR MODEL</span><span id="model-count" class="bg-black/20 px-2 py-0.5 rounded-full text-[9px]">0 data</span></div>
@@ -3054,14 +3072,19 @@ END $$;</textarea>
 
             <!-- PANEL WARNA -->
             <div id="master-panel-warna" class="hidden flex-col gap-3">
-                <div class="bg-cardBg rounded-xl p-4 border-2 border-borderDark flex flex-col gap-3">
-                    <div class="flex items-center gap-2 border-b-2 border-borderDark pb-2"><i class="fa-solid fa-palette brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH WARNA</h3></div>
+                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden flex flex-col">
+                    <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('warna-tambah-collapse','warna-tambah-chevron')">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-palette brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH WARNA</h3></div>
+                        <i id="warna-tambah-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+                    </div>
+                    <div id="warna-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4">
                     <div class="rounded-xl overflow-hidden border-2 border-borderDark">
                         <div class="brand-gradient-bg text-black text-[10px] font-black grid grid-cols-12 py-1.5 px-2 text-center items-center"><div class="col-span-9 text-left">NAMA WARNA</div><div class="col-span-2">KODE</div><div class="col-span-1"></div></div>
                         <div id="warna-rows-container" class="flex flex-col divide-y divide-borderDark"></div>
                     </div>
                     <button onclick="tambahWarnaRow()" class="w-full py-2.5 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#133a66] mt-1"><i class="fa-solid fa-plus"></i> Tambah Warna Lain</button>
                     <button id="btn-simpan-warna" onclick="simpanWarna()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow"><i class="fa-solid fa-floppy-disk"></i> SIMPAN WARNA</button>
+                    </div>
                 </div>
                 <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
                     <div class="brand-gradient-bg text-black text-[10px] font-black flex items-center justify-between px-4 py-2"><span><i class="fa-solid fa-list mr-1"></i>DAFTAR WARNA</span><span id="warna-count" class="bg-black/20 px-2 py-0.5 rounded-full text-[9px]">0 data</span></div>
@@ -3071,14 +3094,19 @@ END $$;</textarea>
 
             <!-- PANEL UKURAN -->
             <div id="master-panel-ukuran" class="hidden flex-col gap-3">
-                <div class="bg-cardBg rounded-xl p-4 border-2 border-borderDark flex flex-col gap-3">
-                    <div class="flex items-center gap-2 border-b-2 border-borderDark pb-2"><i class="fa-solid fa-ruler brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH UKURAN</h3></div>
+                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden flex flex-col">
+                    <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('ukuran-tambah-collapse','ukuran-tambah-chevron')">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-ruler brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH UKURAN</h3></div>
+                        <i id="ukuran-tambah-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+                    </div>
+                    <div id="ukuran-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4">
                     <div class="rounded-xl overflow-hidden border-2 border-borderDark">
                         <div class="brand-gradient-bg text-black text-[10px] font-black grid grid-cols-12 py-1.5 px-2 text-center items-center"><div class="col-span-11 text-left">NAMA UKURAN</div><div class="col-span-1"></div></div>
                         <div id="ukuran-rows-container" class="flex flex-col divide-y divide-borderDark"></div>
                     </div>
                     <button onclick="tambahUkuranRow()" class="w-full py-2.5 rounded-lg dashed-border-brand brand-text font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#133a66] mt-1"><i class="fa-solid fa-plus"></i> Tambah Ukuran Lain</button>
                     <button id="btn-simpan-ukuran" onclick="simpanUkuran()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow"><i class="fa-solid fa-floppy-disk"></i> SIMPAN UKURAN</button>
+                    </div>
                 </div>
                 <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
                     <div class="brand-gradient-bg text-black text-[10px] font-black flex items-center justify-between px-4 py-2"><span><i class="fa-solid fa-list mr-1"></i>DAFTAR UKURAN</span><span id="ukuran-count" class="bg-black/20 px-2 py-0.5 rounded-full text-[9px]">0 data</span></div>
@@ -6261,27 +6289,39 @@ function updateSSK(tab, rowId) {
 
     // ==================== WHITE LABEL ====================
     // ==================== COLLAPSE (accordion) ====================
+    // Grup PENGATURAN: saat salah satu dibuka, yang lain di grup ini otomatis tertutup
+    // (accordion "hanya satu terbuka"). Accordion lain di luar grup ini (mis. TAMBAH
+    // VENDOR/BRAND/MODEL/WARNA/UKURAN, filter manual Laba) berdiri sendiri dan hanya
+    // toggle dirinya sendiri.
     const collapseGroups = {
+        'pesanan-notif-setting-collapse': 'pesanan-notif-setting-chevron',
         'pelunasan-setting-collapse': 'pelunasan-setting-chevron',
+        'sql-schema-collapse': 'sql-schema-chevron',
         'backup-collapse': 'backup-chevron'
     };
 
     function toggleCollapse(bodyId, chevronId) {
         const target = document.getElementById(bodyId);
         if (!target) return;
-        const isNowOpen = target.classList.contains('collapsed');
-        // Tutup semua dulu
-        Object.entries(collapseGroups).forEach(([id, chev]) => {
-            const el = document.getElementById(id);
-            const ic = document.getElementById(chev);
-            if (el) el.classList.add('collapsed');
-            if (ic) ic.classList.remove('rotated');
-        });
-        // Kalau tadi tertutup, buka sekarang
-        if (isNowOpen) {
+        const chevron = document.getElementById(chevronId);
+        const isCollapsed = target.classList.contains('collapsed');
+        // Kalau body ini anggota grup PENGATURAN, tutup dulu semua saudaranya
+        // supaya cuma satu yang terbuka dalam grup itu.
+        if (collapseGroups.hasOwnProperty(bodyId)) {
+            Object.entries(collapseGroups).forEach(([id, chev]) => {
+                const el = document.getElementById(id);
+                const ic = document.getElementById(chev);
+                if (el) el.classList.add('collapsed');
+                if (ic) ic.classList.remove('rotated');
+            });
+        }
+        // Toggle target: buka kalau tadi tertutup, tutup kalau tadi terbuka.
+        if (isCollapsed) {
             target.classList.remove('collapsed');
-            const chev = document.getElementById(chevronId);
-            if (chev) chev.classList.add('rotated');
+            if (chevron) chevron.classList.add('rotated');
+        } else {
+            target.classList.add('collapsed');
+            if (chevron) chevron.classList.remove('rotated');
         }
     }
 
@@ -9460,7 +9500,7 @@ function updateSSK(tab, rowId) {
         list.innerHTML = pageItems.map((d) => {
             const totalQty = d.items.reduce((s, i) => s + i.qty, 0);
             const itemsSummary = d.items.map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black whitespace-nowrap">${i.warna}/${i.ukuran}:<b class="text-black">${i.qty}</b></span>`).join('');
-            return `<div class="bg-cardBg rounded-xl p-3 flex items-start justify-between gap-2 border-2 border-red-500/40">
+            return `<div class="bg-cardBg rounded-xl p-3 flex items-start justify-between gap-2 border-2 border-red-500/40" style="content-visibility:auto;contain-intrinsic-size:0 90px;">
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-1.5">
                         <span class="text-[10px] font-black text-black truncate">${d.brand} — ${d.model}</span>
