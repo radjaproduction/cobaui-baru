@@ -222,6 +222,28 @@
         body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.placeholder-black\/50::placeholder {
             color: rgba(234,241,251,0.5) !important;
         }
+        /* Sama seperti .bg-cardBg di atas, tapi untuk card hasil redesain (rp-input-variasi-card)
+           yang dipakai ulang di TAB MASTER — supaya semua label/teks di dalamnya otomatis putih. */
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card {
+            color: #eaf1fb;
+        }
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .text-black,
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .text-black\/30,
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .text-black\/40,
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .text-black\/45,
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .text-black\/50,
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .text-black\/55,
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .text-black\/60,
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .text-black\/70,
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .text-black\/80,
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .placeholder-black,
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .placeholder-black\/50 {
+            color: #eaf1fb !important;
+        }
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .placeholder-black::placeholder,
+        body:not(#tab-stok):not(#tab-stok *) .rp-input-variasi-card .placeholder-black\/50::placeholder {
+            color: rgba(234,241,251,0.5) !important;
+        }
         /* Same, but for elements using inline style="background:#06142B/#0A1C38/#133a66" instead
            of the Tailwind bg-darkBg/bg-cardBg classes — covers same-element and nested dark text. */
         body:not(#tab-stok):not(#tab-stok *) [style*="06142B"][style*="color:#000"],
@@ -1127,6 +1149,16 @@
         .rp-input-mode-card-zone-left { clip-path: polygon(0 0, 100% 0, 78% 100%, 0 100%); }
         .rp-input-mode-card-zone-right { clip-path: polygon(68% 0, 100% 0, 100% 100%, 78% 100%); }
 
+        /* ---------- TAB MASTER: navigasi sub-tab (VENDOR/BRAND/dst) ala kartu rp-input-mode-card ---------- */
+        .rp-master-tab-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; flex-shrink: 0; }
+        .rp-master-tab-card { position: relative; cursor: pointer; text-align: center; min-height: 76px; border-radius: 16px; border: 1px solid var(--input-border,rgba(118,153,201,.35)); background: linear-gradient(160deg,rgba(11,35,71,.85),rgba(6,20,43,.92)); padding: 11px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: #ff8c00; transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease, background .12s ease; -webkit-tap-highlight-color: transparent; }
+        .rp-master-tab-card:active { transform: scale(.97); }
+        .rp-master-tab-icon { width: 32px; height: 32px; border-radius: 10px; border: 1.5px solid currentColor; color: currentColor; background: rgba(255,255,255,.03); display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; transition: background .12s ease; }
+        .rp-master-tab-title { font-size: 9.5px; font-weight: 900; color: #f4f7fb; letter-spacing: .02em; line-height: 1.15; }
+        .rp-master-tab-active { border-color: rgba(255,140,0,.65); background: linear-gradient(160deg,rgba(255,140,0,.16),rgba(6,20,43,.92)); box-shadow: 0 10px 24px -8px rgba(255,140,0,.5); }
+        .rp-master-tab-active .rp-master-tab-icon { background: currentColor; }
+        .rp-master-tab-active .rp-master-tab-icon i { color: #101010; }
+
         /* ---------- TAB RIWAYAT: saklar INPUT DATA/TRANSAKSI pakai kartu ala TAB INPUT DATA, 2 kolom ---------- */
 
         /* ---------- TAB INPUT DATA: panel PILIH PRODUK (step + progress + selector hex-icon) ---------- */
@@ -1980,6 +2012,154 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 #tab-laba .border-2{ border-width:1px !important; }
 #tab-laba .border-b-2{ border-bottom-width:1px !important; }
 #tab-laba .border-borderDark{ border-color:rgba(118,153,201,.28) !important; }
+</style>
+
+<style id="rp-laba-final-redesign">
+/* =========================================================
+   REDESIGN TAB LABA KOTOR — disamakan dengan bahasa visual
+   kolom-kolom awal (KPI card & section-head di TAB STOK):
+   kartu kaca navy, border tipis rgba(118,153,201,.28),
+   radius 18-20px, backdrop-blur, aksen oranye/hijau.
+   ========================================================= */
+#tab-laba{ gap:12px !important; }
+
+/* ---------- HERO: LABA KOTOR ---------- */
+.rp-laba-hero{
+  display:flex; align-items:center; gap:12px;
+  min-height:88px;
+  border:1px solid rgba(34,197,94,.35);
+  border-radius:18px;
+  padding:12px 14px;
+  background:linear-gradient(145deg,rgba(22,163,74,.30),rgba(8,27,57,.85));
+  backdrop-filter:blur(8px);
+  box-shadow:0 8px 22px rgba(0,0,0,.18);
+}
+.rp-laba-hero-icon{
+  width:44px; height:44px; flex-shrink:0;
+  border-radius:13px;
+  background:linear-gradient(145deg,#4ade80,#16a34a);
+  color:#052e12;
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px;
+  box-shadow:0 5px 14px rgba(22,163,74,.35);
+}
+.rp-laba-hero-copy{ min-width:0; }
+.rp-laba-hero-label{ font-size:9px; font-weight:900; letter-spacing:.08em; color:#bdeecb; }
+.rp-laba-hero-value{ font-size:24px; font-weight:900; color:#fff; line-height:1.1; margin-top:2px; }
+.rp-laba-hero-sub{ font-size:10px; font-weight:700; color:#9fd9b3; margin-top:2px; }
+
+/* ---------- PANEL SHELL (dipakai FILTER PERIODE & RINCIAN LABA) ---------- */
+.rp-laba-panel{
+  border:1px solid rgba(118,153,201,.28);
+  border-radius:18px;
+  background:rgba(8,27,57,.72);
+  backdrop-filter:blur(8px);
+  box-shadow:0 8px 22px rgba(0,0,0,.18);
+  overflow:hidden;
+}
+.rp-laba-panel-head{
+  display:flex; align-items:center; gap:9px;
+  padding:12px 14px;
+  border-bottom:1px solid rgba(118,153,201,.28);
+  background:rgba(255,255,255,.02);
+}
+.rp-laba-panel-head-icon{
+  width:26px; height:26px; flex-shrink:0;
+  border-radius:8px;
+  background:rgba(255,140,0,.14);
+  border:1px solid rgba(255,140,0,.4);
+  color:var(--brand-main);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px;
+}
+.rp-laba-panel-head-title{
+  font-size:12px; font-weight:900; letter-spacing:.03em; color:#f4f7fb;
+}
+.rp-laba-panel-body{ padding:13px 14px; display:flex; flex-direction:column; gap:10px; }
+
+/* ---------- FILTER PERIODE: tombol cepat ---------- */
+.rp-laba-quick-grid{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; }
+.rp-laba-quick-btn{
+  min-height:38px;
+  border-radius:11px;
+  border:1px solid rgba(118,153,201,.28);
+  font-size:8.5px; font-weight:900; letter-spacing:.02em;
+  color:#0a0a0a;
+  transition:transform .1s ease;
+}
+.rp-laba-quick-btn.bg-darkBg{
+  background:#06142B !important;
+  color:#dbe6f5;
+  border-color:rgba(118,153,201,.28);
+}
+.rp-laba-quick-btn:not(.bg-darkBg){
+  border-color:rgba(255,140,0,.55);
+  box-shadow:0 5px 14px rgba(255,115,0,.25);
+}
+.rp-laba-quick-btn:active{ transform:scale(.96); }
+
+/* ---------- FILTER PERIODE: toggle manual ---------- */
+.rp-laba-manual-toggle{
+  display:flex; align-items:center; justify-content:space-between;
+  cursor:pointer; user-select:none;
+  padding:2px 1px;
+}
+.rp-laba-manual-toggle span{
+  font-size:8.5px; font-weight:900; letter-spacing:.07em; color:#9fb0c8;
+}
+.rp-laba-manual-toggle i{ color:var(--brand-main); font-size:10px; }
+.rp-laba-manual-body{ display:flex; flex-direction:column; gap:8px; }
+.rp-laba-manual-dates{ display:flex; gap:8px; }
+.rp-laba-manual-date-field{ flex:1; min-width:0; display:flex; flex-direction:column; gap:4px; }
+.rp-laba-manual-date-field label{ font-size:8px; font-weight:800; letter-spacing:.06em; color:#8fa2bd; }
+.rp-laba-manual-date-field input{
+  width:100%; height:36px;
+  padding:0 9px;
+  border-radius:10px;
+  border:1px solid rgba(118,153,201,.34) !important;
+  background:#06142B !important;
+  color:#f4f7fb !important;
+  font-size:10.5px;
+  outline:none;
+}
+.rp-laba-manual-apply{
+  width:100%; height:40px;
+  border-radius:11px;
+  background:linear-gradient(90deg,#16a34a,#22c55e);
+  color:#fff;
+  font-size:10px; font-weight:900; letter-spacing:.02em;
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  box-shadow:0 6px 16px rgba(22,163,74,.28);
+}
+
+/* ---------- RINCIAN LABA PER MODEL: daftar ---------- */
+.rp-laba-breakdown-list{ display:flex; flex-direction:column; padding:4px 8px 10px; }
+.rp-laba-breakdown-list > div:not(.flex-col){
+  display:flex !important; align-items:center; justify-content:space-between;
+  padding:9px 6px !important;
+  border-bottom:1px solid rgba(118,153,201,.16) !important;
+  border-radius:10px;
+  transition:background .12s ease;
+}
+.rp-laba-breakdown-list > div:not(.flex-col):last-child{ border-bottom:0 !important; }
+.rp-laba-breakdown-list > div:not(.flex-col):active{ background:rgba(255,140,0,.08); }
+.rp-laba-breakdown-list > div.flex-col{ color:#8fa2bd; }
+.rp-laba-breakdown-list > div.flex-col i{ color:#5c6f89 !important; }
+.rp-laba-breakdown-list .text-\[9px\].font-black.text-black{
+  width:20px; height:20px; flex:0 0 20px;
+  border-radius:7px;
+  background:rgba(255,140,0,.14);
+  border:1px solid rgba(255,140,0,.35);
+  color:var(--brand-main) !important;
+  display:flex; align-items:center; justify-content:center;
+  padding-top:0 !important;
+  font-size:9px !important;
+}
+.rp-laba-breakdown-list .text-\[10px\].font-bold.text-black{ color:#f4f7fb !important; font-size:11px !important; }
+.rp-laba-breakdown-list .text-\[8px\].text-black\/70{ color:#8fa2bd !important; font-size:9px !important; margin-top:2px; }
+.rp-laba-breakdown-list .text-\[10\.5px\].font-black.text-green-600{
+  color:#4ade80 !important; font-size:12px !important;
+}
 </style>
 
 <style id="rp-beban-retur-final-redesign">
@@ -2954,38 +3134,49 @@ END $$;</textarea>
 
             <!-- SUMMARY CARDS -->
             <div id="laba-total-omset" class="hidden">Rp 0</div>
-            <div class="rounded-xl p-4 border-2 flex flex-col gap-1" style="background:linear-gradient(135deg,#16a34a,#15803d);border-color:#166534;">
-                <div class="text-[9px] font-black text-white/90 tracking-wider flex items-center gap-1"><i class="fa-solid fa-sack-dollar text-[10px]"></i> LABA KOTOR</div>
-                <div id="laba-total-laba" class="text-[26px] font-black text-white leading-none">Rp 0</div>
-                <div id="laba-margin-persen" class="text-[10px] font-bold text-white/80 mt-1">Margin: 0%</div>
+            <div class="rp-laba-hero">
+                <div class="rp-laba-hero-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                <div class="rp-laba-hero-copy">
+                    <div class="rp-laba-hero-label">LABA KOTOR</div>
+                    <div id="laba-total-laba" class="rp-laba-hero-value">Rp 0</div>
+                    <div id="laba-margin-persen" class="rp-laba-hero-sub">Margin: 0%</div>
+                </div>
             </div>
 
             <!-- FILTER PERIODE -->
-            <div class="bg-cardBg rounded-xl p-3 border-2 border-borderDark flex flex-col gap-3">
-                <div class="text-[11px] font-black text-black flex items-center gap-1.5"><i class="fa-solid fa-calendar-days brand-text text-[10px]"></i> FILTER PERIODE</div>
-                <div class="grid grid-cols-4 gap-1.5">
-                    <button id="laba-quick-minggu-ini" onclick="setLabaFilterMingguIni()" class="py-2.5 rounded-lg text-[8.5px] font-black text-black border-2 border-borderDark" style="background:linear-gradient(90deg,#ff8c00,#ffb347);">MINGGU INI</button>
-                    <button id="laba-quick-minggu-lalu" onclick="setLabaFilterMingguLalu()" class="py-2.5 rounded-lg text-[8.5px] font-black text-black bg-darkBg border-2 border-borderDark">MINGGU LALU</button>
-                    <button id="laba-quick-bulan-ini" onclick="setLabaFilterBulanIni()" class="py-2.5 rounded-lg text-[8.5px] font-black text-black bg-darkBg border-2 border-borderDark">BULAN INI</button>
-                    <button id="laba-quick-semua" onclick="resetLabaFilter()" class="py-2.5 rounded-lg text-[8.5px] font-black text-black bg-darkBg border-2 border-borderDark">SEMUA</button>
+            <div class="rp-laba-panel">
+                <div class="rp-laba-panel-head">
+                    <div class="rp-laba-panel-head-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                    <div class="rp-laba-panel-head-title">FILTER PERIODE</div>
                 </div>
-                <div class="flex items-center justify-between cursor-pointer select-none -mb-1" onclick="toggleCollapse('laba-filter-manual-collapse','laba-filter-manual-chevron')">
-                    <div class="text-[8px] font-black text-black tracking-wider">ATAU PILIH PERIODE MANUAL</div>
-                    <i id="laba-filter-manual-chevron" class="fa-solid fa-chevron-down brand-text text-[10px] collapse-chevron"></i>
-                </div>
-                <div id="laba-filter-manual-collapse" class="collapse-body collapsed flex flex-col gap-2">
-                    <div class="flex gap-2">
-                        <div class="flex flex-col flex-1 min-w-0"><label class="text-[8px] text-black font-bold mb-0.5 leading-none">DARI</label><input type="date" id="laba-filter-dari" class="w-full bg-darkBg text-black text-[11px] px-2 py-2.5 rounded-lg border-2 border-borderDark outline-none"></div>
-                        <div class="flex flex-col flex-1 min-w-0"><label class="text-[8px] text-black font-bold mb-0.5 leading-none">SAMPAI</label><input type="date" id="laba-filter-sampai" class="w-full bg-darkBg text-black text-[11px] px-2 py-2.5 rounded-lg border-2 border-borderDark outline-none"></div>
+                <div class="rp-laba-panel-body">
+                    <div class="rp-laba-quick-grid">
+                        <button id="laba-quick-minggu-ini" onclick="setLabaFilterMingguIni()" class="rp-laba-quick-btn" style="background:linear-gradient(90deg,#ff8c00,#ffb347);">MINGGU INI</button>
+                        <button id="laba-quick-minggu-lalu" onclick="setLabaFilterMingguLalu()" class="rp-laba-quick-btn bg-darkBg">MINGGU LALU</button>
+                        <button id="laba-quick-bulan-ini" onclick="setLabaFilterBulanIni()" class="rp-laba-quick-btn bg-darkBg">BULAN INI</button>
+                        <button id="laba-quick-semua" onclick="resetLabaFilter()" class="rp-laba-quick-btn bg-darkBg">SEMUA</button>
                     </div>
-                    <button onclick="applyLabaFilterManual()" class="w-full py-2.5 text-[10px] font-black rounded-lg text-white flex items-center justify-center gap-1.5" style="background:linear-gradient(90deg,#16a34a,#22c55e);"><i class="fa-solid fa-check"></i> TERAPKAN PERIODE MANUAL</button>
+                    <div class="rp-laba-manual-toggle" onclick="toggleCollapse('laba-filter-manual-collapse','laba-filter-manual-chevron')">
+                        <span>ATAU PILIH PERIODE MANUAL</span>
+                        <i id="laba-filter-manual-chevron" class="fa-solid fa-chevron-down collapse-chevron"></i>
+                    </div>
+                    <div id="laba-filter-manual-collapse" class="collapse-body collapsed rp-laba-manual-body">
+                        <div class="rp-laba-manual-dates">
+                            <div class="rp-laba-manual-date-field"><label>DARI</label><input type="date" id="laba-filter-dari"></div>
+                            <div class="rp-laba-manual-date-field"><label>SAMPAI</label><input type="date" id="laba-filter-sampai"></div>
+                        </div>
+                        <button onclick="applyLabaFilterManual()" class="rp-laba-manual-apply"><i class="fa-solid fa-check"></i> TERAPKAN PERIODE MANUAL</button>
+                    </div>
                 </div>
             </div>
 
             <!-- BREAKDOWN PER MODEL -->
-            <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
-                <div class="flex items-center gap-2 px-4 py-3 border-b-2 border-borderDark"><i class="fa-solid fa-layer-group brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">RINCIAN LABA PER MODEL</h3></div>
-                <div id="laba-breakdown-list" class="flex flex-col pb-3"></div>
+            <div class="rp-laba-panel">
+                <div class="rp-laba-panel-head">
+                    <div class="rp-laba-panel-head-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="rp-laba-panel-head-title">RINCIAN LABA PER MODEL</div>
+                </div>
+                <div id="laba-breakdown-list" class="rp-laba-breakdown-list"></div>
             </div>
         <div style="height:110px;flex-shrink:0;"></div>
         </div>
@@ -2998,60 +3189,99 @@ END $$;</textarea>
                     <p>Kelola vendor, brand, model, warna, dan ukuran.</p>
                 </div>
             </div>
-            <div class="bg-darkBg p-1 rounded-xl flex border-2 border-borderDark gap-0.5 overflow-x-auto no-scrollbar">
-                <button onclick="switchMasterTab('vendor')" id="master-tab-vendor" class="whitespace-nowrap flex-1 py-2 text-[10px] font-bold rounded-lg bg-cardBg brand-text shadow-sm transition-all"><i class="fa-solid fa-truck-fast mr-1"></i>VENDOR</button>
-                <button onclick="switchMasterTab('brand')" id="master-tab-brand" class="whitespace-nowrap flex-1 py-2 text-[10px] font-bold rounded-lg text-black hover:text-black transition-all"><i class="fa-solid fa-tags mr-1"></i>BRAND</button>
-                <button onclick="switchMasterTab('model')" id="master-tab-model" class="whitespace-nowrap flex-1 py-2 text-[10px] font-bold rounded-lg text-black hover:text-black transition-all"><i class="fa-solid fa-shirt mr-1"></i>MODEL</button>
-                <button onclick="switchMasterTab('warna')" id="master-tab-warna" class="whitespace-nowrap flex-1 py-2 text-[10px] font-bold rounded-lg text-black hover:text-black transition-all"><i class="fa-solid fa-palette mr-1"></i>WARNA</button>
-                <button onclick="switchMasterTab('ukuran')" id="master-tab-ukuran" class="whitespace-nowrap flex-1 py-2 text-[10px] font-bold rounded-lg text-black hover:text-black transition-all"><i class="fa-solid fa-ruler mr-1"></i>UKURAN</button>
-                <button onclick="switchMasterTab('pengaturan')" id="master-tab-pengaturan" class="whitespace-nowrap flex-1 py-2 text-[10px] font-bold rounded-lg text-black hover:text-black transition-all"><i class="fa-solid fa-sliders mr-1"></i>PENGATURAN</button>
+            <div class="rp-master-tab-grid">
+                <div onclick="switchMasterTab('vendor')" id="master-tab-vendor" class="rp-master-tab-card rp-master-tab-active">
+                    <div class="rp-master-tab-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <div class="rp-master-tab-title">VENDOR</div>
+                </div>
+                <div onclick="switchMasterTab('brand')" id="master-tab-brand" class="rp-master-tab-card">
+                    <div class="rp-master-tab-icon"><i class="fa-solid fa-tags"></i></div>
+                    <div class="rp-master-tab-title">BRAND</div>
+                </div>
+                <div onclick="switchMasterTab('model')" id="master-tab-model" class="rp-master-tab-card">
+                    <div class="rp-master-tab-icon"><i class="fa-solid fa-shirt"></i></div>
+                    <div class="rp-master-tab-title">MODEL</div>
+                </div>
+                <div onclick="switchMasterTab('warna')" id="master-tab-warna" class="rp-master-tab-card">
+                    <div class="rp-master-tab-icon"><i class="fa-solid fa-palette"></i></div>
+                    <div class="rp-master-tab-title">WARNA</div>
+                </div>
+                <div onclick="switchMasterTab('ukuran')" id="master-tab-ukuran" class="rp-master-tab-card">
+                    <div class="rp-master-tab-icon"><i class="fa-solid fa-ruler"></i></div>
+                    <div class="rp-master-tab-title">UKURAN</div>
+                </div>
+                <div onclick="switchMasterTab('pengaturan')" id="master-tab-pengaturan" class="rp-master-tab-card">
+                    <div class="rp-master-tab-icon"><i class="fa-solid fa-sliders"></i></div>
+                    <div class="rp-master-tab-title">PENGATURAN</div>
+                </div>
             </div>
 
             <!-- PANEL VENDOR -->
             <div id="master-panel-vendor" class="flex flex-col gap-3">
-                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden flex flex-col">
-                    <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('vendor-tambah-collapse','vendor-tambah-chevron')">
-                        <div class="flex items-center gap-2"><i class="fa-solid fa-truck-fast brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH VENDOR</h3></div>
-                        <i id="vendor-tambah-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+                <div class="rp-input-variasi-card">
+                    <div class="rp-input-variasi-head" style="cursor:pointer;user-select:none;" onclick="toggleCollapse('vendor-tambah-collapse','vendor-tambah-chevron')">
+                        <div>
+                            <div class="rp-input-variasi-title">TAMBAH VENDOR</div>
+                            <div class="rp-input-variasi-sub">Isi nama & nomor telepon vendor baru</div>
+                        </div>
+                        <i id="vendor-tambah-chevron" class="fa-solid fa-chevron-down collapse-chevron" style="color:var(--input-accent);"></i>
                     </div>
-                    <div id="vendor-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4">
+                    <div id="vendor-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4 pt-3">
                     <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">NAMA VENDOR</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-building text-black text-xs"></i></div><input id="input-vendor-nama" type="text" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors" placeholder="input nama vendor..." style="color:#1a1d24"></div></div>
                     <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">NO. TELEPON</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-phone text-black text-xs"></i></div><input id="input-vendor-telp" type="tel" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors" placeholder="08xx-xxxx-xxxx" style="color:#1a1d24"></div></div>
                     <button id="btn-simpan-vendor" onclick="simpanVendor()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow mt-1"><i class="fa-solid fa-plus"></i> SIMPAN VENDOR</button>
                     </div>
                 </div>
-                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
-                    <div class="brand-gradient-bg text-black text-[10px] font-black flex items-center justify-between px-4 py-2"><span><i class="fa-solid fa-list mr-1"></i>DAFTAR VENDOR</span><span id="vendor-count" class="bg-black/20 px-2 py-0.5 rounded-full text-[9px]">0 data</span></div>
+                <div class="rp-input-variasi-card">
+                    <div class="rp-input-variasi-head">
+                        <div>
+                            <div class="rp-input-variasi-title">DAFTAR VENDOR</div>
+                            <div class="rp-input-variasi-sub" id="vendor-count">0 data</div>
+                        </div>
+                        <i class="fa-solid fa-list" style="color:var(--input-accent);"></i>
+                    </div>
                     <div id="vendor-list" class="flex flex-col divide-y divide-borderDark"><div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada vendor.</div></div>
                 </div>
             </div>
 
             <!-- PANEL BRAND -->
             <div id="master-panel-brand" class="hidden flex-col gap-3">
-                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden flex flex-col">
-                    <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('brand-tambah-collapse','brand-tambah-chevron')">
-                        <div class="flex items-center gap-2"><i class="fa-solid fa-tags brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH BRAND</h3></div>
-                        <i id="brand-tambah-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+                <div class="rp-input-variasi-card">
+                    <div class="rp-input-variasi-head" style="cursor:pointer;user-select:none;" onclick="toggleCollapse('brand-tambah-collapse','brand-tambah-chevron')">
+                        <div>
+                            <div class="rp-input-variasi-title">TAMBAH BRAND</div>
+                            <div class="rp-input-variasi-sub">Isi nama brand baru</div>
+                        </div>
+                        <i id="brand-tambah-chevron" class="fa-solid fa-chevron-down collapse-chevron" style="color:var(--input-accent);"></i>
                     </div>
-                    <div id="brand-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4">
+                    <div id="brand-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4 pt-3">
                     <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">NAMA BRAND</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-tag text-black text-xs"></i></div><input id="input-brand-nama" type="text" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black placeholder-black focus:outline-none focus:border-[#7699C9] transition-colors" placeholder="input nama brand..." style="color:#1a1d24"></div></div>
                     <button id="btn-simpan-brand" onclick="simpanBrand()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow mt-1"><i class="fa-solid fa-plus"></i> SIMPAN BRAND</button>
                     </div>
                 </div>
-                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
-                    <div class="brand-gradient-bg text-black text-[10px] font-black flex items-center justify-between px-4 py-2"><span><i class="fa-solid fa-list mr-1"></i>DAFTAR BRAND</span><span id="brand-count" class="bg-black/20 px-2 py-0.5 rounded-full text-[9px]">0 data</span></div>
+                <div class="rp-input-variasi-card">
+                    <div class="rp-input-variasi-head">
+                        <div>
+                            <div class="rp-input-variasi-title">DAFTAR BRAND</div>
+                            <div class="rp-input-variasi-sub" id="brand-count">0 data</div>
+                        </div>
+                        <i class="fa-solid fa-list" style="color:var(--input-accent);"></i>
+                    </div>
                     <div id="brand-list" class="flex flex-col divide-y divide-borderDark"><div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada brand.</div></div>
                 </div>
             </div>
 
             <!-- PANEL MODEL -->
             <div id="master-panel-model" class="hidden flex-col gap-3">
-                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden flex flex-col">
-                    <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('model-tambah-collapse','model-tambah-chevron')">
-                        <div class="flex items-center gap-2"><i class="fa-solid fa-shirt brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH MODEL</h3></div>
-                        <i id="model-tambah-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+                <div class="rp-input-variasi-card">
+                    <div class="rp-input-variasi-head" style="cursor:pointer;user-select:none;" onclick="toggleCollapse('model-tambah-collapse','model-tambah-chevron')">
+                        <div>
+                            <div class="rp-input-variasi-title">TAMBAH MODEL</div>
+                            <div class="rp-input-variasi-sub">Pilih brand & isi nama model + harga</div>
+                        </div>
+                        <i id="model-tambah-chevron" class="fa-solid fa-chevron-down collapse-chevron" style="color:var(--input-accent);"></i>
                     </div>
-                    <div id="model-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4">
+                    <div id="model-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4 pt-3">
                     <div class="flex flex-col gap-1.5"><label class="text-[10px] font-bold text-black tracking-wider">PILIH BRAND</label><div class="relative"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-tags text-black text-xs"></i></div><select id="model-pilih-brand" class="w-full bg-darkBg border-2 border-borderDark rounded-lg pl-9 pr-3 py-2.5 text-xs text-black appearance-none focus:outline-none focus:border-[#7699C9] transition-colors" style="color:#1a1d24"><option value="">-- Pilih Brand --</option></select><div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"><i class="fa-solid fa-chevron-down text-black text-xs"></i></div></div></div>
                     <div class="flex flex-col gap-1.5">
                         <label class="text-[10px] font-bold text-black tracking-wider">DAFTAR MODEL & HARGA</label>
@@ -3064,20 +3294,29 @@ END $$;</textarea>
                     <button id="btn-simpan-model" onclick="simpanModel()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow"><i class="fa-solid fa-floppy-disk"></i> SIMPAN MODEL</button>
                     </div>
                 </div>
-                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
-                    <div class="brand-gradient-bg text-black text-[10px] font-black flex items-center justify-between px-4 py-2"><span><i class="fa-solid fa-list mr-1"></i>DAFTAR MODEL</span><span id="model-count" class="bg-black/20 px-2 py-0.5 rounded-full text-[9px]">0 data</span></div>
+                <div class="rp-input-variasi-card">
+                    <div class="rp-input-variasi-head">
+                        <div>
+                            <div class="rp-input-variasi-title">DAFTAR MODEL</div>
+                            <div class="rp-input-variasi-sub" id="model-count">0 data</div>
+                        </div>
+                        <i class="fa-solid fa-list" style="color:var(--input-accent);"></i>
+                    </div>
                     <div id="model-list" class="flex flex-col divide-y divide-borderDark"><div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada model.</div></div>
                 </div>
             </div>
 
             <!-- PANEL WARNA -->
             <div id="master-panel-warna" class="hidden flex-col gap-3">
-                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden flex flex-col">
-                    <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('warna-tambah-collapse','warna-tambah-chevron')">
-                        <div class="flex items-center gap-2"><i class="fa-solid fa-palette brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH WARNA</h3></div>
-                        <i id="warna-tambah-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+                <div class="rp-input-variasi-card">
+                    <div class="rp-input-variasi-head" style="cursor:pointer;user-select:none;" onclick="toggleCollapse('warna-tambah-collapse','warna-tambah-chevron')">
+                        <div>
+                            <div class="rp-input-variasi-title">TAMBAH WARNA</div>
+                            <div class="rp-input-variasi-sub">Isi nama warna & kode warna</div>
+                        </div>
+                        <i id="warna-tambah-chevron" class="fa-solid fa-chevron-down collapse-chevron" style="color:var(--input-accent);"></i>
                     </div>
-                    <div id="warna-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4">
+                    <div id="warna-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4 pt-3">
                     <div class="rounded-xl overflow-hidden border-2 border-borderDark">
                         <div class="brand-gradient-bg text-black text-[10px] font-black grid grid-cols-12 py-1.5 px-2 text-center items-center"><div class="col-span-9 text-left">NAMA WARNA</div><div class="col-span-2">KODE</div><div class="col-span-1"></div></div>
                         <div id="warna-rows-container" class="flex flex-col divide-y divide-borderDark"></div>
@@ -3086,20 +3325,29 @@ END $$;</textarea>
                     <button id="btn-simpan-warna" onclick="simpanWarna()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow"><i class="fa-solid fa-floppy-disk"></i> SIMPAN WARNA</button>
                     </div>
                 </div>
-                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
-                    <div class="brand-gradient-bg text-black text-[10px] font-black flex items-center justify-between px-4 py-2"><span><i class="fa-solid fa-list mr-1"></i>DAFTAR WARNA</span><span id="warna-count" class="bg-black/20 px-2 py-0.5 rounded-full text-[9px]">0 data</span></div>
+                <div class="rp-input-variasi-card">
+                    <div class="rp-input-variasi-head">
+                        <div>
+                            <div class="rp-input-variasi-title">DAFTAR WARNA</div>
+                            <div class="rp-input-variasi-sub" id="warna-count">0 data</div>
+                        </div>
+                        <i class="fa-solid fa-list" style="color:var(--input-accent);"></i>
+                    </div>
                     <div id="warna-list" class="flex flex-col divide-y divide-borderDark"><div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada warna.</div></div>
                 </div>
             </div>
 
             <!-- PANEL UKURAN -->
             <div id="master-panel-ukuran" class="hidden flex-col gap-3">
-                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden flex flex-col">
-                    <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('ukuran-tambah-collapse','ukuran-tambah-chevron')">
-                        <div class="flex items-center gap-2"><i class="fa-solid fa-ruler brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">TAMBAH UKURAN</h3></div>
-                        <i id="ukuran-tambah-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+                <div class="rp-input-variasi-card">
+                    <div class="rp-input-variasi-head" style="cursor:pointer;user-select:none;" onclick="toggleCollapse('ukuran-tambah-collapse','ukuran-tambah-chevron')">
+                        <div>
+                            <div class="rp-input-variasi-title">TAMBAH UKURAN</div>
+                            <div class="rp-input-variasi-sub">Isi nama ukuran baru</div>
+                        </div>
+                        <i id="ukuran-tambah-chevron" class="fa-solid fa-chevron-down collapse-chevron" style="color:var(--input-accent);"></i>
                     </div>
-                    <div id="ukuran-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4">
+                    <div id="ukuran-tambah-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4 pt-3">
                     <div class="rounded-xl overflow-hidden border-2 border-borderDark">
                         <div class="brand-gradient-bg text-black text-[10px] font-black grid grid-cols-12 py-1.5 px-2 text-center items-center"><div class="col-span-11 text-left">NAMA UKURAN</div><div class="col-span-1"></div></div>
                         <div id="ukuran-rows-container" class="flex flex-col divide-y divide-borderDark"></div>
@@ -3108,8 +3356,14 @@ END $$;</textarea>
                     <button id="btn-simpan-ukuran" onclick="simpanUkuran()" class="w-full brand-gradient-bg text-black font-bold text-sm py-3 rounded-xl flex justify-center items-center gap-2 submit-btn-shadow"><i class="fa-solid fa-floppy-disk"></i> SIMPAN UKURAN</button>
                     </div>
                 </div>
-                <div class="bg-cardBg rounded-xl border-2 border-borderDark overflow-hidden">
-                    <div class="brand-gradient-bg text-black text-[10px] font-black flex items-center justify-between px-4 py-2"><span><i class="fa-solid fa-list mr-1"></i>DAFTAR UKURAN</span><span id="ukuran-count" class="bg-black/20 px-2 py-0.5 rounded-full text-[9px]">0 data</span></div>
+                <div class="rp-input-variasi-card">
+                    <div class="rp-input-variasi-head">
+                        <div>
+                            <div class="rp-input-variasi-title">DAFTAR UKURAN</div>
+                            <div class="rp-input-variasi-sub" id="ukuran-count">0 data</div>
+                        </div>
+                        <i class="fa-solid fa-list" style="color:var(--input-accent);"></i>
+                    </div>
                     <div id="ukuran-list" class="flex flex-col divide-y divide-borderDark"><div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada ukuran.</div></div>
                 </div>
             </div>
@@ -3117,16 +3371,16 @@ END $$;</textarea>
             <!-- PANEL PENGATURAN -->
             <div id="master-panel-pengaturan" class="hidden flex-col gap-3">
 
-            <!-- SEMUA PENGATURAN DALAM 1 KOLOM ACCORDION -->
-            <div class="bg-cardBg rounded-xl border-2 border-borderDark flex flex-col overflow-hidden divide-y-2 divide-borderDark">
-
             <!-- NOTIFIKASI PESANAN MASUK -->
-            <div class="flex flex-col">
-                <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('pesanan-notif-setting-collapse','pesanan-notif-setting-chevron')">
-                    <div class="flex items-center gap-2"><i class="fa-solid fa-bell brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">NOTIFIKASI PESANAN MASUK</h3></div>
-                    <i id="pesanan-notif-setting-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+            <div class="rp-input-variasi-card">
+                <div class="rp-input-variasi-head" style="cursor:pointer;user-select:none;" onclick="toggleCollapse('pesanan-notif-setting-collapse','pesanan-notif-setting-chevron')">
+                    <div>
+                        <div class="rp-input-variasi-title">NOTIFIKASI PESANAN MASUK</div>
+                        <div class="rp-input-variasi-sub">Atur suara & getar saat ada pesanan baru</div>
+                    </div>
+                    <i id="pesanan-notif-setting-chevron" class="fa-solid fa-chevron-down collapse-chevron" style="color:var(--input-accent);"></i>
                 </div>
-                <div id="pesanan-notif-setting-collapse" class="collapse-body collapsed flex flex-col gap-4 px-4 pb-4">
+                <div id="pesanan-notif-setting-collapse" class="collapse-body collapsed flex flex-col gap-4 px-4 pb-4 pt-3">
                 <div class="flex items-center justify-between">
                     <div class="flex flex-col">
                         <span class="text-[11px] font-bold text-black">SUARA & GETAR PESANAN BARU</span>
@@ -3142,12 +3396,15 @@ END $$;</textarea>
             </div>
 
             <!-- RIWAYAT PELUNASAN -->
-            <div class="flex flex-col">
-                <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('pelunasan-setting-collapse','pelunasan-setting-chevron')">
-                    <div class="flex items-center gap-2"><i class="fa-solid fa-money-bill-wave brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">RIWAYAT PELUNASAN</h3></div>
-                    <i id="pelunasan-setting-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+            <div class="rp-input-variasi-card">
+                <div class="rp-input-variasi-head" style="cursor:pointer;user-select:none;" onclick="toggleCollapse('pelunasan-setting-collapse','pelunasan-setting-chevron')">
+                    <div>
+                        <div class="rp-input-variasi-title">RIWAYAT PELUNASAN</div>
+                        <div class="rp-input-variasi-sub">Atur batas tampilan riwayat pembayaran</div>
+                    </div>
+                    <i id="pelunasan-setting-chevron" class="fa-solid fa-chevron-down collapse-chevron" style="color:var(--input-accent);"></i>
                 </div>
-                <div id="pelunasan-setting-collapse" class="collapse-body collapsed flex flex-col gap-4 px-4 pb-4">
+                <div id="pelunasan-setting-collapse" class="collapse-body collapsed flex flex-col gap-4 px-4 pb-4 pt-3">
                 <div class="flex items-center justify-between">
                     <div class="flex flex-col">
                         <span class="text-[11px] font-bold text-black">TAMPILKAN SEMUA RIWAYAT</span>
@@ -3163,12 +3420,15 @@ END $$;</textarea>
             </div>
 
             <!-- SQL SCHEMA -->
-            <div class="flex flex-col">
-                <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('sql-schema-collapse','sql-schema-chevron')">
-                    <div class="flex items-center gap-2"><i class="fa-solid fa-code brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">SQL SCHEMA DATABASE</h3></div>
-                    <i id="sql-schema-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+            <div class="rp-input-variasi-card">
+                <div class="rp-input-variasi-head" style="cursor:pointer;user-select:none;" onclick="toggleCollapse('sql-schema-collapse','sql-schema-chevron')">
+                    <div>
+                        <div class="rp-input-variasi-title">SQL SCHEMA DATABASE</div>
+                        <div class="rp-input-variasi-sub">Untuk clone database ke project baru</div>
+                    </div>
+                    <i id="sql-schema-chevron" class="fa-solid fa-chevron-down collapse-chevron" style="color:var(--input-accent);"></i>
                 </div>
-                <div id="sql-schema-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4">
+                <div id="sql-schema-collapse" class="collapse-body collapsed flex flex-col gap-3 px-4 pb-4 pt-3">
                     <div class="bg-darkBg rounded-xl p-3 border-2 border-borderDark flex items-start gap-3">
                         <i class="fa-solid fa-circle-info brand-text text-sm mt-0.5 flex-shrink-0"></i>
                         <div>
@@ -3190,12 +3450,15 @@ END $$;</textarea>
             </div>
 
             <!-- BACKUP & RESTORE DATA -->
-            <div class="flex flex-col">
-                <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('backup-collapse','backup-chevron')">
-                    <div class="flex items-center gap-2"><i class="fa-solid fa-cloud-arrow-down brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">BACKUP & RESTORE DATA</h3></div>
-                    <i id="backup-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
+            <div class="rp-input-variasi-card">
+                <div class="rp-input-variasi-head" style="cursor:pointer;user-select:none;" onclick="toggleCollapse('backup-collapse','backup-chevron')">
+                    <div>
+                        <div class="rp-input-variasi-title">BACKUP & RESTORE DATA</div>
+                        <div class="rp-input-variasi-sub">Ekspor atau pulihkan seluruh data</div>
+                    </div>
+                    <i id="backup-chevron" class="fa-solid fa-chevron-down collapse-chevron" style="color:var(--input-accent);"></i>
                 </div>
-                <div id="backup-collapse" class="collapse-body collapsed flex flex-col gap-4 px-4 pb-4">
+                <div id="backup-collapse" class="collapse-body collapsed flex flex-col gap-4 px-4 pb-4 pt-3">
 
                     <!-- Info -->
                     <div class="bg-darkBg rounded-xl p-3 border-2 border-borderDark flex items-start gap-3">
@@ -3241,15 +3504,11 @@ END $$;</textarea>
                 </div>
             </div>
 
-            <!-- SIMPAN PENGATURAN (di dalam kolom yang sama) -->
-            <div class="p-4">
-                <button id="btn-simpan-pengaturan" onclick="simpanPengaturan()" class="w-full brand-gradient-bg text-black font-bold text-lg py-3.5 rounded-xl shadow-[0_4px_15px_rgba(255,140,0,0.3)] flex justify-center items-center gap-3 submit-btn-shadow">
-                    <i class="fa-solid fa-check-double text-xl"></i> SIMPAN PENGATURAN
-                </button>
-            </div>
+            <!-- SIMPAN PENGATURAN -->
+            <button id="btn-simpan-pengaturan" onclick="simpanPengaturan()" class="w-full brand-gradient-bg text-black font-bold text-lg py-3.5 rounded-xl shadow-[0_4px_15px_rgba(255,140,0,0.3)] flex justify-center items-center gap-3 submit-btn-shadow">
+                <i class="fa-solid fa-check-double text-xl"></i> SIMPAN PENGATURAN
+            </button>
 
-            </div>
-            <!-- END SEMUA PENGATURAN DALAM 1 KOLOM ACCORDION -->
             </div>
             <!-- END PANEL PENGATURAN -->
 
@@ -3320,6 +3579,23 @@ END $$;</textarea>
     </div><!-- end #main-app -->
 
     <script>
+    // ================================================================
+    // CATATAN: ID YANG DIBUAT SECARA DINAMIS (runtime)
+    // Sejumlah elemen di app ini TIDAK punya markup statis di HTML —
+    // id-nya di-set lewat `el.id = '...'` saat elemen dibuat via JS
+    // (modal koreksi stok/SQL setup, toast, dropdown generik, baris
+    // tabel model/warna/ukuran/input/transaksi, dsb). Karena itu,
+    // scan statis `getElementById('...')` untuk id-id berikut akan
+    // terlihat "tidak ketemu" di HTML — ini BUKAN dead code/referensi
+    // mati, elemennya baru ada begitu fungsi pembuatnya dijalankan.
+    // Id-id yang dimaksud: sql-modal, model-row-*, warna-row-*,
+    // ukuran-row-*, generic-dropdown-popup, input-row-*, trx-row-*,
+    // edit-qty-input, btn-simpan-edit-qty-trx, hapus-trx-info,
+    // btn-konfirm-hapus-trx, popup-pilih-metode,
+    // popup-bayar-sebagian-form, app-toast. Masing-masing ditandai
+    // dengan komentar serupa persis di baris `el.id = '...'`-nya.
+    // ================================================================
+
     // ================================================================
     // FLOATING NAVBAR TOGGLE
     // Navbar utama tersembunyi secara default. Tombol hamburger berada
@@ -3406,7 +3682,16 @@ END $$;</textarea>
                 .select(selectStr)
                 .order('id', { ascending: true })
                 .range(from, from + PAGE - 1);
-            if (error) { console.warn('fetchAllRows gagal:', table, error.message); break; }
+            if (error) {
+                console.warn('fetchAllRows gagal:', table, error.message);
+                // Kalau ini halaman PERTAMA, berarti query-nya gagal total (RLS/permission/
+                // tabel belum ada dsb) — bukan cuma "kehabisan data di tengah paginasi".
+                // Lempar error supaya pemanggil (muatSemuaData) tahu dan bisa memberi tahu
+                // user, alih-alih diam-diam mengembalikan array kosong seolah tabelnya
+                // memang tidak punya data.
+                if (from === 0) throw new Error(`Gagal memuat tabel "${table}": ${error.message}`);
+                break;
+            }
             all = all.concat(data || []);
             if (!data || data.length < PAGE) break;
             from += PAGE;
@@ -3620,11 +3905,20 @@ END $$;</textarea>
             });
 
             // Tes koneksi dengan timeout 15 detik
-            await withTimeout(
+            const pingResult = await withTimeout(
                 sbClient.from('pengaturan').select('key').limit(1),
                 15000,
                 'Koneksi Supabase'
             );
+            // PENTING: query Supabase/PostgREST yang gagal (RLS memblokir, tabel belum
+            // di-setup, key tidak punya izin, dst) TIDAK melempar exception — responsnya
+            // tetap datang dengan status sukses tapi membawa field `.error`. Tanpa
+            // pengecekan ini, kegagalan seperti itu akan lolos dianggap "konek sukses"
+            // padahal query sebenarnya gagal, dan pada akhirnya app akan tampil dengan
+            // data kosong tanpa pesan error apa pun ke user.
+            if (pingResult && pingResult.error) {
+                throw new Error(pingResult.error.message || 'Query test koneksi gagal. Cek RLS policy / apakah tabel "pengaturan" sudah dibuat.');
+            }
             await masukApp();
 
         } catch(err) {
@@ -3837,6 +4131,8 @@ GRANT EXECUTE ON FUNCTION public.fix_id_sequences() TO anon, authenticated;`;
             : 'https://supabase.com/dashboard';
 
         const modal = document.createElement('div');
+        // Dibuat dinamis — tidak ada markup statis 'sql-modal' di HTML. Lihat catatan
+        // "ID YANG DIBUAT SECARA DINAMIS" di awal <script> ini.
         modal.id = 'sql-modal';
         modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px';
         modal.innerHTML = `
@@ -3939,6 +4235,19 @@ GRANT EXECUTE ON FUNCTION public.fix_id_sequences() TO anon, authenticated;`;
                 sbClient.from('pengaturan').select('*'),
             ]), TIMEOUT_MS, 'Muat data master');
 
+            // Query Supabase yang gagal (RLS, tabel belum ada, key tidak berizin, dst)
+            // tidak melempar exception — datang sebagai {data:null, error:{...}} dengan
+            // status sukses. Tanpa dicek, ini akan lolos jadi "data kosong" tanpa pesan
+            // apa pun ke user. Kumpulkan semua error dari batch ini dan lempar sekaligus
+            // supaya ditangani oleh catch di bawah dan ditampilkan sebagai toast.
+            const masterErrors = [
+                ['vendor', v.error], ['brand', b.error], ['model', m.error],
+                ['warna', w.error], ['ukuran', u.error], ['pengaturan', pengaturan.error],
+            ].filter(([, err]) => err);
+            if (masterErrors.length) {
+                throw new Error('Gagal memuat data master (' + masterErrors.map(([t]) => t).join(', ') + '): ' + masterErrors[0][1].message);
+            }
+
             masterData.vendor = (v.data || []).map(x => ({ id: x.id, nama: x.nama, telp: x.telp || '' }));
             masterData.brand  = (b.data || []).map(x => ({ id: x.id, nama: x.nama }));
             masterData.model  = (m.data || []).map(x => ({ id: x.id, brandId: x.brand_id, brandNama: x.brand?.nama || x.brand_nama || '', nama: x.nama, harga: x.harga || 0, hargaModal: x.harga_modal || 0 }));
@@ -3993,10 +4302,13 @@ GRANT EXECUTE ON FUNCTION public.fix_id_sequences() TO anon, authenticated;`;
             }));
 
         } catch(e) {
-            console.warn('muatSemuaData error (mungkin tabel belum ada):', e.message);
-            if (e.message && e.message.includes('timeout')) {
-                showToast('⚠️ ' + e.message);
-            }
+            console.warn('muatSemuaData error:', e.message);
+            // Sebelumnya toast HANYA muncul kalau pesan errornya mengandung kata
+            // "timeout" — error lain (RLS, tabel belum ada, permission denied, dst,
+            // termasuk yang baru dilempar eksplisit di atas) hanya masuk console dan
+            // TIDAK terlihat oleh user, padahal appData jadi kosong/tidak lengkap.
+            // Sekarang semua kegagalan di sini ditampilkan sebagai toast.
+            showToast('⚠️ ' + (e.message || 'Gagal memuat sebagian data dari database.'));
         }
 
         // Load pelunasan secara terpisah agar tidak mengganggu data utama
@@ -6532,6 +6844,7 @@ function updateSSK(tab, rowId) {
         const container = document.getElementById('model-rows-container');
         const row = document.createElement('div');
         row.className = 'flex flex-col gap-1.5 p-3 border-b-2 border-borderDark last:border-0';
+        // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
         row.id = 'model-row-' + modelRowCount;
         row.innerHTML = `
             <div class="flex gap-2 items-center">
@@ -6762,6 +7075,7 @@ function updateSSK(tab, rowId) {
         const id = warnaRowCount;
         const container = document.getElementById('warna-rows-container');
         const row = document.createElement('div');
+        // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
         row.id = 'warna-row-' + id;
         row.className = 'grid grid-cols-12 items-center gap-1 px-2 py-1.5 bg-darkBg';
         row.innerHTML = `
@@ -6871,6 +7185,7 @@ function updateSSK(tab, rowId) {
         const id = ukuranRowCount;
         const container = document.getElementById('ukuran-rows-container');
         const row = document.createElement('div');
+        // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
         row.id = 'ukuran-row-' + id;
         row.className = 'grid grid-cols-12 items-center gap-1 px-2 py-1.5 bg-darkBg';
         row.innerHTML = `
@@ -6964,11 +7279,11 @@ function updateSSK(tab, rowId) {
         panels.forEach(p => {
             document.getElementById('master-panel-' + p).classList.add('hidden');
             document.getElementById('master-panel-' + p).classList.remove('flex');
-            document.getElementById('master-tab-' + p).className = "whitespace-nowrap flex-1 py-2 text-[10px] font-bold rounded-lg text-black hover:text-black transition-all";
+            document.getElementById('master-tab-' + p).classList.remove('rp-master-tab-active');
         });
         document.getElementById('master-panel-' + tab).classList.remove('hidden');
         document.getElementById('master-panel-' + tab).classList.add('flex');
-        document.getElementById('master-tab-' + tab).className = "whitespace-nowrap flex-1 py-2 text-[10px] font-bold rounded-lg bg-cardBg brand-text shadow-sm transition-all";
+        document.getElementById('master-tab-' + tab).classList.add('rp-master-tab-active');
         if (tab === 'model') renderBrandOptions();
         if (tab === 'pengaturan') {
             Object.entries(collapseGroups).forEach(([id, chev]) => {
@@ -7058,6 +7373,7 @@ function updateSSK(tab, rowId) {
         }
 
         const popup = document.createElement('div');
+        // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
         popup.id = 'generic-dropdown-popup';
         popup.className = 'fixed z-[999] bg-[#ffffff] border-2 border-[#7699C9] rounded-xl shadow-2xl overflow-hidden';
         popup.style.overflowY = 'auto';
@@ -7581,6 +7897,7 @@ function updateSSK(tab, rowId) {
         const list = document.getElementById('input-variasi-list');
         const isFirst = list.children.length === 0;
         const row = document.createElement('div');
+        // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
         row.id = 'input-row-' + id;
         row.className = 'input-variation-card inline';
 
@@ -8388,6 +8705,7 @@ function updateSSK(tab, rowId) {
 	        const list = document.getElementById('trx-variasi-list');
 	        const isFirst = list.children.length === 0;
 	        const row = document.createElement('div');
+	        // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
 	        row.id = 'trx-row-' + id;
 	        row.className = 'input-variation-card inline';
 
@@ -9621,6 +9939,7 @@ function updateSSK(tab, rowId) {
             };
 
             var inputEl = document.createElement("input");
+            // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
             inputEl.id = "edit-qty-input";
             inputEl.type = "number";
             inputEl.min = minQty;
@@ -10233,7 +10552,7 @@ function updateSSK(tab, rowId) {
         const statusColor = allLunas ? '#16a34a' : '#dc2626';
         const statusBg = allLunas ? '#dcfce7' : '#fee2e2';
 
-        const _svgLogo = `<!-- Creator: CorelDRAW --> <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="200" height="46" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 805.08 185.33" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003"> <defs> <style type="text/css"> <![CDATA[ .fil0 {fill:url(#id0)} ]]> </style> <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="-0" y1="92.66" x2="805.08" y2="92.66"> <stop offset="0" style="stop-opacity:1; stop-color:#F5871D"/> <stop offset="1" style="stop-opacity:1; stop-color:#FFB246"/> </linearGradient> </defs> <g id="Layer_x0020_1"> <metadata id="CorelCorpID_0Corel-Layer"/> <path class="fil0" d="M94.18 141.86l-23.19 -30.74 -54.43 0 55.97 74.2 25.23 0 29.2 0 53.16 0c50.97,0 92.66,-41.7 92.66,-92.66 0,-50.96 -41.7,-92.66 -92.66,-92.66l-46.79 0c16.58,8.68 28.81,24.56 32.52,43.46l14.27 0c27.06,0 49.2,22.14 49.2,49.2 0,27.06 -22.14,49.2 -49.2,49.2l-85.94 0zm199.26 -13.77l511.64 0 0 8.98 -511.64 0 0 -8.98zm14.76 36.03l0 -6.45 18.02 0c0.87,0 1.63,0.31 2.25,0.95 0.65,0.63 0.96,1.39 0.96,2.29 0,0.87 -0.31,1.63 -0.96,2.28 -0.61,0.61 -1.38,0.93 -2.25,0.93l-18.02 0zm-14.76 -17.52l0 37.85 14.76 0 0 -9.24 21.71 0c7.79,0.12 14.42,-6.51 14.3,-14.3 0.11,-7.84 -6.51,-14.39 -14.3,-14.31l-36.47 0zm54.77 -0.03l0 37.85 14.75 0 0 -9.24 13.18 0 7.13 9.24 15.71 0 -8.26 -10.61c2.48,-1.16 4.48,-2.9 5.98,-5.19 1.52,-2.31 2.28,-4.89 2.28,-7.74 0.11,-7.83 -6.51,-14.39 -14.3,-14.31l-36.47 0zm32.75 11.07c1.79,0 3.24,1.44 3.24,3.24 0,0.87 -0.31,1.63 -0.96,2.28 -0.61,0.62 -1.38,0.93 -2.28,0.93l-18 0 0 -6.45 18 0zm47.34 -12.03c-14.24,0.03 -25.91,4.14 -25.85,18.48l0 2.76c-0.06,14.3 11.6,18.45 25.85,18.47 14.23,-0.03 25.88,-4.17 25.83,-18.47l0 -2.76c0,-14.31 -11.58,-18.48 -25.83,-18.48zm11.07 20.3c0.09,6.2 -5.04,7.32 -11.07,7.41 -6.05,-0.09 -11.18,-1.21 -11.09,-7.41l0 -0.92c-0.09,-6.17 5.04,-7.3 11.09,-7.38 6.03,0.08 11.15,1.21 11.07,7.38l0 0.92zm56.04 -0.39c0,3.81 -2.16,6.93 -6,6.93l-16.16 0 0 -13.86 16.16 0c3.84,0 6,3.1 6,6.93zm-36.91 -18.93l0 37.85 33.68 0c10.39,0.14 18.1,-8.64 18.02,-18.93 0.08,-10.34 -7.63,-19.07 -18.02,-18.93l-33.68 0zm92.76 19.35c0.09,6.23 -5.04,7.3 -11.06,7.39 -6.06,-0.09 -11.15,-1.15 -11.09,-7.39l0 -19.4 -14.76 0 0 20.33c-0.06,14.31 11.65,18.42 25.85,18.45 14.2,-0.03 25.9,-4.14 25.85,-18.45l0 -20.33 -14.79 0 0 19.4zm55.92 2.76c-1.35,3.72 -5.58,4.62 -10.64,4.62 -6.03,-0.09 -11.15,-1.21 -11.07,-7.39l0 -0.93c-0.09,-6.22 5.04,-7.29 11.07,-7.38 5.06,0 9.26,0.88 10.64,4.59l15.13 0c-0.94,-12.75 -12.14,-16.58 -25.77,-16.61 -14.2,0.06 -25.91,4.16 -25.85,18.48l0 2.76c-0.05,14.33 11.65,18.45 25.85,18.47 13.63,0 24.84,-3.84 25.77,-16.62l-15.13 0zm48.55 15.75l0 -25.86 17.54 0 0 -12 -49.84 0 0 12 17.54 0 0 25.86 14.75 0zm22.47 -37.91l0 37.85 14.75 0 0 -37.85 -14.75 0zm44.94 -0.93c-14.25,0.03 -25.91,4.14 -25.85,18.48l0 2.76c-0.06,14.3 11.6,18.45 25.85,18.47 14.23,-0.03 25.88,-4.17 25.83,-18.47l0 -2.76c0,-14.31 -11.58,-18.48 -25.83,-18.48zm11.07 20.3c0.08,6.2 -5.04,7.32 -11.07,7.41 -6.06,-0.09 -11.18,-1.21 -11.09,-7.41l0 -0.92c-0.09,-6.17 5.04,-7.3 11.09,-7.38 6.03,0.08 11.15,1.21 11.07,7.38l0 0.92zm56.04 0.68l-16.61 -20.05 -20.3 0 0 37.85 14.75 0 0 -23.12 20.33 23.12 16.62 0 0 -37.85 -14.79 0 0 20.05zm-496.81 -117.74l0 70.69 27.55 0 0 -17.25 24.61 0 13.3 17.25 29.35 0 -15.42 -19.82c4.63,-2.17 8.37,-5.42 11.17,-9.69 2.84,-4.31 4.25,-9.14 4.25,-14.45 0.22,-14.63 -12.15,-26.87 -26.71,-26.73l-68.1 0zm61.16 20.68c3.35,0 6.05,2.67 6.05,6.04 0,1.64 -0.57,3.05 -1.79,4.26 -1.15,1.17 -2.57,1.74 -4.25,1.74l-33.6 0 0 -12.04 33.6 0zm90.07 -0.16l9.67 20.88 -19.4 0 9.73 -20.88zm-54.32 50.22l31.02 0 5.58 -12.1 35.38 0 5.58 12.1 31.02 0 -37.91 -70.69 -32.76 0 -37.91 70.69zm179.62 -35.34c0,7.11 -4.04,12.94 -11.2,12.94l-30.17 0 0 -25.88 30.17 0c7.16,0 11.2,5.8 11.2,12.94zm-68.93 -35.35l0 70.69 62.9 0c19.4,0.27 33.8,-16.14 33.66,-35.34 0.14,-19.3 -14.25,-35.6 -33.66,-35.35l-62.9 0zm172.32 36.13c0.16,11.63 -9.41,13.63 -20.71,13.79 -11.26,-0.16 -20.82,-2.16 -20.66,-13.79l0 -6.89 -27.55 0 0 8.63c-0.11,26.71 21.66,34.39 48.21,34.44 26.71,0 48.29,-7.79 48.29,-34.44l0 -37.93 -27.57 0 0 36.19zm77.42 -15.67l9.67 20.88 -19.4 0 9.73 -20.88zm-54.32 50.22l31.02 0 5.58 -12.1 35.38 0 5.58 12.1 31.02 0 -37.91 -70.69 -32.76 0 -37.91 70.69zm-540.4 15.14l-17.82 -23.63 -0 0 -5.77 -7.65c16.41,-9.67 27.45,-27.52 27.45,-47.91 0,-30.64 -24.92,-55.56 -55.56,-55.56l-104.35 0 32.78 43.46 71.57 0c6.65,0 12.1,5.44 12.1,12.1 0,6.66 -5.45,12.1 -12.1,12.1l-53.32 0 50.6 67.09 54.43 0z"/> </g> </svg>`;
+        const _svgLogo = `<!-- Creator: CorelDRAW --> <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="200" height="46" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 805.08 185.33" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003"> <defs> <style type="text/css"> <![CDATA[ .fil0 {fill:url(#id0-a)} ]]> </style> <linearGradient id="id0-a" gradientUnits="userSpaceOnUse" x1="-0" y1="92.66" x2="805.08" y2="92.66"> <stop offset="0" style="stop-opacity:1; stop-color:#F5871D"/> <stop offset="1" style="stop-opacity:1; stop-color:#FFB246"/> </linearGradient> </defs> <g id="Layer_x0020_1-a"> <metadata id="CorelCorpID_0Corel-Layer"/> <path class="fil0" d="M94.18 141.86l-23.19 -30.74 -54.43 0 55.97 74.2 25.23 0 29.2 0 53.16 0c50.97,0 92.66,-41.7 92.66,-92.66 0,-50.96 -41.7,-92.66 -92.66,-92.66l-46.79 0c16.58,8.68 28.81,24.56 32.52,43.46l14.27 0c27.06,0 49.2,22.14 49.2,49.2 0,27.06 -22.14,49.2 -49.2,49.2l-85.94 0zm199.26 -13.77l511.64 0 0 8.98 -511.64 0 0 -8.98zm14.76 36.03l0 -6.45 18.02 0c0.87,0 1.63,0.31 2.25,0.95 0.65,0.63 0.96,1.39 0.96,2.29 0,0.87 -0.31,1.63 -0.96,2.28 -0.61,0.61 -1.38,0.93 -2.25,0.93l-18.02 0zm-14.76 -17.52l0 37.85 14.76 0 0 -9.24 21.71 0c7.79,0.12 14.42,-6.51 14.3,-14.3 0.11,-7.84 -6.51,-14.39 -14.3,-14.31l-36.47 0zm54.77 -0.03l0 37.85 14.75 0 0 -9.24 13.18 0 7.13 9.24 15.71 0 -8.26 -10.61c2.48,-1.16 4.48,-2.9 5.98,-5.19 1.52,-2.31 2.28,-4.89 2.28,-7.74 0.11,-7.83 -6.51,-14.39 -14.3,-14.31l-36.47 0zm32.75 11.07c1.79,0 3.24,1.44 3.24,3.24 0,0.87 -0.31,1.63 -0.96,2.28 -0.61,0.62 -1.38,0.93 -2.28,0.93l-18 0 0 -6.45 18 0zm47.34 -12.03c-14.24,0.03 -25.91,4.14 -25.85,18.48l0 2.76c-0.06,14.3 11.6,18.45 25.85,18.47 14.23,-0.03 25.88,-4.17 25.83,-18.47l0 -2.76c0,-14.31 -11.58,-18.48 -25.83,-18.48zm11.07 20.3c0.09,6.2 -5.04,7.32 -11.07,7.41 -6.05,-0.09 -11.18,-1.21 -11.09,-7.41l0 -0.92c-0.09,-6.17 5.04,-7.3 11.09,-7.38 6.03,0.08 11.15,1.21 11.07,7.38l0 0.92zm56.04 -0.39c0,3.81 -2.16,6.93 -6,6.93l-16.16 0 0 -13.86 16.16 0c3.84,0 6,3.1 6,6.93zm-36.91 -18.93l0 37.85 33.68 0c10.39,0.14 18.1,-8.64 18.02,-18.93 0.08,-10.34 -7.63,-19.07 -18.02,-18.93l-33.68 0zm92.76 19.35c0.09,6.23 -5.04,7.3 -11.06,7.39 -6.06,-0.09 -11.15,-1.15 -11.09,-7.39l0 -19.4 -14.76 0 0 20.33c-0.06,14.31 11.65,18.42 25.85,18.45 14.2,-0.03 25.9,-4.14 25.85,-18.45l0 -20.33 -14.79 0 0 19.4zm55.92 2.76c-1.35,3.72 -5.58,4.62 -10.64,4.62 -6.03,-0.09 -11.15,-1.21 -11.07,-7.39l0 -0.93c-0.09,-6.22 5.04,-7.29 11.07,-7.38 5.06,0 9.26,0.88 10.64,4.59l15.13 0c-0.94,-12.75 -12.14,-16.58 -25.77,-16.61 -14.2,0.06 -25.91,4.16 -25.85,18.48l0 2.76c-0.05,14.33 11.65,18.45 25.85,18.47 13.63,0 24.84,-3.84 25.77,-16.62l-15.13 0zm48.55 15.75l0 -25.86 17.54 0 0 -12 -49.84 0 0 12 17.54 0 0 25.86 14.75 0zm22.47 -37.91l0 37.85 14.75 0 0 -37.85 -14.75 0zm44.94 -0.93c-14.25,0.03 -25.91,4.14 -25.85,18.48l0 2.76c-0.06,14.3 11.6,18.45 25.85,18.47 14.23,-0.03 25.88,-4.17 25.83,-18.47l0 -2.76c0,-14.31 -11.58,-18.48 -25.83,-18.48zm11.07 20.3c0.08,6.2 -5.04,7.32 -11.07,7.41 -6.06,-0.09 -11.18,-1.21 -11.09,-7.41l0 -0.92c-0.09,-6.17 5.04,-7.3 11.09,-7.38 6.03,0.08 11.15,1.21 11.07,7.38l0 0.92zm56.04 0.68l-16.61 -20.05 -20.3 0 0 37.85 14.75 0 0 -23.12 20.33 23.12 16.62 0 0 -37.85 -14.79 0 0 20.05zm-496.81 -117.74l0 70.69 27.55 0 0 -17.25 24.61 0 13.3 17.25 29.35 0 -15.42 -19.82c4.63,-2.17 8.37,-5.42 11.17,-9.69 2.84,-4.31 4.25,-9.14 4.25,-14.45 0.22,-14.63 -12.15,-26.87 -26.71,-26.73l-68.1 0zm61.16 20.68c3.35,0 6.05,2.67 6.05,6.04 0,1.64 -0.57,3.05 -1.79,4.26 -1.15,1.17 -2.57,1.74 -4.25,1.74l-33.6 0 0 -12.04 33.6 0zm90.07 -0.16l9.67 20.88 -19.4 0 9.73 -20.88zm-54.32 50.22l31.02 0 5.58 -12.1 35.38 0 5.58 12.1 31.02 0 -37.91 -70.69 -32.76 0 -37.91 70.69zm179.62 -35.34c0,7.11 -4.04,12.94 -11.2,12.94l-30.17 0 0 -25.88 30.17 0c7.16,0 11.2,5.8 11.2,12.94zm-68.93 -35.35l0 70.69 62.9 0c19.4,0.27 33.8,-16.14 33.66,-35.34 0.14,-19.3 -14.25,-35.6 -33.66,-35.35l-62.9 0zm172.32 36.13c0.16,11.63 -9.41,13.63 -20.71,13.79 -11.26,-0.16 -20.82,-2.16 -20.66,-13.79l0 -6.89 -27.55 0 0 8.63c-0.11,26.71 21.66,34.39 48.21,34.44 26.71,0 48.29,-7.79 48.29,-34.44l0 -37.93 -27.57 0 0 36.19zm77.42 -15.67l9.67 20.88 -19.4 0 9.73 -20.88zm-54.32 50.22l31.02 0 5.58 -12.1 35.38 0 5.58 12.1 31.02 0 -37.91 -70.69 -32.76 0 -37.91 70.69zm-540.4 15.14l-17.82 -23.63 -0 0 -5.77 -7.65c16.41,-9.67 27.45,-27.52 27.45,-47.91 0,-30.64 -24.92,-55.56 -55.56,-55.56l-104.35 0 32.78 43.46 71.57 0c6.65,0 12.1,5.44 12.1,12.1 0,6.66 -5.45,12.1 -12.1,12.1l-53.32 0 50.6 67.09 54.43 0z"/> </g> </svg>`;
         const logoHtml = logoSrc
             ? `<img src="${logoSrc}" style="height:56px;object-fit:contain;">`
             : _svgLogo;
@@ -10402,7 +10721,7 @@ function updateSSK(tab, rowId) {
         });
         const rows = Object.values(rowMap);
 
-        const _svgLogoSJ = `<!-- Creator: CorelDRAW --> <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="200" height="46" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 805.08 185.33" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003"> <defs> <style type="text/css"> <![CDATA[ .fil0 {fill:url(#id0)} ]]> </style> <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="-0" y1="92.66" x2="805.08" y2="92.66"> <stop offset="0" style="stop-opacity:1; stop-color:#F5871D"/> <stop offset="1" style="stop-opacity:1; stop-color:#FFB246"/> </linearGradient> </defs> <g id="Layer_x0020_1"> <metadata id="CorelCorpID_0Corel-Layer"/> <path class="fil0" d="M94.18 141.86l-23.19 -30.74 -54.43 0 55.97 74.2 25.23 0 29.2 0 53.16 0c50.97,0 92.66,-41.7 92.66,-92.66 0,-50.96 -41.7,-92.66 -92.66,-92.66l-46.79 0c16.58,8.68 28.81,24.56 32.52,43.46l14.27 0c27.06,0 49.2,22.14 49.2,49.2 0,27.06 -22.14,49.2 -49.2,49.2l-85.94 0zm199.26 -13.77l511.64 0 0 8.98 -511.64 0 0 -8.98zm14.76 36.03l0 -6.45 18.02 0c0.87,0 1.63,0.31 2.25,0.95 0.65,0.63 0.96,1.39 0.96,2.29 0,0.87 -0.31,1.63 -0.96,2.28 -0.61,0.61 -1.38,0.93 -2.25,0.93l-18.02 0zm-14.76 -17.52l0 37.85 14.76 0 0 -9.24 21.71 0c7.79,0.12 14.42,-6.51 14.3,-14.3 0.11,-7.84 -6.51,-14.39 -14.3,-14.31l-36.47 0zm54.77 -0.03l0 37.85 14.75 0 0 -9.24 13.18 0 7.13 9.24 15.71 0 -8.26 -10.61c2.48,-1.16 4.48,-2.9 5.98,-5.19 1.52,-2.31 2.28,-4.89 2.28,-7.74 0.11,-7.83 -6.51,-14.39 -14.3,-14.31l-36.47 0zm32.75 11.07c1.79,0 3.24,1.44 3.24,3.24 0,0.87 -0.31,1.63 -0.96,2.28 -0.61,0.62 -1.38,0.93 -2.28,0.93l-18 0 0 -6.45 18 0zm47.34 -12.03c-14.24,0.03 -25.91,4.14 -25.85,18.48l0 2.76c-0.06,14.3 11.6,18.45 25.85,18.47 14.23,-0.03 25.88,-4.17 25.83,-18.47l0 -2.76c0,-14.31 -11.58,-18.48 -25.83,-18.48zm11.07 20.3c0.09,6.2 -5.04,7.32 -11.07,7.41 -6.05,-0.09 -11.18,-1.21 -11.09,-7.41l0 -0.92c-0.09,-6.17 5.04,-7.3 11.09,-7.38 6.03,0.08 11.15,1.21 11.07,7.38l0 0.92zm56.04 -0.39c0,3.81 -2.16,6.93 -6,6.93l-16.16 0 0 -13.86 16.16 0c3.84,0 6,3.1 6,6.93zm-36.91 -18.93l0 37.85 33.68 0c10.39,0.14 18.1,-8.64 18.02,-18.93 0.08,-10.34 -7.63,-19.07 -18.02,-18.93l-33.68 0zm92.76 19.35c0.09,6.23 -5.04,7.3 -11.06,7.39 -6.06,-0.09 -11.15,-1.15 -11.09,-7.39l0 -19.4 -14.76 0 0 20.33c-0.06,14.31 11.65,18.42 25.85,18.45 14.2,-0.03 25.9,-4.14 25.85,-18.45l0 -20.33 -14.79 0 0 19.4zm55.92 2.76c-1.35,3.72 -5.58,4.62 -10.64,4.62 -6.03,-0.09 -11.15,-1.21 -11.07,-7.39l0 -0.93c-0.09,-6.22 5.04,-7.29 11.07,-7.38 5.06,0 9.26,0.88 10.64,4.59l15.13 0c-0.94,-12.75 -12.14,-16.58 -25.77,-16.61 -14.2,0.06 -25.91,4.16 -25.85,18.48l0 2.76c-0.05,14.33 11.65,18.45 25.85,18.47 13.63,0 24.84,-3.84 25.77,-16.62l-15.13 0zm48.55 15.75l0 -25.86 17.54 0 0 -12 -49.84 0 0 12 17.54 0 0 25.86 14.75 0zm22.47 -37.91l0 37.85 14.75 0 0 -37.85 -14.75 0zm44.94 -0.93c-14.25,0.03 -25.91,4.14 -25.85,18.48l0 2.76c-0.06,14.3 11.6,18.45 25.85,18.47 14.23,-0.03 25.88,-4.17 25.83,-18.47l0 -2.76c0,-14.31 -11.58,-18.48 -25.83,-18.48zm11.07 20.3c0.08,6.2 -5.04,7.32 -11.07,7.41 -6.06,-0.09 -11.18,-1.21 -11.09,-7.41l0 -0.92c-0.09,-6.17 5.04,-7.3 11.09,-7.38 6.03,0.08 11.15,1.21 11.07,7.38l0 0.92zm56.04 0.68l-16.61 -20.05 -20.3 0 0 37.85 14.75 0 0 -23.12 20.33 23.12 16.62 0 0 -37.85 -14.79 0 0 20.05zm-496.81 -117.74l0 70.69 27.55 0 0 -17.25 24.61 0 13.3 17.25 29.35 0 -15.42 -19.82c4.63,-2.17 8.37,-5.42 11.17,-9.69 2.84,-4.31 4.25,-9.14 4.25,-14.45 0.22,-14.63 -12.15,-26.87 -26.71,-26.73l-68.1 0zm61.16 20.68c3.35,0 6.05,2.67 6.05,6.04 0,1.64 -0.57,3.05 -1.79,4.26 -1.15,1.17 -2.57,1.74 -4.25,1.74l-33.6 0 0 -12.04 33.6 0zm90.07 -0.16l9.67 20.88 -19.4 0 9.73 -20.88zm-54.32 50.22l31.02 0 5.58 -12.1 35.38 0 5.58 12.1 31.02 0 -37.91 -70.69 -32.76 0 -37.91 70.69zm179.62 -35.34c0,7.11 -4.04,12.94 -11.2,12.94l-30.17 0 0 -25.88 30.17 0c7.16,0 11.2,5.8 11.2,12.94zm-68.93 -35.35l0 70.69 62.9 0c19.4,0.27 33.8,-16.14 33.66,-35.34 0.14,-19.3 -14.25,-35.6 -33.66,-35.35l-62.9 0zm172.32 36.13c0.16,11.63 -9.41,13.63 -20.71,13.79 -11.26,-0.16 -20.82,-2.16 -20.66,-13.79l0 -6.89 -27.55 0 0 8.63c-0.11,26.71 21.66,34.39 48.21,34.44 26.71,0 48.29,-7.79 48.29,-34.44l0 -37.93 -27.57 0 0 36.19zm77.42 -15.67l9.67 20.88 -19.4 0 9.73 -20.88zm-54.32 50.22l31.02 0 5.58 -12.1 35.38 0 5.58 12.1 31.02 0 -37.91 -70.69 -32.76 0 -37.91 70.69zm-540.4 15.14l-17.82 -23.63 -0 0 -5.77 -7.65c16.41,-9.67 27.45,-27.52 27.45,-47.91 0,-30.64 -24.92,-55.56 -55.56,-55.56l-104.35 0 32.78 43.46 71.57 0c6.65,0 12.1,5.44 12.1,12.1 0,6.66 -5.45,12.1 -12.1,12.1l-53.32 0 50.6 67.09 54.43 0z"/> </g> </svg>`;
+        const _svgLogoSJ = `<!-- Creator: CorelDRAW --> <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="200" height="46" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 805.08 185.33" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003"> <defs> <style type="text/css"> <![CDATA[ .fil0 {fill:url(#id0-b)} ]]> </style> <linearGradient id="id0-b" gradientUnits="userSpaceOnUse" x1="-0" y1="92.66" x2="805.08" y2="92.66"> <stop offset="0" style="stop-opacity:1; stop-color:#F5871D"/> <stop offset="1" style="stop-opacity:1; stop-color:#FFB246"/> </linearGradient> </defs> <g id="Layer_x0020_1-b"> <metadata id="CorelCorpID_0Corel-Layer"/> <path class="fil0" d="M94.18 141.86l-23.19 -30.74 -54.43 0 55.97 74.2 25.23 0 29.2 0 53.16 0c50.97,0 92.66,-41.7 92.66,-92.66 0,-50.96 -41.7,-92.66 -92.66,-92.66l-46.79 0c16.58,8.68 28.81,24.56 32.52,43.46l14.27 0c27.06,0 49.2,22.14 49.2,49.2 0,27.06 -22.14,49.2 -49.2,49.2l-85.94 0zm199.26 -13.77l511.64 0 0 8.98 -511.64 0 0 -8.98zm14.76 36.03l0 -6.45 18.02 0c0.87,0 1.63,0.31 2.25,0.95 0.65,0.63 0.96,1.39 0.96,2.29 0,0.87 -0.31,1.63 -0.96,2.28 -0.61,0.61 -1.38,0.93 -2.25,0.93l-18.02 0zm-14.76 -17.52l0 37.85 14.76 0 0 -9.24 21.71 0c7.79,0.12 14.42,-6.51 14.3,-14.3 0.11,-7.84 -6.51,-14.39 -14.3,-14.31l-36.47 0zm54.77 -0.03l0 37.85 14.75 0 0 -9.24 13.18 0 7.13 9.24 15.71 0 -8.26 -10.61c2.48,-1.16 4.48,-2.9 5.98,-5.19 1.52,-2.31 2.28,-4.89 2.28,-7.74 0.11,-7.83 -6.51,-14.39 -14.3,-14.31l-36.47 0zm32.75 11.07c1.79,0 3.24,1.44 3.24,3.24 0,0.87 -0.31,1.63 -0.96,2.28 -0.61,0.62 -1.38,0.93 -2.28,0.93l-18 0 0 -6.45 18 0zm47.34 -12.03c-14.24,0.03 -25.91,4.14 -25.85,18.48l0 2.76c-0.06,14.3 11.6,18.45 25.85,18.47 14.23,-0.03 25.88,-4.17 25.83,-18.47l0 -2.76c0,-14.31 -11.58,-18.48 -25.83,-18.48zm11.07 20.3c0.09,6.2 -5.04,7.32 -11.07,7.41 -6.05,-0.09 -11.18,-1.21 -11.09,-7.41l0 -0.92c-0.09,-6.17 5.04,-7.3 11.09,-7.38 6.03,0.08 11.15,1.21 11.07,7.38l0 0.92zm56.04 -0.39c0,3.81 -2.16,6.93 -6,6.93l-16.16 0 0 -13.86 16.16 0c3.84,0 6,3.1 6,6.93zm-36.91 -18.93l0 37.85 33.68 0c10.39,0.14 18.1,-8.64 18.02,-18.93 0.08,-10.34 -7.63,-19.07 -18.02,-18.93l-33.68 0zm92.76 19.35c0.09,6.23 -5.04,7.3 -11.06,7.39 -6.06,-0.09 -11.15,-1.15 -11.09,-7.39l0 -19.4 -14.76 0 0 20.33c-0.06,14.31 11.65,18.42 25.85,18.45 14.2,-0.03 25.9,-4.14 25.85,-18.45l0 -20.33 -14.79 0 0 19.4zm55.92 2.76c-1.35,3.72 -5.58,4.62 -10.64,4.62 -6.03,-0.09 -11.15,-1.21 -11.07,-7.39l0 -0.93c-0.09,-6.22 5.04,-7.29 11.07,-7.38 5.06,0 9.26,0.88 10.64,4.59l15.13 0c-0.94,-12.75 -12.14,-16.58 -25.77,-16.61 -14.2,0.06 -25.91,4.16 -25.85,18.48l0 2.76c-0.05,14.33 11.65,18.45 25.85,18.47 13.63,0 24.84,-3.84 25.77,-16.62l-15.13 0zm48.55 15.75l0 -25.86 17.54 0 0 -12 -49.84 0 0 12 17.54 0 0 25.86 14.75 0zm22.47 -37.91l0 37.85 14.75 0 0 -37.85 -14.75 0zm44.94 -0.93c-14.25,0.03 -25.91,4.14 -25.85,18.48l0 2.76c-0.06,14.3 11.6,18.45 25.85,18.47 14.23,-0.03 25.88,-4.17 25.83,-18.47l0 -2.76c0,-14.31 -11.58,-18.48 -25.83,-18.48zm11.07 20.3c0.08,6.2 -5.04,7.32 -11.07,7.41 -6.06,-0.09 -11.18,-1.21 -11.09,-7.41l0 -0.92c-0.09,-6.17 5.04,-7.3 11.09,-7.38 6.03,0.08 11.15,1.21 11.07,7.38l0 0.92zm56.04 0.68l-16.61 -20.05 -20.3 0 0 37.85 14.75 0 0 -23.12 20.33 23.12 16.62 0 0 -37.85 -14.79 0 0 20.05zm-496.81 -117.74l0 70.69 27.55 0 0 -17.25 24.61 0 13.3 17.25 29.35 0 -15.42 -19.82c4.63,-2.17 8.37,-5.42 11.17,-9.69 2.84,-4.31 4.25,-9.14 4.25,-14.45 0.22,-14.63 -12.15,-26.87 -26.71,-26.73l-68.1 0zm61.16 20.68c3.35,0 6.05,2.67 6.05,6.04 0,1.64 -0.57,3.05 -1.79,4.26 -1.15,1.17 -2.57,1.74 -4.25,1.74l-33.6 0 0 -12.04 33.6 0zm90.07 -0.16l9.67 20.88 -19.4 0 9.73 -20.88zm-54.32 50.22l31.02 0 5.58 -12.1 35.38 0 5.58 12.1 31.02 0 -37.91 -70.69 -32.76 0 -37.91 70.69zm179.62 -35.34c0,7.11 -4.04,12.94 -11.2,12.94l-30.17 0 0 -25.88 30.17 0c7.16,0 11.2,5.8 11.2,12.94zm-68.93 -35.35l0 70.69 62.9 0c19.4,0.27 33.8,-16.14 33.66,-35.34 0.14,-19.3 -14.25,-35.6 -33.66,-35.35l-62.9 0zm172.32 36.13c0.16,11.63 -9.41,13.63 -20.71,13.79 -11.26,-0.16 -20.82,-2.16 -20.66,-13.79l0 -6.89 -27.55 0 0 8.63c-0.11,26.71 21.66,34.39 48.21,34.44 26.71,0 48.29,-7.79 48.29,-34.44l0 -37.93 -27.57 0 0 36.19zm77.42 -15.67l9.67 20.88 -19.4 0 9.73 -20.88zm-54.32 50.22l31.02 0 5.58 -12.1 35.38 0 5.58 12.1 31.02 0 -37.91 -70.69 -32.76 0 -37.91 70.69zm-540.4 15.14l-17.82 -23.63 -0 0 -5.77 -7.65c16.41,-9.67 27.45,-27.52 27.45,-47.91 0,-30.64 -24.92,-55.56 -55.56,-55.56l-104.35 0 32.78 43.46 71.57 0c6.65,0 12.1,5.44 12.1,12.1 0,6.66 -5.45,12.1 -12.1,12.1l-53.32 0 50.6 67.09 54.43 0z"/> </g> </svg>`;
         const logoHtml = logoSrc
             ? `<img src="${logoSrc}" style="height:60px;object-fit:contain;">`
             : _svgLogoSJ;
@@ -10552,6 +10871,7 @@ function updateSSK(tab, rowId) {
         btnsEl.appendChild(btnBatal);
 
         const btnSimpan = document.createElement('button');
+        // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
         btnSimpan.id = 'btn-simpan-edit-qty-trx';
         btnSimpan.textContent = 'SIMPAN';
         btnSimpan.style.cssText = 'padding:10px 22px;border:none;border-radius:10px;font-family:Montserrat,sans-serif;font-weight:900;font-size:12px;cursor:pointer;background:linear-gradient(90deg,#ff8c00,#ffb347);color:#000;';
@@ -10779,6 +11099,7 @@ function updateSSK(tab, rowId) {
             msgEl.appendChild(itemsContainer);
 
             const infoEl = document.createElement('div');
+            // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
             infoEl.id = 'hapus-trx-info';
             infoEl.style.cssText = 'font-size:9px;color:#facc15;text-align:center;margin-top:4px;';
             const totalQty = trx.items.reduce((s, i) => s + i.qty, 0);
@@ -10794,6 +11115,7 @@ function updateSSK(tab, rowId) {
             btnsEl.appendChild(btnBatal);
 
             const btnHapus = document.createElement('button');
+            // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
             btnHapus.id = 'btn-konfirm-hapus-trx';
             btnHapus.textContent = 'YA, HAPUS';
             btnHapus.style.cssText = 'padding:10px 22px;border:none;border-radius:10px;font-family:Montserrat,sans-serif;font-weight:900;font-size:12px;cursor:pointer;background:#dc2626;color:#fff;';
@@ -11170,6 +11492,7 @@ function updateSSK(tab, rowId) {
         if (existingOverlay) existingOverlay.remove();
 
         const overlay = document.createElement('div');
+        // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
         overlay.id = 'popup-pilih-metode';
         overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.80);z-index:99998;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);';
         overlay.innerHTML = `
@@ -11237,6 +11560,7 @@ function updateSSK(tab, rowId) {
             return sum + appData.pelunasan.filter(p => Number(p.transaksi_id) === Number(t.id)).reduce((s, p) => s + p.jumlah, 0);
         }, 0);
         const formOverlay = document.createElement('div');
+        // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
         formOverlay.id = 'popup-bayar-sebagian-form';
         formOverlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99998;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);';
         formOverlay.innerHTML = `
@@ -11896,7 +12220,7 @@ function updateSSK(tab, rowId) {
         const totalSudahBayar = riwayatBayar.reduce((s, p) => s + p.jumlah, 0);
         const sisaTagihan = Math.max(0, totalNominalVendor - totalSudahBayar);
 
-        const _svgLogo = `<!-- Creator: CorelDRAW --> <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="200" height="46" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 805.08 185.33" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003"> <defs> <style type="text/css"> <![CDATA[ .fil0 {fill:url(#id0)} ]]> </style> <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="-0" y1="92.66" x2="805.08" y2="92.66"> <stop offset="0" style="stop-opacity:1; stop-color:#F5871D"/> <stop offset="1" style="stop-opacity:1; stop-color:#FFB246"/> </linearGradient> </defs> <g id="Layer_x0020_1"> <metadata id="CorelCorpID_0Corel-Layer"/> <path class="fil0" d="M94.18 141.86l-23.19 -30.74 -54.43 0 55.97 74.2 25.23 0 29.2 0 53.16 0c50.97,0 92.66,-41.7 92.66,-92.66 0,-50.96 -41.7,-92.66 -92.66,-92.66l-46.79 0c16.58,8.68 28.81,24.56 32.52,43.46l14.27 0c27.06,0 49.2,22.14 49.2,49.2 0,27.06 -22.14,49.2 -49.2,49.2l-85.94 0zm199.26 -13.77l511.64 0 0 8.98 -511.64 0 0 -8.98zm14.76 36.03l0 -6.45 18.02 0c0.87,0 1.63,0.31 2.25,0.95 0.65,0.63 0.96,1.39 0.96,2.29 0,0.87 -0.31,1.63 -0.96,2.28 -0.61,0.61 -1.38,0.93 -2.25,0.93l-18.02 0zm-14.76 -17.52l0 37.85 14.76 0 0 -9.24 21.71 0c7.79,0.12 14.42,-6.51 14.3,-14.3 0.11,-7.84 -6.51,-14.39 -14.3,-14.31l-36.47 0zm54.77 -0.03l0 37.85 14.75 0 0 -9.24 13.18 0 7.13 9.24 15.71 0 -8.26 -10.61c2.48,-1.16 4.48,-2.9 5.98,-5.19 1.52,-2.31 2.28,-4.89 2.28,-7.74 0.11,-7.83 -6.51,-14.39 -14.3,-14.31l-36.47 0zm32.75 11.07c1.79,0 3.24,1.44 3.24,3.24 0,0.87 -0.31,1.63 -0.96,2.28 -0.61,0.62 -1.38,0.93 -2.28,0.93l-18 0 0 -6.45 18 0zm47.34 -12.03c-14.24,0.03 -25.91,4.14 -25.85,18.48l0 2.76c-0.06,14.3 11.6,18.45 25.85,18.47 14.23,-0.03 25.88,-4.17 25.83,-18.47l0 -2.76c0,-14.31 -11.58,-18.48 -25.83,-18.48zm11.07 20.3c0.09,6.2 -5.04,7.32 -11.07,7.41 -6.05,-0.09 -11.18,-1.21 -11.09,-7.41l0 -0.92c-0.09,-6.17 5.04,-7.3 11.09,-7.38 6.03,0.08 11.15,1.21 11.07,7.38l0 0.92zm56.04 -0.39c0,3.81 -2.16,6.93 -6,6.93l-16.16 0 0 -13.86 16.16 0c3.84,0 6,3.1 6,6.93zm-36.91 -18.93l0 37.85 33.68 0c10.39,0.14 18.1,-8.64 18.02,-18.93 0.08,-10.34 -7.63,-19.07 -18.02,-18.93l-33.68 0zm92.76 19.35c0.09,6.23 -5.04,7.3 -11.06,7.39 -6.06,-0.09 -11.15,-1.15 -11.09,-7.39l0 -19.4 -14.76 0 0 20.33c-0.06,14.31 11.65,18.42 25.85,18.45 14.2,-0.03 25.9,-4.14 25.85,-18.45l0 -20.33 -14.79 0 0 19.4zm55.92 2.76c-1.35,3.72 -5.58,4.62 -10.64,4.62 -6.03,-0.09 -11.15,-1.21 -11.07,-7.39l0 -0.93c-0.09,-6.22 5.04,-7.29 11.07,-7.38 5.06,0 9.26,0.88 10.64,4.59l15.13 0c-0.94,-12.75 -12.14,-16.58 -25.77,-16.61 -14.2,0.06 -25.91,4.16 -25.85,18.48l0 2.76c-0.05,14.33 11.65,18.45 25.85,18.47 13.63,0 24.84,-3.84 25.77,-16.62l-15.13 0zm48.55 15.75l0 -25.86 17.54 0 0 -12 -49.84 0 0 12 17.54 0 0 25.86 14.75 0zm22.47 -37.91l0 37.85 14.75 0 0 -37.85 -14.75 0zm44.94 -0.93c-14.25,0.03 -25.91,4.14 -25.85,18.48l0 2.76c-0.06,14.3 11.6,18.45 25.85,18.47 14.23,-0.03 25.88,-4.17 25.83,-18.47l0 -2.76c0,-14.31 -11.58,-18.48 -25.83,-18.48zm11.07 20.3c0.08,6.2 -5.04,7.32 -11.07,7.41 -6.06,-0.09 -11.18,-1.21 -11.09,-7.41l0 -0.92c-0.09,-6.17 5.04,-7.3 11.09,-7.38 6.03,0.08 11.15,1.21 11.07,7.38l0 0.92zm56.04 0.68l-16.61 -20.05 -20.3 0 0 37.85 14.75 0 0 -23.12 20.33 23.12 16.62 0 0 -37.85 -14.79 0 0 20.05zm-496.81 -117.74l0 70.69 27.55 0 0 -17.25 24.61 0 13.3 17.25 29.35 0 -15.42 -19.82c4.63,-2.17 8.37,-5.42 11.17,-9.69 2.84,-4.31 4.25,-9.14 4.25,-14.45 0.22,-14.63 -12.15,-26.87 -26.71,-26.73l-68.1 0zm61.16 20.68c3.35,0 6.05,2.67 6.05,6.04 0,1.64 -0.57,3.05 -1.79,4.26 -1.15,1.17 -2.57,1.74 -4.25,1.74l-33.6 0 0 -12.04 33.6 0zm90.07 -0.16l9.67 20.88 -19.4 0 9.73 -20.88zm-54.32 50.22l31.02 0 5.58 -12.1 35.38 0 5.58 12.1 31.02 0 -37.91 -70.69 -32.76 0 -37.91 70.69zm179.62 -35.34c0,7.11 -4.04,12.94 -11.2,12.94l-30.17 0 0 -25.88 30.17 0c7.16,0 11.2,5.8 11.2,12.94zm-68.93 -35.35l0 70.69 62.9 0c19.4,0.27 33.8,-16.14 33.66,-35.34 0.14,-19.3 -14.25,-35.6 -33.66,-35.35l-62.9 0zm172.32 36.13c0.16,11.63 -9.41,13.63 -20.71,13.79 -11.26,-0.16 -20.82,-2.16 -20.66,-13.79l0 -6.89 -27.55 0 0 8.63c-0.11,26.71 21.66,34.39 48.21,34.44 26.71,0 48.29,-7.79 48.29,-34.44l0 -37.93 -27.57 0 0 36.19zm77.42 -15.67l9.67 20.88 -19.4 0 9.73 -20.88zm-54.32 50.22l31.02 0 5.58 -12.1 35.38 0 5.58 12.1 31.02 0 -37.91 -70.69 -32.76 0 -37.91 70.69zm-540.4 15.14l-17.82 -23.63 -0 0 -5.77 -7.65c16.41,-9.67 27.45,-27.52 27.45,-47.91 0,-30.64 -24.92,-55.56 -55.56,-55.56l-104.35 0 32.78 43.46 71.57 0c6.65,0 12.1,5.44 12.1,12.1 0,6.66 -5.45,12.1 -12.1,12.1l-53.32 0 50.6 67.09 54.43 0z"/> </g> </svg>`;
+        const _svgLogo = `<!-- Creator: CorelDRAW --> <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="200" height="46" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 805.08 185.33" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003"> <defs> <style type="text/css"> <![CDATA[ .fil0 {fill:url(#id0-c)} ]]> </style> <linearGradient id="id0-c" gradientUnits="userSpaceOnUse" x1="-0" y1="92.66" x2="805.08" y2="92.66"> <stop offset="0" style="stop-opacity:1; stop-color:#F5871D"/> <stop offset="1" style="stop-opacity:1; stop-color:#FFB246"/> </linearGradient> </defs> <g id="Layer_x0020_1-c"> <metadata id="CorelCorpID_0Corel-Layer"/> <path class="fil0" d="M94.18 141.86l-23.19 -30.74 -54.43 0 55.97 74.2 25.23 0 29.2 0 53.16 0c50.97,0 92.66,-41.7 92.66,-92.66 0,-50.96 -41.7,-92.66 -92.66,-92.66l-46.79 0c16.58,8.68 28.81,24.56 32.52,43.46l14.27 0c27.06,0 49.2,22.14 49.2,49.2 0,27.06 -22.14,49.2 -49.2,49.2l-85.94 0zm199.26 -13.77l511.64 0 0 8.98 -511.64 0 0 -8.98zm14.76 36.03l0 -6.45 18.02 0c0.87,0 1.63,0.31 2.25,0.95 0.65,0.63 0.96,1.39 0.96,2.29 0,0.87 -0.31,1.63 -0.96,2.28 -0.61,0.61 -1.38,0.93 -2.25,0.93l-18.02 0zm-14.76 -17.52l0 37.85 14.76 0 0 -9.24 21.71 0c7.79,0.12 14.42,-6.51 14.3,-14.3 0.11,-7.84 -6.51,-14.39 -14.3,-14.31l-36.47 0zm54.77 -0.03l0 37.85 14.75 0 0 -9.24 13.18 0 7.13 9.24 15.71 0 -8.26 -10.61c2.48,-1.16 4.48,-2.9 5.98,-5.19 1.52,-2.31 2.28,-4.89 2.28,-7.74 0.11,-7.83 -6.51,-14.39 -14.3,-14.31l-36.47 0zm32.75 11.07c1.79,0 3.24,1.44 3.24,3.24 0,0.87 -0.31,1.63 -0.96,2.28 -0.61,0.62 -1.38,0.93 -2.28,0.93l-18 0 0 -6.45 18 0zm47.34 -12.03c-14.24,0.03 -25.91,4.14 -25.85,18.48l0 2.76c-0.06,14.3 11.6,18.45 25.85,18.47 14.23,-0.03 25.88,-4.17 25.83,-18.47l0 -2.76c0,-14.31 -11.58,-18.48 -25.83,-18.48zm11.07 20.3c0.09,6.2 -5.04,7.32 -11.07,7.41 -6.05,-0.09 -11.18,-1.21 -11.09,-7.41l0 -0.92c-0.09,-6.17 5.04,-7.3 11.09,-7.38 6.03,0.08 11.15,1.21 11.07,7.38l0 0.92zm56.04 -0.39c0,3.81 -2.16,6.93 -6,6.93l-16.16 0 0 -13.86 16.16 0c3.84,0 6,3.1 6,6.93zm-36.91 -18.93l0 37.85 33.68 0c10.39,0.14 18.1,-8.64 18.02,-18.93 0.08,-10.34 -7.63,-19.07 -18.02,-18.93l-33.68 0zm92.76 19.35c0.09,6.23 -5.04,7.3 -11.06,7.39 -6.06,-0.09 -11.15,-1.15 -11.09,-7.39l0 -19.4 -14.76 0 0 20.33c-0.06,14.31 11.65,18.42 25.85,18.45 14.2,-0.03 25.9,-4.14 25.85,-18.45l0 -20.33 -14.79 0 0 19.4zm55.92 2.76c-1.35,3.72 -5.58,4.62 -10.64,4.62 -6.03,-0.09 -11.15,-1.21 -11.07,-7.39l0 -0.93c-0.09,-6.22 5.04,-7.29 11.07,-7.38 5.06,0 9.26,0.88 10.64,4.59l15.13 0c-0.94,-12.75 -12.14,-16.58 -25.77,-16.61 -14.2,0.06 -25.91,4.16 -25.85,18.48l0 2.76c-0.05,14.33 11.65,18.45 25.85,18.47 13.63,0 24.84,-3.84 25.77,-16.62l-15.13 0zm48.55 15.75l0 -25.86 17.54 0 0 -12 -49.84 0 0 12 17.54 0 0 25.86 14.75 0zm22.47 -37.91l0 37.85 14.75 0 0 -37.85 -14.75 0zm44.94 -0.93c-14.25,0.03 -25.91,4.14 -25.85,18.48l0 2.76c-0.06,14.3 11.6,18.45 25.85,18.47 14.23,-0.03 25.88,-4.17 25.83,-18.47l0 -2.76c0,-14.31 -11.58,-18.48 -25.83,-18.48zm11.07 20.3c0.08,6.2 -5.04,7.32 -11.07,7.41 -6.06,-0.09 -11.18,-1.21 -11.09,-7.41l0 -0.92c-0.09,-6.17 5.04,-7.3 11.09,-7.38 6.03,0.08 11.15,1.21 11.07,7.38l0 0.92zm56.04 0.68l-16.61 -20.05 -20.3 0 0 37.85 14.75 0 0 -23.12 20.33 23.12 16.62 0 0 -37.85 -14.79 0 0 20.05zm-496.81 -117.74l0 70.69 27.55 0 0 -17.25 24.61 0 13.3 17.25 29.35 0 -15.42 -19.82c4.63,-2.17 8.37,-5.42 11.17,-9.69 2.84,-4.31 4.25,-9.14 4.25,-14.45 0.22,-14.63 -12.15,-26.87 -26.71,-26.73l-68.1 0zm61.16 20.68c3.35,0 6.05,2.67 6.05,6.04 0,1.64 -0.57,3.05 -1.79,4.26 -1.15,1.17 -2.57,1.74 -4.25,1.74l-33.6 0 0 -12.04 33.6 0zm90.07 -0.16l9.67 20.88 -19.4 0 9.73 -20.88zm-54.32 50.22l31.02 0 5.58 -12.1 35.38 0 5.58 12.1 31.02 0 -37.91 -70.69 -32.76 0 -37.91 70.69zm179.62 -35.34c0,7.11 -4.04,12.94 -11.2,12.94l-30.17 0 0 -25.88 30.17 0c7.16,0 11.2,5.8 11.2,12.94zm-68.93 -35.35l0 70.69 62.9 0c19.4,0.27 33.8,-16.14 33.66,-35.34 0.14,-19.3 -14.25,-35.6 -33.66,-35.35l-62.9 0zm172.32 36.13c0.16,11.63 -9.41,13.63 -20.71,13.79 -11.26,-0.16 -20.82,-2.16 -20.66,-13.79l0 -6.89 -27.55 0 0 8.63c-0.11,26.71 21.66,34.39 48.21,34.44 26.71,0 48.29,-7.79 48.29,-34.44l0 -37.93 -27.57 0 0 36.19zm77.42 -15.67l9.67 20.88 -19.4 0 9.73 -20.88zm-54.32 50.22l31.02 0 5.58 -12.1 35.38 0 5.58 12.1 31.02 0 -37.91 -70.69 -32.76 0 -37.91 70.69zm-540.4 15.14l-17.82 -23.63 -0 0 -5.77 -7.65c16.41,-9.67 27.45,-27.52 27.45,-47.91 0,-30.64 -24.92,-55.56 -55.56,-55.56l-104.35 0 32.78 43.46 71.57 0c6.65,0 12.1,5.44 12.1,12.1 0,6.66 -5.45,12.1 -12.1,12.1l-53.32 0 50.6 67.09 54.43 0z"/> </g> </svg>`;
         const logoHtml = logoSrc ? `<img src="${logoSrc}" style="height:56px;object-fit:contain;">` : _svgLogo;
 
         // Tabel transaksi (ringkasan per model)
@@ -12022,6 +12346,7 @@ function updateSSK(tab, rowId) {
         let toast = document.getElementById('app-toast');
         if (!toast) {
             toast = document.createElement('div');
+            // Dibuat dinamis — lihat catatan "ID YANG DIBUAT SECARA DINAMIS" di awal <script>.
             toast.id = 'app-toast';
             toast.className = 'fixed top-6 left-1/2 -translate-x-1/2 bg-[#133a66] border-2 border-[#7699C9] text-black text-xs font-bold px-5 py-3 rounded-2xl shadow-2xl transition-all';
             toast.style.cssText = 'position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:9999999;';
