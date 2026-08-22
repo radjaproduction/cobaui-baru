@@ -9890,7 +9890,7 @@ function updateSSK(tab, rowId) {
                         </button>
                     </div>
                 </div>
-                <div id="vg-body-${vendorKey}" class="flex flex-col gap-2 mt-2">
+                <div id="vg-body-${vendorKey}" class="flex flex-col gap-2 mt-2" style="min-height:${trxCount * 140 + Math.max(0, trxCount - 1) * 8}px;">
                     <div class="text-center text-white/60 text-xs py-4">Memuat...</div>
                 </div>
             </div>`;
@@ -9903,7 +9903,7 @@ function updateSSK(tab, rowId) {
         });
 
         // Batalkan render detail sebelumnya jika ada
-        if (_renderTrxVendorTimeout) clearTimeout(_renderTrxVendorTimeout);
+        if (_renderTrxVendorTimeout) cancelAnimationFrame(_renderTrxVendorTimeout);
 
         // Render detail transaksi per vendor secara bertahap (HANYA vendor di halaman aktif)
         let vendorIndex = 0;
@@ -9928,7 +9928,7 @@ function updateSSK(tab, rowId) {
                             const totalNominal = totalQty * (d.harga || 0);
                             const uid = 'rt-' + (d.id || idx);
                             const noUrut = idx + 1;
-                            return `<div id="card-${uid}" class="rounded-2xl border overflow-hidden transition-all" style="background:${accentBg};border-color:${accentBorder};">
+                            return `<div id="card-${uid}" class="rounded-2xl border overflow-hidden transition-all" style="background:${accentBg};border-color:${accentBorder};backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
                                 <div class="flex items-center gap-2.5 px-3 py-2.5">
                                     <div class="flex flex-col items-center gap-1 flex-shrink-0">
                                         <span class="text-[9px] font-black text-white/70">${noUrut}</span>
@@ -9966,6 +9966,7 @@ function updateSSK(tab, rowId) {
                             return '';
                         }
                     }).join('');
+                    bodyEl.style.minHeight = '';
                     bodyEl.innerHTML = cards || '<div class="text-center text-white/60 text-xs py-4">Tidak ada transaksi untuk vendor ini.</div>';
                     _markVendorGroupSeen(vendor, vendorKey);
                 }
@@ -9974,7 +9975,7 @@ function updateSSK(tab, rowId) {
                 if (bodyEl) bodyEl.innerHTML = '<div class="text-center text-red-400 text-xs py-4">Gagal memuat sebagian data. Coba refresh.</div>';
             }
             vendorIndex++;
-            _renderTrxVendorTimeout = setTimeout(() => requestAnimationFrame(renderNextVendor), 16);
+            _renderTrxVendorTimeout = requestAnimationFrame(renderNextVendor);
         }
         requestAnimationFrame(renderNextVendor);
     }
@@ -10931,7 +10932,7 @@ function updateSSK(tab, rowId) {
                 if (hasBayarSebagian) {
                     return `<div class="flex items-start gap-2">
                         <div class="w-5 flex-shrink-0 pt-3 text-center text-[10px] font-black text-white">${noUrut}</div>
-                        <div id="card-${uid}" class="flex-1 min-w-0 rounded-lg border-2 overflow-hidden opacity-80" style="background:${accentBg};border-color:${accentBorder};">
+                        <div id="card-${uid}" class="flex-1 min-w-0 rounded-lg border-2 overflow-hidden opacity-80" style="background:${accentBg};border-color:${accentBorder};backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
                         <div class="flex items-center gap-2.5 px-3 py-2.5 select-none">
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-2">
@@ -10949,7 +10950,7 @@ function updateSSK(tab, rowId) {
                 }
 
                 // FITUR BARU: Tambahkan checkbox untuk pelunasan parsial
-                return `<div id="card-${uid}" class="rounded-lg border overflow-hidden transition-all" style="background:${accentBg};border-color:${accentBorder};">
+                return `<div id="card-${uid}" class="rounded-lg border overflow-hidden transition-all" style="background:${accentBg};border-color:${accentBorder};backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
                     <div class="flex items-center gap-2.5 px-3 py-2.5 select-none">
                         <div class="flex flex-col items-center gap-1 flex-shrink-0">
                             <span class="text-[9px] font-black text-white/70">${noUrut}</span>
