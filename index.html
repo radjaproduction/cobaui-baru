@@ -4065,6 +4065,11 @@ async function fetchBayarSebagianData() {
     // otomatis berkurang begitu vendor/admin mengonfirmasi pesanan di app Pesanan.
     const PESANAN_TABLE = 'produksi_orders';
     let pesananMenungguCount = 0;
+    // order_code pesanan yang MASIH "Menunggu" (stage 0, belum dikonfirmasi admin). Transaksi
+    // yang order_code-nya ada di Set ini SENGAJA disembunyikan dari tab Riwayat Transaksi —
+    // walau stok-nya sudah langsung terpotong sejak pesanan dibuat (supaya aman dari oversold),
+    // catatan penjualannya baru "resmi" muncul di Riwayat setelah admin klik Konfirmasi (stage 1).
+    const _pesananMenungguCodes = new Set();
     let _audioCtxPesanan = null;
 
     // Browser umumnya blokir audio yang diputar otomatis sebelum ada interaksi user sama
@@ -4296,7 +4301,9 @@ async function fetchBayarSebagianData() {
             if (error) throw error;
             showToast('✅ ' + jumlah + ' pesanan berhasil dikonfirmasi');
             pesananMenungguCount = 0;
+            _pesananMenungguCodes.clear();
             _updatePesananBellBadge();
+            if (typeof _renderRiwayatTransaksiOri === 'function') _renderRiwayatTransaksiOri();
             tutupPopupPesananKonfirmasi();
         } catch (e) {
             console.error('Gagal konfirmasi semua pesanan:', e);
@@ -4428,7 +4435,9 @@ async function fetchBayarSebagianData() {
                     updRows.forEach(r => { if (r.id != null) _pesananProcessedIds.add(r.id); });
                 }
                 pesananMenungguCount = Math.max(0, pesananMenungguCount - 1);
+                _pesananMenungguCodes.delete(orderCode);
                 _updatePesananBellBadge();
+                if (typeof _renderRiwayatTransaksiOri === 'function') _renderRiwayatTransaksiOri();
                 const orders = await _fetchAktifPesananOrders();
                 _renderRincianPesananList(orders);
             } catch (e) {
@@ -4529,6 +4538,7 @@ async function fetchBayarSebagianData() {
             }
             if ((row.stage || 0) === 0) {
                 pesananMenungguCount++;
+                if (row.order_code) _pesananMenungguCodes.add(row.order_code);
                 _updatePesananBellBadge();
                 showToast('📦 Pesanan baru masuk: ' + (row.order_code || '-'));
                 // Bel & badge tetap update walau di-mute — cuma suara/getar/notif sistemnya
@@ -4542,9 +4552,18 @@ async function fetchBayarSebagianData() {
             const wasWaiting = (oldRow.stage || 0) === 0, nowWaiting = (row.stage || 0) === 0;
             if (wasWaiting && !nowWaiting) pesananMenungguCount = Math.max(0, pesananMenungguCount - 1);
             else if (!wasWaiting && nowWaiting) pesananMenungguCount++;
+            // Pesanan berpindah dari Menunggu -> Diterima (atau sebaliknya): sinkronkan Set
+            // penanda "masih Menunggu" ini, lalu render ulang Riwayat Transaksi supaya catatan
+            // penjualannya langsung nongol/hilang tanpa perlu refresh manual.
+            if (row.order_code) {
+                if (nowWaiting) _pesananMenungguCodes.add(row.order_code);
+                else _pesananMenungguCodes.delete(row.order_code);
+            }
             _updatePesananBellBadge();
+            if (typeof _renderRiwayatTransaksiOri === 'function') _renderRiwayatTransaksiOri();
         } else if (payload.eventType === 'DELETE') {
             if ((oldRow.stage || 0) === 0) pesananMenungguCount = Math.max(0, pesananMenungguCount - 1);
+            if (oldRow.order_code) _pesananMenungguCodes.delete(oldRow.order_code);
             _updatePesananBellBadge();
         }
     }
@@ -4559,10 +4578,14 @@ async function fetchBayarSebagianData() {
         _requestPesananNotifPermission();
         if (!sbClient) { _updatePesananBellBadge(); return; }
         try {
-            const { data, error } = await sbClient.from(PESANAN_TABLE).select('id').eq('stage', 0);
+            const { data, error } = await sbClient.from(PESANAN_TABLE).select('id, order_code').eq('stage', 0);
             if (!error) {
                 pesananMenungguCount = (data || []).length;
-                (data || []).forEach(o => { if (o.id != null) _pesananProcessedIds.add(o.id); });
+                _pesananMenungguCodes.clear();
+                (data || []).forEach(o => {
+                    if (o.id != null) _pesananProcessedIds.add(o.id);
+                    if (o.order_code) _pesananMenungguCodes.add(o.order_code);
+                });
             }
         } catch (e) { console.warn('Gagal cek pesanan menunggu:', e.message); }
         _updatePesananBellBadge();
@@ -4586,6 +4609,10 @@ async function fetchBayarSebagianData() {
             if (!error && data) {
                 const baru = data.filter(o => o.id != null && !_pesananProcessedIds.has(o.id));
                 pesananMenungguCount = data.length;
+                // Set order_code yang masih Menunggu dibangun ulang dari sumber kebenaran (server)
+                // tiap polling — otomatis benar walau ada event realtime yang kelewat sebelumnya.
+                _pesananMenungguCodes.clear();
+                data.forEach(o => { if (o.order_code) _pesananMenungguCodes.add(o.order_code); });
                 baru.forEach(o => {
                     _pesananProcessedIds.add(o.id);
                     if (_pesananProcessedIds.size > 200) { const first = _pesananProcessedIds.values().next().value; _pesananProcessedIds.delete(first); }
@@ -9530,6 +9557,12 @@ function updateSSK(tab, rowId) {
 
         const { dari: fDari, sampai: fSampai } = getFilterRange();
         let filteredTrx = appData.riwayatTransaksi.filter(d => tanggalDalamRange(d.tanggal, fDari, fSampai));
+
+        // Transaksi hasil sinkron otomatis dari pesanan yang MASIH "Menunggu" (belum dikonfirmasi
+        // admin) sengaja disembunyikan dari Riwayat Transaksi — stoknya tetap sudah terpotong
+        // (lihat appData.riwayatTransaksi & renderStokDashboard, TIDAK ikut difilter di sini),
+        // tapi catatan penjualannya baru "resmi" tampil di sini setelah admin klik Konfirmasi.
+        filteredTrx = filteredTrx.filter(d => !d.orderCode || !_pesananMenungguCodes.has(d.orderCode));
 
         if (_filterTrxStatus === 'kredit') {
             filteredTrx = filteredTrx.filter(d => d.status !== 'lunas');
