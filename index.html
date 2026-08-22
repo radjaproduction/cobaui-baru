@@ -10082,14 +10082,18 @@ function updateSSK(tab, rowId) {
         if (_rtPage < 1) _rtPage = 1;
         const pageVendors = sortedVendors.slice((_rtPage - 1) * RT_PAGE_SIZE, _rtPage * RT_PAGE_SIZE);
 
+        // PERF FIX: baca+parse 'trx_seen_vendor' SEKALI di luar loop -- sebelumnya
+        // ini dipanggil ulang di dalam .map() untuk SETIAP vendor (localStorage +
+        // JSON.parse yang sama diulang berkali-kali per render), ikut nyumbang ke
+        // delay yang terasa tiap buka tab ini.
+        const _seenVendorData = JSON.parse(localStorage.getItem('trx_seen_vendor') || '{}');
         list.innerHTML = bannerHiddenOld + bannerKorup + pageVendors.map(vendor => {
             const vendorLabel = String(vendor || '').trim() ? vendor : 'VENDOR TIDAK DIKETAHUI';
             const vendorKey = (vendorLabel || 'vendor_tidak_diketahui').replace(/\s+/g,'_');
             const trxList = vendorGroups[vendor] || [];
             const trxCount = trxList.length;
             const totalNominalVendor = trxList.reduce((s, d) => s + d.items.reduce((si, i) => si + i.qty, 0) * d.harga, 0);
-            const seenData = JSON.parse(localStorage.getItem('trx_seen_vendor') || '{}');
-            const lastSeenId = seenData[vendor] || 0;
+            const lastSeenId = _seenVendorData[vendor] || 0;
             const newCount = trxList.filter(t => t.id > lastSeenId).length;
             const hasBayarSebagianTrx = appData.pelunasan.some(p => p.vendor === vendor && (p.transaksi_id === null || p.transaksi_id === undefined));
             // Cek apakah vendor ini MASIH punya sisa hutang (bukan cuma pernah pakai Bayar Sebagian).
@@ -10210,7 +10214,17 @@ function updateSSK(tab, rowId) {
             vendorIndex++;
             _renderTrxVendorTimeout = requestAnimationFrame(renderNextVendor);
         }
-        requestAnimationFrame(renderNextVendor);
+        // PERF FIX: vendor PERTAMA dulu dirender SEKARANG JUGA (bukan nunggu
+        // requestAnimationFrame) -- sebelumnya baris ini "requestAnimationFrame(renderNextVendor)"
+        // membuat SEMUA vendor (termasuk yang pertama/satu-satunya, kasus paling umum: 1-5
+        // vendor per halaman karena sudah dibatasi RT_PAGE_SIZE) selalu nunggu minimal 1 frame
+        // tambahan sebelum kontennya tampil -- padahal skeleton "Memuat..." di atas baru saja
+        // ditulis lewat list.innerHTML pada baris yang sama, jadi elemennya sudah ada di DOM
+        // dan bisa langsung diisi tanpa nunggu frame berikutnya. Ini salah satu sumber "delay
+        // sepersekian detik" yang selalu terasa tiap buka tab RIWAYAT TRANSAKSI. Vendor
+        // ke-2 dst tetap dirantai lewat requestAnimationFrame (di dalam fungsi ini) supaya kalau
+        // vendornya banyak/transaksinya berat, main thread tetap tidak freeze sekaligus.
+        renderNextVendor();
     }
 
     // Kartu Riwayat Transaksi default TERTUTUP (cuma ringkasan) — detail item +
