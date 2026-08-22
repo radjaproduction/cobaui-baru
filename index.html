@@ -5579,6 +5579,57 @@ function hitungStokEfektifTrx(modelNama, warnaNama, ukuranNama, kecualiRowId, br
     return stokDB;
 }
 
+// PERF FIX: dipanggil SEKALI tepat setelah model dipilih di form transaksi. Tanpa
+// ini, getTrxRowUkuranList() (dipanggil otomatis lewat tambahVariasiTrx() setelah
+// pilih model) melakukan nested loop warna x ukuran yang masing-masing manggil
+// hitungStokItem() — dan karena model ini BARU dipilih, semua kombinasi warna x
+// ukuran-nya masih cache-miss, jadi tiap kombinasi melakukan full scan ulang ke
+// riwayatInput + riwayatTransaksi (mis. 10 warna x 8 ukuran = 80x full scan),
+// itu yang bikin jeda pas klik model. Fungsi ini melakukan HANYA 1x pass atas
+// riwayatInput + 1x pass atas riwayatTransaksi untuk model ini, lalu isi
+// _stokItemCache untuk SEMUA kombinasi warna x ukuran sekaligus (termasuk yang
+// stoknya 0), format cacheKey-nya harus identik dengan yang dipakai hitungStokItem().
+function _primeStokItemCacheModel(modelNama, brandNama, brandId) {
+    const mNama = (modelNama || "").trim().toUpperCase();
+    const bNama = (brandNama || "").trim().toUpperCase();
+
+    function brandMatch(d) {
+        if (!bNama && !brandId) return true;
+        const b = masterData.brand.find(b => (b.nama || "").trim().toUpperCase() === (d.brand || "").trim().toUpperCase());
+        if (brandId) return b && b.id == brandId;
+        return b ? b.id == (masterData.brand.find(x => (x.nama||"").trim().toUpperCase() === bNama)?.id) : (d.brand || "").trim().toUpperCase() === bNama;
+    }
+
+    const stokMap = {}; // "WARNA||UKURAN" -> stok
+    appData.riwayatInput.forEach(d => {
+        if (!brandMatch(d)) return;
+        if ((d.model || "").trim().toUpperCase() !== mNama) return;
+        d.items.forEach(item => {
+            const k = `${(item.warna||"").trim().toUpperCase()}||${(item.ukuran||"").trim().toUpperCase()}`;
+            if (!stokMap[k]) stokMap[k] = 0;
+            stokMap[k] += d.mode === 'retur' ? -item.qty : item.qty;
+        });
+    });
+    appData.riwayatTransaksi.forEach(d => {
+        if (!brandMatch(d)) return;
+        if ((d.model || "").trim().toUpperCase() !== mNama) return;
+        d.items.forEach(item => {
+            const k = `${(item.warna||"").trim().toUpperCase()}||${(item.ukuran||"").trim().toUpperCase()}`;
+            if (!stokMap[k]) stokMap[k] = 0;
+            stokMap[k] -= item.qty;
+        });
+    });
+
+    (masterData.warna || []).forEach(w => {
+        (masterData.ukuran || []).forEach(u => {
+            const wU = (w.nama || "").trim().toUpperCase();
+            const uU = (u.nama || "").trim().toUpperCase();
+            const cacheKey = `${mNama}||${wU}||${uU}||${bNama}||${brandId ?? ''}`;
+            _stokItemCache.set(cacheKey, stokMap[`${wU}||${uU}`] || 0);
+        });
+    });
+}
+
 function hitungStokItem(modelNama, warnaNama, ukuranNama, brandNama, brandId) {
     const mNama = (modelNama || "").trim().toUpperCase();
     const wNama = (warnaNama || "").trim().toUpperCase();
@@ -8309,6 +8360,7 @@ function updateSSK(tab, rowId) {
                 if (item.id !== trxState.modelId) {
                     trxState.modelId = item.id; trxState.modelNama = item.nama; trxState.modelHarga = item.harga || 0; trxState.modelHargaModal = item.hargaModal || 0;
                     document.getElementById('trx-model-display').textContent = item.nama;
+                    _primeStokItemCacheModel(item.nama, trxState.brandNama, trxState.brandId);
                     _clearTrxVariasi();
                     tambahVariasiTrx();
                 }
