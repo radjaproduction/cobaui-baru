@@ -1149,6 +1149,43 @@
         .rp-riwayat-filter-btn i { font-size: 15px; }
         .rp-riwayat-filter-btn span { font-size: 7.5px; font-weight: 900; letter-spacing: .04em; white-space: nowrap; }
 
+        /* ---------- TAB RIWAYAT TRANSAKSI (redesign): status toggle, gaya kartu sama dgn KPI TAB STOK ---------- */
+        .rp-status-toggle { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin-top: 4px; flex-shrink: 0; }
+        .rp-status-toggle-btn { min-width: 0; min-height: 84px; border: 1px solid rgba(118,153,201,.28); border-radius: 18px; background: rgba(8,27,57,.72); backdrop-filter: blur(8px); padding: 11px 12px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 7px; box-shadow: 0 8px 22px rgba(0,0,0,.18); color: #b7c3d6; transition: all .15s ease; }
+        .rp-status-toggle-top { display: flex; align-items: center; gap: 7px; }
+        .rp-status-toggle-icon { width: 31px; height: 31px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; flex-shrink: 0; background: rgba(255,255,255,.08); }
+        .rp-status-toggle-label { font-size: 11px; font-weight: 900; letter-spacing: .03em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .rp-status-toggle-value { font-size: 20px; font-weight: 900; line-height: 1; color: #fff; margin-top: 3px; }
+        .rp-status-toggle-sub { font-size: 8px; color: #9fb0c8; font-weight: 600; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .rp-status-toggle-btn[data-active="true"] .rp-status-toggle-sub { color: rgba(255,255,255,.7); }
+        .rp-status-toggle-btn.is-kredit .rp-status-toggle-icon { background: linear-gradient(145deg,#ffb11a,#ff7800); }
+        .rp-status-toggle-btn.is-lunas .rp-status-toggle-icon { background: linear-gradient(145deg,#45d58b,#179c60); }
+        .rp-status-toggle-btn[data-active="true"] { color: #fff; }
+        .rp-status-toggle-btn.is-kredit[data-active="true"] { border-color: rgba(255,140,0,.55); background: rgba(255,140,0,.12); }
+        .rp-status-toggle-btn.is-lunas[data-active="true"] { border-color: rgba(34,197,94,.55); background: rgba(34,197,94,.12); }
+
+
+        /* Sub-tab LUNAS: pil sederhana sejajar, tanpa kotak bergaris putus-putus */
+        .rp-inner-toggle { display: flex; gap: 6px; flex-shrink: 0; }
+        .rp-inner-toggle-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 9px 6px; border-radius: 999px; font-size: 9px; font-weight: 900; letter-spacing: .03em; color: #8fa2bd; background: rgba(6,20,43,.55); border: 1px solid rgba(118,153,201,.25); }
+        .rp-inner-toggle-btn i { font-size: 9px; }
+        .rp-inner-toggle-btn[data-active="true"] { color: #fff; background: #16a34a; border-color: #16a34a; }
+
+        /* Kartu vendor: flat navy, bukan lagi banner oranye besar */
+        .rp-vendor-card { border-radius: 14px; background: #0A1C38; border: 1px solid #7699C9; overflow: hidden; }
+        .rp-vendor-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; }
+        .rp-vendor-card-name { font-size: 13px; font-weight: 900; color: #fff; letter-spacing: .01em; text-transform: uppercase; line-height: 1.15; }
+        .rp-vendor-card-meta { font-size: 10px; font-weight: 700; color: #8fa2bd; margin-top: 2px; }
+        .rp-vendor-card-icon { width: 34px; height: 34px; border-radius: 10px; background: rgba(255,140,0,.12); color: var(--brand-main); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .rp-vendor-select-btn { flex-shrink: 0; font-size: 10px; font-weight: 900; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,.06); color: #b7c3d6; }
+
+        /* Kartu transaksi per item: lebih flat, status jadi dot bukan badge tebal */
+        .rp-trx-card { border-radius: 12px; background: #0A1C38; border: 1px solid rgba(118,153,201,.55); }
+        .rp-trx-card-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
+        .rp-trx-status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+        .rp-trx-status-dot.is-lunas { background: #22c55e; }
+        .rp-trx-status-dot.is-kredit { background: #ef4444; }
+
         /* ---------- TAB INPUT DATA: mode switcher ala kartu (ikon + judul + deskripsi + tombol panah) ---------- */
         .rp-input-mode-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; flex-shrink: 0; }
         .rp-input-mode-card { position: relative; text-align: left; min-height: 148px; border-radius: 18px; border: 1px solid var(--input-border); background: linear-gradient(160deg,rgba(11,35,71,.85),rgba(6,20,43,.92)); padding: 13px 10px 42px; display: flex; flex-direction: column; gap: 7px; transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease, background .12s ease; }
@@ -2250,23 +2287,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
   border-color:rgba(239,68,68,.55)!important;
 }
 
-/* riwayat retur */
-#riwayat-retur-section{gap:7px!important}
-#riwayat-retur-section>.flex.items-center.gap-2.px-1{padding:3px 2px 1px!important}
-#riwayat-retur-section>.flex.items-center.gap-2.px-1 i{color:#ef6666!important}
-#riwayat-retur-section>.flex.items-center.gap-2.px-1 span{font-size:10px!important;color:#f4f7fb!important}
-#riwayat-retur-list{gap:6px!important}
-#riwayat-retur-list>div.bg-cardBg{
-  border:1px solid rgba(239,68,68,.25)!important;
-  border-radius:12px!important;
-  background:rgba(8,27,57,.76)!important;
-}
-#riwayat-retur-list .px-3.py-2{padding:8px 10px!important}
-#riwayat-retur-list .text-\[10px\]{font-size:9px!important;color:#f4f7fb!important}
-#riwayat-retur-list .text-\[8px\]{font-size:7px!important}
-#riwayat-retur-list .bg-darkBg{background:#06142B!important;border-color:rgba(118,153,201,.22)!important}
-#riwayat-retur-list .border-t-2{border-top-width:1px!important;border-color:rgba(118,153,201,.22)!important}
-
 @media (max-width:360px){
   #tab-input.rp-input-screen .rp-input-mode-card{min-height:92px;padding-left:8px;padding-right:8px}
   #tab-input.rp-input-screen .rp-input-mode-card-title{max-width:58%}
@@ -2726,14 +2746,6 @@ END $$;</textarea>
                     <button id="btn-tambah-variasi-input" onclick="tambahVariasiInput()" class="rp-input-add-btn opacity-40 cursor-not-allowed pointer-events-none" disabled><i class="fa-solid fa-plus"></i> Tambah Variasi</button>
                 </div>
             </div>
-            <!-- RIWAYAT RETUR: hanya tampil saat mode RETUR aktif -->
-            <div id="riwayat-retur-section" class="hidden flex-col gap-2 flex-shrink-0">
-                <div class="flex items-center gap-2 px-1">
-                    <i class="fa-solid fa-clock-rotate-left text-red-400 text-xs"></i>
-                    <span class="text-[11px] font-black text-black tracking-wide">RIWAYAT RETUR</span>
-                </div>
-                <div id="riwayat-retur-list" class="flex flex-col gap-2"></div>
-            </div>
         <div class="tab-bottom-spacer" style="height:90px;flex-shrink:0;"></div>
         </div>
 
@@ -2898,10 +2910,17 @@ END $$;</textarea>
         <!-- TAB RIWAYAT -->
         <!-- TAB RIWAYAT INPUT -->
         <div id="tab-riwayat-input" class="tab-content hidden flex-col p-4 gap-4 relative z-10" >
-            <div class="rp-input-heading">
-                <h1>Riwayat <span>Input</span></h1>
-                <p>Riwayat stok masuk yang sudah dicatat.</p>
+            <div class="rp-riwayat-heading">
+                <div>
+                    <h1>Riwayat <span>Input</span></h1>
+                    <p>Riwayat stok masuk yang sudah dicatat.</p>
+                </div>
+                <button onclick="bukaPopupFilterTanggal()" class="rp-riwayat-filter-btn">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span id="filter-tanggal-badge-input">HARI INI</span>
+                </button>
             </div>
+            <div id="riwayat-input-only-list" class="flex flex-col gap-2"></div>
         </div>
 
         <!-- TAB RIWAYAT BEBAN -->
@@ -2914,59 +2933,47 @@ END $$;</textarea>
 
         <!-- TAB RIWAYAT RETUR -->
         <div id="tab-riwayat-retur" class="tab-content hidden flex-col p-4 gap-4 relative z-10" >
-            <div class="rp-input-heading">
-                <h1>Riwayat <span>Retur</span></h1>
-                <p>Riwayat retur stok yang sudah dicatat.</p>
+            <div class="rp-riwayat-heading">
+                <div>
+                    <h1>Riwayat <span>Retur</span></h1>
+                    <p>Riwayat retur stok yang sudah dicatat.</p>
+                </div>
+                <button onclick="bukaPopupFilterTanggal()" class="rp-riwayat-filter-btn">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span id="filter-tanggal-badge-retur">HARI INI</span>
+                </button>
             </div>
+            <div id="riwayat-retur-only-list" class="flex flex-col gap-2"></div>
         </div>
 
         <div id="tab-riwayat" class="tab-content hidden flex-col p-4 gap-4 relative z-10" >
             <div class="rp-riwayat-heading">
                 <div>
-                    <h1>Riwayat <span>Data</span></h1>
-                    <p>Semua input, transaksi, dan pembayaran tercatat rapi di sini.</p>
+                    <h1>Riwayat <span>Transaksi</span></h1>
+                    <p>Riwayat transaksi & pembayaran tercatat rapi di sini.</p>
                 </div>
                 <button onclick="bukaPopupFilterTanggal()" class="rp-riwayat-filter-btn">
                     <i class="fa-solid fa-calendar-days"></i>
                     <span id="filter-tanggal-badge">HARI INI</span>
                 </button>
             </div>
-            <!-- LEVEL 1: Saklar utama — INPUT DATA / TRANSAKSI (kartu ala TAB INPUT DATA) -->
-            <div class="rp-riwayat-mode-grid">
-                <button id="subtab-btn-input" onclick="switchRiwayatSubTab('input')" class="rp-input-mode-card rp-input-mode-orange rp-input-mode-active">
-                    <div class="rp-input-mode-card-icon"><i class="fa-solid fa-pen-to-square"></i></div>
-                    <div class="rp-input-mode-card-title">INPUT DATA</div>
-                    <div class="rp-input-mode-card-sub">Riwayat stok masuk, beban & retur</div>
-                    <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <!-- LEVEL 2: Status transaksi — satu bar segmented, KREDIT vs LUNAS -->
+            <div id="filter-transaksi-status-bar" class="hidden rp-status-toggle">
+                <button id="filter-trx-kredit" onclick="setFilterTrxStatus('kredit')" data-active="true" class="rp-status-toggle-btn is-kredit">
+                    <div class="rp-status-toggle-top"><div class="rp-status-toggle-icon"><i class="fa-solid fa-hourglass-half"></i></div><div class="rp-status-toggle-label">KREDIT</div></div>
+                    <div><div id="filter-trx-kredit-count" class="rp-status-toggle-value">0</div><div class="rp-status-toggle-sub">Transaksi</div></div>
                 </button>
-                <button id="subtab-btn-transaksi" onclick="switchRiwayatSubTab('transaksi')" class="rp-input-mode-card rp-input-mode-blue">
-                    <div class="rp-input-mode-card-icon"><i class="fa-solid fa-receipt"></i></div>
-                    <div class="rp-input-mode-card-title">TRANSAKSI</div>
-                    <div class="rp-input-mode-card-sub">Riwayat penjualan & pembayaran</div>
-                    <div class="rp-input-mode-card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <button id="filter-trx-lunas" onclick="setFilterTrxStatus('lunas')" data-active="false" class="rp-status-toggle-btn is-lunas">
+                    <div class="rp-status-toggle-top"><div class="rp-status-toggle-icon"><i class="fa-solid fa-circle-check"></i></div><div class="rp-status-toggle-label">LUNAS</div></div>
+                    <div><div id="filter-trx-lunas-count" class="rp-status-toggle-value">0</div><div class="rp-status-toggle-sub">Pelunasan</div></div>
                 </button>
             </div>
-            <!-- LEVEL 2: Status transaksi — dua kartu terpisah, warna beda arti: KREDIT (merah, menunggu) vs LUNAS (hijau, selesai) -->
-            <div id="filter-transaksi-status-bar" class="hidden grid grid-cols-2 gap-2">
-                <button id="filter-trx-kredit" onclick="setFilterTrxStatus('kredit')" class="flex items-center justify-center gap-2 py-3.5 rounded-2xl transition-all font-black text-[11px] tracking-wide text-white shadow-[0_4px_14px_rgba(220,38,38,0.45)] bg-[linear-gradient(135deg,#ef4444,#dc2626)] border-4 border-[#dc2626] bg-clip-padding">
-                    <i class="fa-solid fa-hourglass-half text-[12px]"></i>
-                    <span class="flex flex-col items-start leading-none"><span>KREDIT</span><span class="text-[7px] font-bold opacity-80 mt-1 tracking-widest">BELUM LUNAS</span></span>
-                </button>
-                <button id="filter-trx-lunas" onclick="setFilterTrxStatus('lunas')" class="flex items-center justify-center gap-2 py-3.5 rounded-2xl transition-all font-black text-[11px] tracking-wide text-black/55 bg-cardBg border-4 border-dashed border-[#16a34a]/40">
-                    <i class="fa-solid fa-circle-check text-[12px]"></i>
-                    <span class="flex flex-col items-start leading-none"><span>LUNAS</span><span class="text-[7px] font-bold opacity-70 mt-1 tracking-widest">SUDAH DIBAYAR</span></span>
-                </button>
+            <!-- LEVEL 3: Rincian LUNAS — pil sejajar sederhana -->
+            <div id="transaksi-inner-subtab-bar" class="hidden rp-inner-toggle">
+                <button id="inner-btn-lunas" onclick="switchRiwayatSubTab('lunas')" data-active="true" class="rp-inner-toggle-btn"><i class="fa-solid fa-list-check"></i>LUNAS</button>
+                <button id="inner-btn-pelunasan" onclick="switchRiwayatSubTab('pelunasan')" data-active="false" class="rp-inner-toggle-btn"><i class="fa-solid fa-money-bill-wave"></i>PELUNASAN</button>
+                <button id="inner-btn-bayar-sebagian" onclick="switchRiwayatSubTab('bayar-sebagian')" data-active="false" class="rp-inner-toggle-btn"><i class="fa-solid fa-hand-holding-dollar"></i>SEBAGIAN</button>
             </div>
-            <!-- LEVEL 3: Rincian LUNAS — menjorok & terhubung ke kartu LUNAS, bentuk pil kecil supaya kelihatan sebagai anak/sub -->
-            <div id="transaksi-inner-subtab-bar" class="hidden rounded-2xl border-2 border-dashed p-2 pt-1.5" style="border-color:rgba(22,163,74,0.35); background:rgba(22,163,74,0.06);">
-                <div class="flex items-center gap-1.5 px-1 pb-1.5 text-[8px] font-black tracking-widest text-[#16a34a] uppercase"><i class="fa-solid fa-turn-down text-[9px]"></i> Rincian Lunas</div>
-                <div class="flex gap-1.5">
-                    <button id="inner-btn-lunas" onclick="switchRiwayatSubTab('lunas')" class="flex-1 flex items-center justify-center gap-1 py-2.5 rounded-full text-[8.5px] font-black tracking-wide text-white shadow-[0_2px_8px_rgba(22,163,74,0.35)] bg-[#16a34a]"><i class="fa-solid fa-list-check text-[9px]"></i>LUNAS</button>
-                    <button id="inner-btn-pelunasan" onclick="switchRiwayatSubTab('pelunasan')" class="flex-1 flex items-center justify-center gap-1 py-2.5 rounded-full text-[8.5px] font-black tracking-wide text-[#16a34a] bg-white/70 border-2 border-[#16a34a]/40"><i class="fa-solid fa-money-bill-wave text-[9px]"></i>PELUNASAN</button>
-                    <button id="inner-btn-bayar-sebagian" onclick="switchRiwayatSubTab('bayar-sebagian')" class="flex-1 flex items-center justify-center gap-1 py-2.5 rounded-full text-[8.5px] font-black tracking-wide text-[#16a34a] bg-white/70 border-2 border-[#16a34a]/40"><i class="fa-solid fa-hand-holding-dollar text-[9px]"></i>BAYAR SEBAGIAN</button>
-                </div>
-            </div>
-            <div id="riwayat-input-list" class="flex flex-col gap-3"></div>
             <div id="riwayat-transaksi-list" class="hidden flex-col gap-2"></div>
             <div id="riwayat-pelunasan-list" class="hidden flex-col gap-3"></div>
             <div id="riwayat-bayar-sebagian-list" class="hidden flex-col gap-3"></div>
@@ -2982,13 +2989,9 @@ END $$;</textarea>
 
         <!-- TAB LABA KOTOR -->
         <div id="tab-laba" class="tab-content hidden flex-col p-4 gap-4 relative z-10" >
-            <div class="flex items-stretch -mx-4 -mt-4 mb-2 shadow-[0_4px_16px_rgba(255,140,0,0.35)] brand-gradient-bg rounded-b-2xl overflow-hidden sticky top-0 z-30">
-                <div class="w-20 h-[72px] flex items-center justify-center flex-shrink-0 z-10 relative bg-black/5 border-r-2 border-black/10"><i class="fa-solid fa-sack-dollar text-3xl text-[#000000]"></i></div>
-                <div class="h-[72px] flex flex-col justify-center px-4 flex-grow z-10 relative">
-                    <h1 class="text-[26px] font-black text-[#000000] leading-none tracking-wide mb-1">LABA <span class="text-black">KOTOR</span></h1>
-                    <div class="w-full h-[1.5px] bg-[#ffffff]/30 mb-1"></div>
-                    <h2 class="display-brand-name text-[10px] font-bold text-[#000000] tracking-[0.15em] leading-none mt-0.5 uppercase">RADJA PRODUCTION</h2>
-                </div>
+            <div class="rp-stock-heading" style="padding:4px 4px 4px">
+                <h1>Laba <span>Kotor</span></h1>
+                <p>Pantau laba kotor dan margin penjualan.</p>
             </div>
 
             <!-- SUMMARY CARDS -->
@@ -3361,15 +3364,15 @@ END $$;</textarea>
                 <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-handshake text-xl"></i></div>
                 <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Transaksi</span>
             </div>
-            <div id="nav-btn-riwayat-input" onclick="switchTab('riwayat-input')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
+            <div id="nav-btn-riwayat-input" onclick="switchTab('riwayat-input')" class="nav-btn inactive hidden flex-col items-center gap-1 cursor-pointer">
                 <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-clipboard-list text-xl"></i></div>
                 <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Riwayat Input</span>
             </div>
-            <div id="nav-btn-riwayat-beban" onclick="switchTab('riwayat-beban')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
+            <div id="nav-btn-riwayat-beban" onclick="switchTab('riwayat-beban')" class="nav-btn inactive hidden flex-col items-center gap-1 cursor-pointer">
                 <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-money-bill-wave text-xl"></i></div>
                 <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Riwayat Beban</span>
             </div>
-            <div id="nav-btn-riwayat-retur" onclick="switchTab('riwayat-retur')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
+            <div id="nav-btn-riwayat-retur" onclick="switchTab('riwayat-retur')" class="nav-btn inactive hidden flex-col items-center gap-1 cursor-pointer">
                 <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-rotate-left text-xl"></i></div>
                 <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Riwayat Retur</span>
             </div>
@@ -4170,7 +4173,7 @@ async function fetchBayarSebagianData() {
         warna:        { fetch: fetchWarnaData,        render: () => { renderWarnaList(); } },
         ukuran:       { fetch: fetchUkuranData,       render: () => { renderUkuranList(); } },
         pengaturan:   { fetch: fetchPengaturanData,   render: () => {} }, // tema/nama brand sudah langsung diterapkan di dalam fetch-nya
-        riwayatInput: { fetch: fetchRiwayatInputData, render: () => { renderStokDashboard(); if (typeof _renderRiwayatInputOri === 'function') _renderRiwayatInputOri(); } },
+        riwayatInput: { fetch: fetchRiwayatInputData, render: () => { renderStokDashboard(); if (typeof _renderRiwayatInputOri === 'function') _renderRiwayatInputOri(); if (typeof renderRiwayatInputTab === 'function') renderRiwayatInputTab(); if (typeof renderRiwayatReturTab === 'function') renderRiwayatReturTab(); } },
         transaksi:    { fetch: fetchTransaksiData,    render: () => { renderStokDashboard(); if (typeof _renderRiwayatTransaksiOri === 'function') _renderRiwayatTransaksiOri(); if (typeof _renderPelunasanViewOri === 'function') _renderPelunasanViewOri(); if (typeof renderLabaKotor === 'function') renderLabaKotor(); } },
         pelunasan:    { fetch: fetchPelunasanData,    render: () => { if (typeof _renderPelunasanViewOri === 'function') _renderPelunasanViewOri(); } },
     bayarSebagian:{ fetch: fetchBayarSebagianData,render: () => { if (typeof _renderBayarSebagianViewOri === 'function') _renderBayarSebagianViewOri(); } },
@@ -4627,13 +4630,8 @@ async function fetchBayarSebagianData() {
     }
 
     async function initUI() {
-        // Default filter = HARI INI (bukan tampilkan semua data)
-        const dariEl = document.getElementById("filter-dari-tanggal");
-        const sampaiEl = document.getElementById("filter-sampai-tanggal");
-        const _todayInit = _todayStr();
-        if (dariEl) dariEl.value = _todayInit;
-        if (sampaiEl) sampaiEl.value = _todayInit;
-        updateFilterTanggalBadge();
+        // Default filter = periode mingguan berjalan (bukan tampilkan semua data)
+        setFilterPeriodeDefault();
         tambahModelRow();
         tambahWarnaRow();
         tambahUkuranRow();
@@ -4979,36 +4977,6 @@ function updateSSK(tab, rowId) {
     }
 }
 
-    let _brandSortMode = 'alpha';
-    function buildHeatSegments(pctFill, isNeg, total) {
-        const SEG_COUNT = 14;
-        let litCount;
-        if (isNeg) {
-            litCount = SEG_COUNT;
-        } else if (!total || total <= 0) {
-            litCount = 0;
-        } else {
-            litCount = Math.max(1, Math.round((pctFill / 100) * SEG_COUNT));
-        }
-        let segs = '';
-        for (let i = 0; i < SEG_COUNT; i++) {
-            const t = i / (SEG_COUNT - 1);
-            const hue = Math.round(42 - (37 * t));      // 42 (gold) -> 5 (merah-oranye tua)
-            const light = Math.round(63 - (20 * t));    // 63% (terang) -> 43% (gelap/pekat)
-            let bg;
-            if (isNeg) {
-                bg = '#ef4444';
-            } else if (i < litCount) {
-                bg = `hsl(${hue}, 92%, ${light}%)`;
-            } else {
-                bg = 'rgba(0,0,0,0.08)';
-            }
-            const glow = (!isNeg && i < litCount) ? `box-shadow:0 0 4px hsla(${hue},92%,${light}%,0.65);` : '';
-            segs += `<div class="flex-1 rounded-[2px]" style="height:100%;background:${bg};${glow}"></div>`;
-        }
-        return segs;
-    }
-
     function renderStokDashboard() {
         let totalMasuk = 0, totalRetur = 0, totalKeluar = 0;
         appData.riwayatInput.forEach(d => {
@@ -5066,7 +5034,6 @@ function updateSSK(tab, rowId) {
                 } else {
                     brandListEl.innerHTML = brandStok.map((b, idx) => {
                         const isNegative = b.total < 0;
-                        const initials = b.nama.replace(/[^A-Za-z0-9 ]/g, '').trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase() || '?';
                         const cardClass = isNegative ? 'rp-brand-card rp-brand-card-negative' : 'rp-brand-card';
                         const orderNo = String(idx + 1).padStart(2, '0');
                         return `<div onclick="openBrandDetail(${b.id}, '${String(b.nama).replace(/'/g, "\\'")}')" class="${cardClass}">
@@ -5140,12 +5107,6 @@ function updateSSK(tab, rowId) {
         }
     }
 
-    function toggleBrandSort() {
-        // Urutan STOK PER BRAND sekarang tetap: stok terbanyak → terkecil.
-        // Brand dengan stok 0 otomatis disembunyikan.
-        renderStokDashboard();
-    }
-
     // ==================== NAVIGASI ====================
     let _activeTab = 'stok';
     let _riwayatNeedsReset = true; // true = tab Riwayat perlu direset ke default (INPUT DATA + HARI INI) saat dibuka
@@ -5205,6 +5166,9 @@ function updateSSK(tab, rowId) {
         if (tabName !== 'riwayat') {
             _riwayatNeedsReset = true;
         }
+        if (tabName !== 'riwayat-retur') {
+            _returNeedsReset = true;
+        }
         if (tabName !== 'laba') {
             _labaNeedsReset = true;
         }
@@ -5242,6 +5206,19 @@ function updateSSK(tab, rowId) {
         // Defer render berat ke setelah tab tampil di layar
         requestAnimationFrame(() => {
             if (tabName === 'stok') _renderStokDashboardOri();
+            if (tabName === 'riwayat-input') {
+                if (typeof renderRiwayatInputTab === 'function') renderRiwayatInputTab();
+            }
+            if (tabName === 'riwayat-retur') {
+                // Beda dgn tab Riwayat Transaksi (default periode mingguan): tab ini
+                // selalu dibuka dgn filter HARI INI, walau field filternya dibagi
+                // bareng dgn Transaksi/Input (lihat _resetReturDefaults).
+                if (_returNeedsReset) {
+                    _resetReturDefaults();
+                    _returNeedsReset = false;
+                }
+                if (typeof renderRiwayatReturTab === 'function') renderRiwayatReturTab();
+            }
             if (tabName === 'riwayat') {
                 // kembalikan ke kondisi default: sub-tab INPUT DATA, filter tanggal
                 // HARI INI, filter status KREDIT/LUNAS non-aktif.
@@ -5253,7 +5230,6 @@ function updateSSK(tab, rowId) {
                 if (activeSubTab === 'kredit' || activeSubTab === 'lunas') _renderRiwayatTransaksiOri();
                 else if (activeSubTab === 'pelunasan') _renderPelunasanViewOri();
                 else if (activeSubTab === 'bayar-sebagian') { if (typeof _renderBayarSebagianViewOri === 'function') _renderBayarSebagianViewOri(); }
-                else _renderRiwayatInputOri();
             }
             if (tabName === 'master') renderBrandOptions();
             if (tabName === 'laba') {
@@ -5274,6 +5250,11 @@ function updateSSK(tab, rowId) {
             }
         });
     }
+
+    // Tab Riwayat Retur pakai filter tanggal yang SAMA (shared field) dgn tab Riwayat
+    // Transaksi, tapi defaultnya harus HARI INI, bukan ikut periode mingguan Transaksi.
+    // Makanya perlu reset-on-entry sendiri, mirip pola _riwayatNeedsReset di atas.
+    let _returNeedsReset = true;
 
     let _detailStokMap = {};
     let _detailBrandName = '';
@@ -5671,25 +5652,27 @@ function updateSSK(tab, rowId) {
     // Sub-tab riwayat sekarang cuma 2 grup utama: 'input' & 'transaksi'.
     // 'pelunasan' dan 'bayar-sebagian' adalah sub-tab BERSARANG di dalam grup 'transaksi'.
     function _resetRiwayatDefaults() {
-        // Reset filter tanggal ke HARI INI
-        const dariEl = document.getElementById('filter-dari-tanggal');
-        const sampaiEl = document.getElementById('filter-sampai-tanggal');
-        if (dariEl && sampaiEl) {
-            const today = _todayStr();
-            dariEl.value = today;
-            sampaiEl.value = today;
-            updateFilterTanggalBadge();
-        }
+        // Reset filter tanggal ke periode mingguan berjalan
+        setFilterPeriodeDefault();
         // Reset filter status KREDIT/LUNAS: default ke KREDIT
         _filterTrxStatus = 'kredit';
         _updateFilterTrxStatusButtons('kredit');
         _trxShowAllOld = false;
-        // Reset filter MASUK/RETUR di sub-tab INPUT DATA ke SEMUA (default),
-        // supaya navigasi biasa ke tab Riwayat lewat nav bar tidak "nyangkut"
-        // di filter yang ditinggalkan oleh tombol pintasan kartu (mis. bukaRiwayatStokMasuk()).
-        _filterInputMode = 'semua';
-        // Reset sub-tab ke INPUT DATA
-        switchRiwayatSubTab('input');
+        // Reset sub-tab ke TRANSAKSI/KREDIT (default sekarang, sub-tab INPUT DATA sudah dihapus
+        // karena datanya sudah pindah ke TAB RIWAYAT INPUT/BEBAN/RETUR standalone di bottom nav)
+        switchRiwayatSubTab('kredit');
+    }
+
+    // Reset filter tanggal tab Riwayat Retur ke HARI INI setiap kali tab ini dibuka
+    // (bukan ikut periode mingguan berjalan seperti tab Riwayat Transaksi). Field
+    // filter-dari-tanggal/filter-sampai-tanggal dibagi bareng dgn Transaksi & Input,
+    // jadi ini sengaja override nilainya begitu tab Retur jadi aktif.
+    function _resetReturDefaults() {
+        const today = _todayStr();
+        document.getElementById('filter-dari-tanggal').value = today;
+        document.getElementById('filter-sampai-tanggal').value = today;
+        updateFilterTanggalBadge();
+        _rrOnlyPage = 1;
     }
 
     // Spacer di bawah list tab Riwayat harus lebih tinggi saat #sticky-total-bar (BATAL/TAGIHAN/SURAT
@@ -5710,10 +5693,7 @@ function updateSSK(tab, rowId) {
     function switchRiwayatSubTab(subTab) {
         if (subTab === 'transaksi') subTab = 'kredit'; // default grup TRANSAKSI = KREDIT
 
-        const btnInput = document.getElementById('subtab-btn-input');
-        const btnTransaksi = document.getElementById('subtab-btn-transaksi');
         const innerBar = document.getElementById('transaksi-inner-subtab-bar');
-        const listInput = document.getElementById('riwayat-input-list');
         const listTransaksi = document.getElementById('riwayat-transaksi-list');
         const listPelunasan = document.getElementById('riwayat-pelunasan-list');
         const listBayarSebagian = document.getElementById('riwayat-bayar-sebagian-list');
@@ -5721,15 +5701,10 @@ function updateSSK(tab, rowId) {
         const pelunasanBar = document.getElementById('pelunasan-action-bar');
         if (pelunasanBar) pelunasanBar.classList.add('hidden');
 
-        // Reset tombol utama (kartu ala TAB INPUT DATA — warna tetap, cuma status aktif yang di-toggle)
-        btnInput.classList.remove('rp-input-mode-active');
-        btnTransaksi.classList.remove('rp-input-mode-active');
-
         const isLunasGroup = (subTab === 'lunas' || subTab === 'pelunasan' || subTab === 'bayar-sebagian');
         const isTransaksiGroup = (subTab === 'kredit' || isLunasGroup);
 
         // Reset semua panel & filter bar
-        listInput.classList.add('hidden'); listInput.classList.remove('flex');
         listTransaksi.classList.add('hidden'); listTransaksi.classList.remove('flex');
         if (listPelunasan) { listPelunasan.classList.add('hidden'); listPelunasan.classList.remove('flex'); }
         if (listBayarSebagian) { listBayarSebagian.classList.add('hidden'); listBayarSebagian.classList.remove('flex'); }
@@ -5737,18 +5712,10 @@ function updateSSK(tab, rowId) {
         var filterTrxBar = document.getElementById('filter-transaksi-status-bar');
         if (innerBar) innerBar.classList.add('hidden');
 
-        if (subTab === 'input') {
-            btnInput.classList.add('rp-input-mode-active');
-            if (filterTrxBar) filterTrxBar.classList.add('hidden');
-            listInput.classList.remove('hidden'); listInput.classList.add('flex');
-            _updateRiwayatBottomSpacer();
-            return;
-        }
-
         if (!isTransaksiGroup) { _updateRiwayatBottomSpacer(); return; }
 
-        // Grup TRANSAKSI aktif (termasuk sub-tab LUNAS / PELUNASAN / BAYAR SEBAGIAN di bawah LUNAS)
-        btnTransaksi.classList.add('rp-input-mode-active');
+        // Grup TRANSAKSI aktif (satu-satunya grup sekarang; sub-tab LUNAS / PELUNASAN / BAYAR SEBAGIAN
+        // ada di bawah LUNAS)
         if (filterTrxBar) filterTrxBar.classList.remove('hidden');
         _updateFilterTrxStatusButtons(subTab === 'kredit' ? 'kredit' : 'lunas');
 
@@ -5789,30 +5756,21 @@ function updateSSK(tab, rowId) {
     function _updateFilterTrxStatusButtons(activeStatus) {
         const btnLunas = document.getElementById('filter-trx-lunas');
         const btnKredit = document.getElementById('filter-trx-kredit');
-        const kreditActive = 'flex items-center justify-center gap-2 py-3.5 rounded-2xl transition-all font-black text-[11px] tracking-wide text-white shadow-[0_4px_14px_rgba(220,38,38,0.45)] bg-[linear-gradient(135deg,#ef4444,#dc2626)] border-4 border-[#dc2626] bg-clip-padding';
-        const kreditInactive = 'flex items-center justify-center gap-2 py-3.5 rounded-2xl transition-all font-black text-[11px] tracking-wide text-black/55 bg-cardBg border-4 border-dashed border-[#dc2626]/40';
-        const lunasActive = 'flex items-center justify-center gap-2 py-3.5 rounded-2xl transition-all font-black text-[11px] tracking-wide text-white shadow-[0_4px_14px_rgba(22,163,74,0.45)] bg-[linear-gradient(135deg,#22c55e,#16a34a)] border-4 border-[#16a34a] bg-clip-padding';
-        const lunasInactive = 'flex items-center justify-center gap-2 py-3.5 rounded-2xl transition-all font-black text-[11px] tracking-wide text-black/55 bg-cardBg border-4 border-dashed border-[#16a34a]/40';
-        if (btnKredit) btnKredit.className = (activeStatus === 'kredit') ? kreditActive : kreditInactive;
-        if (btnLunas) btnLunas.className = (activeStatus === 'lunas') ? lunasActive : lunasInactive;
+        if (btnKredit) btnKredit.dataset.active = (activeStatus === 'kredit') ? 'true' : 'false';
+        if (btnLunas) btnLunas.dataset.active = (activeStatus === 'lunas') ? 'true' : 'false';
     }
 
     function _updateTransaksiInnerTabButtons(activeInner) {
         const map = { lunas: 'inner-btn-lunas', pelunasan: 'inner-btn-pelunasan', 'bayar-sebagian': 'inner-btn-bayar-sebagian' };
-        const innerActive = "flex-1 flex items-center justify-center gap-1 py-2.5 rounded-full text-[8.5px] font-black tracking-wide text-white shadow-[0_2px_8px_rgba(22,163,74,0.35)] bg-[#16a34a]";
-        const innerInactive = "flex-1 flex items-center justify-center gap-1 py-2.5 rounded-full text-[8.5px] font-black tracking-wide text-[#16a34a] bg-white/70 border-2 border-[#16a34a]/40";
         Object.keys(map).forEach(function(key) {
             const el = document.getElementById(map[key]);
             if (!el) return;
-            const isActive = (key === activeInner);
-            el.className = isActive ? innerActive : innerInactive;
-            el.dataset.active = isActive ? 'true' : 'false';
+            el.dataset.active = (key === activeInner) ? 'true' : 'false';
         });
     }
 
     // Helper: tentukan sub-tab riwayat yang sedang aktif ('input' | 'kredit' | 'lunas' | 'pelunasan' | 'bayar-sebagian')
     function getActiveRiwayatSubTab() {
-        if (document.getElementById('subtab-btn-input')?.classList.contains('rp-input-mode-active')) return 'input';
         if (document.getElementById('inner-btn-pelunasan')?.dataset.active === 'true') return 'pelunasan';
         if (document.getElementById('inner-btn-bayar-sebagian')?.dataset.active === 'true') return 'bayar-sebagian';
         if (document.getElementById('inner-btn-lunas')?.dataset.active === 'true') return 'lunas';
@@ -5847,14 +5805,6 @@ function updateSSK(tab, rowId) {
         }
     }
 
-    // Klik card "VENDOR AKTIF" di ringkasan atas -> buka POPUP TRANSAKSI VENDOR terpisah
-    // (bukan menyatu / scroll di dalam dashboard).
-    function bukaTransaksiVendor() {
-        const popup = document.getElementById('popup-transaksi-vendor');
-        if (!popup) return;
-        popup.classList.remove('hidden');
-        popup.style.display = 'flex';
-    }
     function tutupTransaksiVendor() {
         const popup = document.getElementById('popup-transaksi-vendor');
         if (!popup) return;
@@ -6716,7 +6666,6 @@ function updateSSK(tab, rowId) {
         const keteranganWrapper = document.getElementById('retur-keterangan-wrapper');
         const headerTitle = document.getElementById('input-header-title');
         const btnText = document.getElementById('btn-simpan-input-text');
-        const returSection = document.getElementById('riwayat-retur-section');
         const bebanWrapper = document.getElementById('beban-form-wrapper');
         const brandModelWrapper = document.getElementById('input-brandmodel-wrapper');
         const variasiCard = document.getElementById('input-variasi-card');
@@ -6734,7 +6683,6 @@ function updateSSK(tab, rowId) {
         if (mode === 'beban') {
             if (banner) { banner.classList.add('hidden'); banner.classList.remove('flex'); }
             if (keteranganWrapper) { keteranganWrapper.classList.add('hidden'); keteranganWrapper.classList.remove('flex'); }
-            if (returSection) { returSection.classList.add('hidden'); returSection.classList.remove('flex'); }
             if (brandModelWrapper) brandModelWrapper.classList.add('hidden');
             if (variasiCard) variasiCard.classList.add('hidden');
             if (actionBar) actionBar.style.display = 'none';
@@ -6760,15 +6708,11 @@ function updateSSK(tab, rowId) {
             if (keteranganWrapper) { keteranganWrapper.classList.add('hidden'); keteranganWrapper.classList.remove('flex'); }
             if (headerTitle) headerTitle.innerHTML = 'Input <span>Data</span>';
             if (btnText) btnText.textContent = 'SIMPAN DATA MASUK';
-            if (returSection) { returSection.classList.add('hidden'); returSection.classList.remove('flex'); }
         } else {
             if (banner) { banner.classList.remove('hidden'); banner.classList.add('flex'); }
             if (keteranganWrapper) { keteranganWrapper.classList.remove('hidden'); keteranganWrapper.classList.add('flex'); }
             if (headerTitle) headerTitle.innerHTML = 'Retur <span>Stok</span>';
             if (btnText) btnText.textContent = 'SIMPAN RETUR';
-            if (returSection) { returSection.classList.remove('hidden'); returSection.classList.add('flex'); }
-            _rrPage = 1; // masuk mode retur -> kembali ke halaman 1 biar tidak nyangkut di halaman lama
-            renderRiwayatReturInline();
         }
         _updateSimpanInputBtnState();
     }
@@ -8518,6 +8462,38 @@ function updateSSK(tab, rowId) {
         return _now.getFullYear() + '-' + String(_now.getMonth()+1).padStart(2,'0') + '-' + String(_now.getDate()).padStart(2,'0');
     }
 
+    // Hitung periode mingguan default berdasarkan tanggal hari ini:
+    // 1-7, 8-14, 15-21, 22-28, 29-akhir bulan.
+    function _hitungPeriodeDefault(dateObj) {
+        const d = dateObj || new Date();
+        const year = d.getFullYear();
+        const month = d.getMonth(); // 0-based
+        const day = d.getDate();
+        const lastDay = new Date(year, month + 1, 0).getDate();
+
+        let startDay, endDay;
+        if (day <= 7) { startDay = 1; endDay = 7; }
+        else if (day <= 14) { startDay = 8; endDay = 14; }
+        else if (day <= 21) { startDay = 15; endDay = 21; }
+        else if (day <= 28) { startDay = 22; endDay = 28; }
+        else { startDay = 29; endDay = lastDay; }
+
+        const fmt = (y, m, dd) => y + '-' + String(m + 1).padStart(2, '0') + '-' + String(dd).padStart(2, '0');
+        return { dari: fmt(year, month, startDay), sampai: fmt(year, month, endDay) };
+    }
+
+    // Set filter tanggal Tab Riwayat ke periode default (dipanggil sekali saat app dibuka).
+    function setFilterPeriodeDefault() {
+        const dariEl = document.getElementById('filter-dari-tanggal');
+        const sampaiEl = document.getElementById('filter-sampai-tanggal');
+        if (!dariEl || !sampaiEl) return;
+        const { dari, sampai } = _hitungPeriodeDefault();
+        dariEl.value = dari;
+        sampaiEl.value = sampai;
+        updateFilterTanggalBadge();
+    }
+    window.setFilterPeriodeDefault = setFilterPeriodeDefault;
+
     function bukaPopupFilterTanggal() {
         const p = document.getElementById('popup-filter-tanggal');
         if (p) { p.classList.remove('hidden'); p.classList.add('flex'); }
@@ -8530,20 +8506,26 @@ function updateSSK(tab, rowId) {
 
     function updateFilterTanggalBadge() {
         const badge = document.getElementById('filter-tanggal-badge');
-        if (!badge) return;
+        const badgeInput = document.getElementById('filter-tanggal-badge-input');
+        const badgeRetur = document.getElementById('filter-tanggal-badge-retur');
+        if (!badge && !badgeInput && !badgeRetur) return;
         const dari = document.getElementById('filter-dari-tanggal')?.value;
         const sampai = document.getElementById('filter-sampai-tanggal')?.value;
         const today = _todayStr();
+        let text;
         if (!dari && !sampai) {
-            badge.textContent = 'SEMUA';
+            text = 'SEMUA';
         } else if (dari === today && sampai === today) {
-            badge.textContent = 'HARI INI';
+            text = 'HARI INI';
         } else if (dari && sampai) {
             const fmt = (d) => { const p = d.split('-'); return p[2] + '/' + p[1]; };
-            badge.textContent = fmt(dari) + '-' + fmt(sampai);
+            text = fmt(dari) + '-' + fmt(sampai);
         } else {
-            badge.textContent = 'CUSTOM';
+            text = 'CUSTOM';
         }
+        if (badge) badge.textContent = text;
+        if (badgeInput) badgeInput.textContent = text;
+        if (badgeRetur) badgeRetur.textContent = text;
     }
 
     function setFilterHariIni() {
@@ -8576,12 +8558,13 @@ function updateSSK(tab, rowId) {
         updateFilterTanggalBadge();
         selectedTrxIds.clear();
         updateCetakBar();
-        _rtPage = 1; _pelPage = 1; _riPage = 1; // filter tanggal berubah -> kembali ke halaman 1 biar tidak bingung
+        _rtPage = 1; _pelPage = 1; _riPage = 1; _riOnlyPage = 1; _rrOnlyPage = 1; // filter tanggal berubah -> kembali ke halaman 1 biar tidak bingung
         const activeSubTab = getActiveRiwayatSubTab();
         if (activeSubTab === 'kredit' || activeSubTab === 'lunas') renderRiwayatTransaksi();
         else if (activeSubTab === 'pelunasan') renderPelunasanView();
-        else if (activeSubTab === 'bayar-sebagian') renderBayarSebagianView();
-        else renderRiwayatInput();
+        else if (activeSubTab === 'bayar-sebagian') { renderBayarSebagianView(); _updateStatusToggleCounts(); }
+        if (typeof renderRiwayatInputTab === 'function') renderRiwayatInputTab();
+        if (typeof renderRiwayatReturTab === 'function') renderRiwayatReturTab();
     }
 
     // ==================== TAB LABA KOTOR ====================
@@ -8802,7 +8785,11 @@ function updateSSK(tab, rowId) {
     window.riGoToPage = riGoToPage;
 
     function renderRiwayatInput() {
+        // Div 'riwayat-input-list' sudah dihapus dari TAB RIWAYAT DATA (sub-tab INPUT DATA dihapus).
+        // Fungsi ini masih dipanggil di banyak tempat sebagai trigger refresh untuk TAB RIWAYAT
+        // INPUT/RETUR standalone (lewat wrapper di bawah), jadi cukup no-op kalau elemennya tidak ada.
         const list = document.getElementById('riwayat-input-list');
+        if (!list) return;
         if (appData.riwayatInput.length === 0) {
             list.innerHTML = '<div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada data input.</div>';
             return;
@@ -8916,11 +8903,6 @@ function updateSSK(tab, rowId) {
         requestAnimationFrame(renderNextInputItem);
     }
 
-    // PAGINATION Riwayat Retur (inline, di tab Input Data mode RETUR): sama seperti
-    // pagination Riwayat Input — list flat, dipaginasi langsung per-item.
-    let _rrPage = 1;
-    const RR_PAGE_SIZE = 10;
-
     // ==================== ARSIP OTOMATIS RETUR LAMA — DINONAKTIFKAN ====================
     // Sistem lama menggabungkan retur-retur lama (di luar 50 terbaru) jadi satu record
     // "ARSIP OTOMATIS" per Brand+Model+Warna+Ukuran. Efeknya: alasan retur asli
@@ -8934,44 +8916,108 @@ function updateSSK(tab, rowId) {
     // sengaja dibuat no-op (tidak menghapus/menggabungkan apa pun) tapi tetap
     // dipertahankan sebagai stub supaya pemanggil lama (cekDanArsipkanReturLama())
     // di tempat lain tidak error.
-    let _arsipReturRunning = false;
     async function cekDanArsipkanReturLama() {
         return; // sengaja tidak melakukan apa-apa — lihat catatan di atas
     }
     window.cekDanArsipkanReturLama = cekDanArsipkanReturLama;
 
-    function rrGoToPage(page) {
-        _rrPage = page;
-        renderRiwayatReturInline();
-        const list = document.getElementById('riwayat-retur-list');
+    // ==================== TAB RIWAYAT INPUT (standalone, di bottom nav) ====================
+    // Versi ringan khusus stok MASUK saja (retur & beban punya tab sendiri).
+    // Reuse appData.riwayatInput (sudah di-fetch & disinkron realtime utk TAB RIWAYAT),
+    // filter periode yang SAMA dgn TAB RIWAYAT (popup & state dari/sampai dibagi bareng),
+    // dan desain kartu flat 1-baris supaya ringan dirender.
+    let _riOnlyPage = 1;
+    const RI_ONLY_PAGE_SIZE = 15;
+
+    function riOnlyGoToPage(page) {
+        _riOnlyPage = page;
+        renderRiwayatInputTab();
+        const list = document.getElementById('riwayat-input-only-list');
         if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    window.rrGoToPage = rrGoToPage;
+    window.riOnlyGoToPage = riOnlyGoToPage;
 
-    function renderRiwayatReturInline() {
-        const list = document.getElementById('riwayat-retur-list');
+    function renderRiwayatInputTab() {
+        const list = document.getElementById('riwayat-input-only-list');
+        if (!list) return;
+        const masukDataFull = appData.riwayatInput.filter(d => d.mode !== 'retur');
+        if (masukDataFull.length === 0) {
+            list.innerHTML = '<div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada data input.</div>';
+            return;
+        }
+        const { dari, sampai } = getFilterRange();
+        const filtered = masukDataFull.filter(d => tanggalDalamRange(d.tanggal, dari, sampai));
+        if (filtered.length === 0) {
+            list.innerHTML = '<div class="text-center text-black text-xs mt-10"><i class="fa-solid fa-calendar-xmark text-3xl mb-2 opacity-50"></i><br>Tidak ada data di rentang tanggal ini.</div>';
+            return;
+        }
+        const totalPages = Math.max(1, Math.ceil(filtered.length / RI_ONLY_PAGE_SIZE));
+        if (_riOnlyPage > totalPages) _riOnlyPage = totalPages;
+        if (_riOnlyPage < 1) _riOnlyPage = 1;
+        const pageItems = filtered.slice((_riOnlyPage - 1) * RI_ONLY_PAGE_SIZE, _riOnlyPage * RI_ONLY_PAGE_SIZE);
+
+        list.innerHTML = pageItems.map((d) => {
+            const totalQty = d.items.reduce((s, i) => s + i.qty, 0);
+            const itemsSummary = d.items.map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black whitespace-nowrap">${i.warna}/${i.ukuran}:<b class="text-black">${i.qty}</b></span>`).join('');
+            return `<div class="bg-cardBg rounded-xl p-3 flex items-start justify-between gap-2 border-2 border-borderDark">
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-1.5">
+                        <span class="text-[10px] font-black text-black truncate min-w-0 flex-1">${d.brand} — ${d.model}</span>
+                        <span class="text-[8px] font-black px-1.5 py-0.5 rounded border-2 flex-shrink-0 bg-green-500/20 text-green-400 border-green-500/40">↓ MASUK</span>
+                    </div>
+                    <div class="text-[9px] text-black/60 font-bold mt-0.5">${d.tanggal} ${d.jam} <span class="brand-text">• ${totalQty} pcs</span></div>
+                    <div class="flex gap-1 flex-wrap mt-1">${itemsSummary}</div>
+                </div>
+                <button onclick="bukaPilihItemRetur(${d.id})" class="w-7 h-7 rounded-lg bg-yellow-500/10 hover:bg-yellow-500/20 border-2 border-yellow-500/30 flex items-center justify-center text-yellow-400 text-[10px] flex-shrink-0" title="Edit qty">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+            </div>`;
+        }).join('') + _renderPaginationControls({
+            currentPage: _riOnlyPage,
+            totalPages: totalPages,
+            totalItems: filtered.length,
+            itemLabel: 'data',
+            onPageChangeFn: 'riOnlyGoToPage'
+        });
+    }
+    window.renderRiwayatInputTab = renderRiwayatInputTab;
+
+    // ==================== TAB RIWAYAT RETUR (standalone, di bottom nav) ====================
+    // Sama persis polanya dgn renderRiwayatInputTab di atas: reuse appData.riwayatInput,
+    // filter periode yang SAMA dgn TAB RIWAYAT (popup & state dari/sampai dibagi bareng),
+    // desain kartu flat 1-baris, pagination sendiri.
+    let _rrOnlyPage = 1;
+    const RR_ONLY_PAGE_SIZE = 15;
+
+    function rrOnlyGoToPage(page) {
+        _rrOnlyPage = page;
+        renderRiwayatReturTab();
+        const list = document.getElementById('riwayat-retur-only-list');
+        if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    window.rrOnlyGoToPage = rrOnlyGoToPage;
+
+    function renderRiwayatReturTab() {
+        const list = document.getElementById('riwayat-retur-only-list');
         if (!list) return;
         const returDataFull = appData.riwayatInput.filter(d => d.mode === 'retur');
         if (returDataFull.length === 0) {
             list.innerHTML = '<div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada data retur.</div>';
             return;
         }
-        // returDataFull sudah terurut terbaru-dulu (appData.riwayatInput di-sort by id
-        // descending saat dimuat). Sistem PER-RETUR: semua retur (baru maupun lama)
-        // tetap sebagai record tersendiri dengan alasan & tanggal aslinya masing-masing
-        // — tidak ada lagi yang digabung atau disembunyikan, tinggal dijelajahi lewat
-        // pagination di bawah.
-        const returData = returDataFull;
-        const rrTotalPages = Math.max(1, Math.ceil(returData.length / RR_PAGE_SIZE));
-        if (_rrPage > rrTotalPages) _rrPage = rrTotalPages;
-        if (_rrPage < 1) _rrPage = 1;
-        const pageItems = returData.slice((_rrPage - 1) * RR_PAGE_SIZE, _rrPage * RR_PAGE_SIZE);
+        const { dari, sampai } = getFilterRange();
+        const filtered = returDataFull.filter(d => tanggalDalamRange(d.tanggal, dari, sampai));
+        if (filtered.length === 0) {
+            list.innerHTML = '<div class="text-center text-black text-xs mt-10"><i class="fa-solid fa-calendar-xmark text-3xl mb-2 opacity-50"></i><br>Tidak ada data di rentang tanggal ini.</div>';
+            return;
+        }
+        const totalPages = Math.max(1, Math.ceil(filtered.length / RR_ONLY_PAGE_SIZE));
+        if (_rrOnlyPage > totalPages) _rrOnlyPage = totalPages;
+        if (_rrOnlyPage < 1) _rrOnlyPage = 1;
+        const pageItems = filtered.slice((_rrOnlyPage - 1) * RR_ONLY_PAGE_SIZE, _rrOnlyPage * RR_ONLY_PAGE_SIZE);
 
-        list.innerHTML = pageItems.map((d, idx) => {
+        list.innerHTML = pageItems.map((d) => {
             const totalQty = d.items.reduce((s, i) => s + i.qty, 0);
-            // REDESIGN: 1 baris flat per retur (mirip list BEBAN) — jauh lebih sedikit
-            // node DOM per kartu, tidak nambah proporsional ke jumlah item di dalamnya.
-            // Edit qty per item dipindah ke modal picker (langsung ke item kalau cuma 1).
             const itemsSummary = d.items.map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black whitespace-nowrap">${i.warna}/${i.ukuran}:<b class="text-black">${i.qty}</b></span>`).join('');
             return `<div class="bg-cardBg rounded-xl p-3 flex items-start justify-between gap-2 border-2 border-red-500/40">
                 <div class="flex-1 min-w-0">
@@ -8987,13 +9033,14 @@ function updateSSK(tab, rowId) {
                 </button>
             </div>`;
         }).join('') + _renderPaginationControls({
-            currentPage: _rrPage,
-            totalPages: rrTotalPages,
-            totalItems: returData.length,
+            currentPage: _rrOnlyPage,
+            totalPages: totalPages,
+            totalItems: filtered.length,
             itemLabel: 'data',
-            onPageChangeFn: 'rrGoToPage'
+            onPageChangeFn: 'rrOnlyGoToPage'
         });
     }
+    window.renderRiwayatReturTab = renderRiwayatReturTab;
 
     function bukaPilihItemRetur(riwayatId) {
         const record = appData.riwayatInput.find(d => d.id === riwayatId);
@@ -9155,10 +9202,13 @@ function updateSSK(tab, rowId) {
             _modal.close();
             renderRiwayatInput();
             renderStokDashboard();
-            // Refresh juga kolom RIWAYAT RETUR (tab Input Data mode retur) kalau lagi kebuka,
-            // karena baris ringkasan qty di situ dibangun dari innerHTML, bukan live-bind.
-            if (typeof renderRiwayatReturInline === 'function' && document.getElementById('riwayat-retur-list')) {
-                renderRiwayatReturInline();
+            // Refresh juga TAB RIWAYAT RETUR standalone (bottom nav) & TAB RIWAYAT INPUT
+            // standalone kalau lagi kebuka, sama alasannya seperti di atas.
+            if (typeof renderRiwayatReturTab === 'function' && document.getElementById('riwayat-retur-only-list')) {
+                renderRiwayatReturTab();
+            }
+            if (typeof renderRiwayatInputTab === 'function' && document.getElementById('riwayat-input-only-list')) {
+                renderRiwayatInputTab();
             }
             showToast("Qty diperbarui: " + qtyLama + " pcs ke " + qtyBaru + " pcs");
         } catch(e) {
@@ -9230,6 +9280,30 @@ function updateSSK(tab, rowId) {
     }
     window.setFilterTrxStatus = setFilterTrxStatus;
 
+    // Update angka jumlah transaksi kredit & jumlah pelunasan di bawah tombol KREDIT/LUNAS,
+    // mengikuti rentang tanggal filter yang sedang aktif (sama seperti yang dipakai render list).
+    function _updateStatusToggleCounts() {
+        const elKredit = document.getElementById('filter-trx-kredit-count');
+        const elLunas = document.getElementById('filter-trx-lunas-count');
+        if (!elKredit && !elLunas) return;
+
+        const { dari: fDari, sampai: fSampai } = getFilterRange();
+
+        if (elKredit) {
+            const jumlahKredit = (appData.riwayatTransaksi || []).filter(d =>
+                d.status !== 'lunas' && tanggalDalamRange(d.tanggal, fDari, fSampai)
+            ).length;
+            elKredit.textContent = jumlahKredit.toLocaleString('id-ID');
+        }
+
+        if (elLunas) {
+            const jumlahLunas = (appData.pelunasan || []).filter(p =>
+                tanggalDalamRange(p.tanggal, fDari, fSampai)
+            ).length;
+            elLunas.textContent = jumlahLunas.toLocaleString('id-ID');
+        }
+    }
+
     function _isTransaksiKorup(d) {
         const vendorKosong = !String(d.vendor || '').trim();
         const brandKosong = !String(d.brand || '').trim();
@@ -9242,6 +9316,7 @@ function updateSSK(tab, rowId) {
         const list = document.getElementById('riwayat-transaksi-list');
         selectedTrxIds.clear();
         updateCetakBar();
+        _updateStatusToggleCounts();
         if (appData.riwayatTransaksi.length === 0) {
             list.innerHTML = '<div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada data transaksi.</div>';
             return;
@@ -9351,24 +9426,25 @@ function updateSSK(tab, rowId) {
                 ? `<div id="vg-badge-${vendorKey}" class="vendor-notif-badge">${newCount > 99 ? '99+' : newCount}</div>`
                 : `<div id="vg-badge-${vendorKey}"></div>`;
 
-            return `<div class="mb-1" data-vendor-group="${vendor}">
-                <div class="brand-gradient-bg rounded-xl px-3 py-9 flex items-center justify-between shadow-[0_2px_12px_rgba(255,140,0,0.25)]">
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-truck-fast text-black text-base"></i>
-                        <div>
-                            <div class="flex items-center gap-1.5">
-                                <div class="text-[16px] font-black text-black uppercase tracking-wide leading-none">${vendorLabel}</div>
-                                ${tampilkanBadgeCicil ? '<span style="background:rgba(220,38,38,0.85);border:1px solid rgba(220,38,38,0.9);" class="text-[10px] font-black text-black px-1.5 py-0.5 rounded-md tracking-wide flex items-center gap-0.5 whitespace-nowrap"><i class="fa-solid fa-hand-holding-dollar text-[9px]"></i> CICIL</span>' : ''}
+            return `<div class="mb-2" data-vendor-group="${vendor}">
+                <div class="rp-vendor-card">
+                    <div class="rp-vendor-card-head">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <div class="rp-vendor-card-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                            <div class="min-w-0">
+                                <div class="flex items-center gap-1.5">
+                                    <div class="rp-vendor-card-name truncate">${vendorLabel}</div>
+                                    ${tampilkanBadgeCicil ? '<span style="background:rgba(220,38,38,0.85);" class="text-[9px] font-black text-white px-1.5 py-0.5 rounded-md tracking-wide flex items-center gap-0.5 whitespace-nowrap flex-shrink-0"><i class="fa-solid fa-hand-holding-dollar text-[8px]"></i> CICIL</span>' : ''}
+                                </div>
+                                <div class="rp-vendor-card-meta">${trxCount} transaksi • Rp ${totalNominalVendor.toLocaleString('id-ID')}</div>
                             </div>
-                            <div class="text-[12px] text-black/60 font-bold mt-0.5">${trxCount} transaksi • Rp ${totalNominalVendor.toLocaleString('id-ID')}</div>
                         </div>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        ${badgeHtml}
-                        <button id="pilih-semua-${vendorKey}" onclick="pilihSemuaVendor('${vendor}')"
-                            class="text-[11px] font-black px-2.5 py-1 rounded-lg bg-black/20 text-black hover:bg-black/30 transition-colors whitespace-nowrap">
-                            ✓ Semua
-                        </button>
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            ${badgeHtml}
+                            <button id="pilih-semua-${vendorKey}" onclick="pilihSemuaVendor('${vendor}')" class="rp-vendor-select-btn">
+                                ✓ Semua
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div id="vg-body-${vendorKey}" class="flex flex-col gap-2 mt-2">
@@ -10309,6 +10385,7 @@ function updateSSK(tab, rowId) {
 
     function renderPelunasanView() {
         selectedPelunasan.clear(); updatePelunasanActionBar();
+        _updateStatusToggleCounts();
         const list = document.getElementById('riwayat-pelunasan-list');
         if (!list) return;
         // PERBAIKAN: Ambil rentang tanggal dari filter
@@ -12084,13 +12161,19 @@ function updateSSK(tab, rowId) {
         _renderRiwayatInputOri();
     }, 80);
 
-    // Bungkus sekali lagi supaya daftar "Riwayat Retur" di tab Input Data (mode retur) ikut ter-refresh
+    // Bungkus sekali lagi supaya TAB RIWAYAT INPUT / TAB RIWAYAT RETUR standalone ikut ter-refresh
     const _renderRiwayatInputDebounced = renderRiwayatInput;
     renderRiwayatInput = function() {
         _renderRiwayatInputDebounced();
-        const tabInput = document.getElementById('tab-input');
-        if (tabInput && !tabInput.classList.contains('hidden') && typeof inputState !== 'undefined' && inputState.mode === 'retur') {
-            renderRiwayatReturInline();
+        // Ikut refresh TAB RIWAYAT INPUT / TAB RIWAYAT RETUR standalone (bottom nav)
+        // kalau lagi kebuka, biar datanya sinkron sama TAB RIWAYAT tanpa perlu pindah tab.
+        const tabRiwayatInput = document.getElementById('tab-riwayat-input');
+        if (tabRiwayatInput && !tabRiwayatInput.classList.contains('hidden') && typeof renderRiwayatInputTab === 'function') {
+            renderRiwayatInputTab();
+        }
+        const tabRiwayatRetur = document.getElementById('tab-riwayat-retur');
+        if (tabRiwayatRetur && !tabRiwayatRetur.classList.contains('hidden') && typeof renderRiwayatReturTab === 'function') {
+            renderRiwayatReturTab();
         }
     };
 
@@ -12146,6 +12229,7 @@ function updateSSK(tab, rowId) {
             }
         }, 45000);
 
+        setFilterPeriodeDefault();
         initApp();
     });
 
