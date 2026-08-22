@@ -4602,15 +4602,23 @@ async function fetchBayarSebagianData() {
     // Realtime, jadi tetap dapat notifikasi & data ter-update walau koneksi realtime diam-diam mati.
     const PESANAN_POLL_FALLBACK_MS = 20000;
     let _pesananPollTimer = null;
-    async function _pesananPollFallback() {
-        if (!sbClient || document.visibilityState !== 'visible') return;
+
+    // PERBAIKAN: logika "tarik ulang status pesanan dari server lalu bandingkan dengan yang
+    // sudah diketahui" ini awalnya cuma ada di dalam _pesananPollFallback(). Sekarang dipisah
+    // jadi fungsi sendiri supaya bisa dipanggil juga tepat setelah realtime reconnect (lihat
+    // _reconnectRealtimeSync) — sebelumnya, order yang masuk/dikonfirmasi PERSIS saat koneksi
+    // realtime lagi putus tidak pernah ke-refresh sampai polling 20 detik jalan (butuh tab
+    // visible) atau app di-reload penuh, karena reconnect handler cuma menyegarkan
+    // REALTIME_GROUP_HANDLERS (vendor/transaksi/dst) dan tidak menyentuh status pesanan ini.
+    async function _resyncPesananState() {
+        if (!sbClient) return;
         try {
             const { data, error } = await sbClient.from(PESANAN_TABLE).select('id, order_code, items, note, stage').eq('stage', 0);
             if (!error && data) {
                 const baru = data.filter(o => o.id != null && !_pesananProcessedIds.has(o.id));
                 pesananMenungguCount = data.length;
                 // Set order_code yang masih Menunggu dibangun ulang dari sumber kebenaran (server)
-                // tiap polling — otomatis benar walau ada event realtime yang kelewat sebelumnya.
+                // tiap kali fungsi ini jalan — otomatis benar walau ada event realtime yang kelewat.
                 _pesananMenungguCodes.clear();
                 data.forEach(o => { if (o.order_code) _pesananMenungguCodes.add(o.order_code); });
                 baru.forEach(o => {
@@ -4623,7 +4631,16 @@ async function fetchBayarSebagianData() {
                     _speakPesananAlarm(baru.length > 1 ? 'Ada ' + baru.length + ' pesanan masuk, harap segera dibuka' : 'Ada pesanan masuk, harap segera dibuka');
                 }
             }
-        } catch (e) { console.warn('[Poll fallback] Gagal cek pesanan:', e.message); }
+        } catch (e) { console.warn('[Resync pesanan] Gagal cek pesanan:', e.message); }
+        // Riwayat Transaksi bergantung pada _pesananMenungguCodes yang baru saja disegarkan
+        // di atas (lihat filter di renderRiwayatTransaksi) — render ulang supaya transaksi yang
+        // baru dikonfirmasi langsung nongol tanpa perlu nunggu grup 'transaksi' ikut berubah.
+        if (typeof _renderRiwayatTransaksiOri === 'function') _renderRiwayatTransaksiOri();
+    }
+
+    async function _pesananPollFallback() {
+        if (!sbClient || document.visibilityState !== 'visible') return;
+        await _resyncPesananState();
         // Sekalian refresh grup data lain (Riwayat Transaksi, dst) — jaring pengaman yang sama
         // untuk kasus event realtime transaksi/transaksi_item yang mungkin ikut kelewat.
         try {
@@ -4665,6 +4682,12 @@ async function fetchBayarSebagianData() {
         } catch (e) { /* abaikan, channel lama mungkin sudah tidak valid */ }
         _realtimeChannel = null;
         initRealtimeSync();
+        // PERBAIKAN: status pesanan (_pesananMenungguCodes/pesananMenungguCount) TIDAK ikut
+        // masuk REALTIME_GROUP_HANDLERS di bawah ini (dikelola terpisah lewat onPesananRealtimeChange),
+        // jadi kalau event INSERT/UPDATE produksi_orders kebetulan terjadi SAAT koneksi realtime
+        // putus, statusnya nyangkut/basi sampai polling 20 detik jalan atau app di-reload. Tarik
+        // ulang dari server di sini juga supaya konsisten dengan grup data lain setelah reconnect.
+        _resyncPesananState();
         // Setelah reconnect, tarik ulang semua data grup supaya perubahan yang mungkin
         // terlewat SAAT koneksi putus tetap ikut ter-update (bukan cuma yang terjadi setelahnya).
         _dirtyGroups = new Set(Object.keys(REALTIME_GROUP_HANDLERS));
