@@ -8296,8 +8296,12 @@ function updateSSK(tab, rowId) {
             if (!trxState.brandId) { showAlert('Pilih brand terlebih dahulu!', {type:'warning'}); return; }
             const modelsByBrand = masterData.model.filter(m => m.brandId == trxState.brandId);
             if (modelsByBrand.length === 0) { showAlert('Belum ada model untuk brand ini.', {type:'warning'}); return; }
+            // PERF FIX: hitungStokBrand() melakukan full scan ke SELURUH riwayatInput +
+            // riwayatTransaksi. Sebelumnya dipanggil di DALAM .filter() sehingga di-scan
+            // ulang sekali per model (mis. 15 model = 15x full scan) sebelum dropdown
+            // tampil, itu yang bikin loading. Sekarang dihitung SEKALI di luar loop.
+            const stokMap = hitungStokBrand(trxState.brandId);
             const modelsAdaStok = modelsByBrand.filter(m => {
-                const stokMap = hitungStokBrand(trxState.brandId);
                 return Object.entries(stokMap).some(([key, qty]) => key.startsWith(m.nama + '||') && qty > 0);
             });
             if (modelsAdaStok.length === 0) { showAlert('Tidak ada model dengan stok tersedia untuk brand ini.', {type:'warning'}); return; }
