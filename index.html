@@ -5998,6 +5998,7 @@ function updateSSK(tab, rowId) {
         inputRowCount = 0;
         inputState = { mode: 'masuk', brandId: null, brandNama: '', modelId: null, modelNama: '' };
         updateInputVariasiState();
+        _updateInputBrandModelLock();
     }
 
     function _clearTrxForm() {
@@ -7832,6 +7833,14 @@ function updateSSK(tab, rowId) {
     function bukaDropdownInput(type) {
         const triggerEl = document.getElementById('input-' + type + '-selector');
         if (_toggleDropdownIfSameTrigger(triggerEl)) return;
+        // FIX: begitu minimal 1 baris VARIASI ITEM sudah dibuat (baik otomatis
+        // setelah pilih MODEL, atau lewat "+ Tambah Variasi"), BRAND & MODEL
+        // dikunci — tidak boleh diganti lagi supaya semua baris variasi yang
+        // sudah/akan dibuat konsisten mengacu ke brand+model yang sama.
+        if ((type === 'brand' || type === 'model') && _isInputBrandModelLocked()) {
+            showAlert('Hapus dulu semua variasi untuk mengganti brand/model.', {type:'warning'});
+            return;
+        }
         if (type === 'brand') {
             if (masterData.brand.length === 0) { showAlert('Belum ada brand.', {type:'warning'}); return; }
             bukaGenericDropdown(masterData.brand.map(b => ({ label: b.nama, id: b.id })), triggerEl, (item) => {
@@ -7842,6 +7851,7 @@ function updateSSK(tab, rowId) {
                     document.getElementById('input-model-display').textContent = 'Pilih model';
                     document.getElementById('input-variasi-list').innerHTML = '';
                     inputRowCount = 0;
+                    _updateInputBrandModelLock();
                 } else {
                     inputState.brandId = item.id; inputState.brandNama = item.label;
                     document.getElementById('input-brand-display').textContent = item.label;
@@ -7987,6 +7997,25 @@ function updateSSK(tab, rowId) {
         _updateSimpanInputBtnState();
     }
 
+    // FIX: kunci selector BRAND & MODEL (tab INPUT DATA) begitu sudah ada
+    // minimal 1 baris VARIASI ITEM, supaya brand/model tidak bisa diganti
+    // lagi di tengah jalan saat baris ke-2/ke-3/dst sudah/sedang diisi.
+    // Otomatis kebuka lagi begitu semua baris variasi dihapus/form direset.
+    function _isInputBrandModelLocked() {
+        const list = document.getElementById('input-variasi-list');
+        return !!(list && list.children.length > 0);
+    }
+    function _updateInputBrandModelLock() {
+        const locked = _isInputBrandModelLocked();
+        ['input-brand-selector', 'input-model-selector'].forEach(selId => {
+            const el = document.getElementById(selId);
+            if (!el) return;
+            el.classList.toggle('opacity-40', locked);
+            el.classList.toggle('pointer-events-none', locked);
+            el.classList.toggle('cursor-not-allowed', locked);
+        });
+    }
+
     function tambahVariasiInput() {
         const listExisting = document.getElementById('input-variasi-list');
         if (listExisting && listExisting.children.length > 0) {
@@ -8052,6 +8081,7 @@ function updateSSK(tab, rowId) {
         updateInputVariasiState();
         refreshInputRowSummary(id);
         _renumberInputRows();
+        _updateInputBrandModelLock();
 
         // FIX: sama seperti kasus popup BRAND/MODEL di bukaGenericDropdown() —
         // di mode RETUR, banner "MODE RETUR AKTIF" + kolom "ALASAN RETUR" menambah
@@ -8182,6 +8212,7 @@ function updateSSK(tab, rowId) {
         }
         _renumberInputRows();
         _updateSimpanInputBtnState();
+        _updateInputBrandModelLock();
     }
     function _renumberInputRows() {
         const list = document.getElementById('input-variasi-list');
@@ -8456,10 +8487,21 @@ function updateSSK(tab, rowId) {
         _clearTrxDariModel();
     }
 
+    function _isTrxBrandModelLocked() {
+        const list = document.getElementById('trx-variasi-list');
+        return !!(list && list.children.length > 0);
+    }
+
     function bukaDropdownTrx(type) {
         const triggerEl = document.getElementById('trx-' + type + '-selector');
         if (_toggleDropdownIfSameTrigger(triggerEl)) return;
         tutupSemuaDropdownPopup();
+        // FIX: begitu minimal 1 baris VARIASI ITEM sudah dibuat, VENDOR/BRAND/
+        // MODEL dikunci — tidak boleh diganti lagi (lihat _updateTrxRowsLockState).
+        if (_isTrxBrandModelLocked()) {
+            showAlert('Hapus dulu semua item untuk mengganti vendor/brand/model.', {type:'warning'});
+            return;
+        }
         if (type === 'vendor') {
             if (masterData.vendor.length === 0) { showAlert('Belum ada vendor.', {type:'warning'}); return; }
             bukaGenericDropdown(masterData.vendor.map(v => ({ label: v.nama, id: v.id })), triggerEl, (item) => {
@@ -8520,6 +8562,19 @@ function updateSSK(tab, rowId) {
         const progressFrac = document.getElementById('trx-select-progress-frac');
         if (progressFill) progressFill.style.width = (progressCount / 3 * 100) + '%';
         if (progressFrac) progressFrac.textContent = progressCount + '/3';
+
+        // FIX: sama seperti tab INPUT DATA — begitu minimal 1 baris VARIASI
+        // ITEM sudah dibuat, VENDOR/BRAND/MODEL dikunci (tidak bisa diganti)
+        // supaya semua baris variasi tetap konsisten mengacu ke vendor+brand+
+        // model yang sama. Otomatis terbuka lagi begitu semua baris dihapus.
+        const vbmLocked = _isTrxBrandModelLocked();
+        ['trx-vendor-selector', 'trx-brand-selector', 'trx-model-selector'].forEach(selId => {
+            const el = document.getElementById(selId);
+            if (!el) return;
+            el.classList.toggle('opacity-40', vbmLocked);
+            el.classList.toggle('pointer-events-none', vbmLocked);
+            el.classList.toggle('cursor-not-allowed', vbmLocked);
+        });
 
 	        document.querySelectorAll('#trx-variasi-list > div').forEach(row => {
 	            const rowId = row.id.replace('trx-row-', '');
@@ -8934,6 +8989,7 @@ function updateSSK(tab, rowId) {
         }
         _renumberTrxRows();
         _updateSimpanTrxBtnState();
+        _updateTrxRowsLockState();
     }
 
     let _trxIsSaving = false; 
@@ -9133,6 +9189,7 @@ function updateSSK(tab, rowId) {
         inputRowCount = 0;
         inputState = { mode: 'masuk', brandId: null, brandNama: '', modelId: null, modelNama: '' };
         updateInputVariasiState();
+        _updateInputBrandModelLock();
     }
 
     function clearTransaksi() {
