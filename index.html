@@ -148,8 +148,7 @@
            touching #tab-stok (which already uses its own navy scheme) or any
            element still sitting on a white/light surface. */
         body:not(#tab-stok):not(#tab-stok *) .bg-darkBg,
-        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox {
+        body:not(#tab-stok):not(#tab-stok *) .bg-cardBg {
             color: #eaf1fb;
         }
         body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .text-black,
@@ -170,15 +169,6 @@
         body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .text-black\/60,
         body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .text-black\/70,
         body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .text-black\/80,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/30,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/40,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/45,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/50,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/55,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/60,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/70,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox .text-black\/80,
         body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.text-black,
         body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.text-black\/30,
         body:not(#tab-stok):not(#tab-stok *) .bg-darkBg.text-black\/40,
@@ -197,15 +187,6 @@
         body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.text-black\/60,
         body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.text-black\/70,
         body:not(#tab-stok):not(#tab-stok *) .bg-cardBg.text-black\/80,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/30,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/40,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/45,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/50,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/55,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/60,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/70,
-        body:not(#tab-stok):not(#tab-stok *) .bg-headerBox.text-black\/80,
         body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .placeholder-black,
         body:not(#tab-stok):not(#tab-stok *) .bg-darkBg .placeholder-black\/50,
         body:not(#tab-stok):not(#tab-stok *) .bg-cardBg .placeholder-black,
@@ -295,19 +276,6 @@
         .brand-bg { background-color: var(--brand-main) !important; }
         .brand-gradient-bg { background: var(--brand-gradient) !important; }
         .dashed-border-brand { border: 2px dashed #7699C9 !important; }
-        .stat-watermark {
-            position: absolute;
-            bottom: -14px;
-            right: -14px;
-            width: 58px;
-            height: auto;
-            fill: #000000;
-            opacity: 0.10;
-            pointer-events: none;
-            z-index: 0;
-            transform: rotate(-8deg);
-        }
-        .stat-watermark-light { opacity: 0.16; }
         /* Catatan: dulu ada rule border khusus mode gelap di sini, tapi fitur
            toggle mode gelap/terang sudah dihapus (body permanen class .bg-light,
            lihat .border-borderDark#ff8c00 di blok style paling atas). */
@@ -660,27 +628,6 @@
             border-color: #7699C9;
             background: linear-gradient(180deg, rgba(255,140,0,0.11), #133a66 72%);
         }
-        .input-row-index {
-            width: 24px; height: 24px;
-            border-radius: 8px;
-            background: rgba(255,140,0,0.12);
-            border: 1px solid rgba(118,153,201,0.35);
-            color: var(--brand-main);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 10px; font-weight: 900;
-            flex-shrink: 0;
-        }
-        .input-summary-pill {
-            height: 24px;
-            border-radius: 8px;
-            background: #06142B;
-            border: 1px solid #7699C9;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 0 8px;
-            white-space: nowrap;
-        }
         /* ---------- INLINE VARIASI: WARNA (horizontal selector) / SIZE (dropdown) / QTY / SSK ---------- */
         .input-variation-card.inline {
             flex-direction: column;
@@ -688,35 +635,17 @@
             gap: 6px;
             min-height: 0;
         }
-        .input-row-top {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .input-row-title {
-            font-size: 9px;
-            font-weight: 900;
-            letter-spacing: .06em;
-            color: #7699C9;
-        }
         .input-row-content-inline {
             display: flex;
             flex-direction: column;
             gap: 9px;
         }
         .input-inline-field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-        .input-inline-label-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
         .input-inline-label {
             font-size: 9px;
             font-weight: 900;
             letter-spacing: .06em;
             color: #7699C9;
-        }
-        .input-inline-value {
-            font-size: 11px;
-            font-weight: 900;
-            color: #eaf1fb;
-            max-width: 60%;
         }
         .input-warna-trigger-compact {
             display: flex;
@@ -821,7 +750,7 @@
         }
         .input-inline-row2.small .input-inline-label { font-size: 8px; }
         .input-inline-field.delete-col { align-items: center; }
-        .input-inline-select, .input-inline-qty, .input-inline-ssk {
+        .input-inline-qty, .input-inline-ssk {
             width: 100%;
             height: 34px;
             border-radius: 8px;
@@ -835,8 +764,6 @@
             padding: 0 2px;
             outline: none;
         }
-        .input-inline-select { text-align: left; padding: 0 4px; }
-        .input-inline-select option { background: #06142B; color: #ffffff; }
         .input-inline-ssk { color: rgba(234,241,251,.88); -webkit-text-fill-color: rgba(234,241,251,.88); }
         body.sheet-open-lock {
             overflow: hidden !important;
@@ -989,12 +916,6 @@
         }
 
         /* ===== SKELETON LOADING: TAB STOK ===== */
-        .skel-bar {
-            background: linear-gradient(90deg, rgba(120,70,10,0.07) 25%, rgba(255,140,0,0.18) 37%, rgba(120,70,10,0.07) 63%);
-            background-size: 400% 100%;
-            animation: skelShimmer 1.5s ease-in-out infinite;
-            border-radius: 6px;
-        }
         @keyframes skelShimmer {
             0% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
@@ -1056,8 +977,6 @@
             --input-section-bg: #0d2645;
             --input-choice-active: rgba(255,140,0,.18);
             --input-row-bg: #0a1c38;
-            --input-row-index-bg: rgba(255,140,0,.16);
-            --input-row-index-border: rgba(255,140,0,.4);
             --input-pill-bg: #0d2645;
 
             /* -- tema TAB TRANSAKSI: disamakan dengan TAB INPUT DATA (navy + oranye) -- */
@@ -1071,8 +990,6 @@
             --trx-section-bg: var(--input-section-bg);
             --trx-choice-active: var(--input-choice-active);
             --trx-row-bg: var(--input-row-bg);
-            --trx-row-index-bg: var(--input-row-index-bg);
-            --trx-row-index-border: var(--input-row-index-border);
             --trx-pill-bg: var(--input-pill-bg);
         }
 
@@ -1103,16 +1020,12 @@
 
         #tab-input .input-variation-card { background: var(--input-row-bg) !important; border-color: var(--input-border) !important; }
         #tab-input .input-variation-card.is-filled { background: linear-gradient(180deg, var(--input-choice-active), var(--input-row-bg) 72%) !important; }
-        #tab-input .input-row-index { background: var(--input-row-index-bg) !important; border-color: var(--input-row-index-border) !important; }
-        #tab-input .input-summary-pill { background: var(--input-pill-bg) !important; border-color: var(--input-border) !important; }
         #tab-input .input-warna-trigger-compact,
         #tab-input .input-ukuran-trigger-compact,
         #tab-input .input-ukuran-pill,
-        #tab-input .input-inline-select,
         #tab-input .input-inline-qty,
         #tab-input .input-inline-ssk { background: var(--input-bg) !important; border-color: var(--input-border) !important; }
-        #tab-input .input-inline-label,
-        #tab-input .input-row-title { color: var(--input-accent) !important; }
+        #tab-input .input-inline-label { color: var(--input-accent) !important; }
         #tab-input .input-warna-swatch.active,
         #tab-input .input-ukuran-pill.active { border-color: var(--input-accent) !important; box-shadow: 0 0 0 2px var(--input-choice-active) !important; }
         /* ---------- TAB INPUT DATA: teks putih di atas navy (konsep sama dengan TAB STOK) ---------- */
@@ -1169,19 +1082,10 @@
         .rp-inner-toggle-btn[data-active="true"] { color: #fff; background: #16a34a; border-color: #16a34a; }
 
         /* Kartu vendor: flat navy, bukan lagi banner oranye besar */
-        .rp-vendor-card { border-radius: 14px; background: #0A1C38; border: 1px solid #7699C9; overflow: hidden; }
-        .rp-vendor-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; }
-        .rp-vendor-card-name { font-size: 13px; font-weight: 900; color: #fff; letter-spacing: .01em; text-transform: uppercase; line-height: 1.15; }
-        .rp-vendor-card-meta { font-size: 10px; font-weight: 700; color: #8fa2bd; margin-top: 2px; }
-        .rp-vendor-card-icon { width: 34px; height: 34px; border-radius: 10px; background: rgba(255,140,0,.12); color: var(--brand-main); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
         .rp-vendor-select-btn { flex-shrink: 0; font-size: 10px; font-weight: 900; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,.06); color: #b7c3d6; }
 
         /* Kartu transaksi per item: lebih flat, status jadi dot bukan badge tebal */
-        .rp-trx-card { border-radius: 12px; background: #0A1C38; border: 1px solid rgba(118,153,201,.55); }
-        .rp-trx-card-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
-        .rp-trx-status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-        .rp-trx-status-dot.is-lunas { background: #22c55e; }
-        .rp-trx-status-dot.is-kredit { background: #ef4444; }
+
 
         /* ---------- TAB INPUT DATA: mode switcher ala kartu (ikon + judul + deskripsi + tombol panah) ---------- */
         .rp-input-mode-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; flex-shrink: 0; }
@@ -1189,7 +1093,7 @@
         .rp-input-mode-card:active { transform: scale(.97); }
         .rp-input-mode-card-icon { width: 38px; height: 38px; border-radius: 11px; border: 1.5px solid currentColor; color: currentColor; background: rgba(255,255,255,.03); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
         .rp-input-mode-card-title { font-size: 11.5px; font-weight: 900; color: #f4f7fb; letter-spacing: .01em; margin-top: 2px; line-height: 1.15; }
-        .rp-input-mode-card-sub { font-size: 9px; font-weight: 600; color: #8fa2bd; line-height: 1.4; }
+
         .rp-input-mode-card-arrow { position: absolute; right: 10px; bottom: 10px; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; background: rgba(255,255,255,.05); border: 1.5px solid currentColor; color: currentColor; }
         .rp-input-mode-orange { color: #ff8c00; }
         .rp-input-mode-blue { color: #2196f3; }
@@ -1209,8 +1113,6 @@
         .rp-input-mode-card-zone-right { clip-path: polygon(68% 0, 100% 0, 100% 100%, 78% 100%); }
 
         /* ---------- TAB RIWAYAT: saklar INPUT DATA/TRANSAKSI pakai kartu ala TAB INPUT DATA, 2 kolom ---------- */
-        .rp-riwayat-mode-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; flex-shrink: 0; }
-        .rp-riwayat-mode-grid .rp-input-mode-card { min-height: 92px; padding: 12px 10px 38px; }
 
         /* ---------- TAB INPUT DATA: panel PILIH PRODUK (step + progress + selector hex-icon) ---------- */
         .rp-input-select-panel { border: 1px solid var(--input-border); border-radius: 18px; background: rgba(8,27,57,.62); padding: 14px; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
@@ -1283,19 +1185,15 @@
 
         #tab-transaksi .input-variation-card { background: var(--trx-row-bg) !important; border-color: var(--trx-border) !important; }
         #tab-transaksi .input-variation-card.is-filled { background: linear-gradient(180deg, var(--trx-choice-active), var(--trx-row-bg) 72%) !important; }
-        #tab-transaksi .input-row-index { background: var(--trx-row-index-bg) !important; border-color: var(--trx-row-index-border) !important; }
-        #tab-transaksi .input-summary-pill { background: var(--trx-pill-bg) !important; border-color: var(--trx-border) !important; }
         /* FIX kontras: kotak QTY/SSK & label-nya di TAB TRANSAKSI kadang render dengan
            background putih bawaan browser (autofill/number-input default), bikin teks
            putih tidak kebaca. Paksa tetap gelap + kontras, sama seperti TAB INPUT DATA. */
         #tab-transaksi .input-warna-trigger-compact,
         #tab-transaksi .input-ukuran-trigger-compact,
         #tab-transaksi .input-ukuran-pill,
-        #tab-transaksi .input-inline-select,
         #tab-transaksi .input-inline-qty,
         #tab-transaksi .input-inline-ssk { background: var(--trx-bg) !important; border-color: var(--trx-border) !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
-        #tab-transaksi .input-inline-label,
-        #tab-transaksi .input-row-title { color: var(--trx-accent) !important; }
+        #tab-transaksi .input-inline-label { color: var(--trx-accent) !important; }
         #tab-transaksi .input-warna-swatch.active,
         #tab-transaksi .input-ukuran-pill.active { border-color: var(--trx-accent) !important; box-shadow: 0 0 0 2px var(--trx-choice-active) !important; }
         #trx-variasi-sheet .input-sheet-section { background: var(--trx-section-bg) !important; border-color: var(--trx-border) !important; }
@@ -1354,15 +1252,40 @@
 <style id="radja-stock-redesign">
 #tab-stok.rp-stock-screen{--rp-navy:#06142b;--rp-navy2:#0a1c38;--rp-panel:rgba(8,25,52,.78);--rp-border:rgba(118,153,201,.28);--rp-orange:#ff8c00;--rp-blue:#2196f3;--rp-text:#f5f7fb;--rp-muted:#aebbd0;background:#06142b!important;color:var(--rp-text)!important;min-height:100vh;min-height:100dvh;overflow:hidden;padding:0 16px 96px;position:relative;isolation:isolate}
 #tab-stok.rp-stock-screen::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_stock_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+/* ==================== BACKGROUND HALAMAN TAMBAHAN ====================
+   Pola identik dengan tab-stok/tab-input/tab-transaksi di atas — pseudo-element
+   ::before (gambar + gradient kiri-kanan biar teks tetap kebaca) dan ::after
+   (gradient atas-bawah, menggelapkan bagian bawah). File gambar TIDAK di-embed
+   di sini, taruh sejajar dengan index.html (folder yang sama):
+     tab-riwayat-input -> bck1.png
+     tab-riwayat-beban -> bck2.png
+     tab-riwayat-retur -> bck3.png
+     tab-riwayat       -> bck4.png
+     tab-laba          -> bck5.png
+     tab-master        -> bck6.png
+   Kalau nama/ekstensi filenya beda, tinggal ganti url('bckN.png') di bawah. */
+#tab-riwayat-input.tab-content,#tab-riwayat-beban.tab-content,#tab-riwayat-retur.tab-content,#tab-riwayat.tab-content,#tab-laba.tab-content,#tab-master.tab-content{background:#06142b!important;position:relative;isolation:isolate}
+#tab-riwayat-input::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('bck1.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+#tab-riwayat-input::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
+#tab-riwayat-beban::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('bck1.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+#tab-riwayat-beban::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
+#tab-riwayat-retur::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('bck1.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+#tab-riwayat-retur::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
+#tab-riwayat::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+#tab-riwayat::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
+#tab-laba::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_stock_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+#tab-laba::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
+#tab-master::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_stock_background_2.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+#tab-master::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
 #tab-stok.rp-stock-screen::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
 #tab-stok.rp-stock-screen .rp-stock-dashboard{min-height:100vh;min-height:100dvh;gap:0;position:relative}
 .rp-stock-hero{padding:0 0 18px;position:relative;z-index:30;}
 .rp-stock-header-col{display:flex;flex-direction:column;width:calc(100% + 32px);margin:0 -16px 0;background:#0a1c38;border:0;border-radius:0;padding:calc(14px + env(safe-area-inset-top)) 16px 14px;position:sticky;top:0;z-index:40}
-.rp-stock-hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.rp-stock-brand-lockup{display:flex;align-items:center;gap:9px;min-width:0}.rp-stock-logo-svg,.rp-stock-logo{width:150px;height:34px;object-fit:contain;flex-shrink:0}.rp-stock-brand-name{font-size:13px;line-height:.86;font-weight:900;letter-spacing:.02em;color:#fff}.rp-stock-brand-name span{font-size:8px;letter-spacing:.11em}.rp-stock-actions{display:flex;gap:8px}.rp-stock-icon-btn{width:38px;height:38px;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(7,25,52,.72);color:#eef3fb;display:flex;align-items:center;justify-content:center;position:relative;font-size:15px}.rp-stock-badge{position:absolute;right:-2px;top:-3px;min-width:15px;height:15px;border-radius:99px;background:var(--rp-orange);color:#111;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #06142b}
+.rp-stock-hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.rp-stock-brand-lockup{display:flex;align-items:center;gap:9px;min-width:0}.rp-stock-logo-svg,.rp-stock-logo{width:150px;height:34px;object-fit:contain;flex-shrink:0}.rp-stock-actions{display:flex;gap:8px}.rp-stock-icon-btn{width:38px;height:38px;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(7,25,52,.72);color:#eef3fb;display:flex;align-items:center;justify-content:center;position:relative;font-size:15px}.rp-stock-badge{position:absolute;right:-2px;top:-3px;min-width:15px;height:15px;border-radius:99px;background:var(--rp-orange);color:#111;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #06142b}
 .rp-stock-heading{padding:22px 4px 4px}.rp-stock-heading h1{font-size:30px;line-height:1;font-weight:900;letter-spacing:-.04em;margin:0;color:#fff}.rp-stock-heading h1 span{color:var(--rp-orange)}.rp-stock-heading p{margin:9px 0 0;color:#b7c3d6;font-size:11px;line-height:1.65;font-weight:600}
 .rp-stock-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:4px 0 12px}.rp-stock-kpi{min-width:0;min-height:92px;border:1px solid var(--rp-border);border-radius:18px;background:rgba(8,27,57,.72);backdrop-filter:blur(8px);padding:11px 8px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:7px;box-shadow:0 8px 22px rgba(0,0,0,.18)}.rp-kpi-icon{width:31px;height:31px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;flex-shrink:0}.rp-kpi-top{display:flex;align-items:center;gap:7px}.rp-kpi-orange .rp-kpi-icon{background:linear-gradient(145deg,#ffb11a,#ff7800)}.rp-kpi-blue .rp-kpi-icon{background:linear-gradient(145deg,#42a5ff,#1264da)}.rp-kpi-green .rp-kpi-icon{background:linear-gradient(145deg,#45d58b,#179c60)}.rp-kpi-label{font-size:9px;font-weight:700;color:#d6dfed;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rp-kpi-value{font-size:20px;font-weight:900;line-height:1;color:#fff;margin-top:3px}.rp-kpi-sub{font-size:7px;color:#9fb0c8;font-weight:600;margin-top:3px;white-space:nowrap}
-.rp-stock-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:10px;padding:0 2px}.rp-stock-section-head h2{font-size:15px;line-height:1;font-weight:900;color:#fff;margin:0;letter-spacing:.01em}.rp-stock-section-head p{font-size:8px;color:#7386a1;margin:5px 0 0;font-weight:600}.rp-stock-section-head button{border:0;background:transparent;color:var(--rp-orange);font-size:10px;font-weight:900;display:flex;align-items:center;gap:5px;white-space:nowrap}.rp-stock-sort-note{color:var(--rp-orange);font-size:9px;font-weight:900;display:flex;align-items:center;gap:5px;white-space:nowrap}
-.rp-brand-shell{min-height:0;background:transparent!important;border:0!important;overflow:visible!important}.rp-brand-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0!important;overflow:visible!important}.rp-brand-card{position:relative;min-height:188px;border:1px solid rgba(118,153,201,.28);border-radius:18px;background:linear-gradient(145deg,rgba(11,35,71,.92),rgba(6,20,43,.9));overflow:hidden;padding:14px 12px 12px;box-shadow:0 10px 26px rgba(0,0,0,.22);cursor:pointer;transition:transform .15s ease,border-color .15s ease}.rp-brand-card:active{transform:scale(.97);border-color:rgba(255,140,0,.6)}.rp-brand-accent{position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#ffb11a,#ff7900)}.rp-brand-card-negative .rp-brand-accent{background:#ef4444}.rp-brand-top{display:flex;align-items:center;justify-content:space-between}.rp-brand-logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#ffb21a,#ff7900);color:#101010;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 14px rgba(255,140,0,.2)}.rp-brand-arrow{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.055);color:#91a4bf;display:flex;align-items:center;justify-content:center;font-size:9px}.rp-brand-name{font-size:12px;font-weight:900;color:#f4f7fb;margin-top:12px;line-height:1.2;min-height:29px;display:flex;align-items:center}.rp-brand-total-label{font-size:8px;color:#2399ff;font-weight:800;margin-top:9px}.rp-brand-total{font-size:24px;color:#249cff;font-weight:900;line-height:1.05;margin-top:3px}.rp-brand-total.negative{color:#ef6666}.rp-brand-models{font-size:9px;color:#c1ccdc;font-weight:700;margin-top:4px}.rp-brand-divider{height:1px;background:rgba(143,168,203,.16);margin:12px 0 9px}.rp-brand-status{display:flex;align-items:center;gap:6px;color:#9eb0c7;font-size:8px;font-weight:700}.rp-brand-status i{font-size:10px}.rp-brand-loading{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;padding:22px;color:#7f92ad;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}.rp-brand-list>.skel-row{min-height:80px;grid-column:1/-1;background:rgba(8,26,53,.75)!important;border:1px solid rgba(100,135,183,.15)}
+.rp-stock-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:10px;padding:0 2px}.rp-stock-section-head h2{font-size:15px;line-height:1;font-weight:900;color:#fff;margin:0;letter-spacing:.01em}.rp-stock-section-head p{font-size:8px;color:#7386a1;margin:5px 0 0;font-weight:600}.rp-stock-section-head button{border:0;background:transparent;color:var(--rp-orange);font-size:10px;font-weight:900;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.rp-brand-shell{min-height:0;background:transparent!important;border:0!important;overflow:visible!important}.rp-brand-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0!important;overflow:visible!important}.rp-brand-card{position:relative;min-height:188px;border:1px solid rgba(118,153,201,.28);border-radius:18px;background:linear-gradient(145deg,rgba(11,35,71,.92),rgba(6,20,43,.9));overflow:hidden;padding:14px 12px 12px;box-shadow:0 10px 26px rgba(0,0,0,.22);cursor:pointer;transition:transform .15s ease,border-color .15s ease}.rp-brand-card:active{transform:scale(.97);border-color:rgba(255,140,0,.6)}.rp-brand-logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#ffb21a,#ff7900);color:#101010;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 14px rgba(255,140,0,.2)}.rp-brand-arrow{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.055);color:#91a4bf;display:flex;align-items:center;justify-content:center;font-size:9px}.rp-brand-name{font-size:12px;font-weight:900;color:#f4f7fb;margin-top:12px;line-height:1.2;min-height:29px;display:flex;align-items:center}.rp-brand-divider{height:1px;background:rgba(143,168,203,.16);margin:12px 0 9px}.rp-brand-loading{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;padding:22px;color:#7f92ad;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}.rp-brand-list>.skel-row{min-height:80px;grid-column:1/-1;background:rgba(8,26,53,.75)!important;border:1px solid rgba(100,135,183,.15)}
 .rp-brand-realtime-note{margin:16px 4px 4px;padding:0;background:none;border:0;color:#fff;font-size:30px;line-height:1;letter-spacing:-.04em;font-weight:900;text-align:left}
 .rp-brand-realtime-note span{display:block;color:var(--rp-orange)}
 .rp-stock-fab{position:fixed;right:18px;bottom:92px;width:72px;height:72px;border:0;border-radius:50%;background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:900;box-shadow:0 12px 28px rgba(255,115,0,.35);z-index:70}.rp-stock-fab i{font-size:21px;line-height:1}.rp-stock-fab span{font-size:8px}
@@ -1444,13 +1367,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 #tab-stok.rp-stock-screen .rp-brand-card-negative::after{
   background:linear-gradient(90deg,#ef4444,rgba(239,68,68,0));
 }
-#tab-stok.rp-stock-screen .rp-brand-accent{display:none}
-#tab-stok.rp-stock-screen .rp-brand-top{
-  height:34px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
 #tab-stok.rp-stock-screen .rp-brand-logo{
   width:32px;height:32px;
   border-radius:10px;
@@ -1475,39 +1391,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
   overflow:hidden;
   text-overflow:ellipsis;
 }
-#tab-stok.rp-stock-screen .rp-brand-total-label{display:none}
-#tab-stok.rp-stock-screen .rp-brand-total{
-  position:absolute;
-  right:11px;
-  bottom:28px;
-  margin:0;
-  font-size:19px;
-  line-height:1;
-  color:#28a1ff;
-}
-#tab-stok.rp-stock-screen .rp-brand-total.negative{color:#ef6666}
-#tab-stok.rp-stock-screen .rp-brand-models{
-  position:absolute;
-  left:12px;
-  bottom:10px;
-  margin:0;
-  font-size:7px;
-  color:#8295ae;
-  font-weight:700;
-}
 #tab-stok.rp-stock-screen .rp-brand-divider{display:none}
-#tab-stok.rp-stock-screen .rp-brand-status{
-  position:absolute;
-  right:11px;
-  bottom:10px;
-  display:flex;
-  gap:4px;
-  color:#8295ae;
-  font-size:7px;
-  font-weight:700;
-}
-#tab-stok.rp-stock-screen .rp-brand-status i{font-size:7px}
-#tab-stok.rp-stock-screen .rp-brand-status span{display:none}
 #tab-stok.rp-stock-screen .rp-brand-loading{padding:18px;font-size:8px}
 #tab-stok.rp-stock-screen .rp-brand-list>.skel-row{min-height:70px}
 
@@ -1557,9 +1441,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 #tab-stok.rp-stock-screen .rp-brand-card-negative::after{
   background:rgba(239,68,68,.65);
 }
-#tab-stok.rp-stock-screen .rp-brand-top{
-  height:28px;
-}
 #tab-stok.rp-stock-screen .rp-brand-logo{
   width:28px;height:28px;border-radius:8px;
   font-size:9px;background:#ff9417;box-shadow:none;
@@ -1573,24 +1454,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
   font-size:10px;line-height:14px;font-weight:900;
   max-width:88%;
 }
-#tab-stok.rp-stock-screen .rp-brand-total{
-  left:10px;right:auto;bottom:9px;
-  font-size:20px;line-height:1;font-weight:900;
-}
-#tab-stok.rp-stock-screen .rp-brand-models{
-  left:auto;right:10px;bottom:10px;
-  font-size:7px;color:#8295ae;
-}
-#tab-stok.rp-stock-screen .rp-brand-status{
-  left:auto;right:10px;top:47px;bottom:auto;
-  width:6px;height:6px;border-radius:50%;
-  display:block;background:#35d28b;font-size:0;
-}
-#tab-stok.rp-stock-screen .rp-brand-status i{display:none}
-#tab-stok.rp-stock-screen .rp-brand-card-negative .rp-brand-status{background:#ef4444}
-#tab-stok.rp-stock-screen .rp-brand-divider,
-#tab-stok.rp-stock-screen .rp-brand-total-label,
-#tab-stok.rp-stock-screen .rp-brand-accent{display:none}
+#tab-stok.rp-stock-screen .rp-brand-divider{display:none}
 @media (min-width:520px){
   #tab-stok.rp-stock-screen .rp-brand-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 }
@@ -1712,12 +1576,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
   color:#91a4bf!important;font-size:8px!important;
   margin-left:10px!important;
 }
-#tab-stok.rp-stock-screen .rp-brand-accent,
-#tab-stok.rp-stock-screen .rp-brand-total-label,
-#tab-stok.rp-stock-screen .rp-brand-total,
-#tab-stok.rp-stock-screen .rp-brand-models,
-#tab-stok.rp-stock-screen .rp-brand-divider,
-#tab-stok.rp-stock-screen .rp-brand-status{display:none!important}
+#tab-stok.rp-stock-screen .rp-brand-divider{display:none!important}
 #tab-stok.rp-stock-screen .rp-brand-card:active{transform:scale(.985)!important;border-color:rgba(255,140,0,.65)!important}
 /* Perkecil panjang (lebar) kartu STOK PER BRAND, tinggi (88px) tetap dipertahankan */
 #tab-stok.rp-stock-screen .rp-brand-list{
@@ -2159,7 +2018,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 }
 #tab-input.rp-input-screen .rp-input-mode-card-icon{width:34px;height:34px;border-radius:10px;font-size:13px;position:relative;z-index:1}
 #tab-input.rp-input-screen .rp-input-mode-card-title{font-size:10.5px;position:relative;z-index:1;max-width:52%;word-break:break-word}
-#tab-input.rp-input-screen .rp-input-mode-card-sub{font-size:8px;line-height:1.35;position:relative;z-index:1;max-width:52%;word-break:break-word}
 #tab-input.rp-input-screen .rp-input-mode-card-arrow{width:24px;height:24px;right:8px;bottom:8px;font-size:9px;z-index:1}
 
 /* ---------- BEBAN: main panel ---------- */
@@ -2371,8 +2229,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
   --input-shadow:rgba(120,10,10,.45)!important;
   --input-hover:rgba(239,68,68,.10)!important;
   --input-choice-active:rgba(239,68,68,.18)!important;
-  --input-row-index-bg:rgba(239,68,68,.16)!important;
-  --input-row-index-border:rgba(239,68,68,.4)!important;
 }
 #tab-input.rp-input-screen.rp-mode-retur-active .rp-input-add-btn{
   border-color:rgba(239,68,68,.55)!important;
@@ -3279,40 +3135,6 @@ END $$;</textarea>
                 </div>
             </div>
 
-            <!-- KEAMANAN PIN -->
-            <div class="flex flex-col">
-                <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('pin-collapse','pin-chevron')">
-                    <div class="flex items-center gap-2"><i class="fa-solid fa-lock brand-text"></i><h3 class="text-sm font-bold text-black tracking-wide">KEAMANAN PIN</h3></div>
-                    <i id="pin-chevron" class="fa-solid fa-chevron-down brand-text text-xs collapse-chevron"></i>
-                </div>
-                <div id="pin-collapse" class="collapse-body collapsed flex flex-col gap-4 px-4 pb-4">
-                    <!-- Status PIN -->
-                    <div class="bg-darkBg rounded-xl p-3 border-2 border-borderDark flex items-center justify-between">
-                        <div>
-                            <div class="text-[11px] font-black text-black flex items-center gap-1.5"><i class="fa-solid fa-shield-halved brand-text text-[10px]"></i> STATUS PIN</div>
-                            <div id="pin-status-label" class="text-[9px] text-black mt-0.5">Memuat...</div>
-                        </div>
-                        <div id="pin-status-badge" class="px-3 py-1 rounded-full text-[10px] font-black bg-green-500/15 border-2 border-green-500/30 text-green-400">AKTIF</div>
-                    </div>
-                    <!-- Ganti PIN Login -->
-                    <div class="bg-darkBg rounded-xl p-3 border-2 border-borderDark">
-                        <div class="text-[11px] font-black text-black flex items-center gap-1.5 mb-2"><i class="fa-solid fa-key brand-text text-[10px]"></i> GANTI PIN LOGIN</div>
-                        <p class="text-[9px] text-black mb-3 leading-relaxed">PIN ini wajib dimasukkan saat pertama kali membuka aplikasi. Digunakan oleh semua pengguna.</p>
-                        <button onclick="bukaGantiPin('login')" class="w-full py-2.5 brand-gradient-bg text-black font-black text-[11px] rounded-xl flex justify-center items-center gap-2">
-                            <i class="fa-solid fa-rotate"></i> GANTI PIN LOGIN
-                        </button>
-                    </div>
-                    <!-- Ganti PIN Master -->
-                    <div class="bg-darkBg rounded-xl p-3 border-2 border-borderDark">
-                        <div class="text-[11px] font-black text-black flex items-center gap-1.5 mb-2"><i class="fa-solid fa-shield-halved brand-text text-[10px]"></i> GANTI PIN MASTER (OWNER)</div>
-                        <p class="text-[9px] text-black mb-3 leading-relaxed">PIN ini hanya diketahui owner. Diperlukan saat mengakses TAB MASTER DATA.</p>
-                        <button onclick="bukaGantiPin('master')" class="w-full py-2.5 bg-darkBg border-2 border-[#7699C9] brand-text font-black text-[11px] rounded-xl flex justify-center items-center gap-2">
-                            <i class="fa-solid fa-rotate"></i> GANTI PIN MASTER
-                        </button>
-                    </div>
-                </div>
-            </div>
-
             <!-- SQL SCHEMA -->
             <div class="flex flex-col">
                 <div class="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onclick="toggleCollapse('sql-schema-collapse','sql-schema-chevron')">
@@ -3534,6 +3356,23 @@ END $$;</textarea>
 
     let sbClient = null;
 
+    // Escape teks bebas dari user (keterangan, nama brand/model/vendor/dst) sebelum
+    // ditulis ke innerHTML — mencegah stored XSS kalau user isi keterangan/nama dengan
+    // tag HTML/script (mis. <img src=x onerror=...>). Pakai di SEMUA titik yang
+    // menyisipkan field user ke template HTML, bukan cuma yang sudah ketahuan berisiko.
+    function escapeHtml(str) {
+        return String(str ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+    }
+    // Untuk nilai yang disisipkan ke dalam string JS berkutip-satu DI DALAM atribut HTML
+    // (mis. onclick="fn('${..}')") — escape dulu sebagai string JS (backslash & kutip satu),
+    // BARU escape sebagai atribut HTML. Urutan ini penting: browser men-decode entity HTML
+    // pada atribut SEBELUM menjalankannya sebagai JS, jadi hasil akhirnya tetap string JS
+    // yang valid & aman walau nilainya mengandung kutip satu/dua atau tag.
+    function jsAttr(str) {
+        return escapeHtml(String(str ?? '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"));
+    }
+
+
     // ==================== FETCH TANPA LIMIT (ANTI TERPOTONG) ====================
     // Supabase/PostgREST membatasi hasil query max 1000 baris per request secara default.
     // Kalau tabel (misal riwayat_input_item) sudah punya >1000 baris, select('*') biasa
@@ -3546,7 +3385,7 @@ END $$;</textarea>
     // untuk menjamin urutan yang konsisten saat melakukan paginasi, mencegah data
     // terlewat (race condition) jika ada data baru masuk saat proses fetch berjalan.
     async function fetchAllRows(table, selectStr = '*') {
-        const PAGE = 1000;
+        const PAGE = 5000; // diperbesar dari 1000 -> lebih sedikit round-trip ke server untuk tabel besar
         let from = 0;
         let all = [];
         while (true) {
@@ -3986,7 +3825,8 @@ END $$;`;
     // pop/shift/sort/reverse) pada array yang sedang dipakai — jadi tidak perlu diinvalidate
     // manual satu-satu di setiap tempat data riwayat diubah.
     let _stokItemCache = new Map();
-    function _invalidateStokItemCache() { _stokItemCache.clear(); }
+    let _stokDashboardCache = null; // cache hasil agregat dashboard stok (lihat _getStokDashboardAggregate di bawah)
+    function _invalidateStokItemCache() { _stokItemCache.clear(); _stokDashboardCache = null; }
     function _watchRiwayatArray(arr) {
         if (!arr || arr.__stokWatched) return arr;
         ['push', 'unshift', 'splice', 'pop', 'shift', 'sort', 'reverse'].forEach(method => {
@@ -4044,10 +3884,10 @@ END $$;`;
 
             setLoadingText('MEMUAT RIWAYAT TRANSAKSI...', 45);
             const [riDataRaw, riItemsData, trxDataRaw, trxItemsData] = await withTimeout(Promise.all([
-                fetchAllRows('riwayat_input', '*'),
-                fetchAllRows('riwayat_input_item', '*'),
-                fetchAllRows('transaksi', '*'),
-                fetchAllRows('transaksi_item', '*'),
+                fetchAllRows('riwayat_input', 'id,mode,brand,model,keterangan,tanggal,jam'),
+                fetchAllRows('riwayat_input_item', 'id,riwayat_input_id,warna,ukuran,qty'),
+                fetchAllRows('transaksi', 'id,vendor,brand,model,harga,harga_modal,status,order_code,tanggal,jam'),
+                fetchAllRows('transaksi_item', 'id,transaksi_id,warna,ukuran,qty,ssk'),
             ]), TIMEOUT_MS, 'Muat riwayat');
             // Urutan tampil: terbaru dulu
             const ri = { data: [...riDataRaw].sort((a, b) => b.id - a.id) };
@@ -4141,8 +3981,8 @@ END $$;`;
     }
     async function fetchRiwayatInputData() {
         const [riData, riItemsData] = await Promise.all([
-            fetchAllRows('riwayat_input', '*'),
-            fetchAllRows('riwayat_input_item', '*'),
+            fetchAllRows('riwayat_input', 'id,mode,brand,model,keterangan,tanggal,jam'),
+            fetchAllRows('riwayat_input_item', 'id,riwayat_input_id,warna,ukuran,qty'),
         ]);
         const riItemsMap = {};
         riItemsData.forEach(i => {
@@ -4163,8 +4003,8 @@ END $$;`;
     }
     async function fetchTransaksiData() {
         const [trxData, trxItemsData] = await Promise.all([
-            fetchAllRows('transaksi', '*'),
-            fetchAllRows('transaksi_item', '*'),
+            fetchAllRows('transaksi', 'id,vendor,brand,model,harga,harga_modal,status,order_code,tanggal,jam'),
+            fetchAllRows('transaksi_item', 'id,transaksi_id,warna,ukuran,qty,ssk'),
         ]);
         const trxItemsMap = {};
         trxItemsData.forEach(i => {
@@ -4772,18 +4612,28 @@ async function fetchBayarSebagianData() {
     let _realtimeReconnectTimer = null;
     let _realtimeReconnectDelay = 1000;
     let _realtimeReconnecting = false;
+    // Kapan tab terakhir di-background (dipakai visibilitychange di bawah untuk mengukur
+    // berapa lama tab tidak aktif — lihat REALTIME_QUICK_RESUME_MS).
+    let _backgroundedAt = null;
+    // Kalau tab cuma di-background SEBENTAR (di bawah nilai ini), koneksi WebSocket-nya
+    // hampir pasti masih hidup dan tidak ada perubahan berarti yang terlewat — jadi cukup
+    // pastikan channel-nya nyala lagi TANPA full-refetch semua grup (yang berat karena
+    // termasuk tabel riwayat_input & transaksi yang paling besar). Kalau di atas nilai ini,
+    // atau kalau memang genuine disconnect (CHANNEL_ERROR/TIMED_OUT/CLOSED/offline->online),
+    // tetap full-refetch semua grup seperti semula supaya tidak ada data yang kelewat.
+    const REALTIME_QUICK_RESUME_MS = 10000;
 
     function _scheduleRealtimeReconnect(reason) {
         if (_realtimeReconnectTimer) return; // sudah ada jadwal reconnect berjalan
         console.warn('⚠️ Realtime sync putus (' + reason + '), reconnect dalam ' + (_realtimeReconnectDelay / 1000) + 's...');
         _realtimeReconnectTimer = setTimeout(() => {
             _realtimeReconnectTimer = null;
-            _reconnectRealtimeSync();
+            _reconnectRealtimeSync(true); // channel benar-benar error/putus -> tidak tahu apa yang terlewat, full refresh
         }, _realtimeReconnectDelay);
         _realtimeReconnectDelay = Math.min(_realtimeReconnectDelay * 2, 30000);
     }
 
-    function _reconnectRealtimeSync() {
+    function _reconnectRealtimeSync(forceFull = true) {
         if (!sbClient || _realtimeReconnecting) return;
         _realtimeReconnecting = true; // tetap true sampai subscribe() baru selesai (lihat initRealtimeSync)
         try {
@@ -4793,6 +4643,7 @@ async function fetchBayarSebagianData() {
         } catch (e) { /* abaikan, channel lama mungkin sudah tidak valid */ }
         _realtimeChannel = null;
         initRealtimeSync();
+        if (!forceFull) return; // reconnect cepat (tab sempat background sebentar) — channel baru sudah cukup, skip full refetch semua grup
         // Setelah reconnect, tarik ulang semua data grup supaya perubahan yang mungkin
         // terlewat SAAT koneksi putus tetap ikut ter-update (bukan cuma yang terjadi setelahnya).
         _dirtyGroups = new Set(Object.keys(REALTIME_GROUP_HANDLERS));
@@ -4843,33 +4694,194 @@ async function fetchBayarSebagianData() {
     // atau saat browser mendeteksi internet baru nyambung lagi — dua situasi paling umum
     // yang bikin koneksi WebSocket Realtime putus diam-diam di HP.
     document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && sbClient) {
+        if (document.visibilityState === 'hidden') {
+            _backgroundedAt = Date.now();
+        } else if (document.visibilityState === 'visible' && sbClient) {
             _realtimeReconnectDelay = 1000; // tab aktif lagi = coba langsung, tanpa nunggu backoff lama
-            _reconnectRealtimeSync();
+            const elapsedMs = _backgroundedAt ? (Date.now() - _backgroundedAt) : Infinity;
+            _backgroundedAt = null;
+            _reconnectRealtimeSync(elapsedMs >= REALTIME_QUICK_RESUME_MS);
         }
     });
     window.addEventListener('online', () => {
         if (sbClient) {
             _realtimeReconnectDelay = 1000;
-            _reconnectRealtimeSync();
+            _reconnectRealtimeSync(true); // baru saja offline sungguhan -> durasinya tidak bisa dianggap aman, selalu full refresh
         }
     });
+
+    // ==================== PATCH INCREMENTAL (tanpa full refetch) ====================
+    // Grup ini datanya bisa "ditambal" langsung dari payload INSERT/UPDATE/DELETE yang
+    // dikirim Supabase Realtime, tanpa perlu tarik ulang SELURUH tabel dari server.
+    // Ini yang paling penting: riwayat & transaksi biasanya tabel PALING BESAR & PALING
+    // SERING berubah, jadi full-refetch di sini paling mahal (lihat catatan fetchAllRows).
+    // Grup lain (vendor/brand/model/dst) tetap full-fetch seperti semula karena datanya kecil.
+    const INCREMENTAL_PATCH_GROUPS = new Set(['riwayatInput', 'transaksi']);
+
+    // Terapkan satu batch payload realtime untuk 1 grup ke appData secara in-place.
+    // Return true kalau berhasil ditambal (tidak perlu fetch lagi), false kalau ada
+    // kondisi yang tidak aman ditambal (misal parent belum ada lokal) -> fallback ke
+    // full-fetch grup itu SAJA, supaya data tetap benar walau jarang kena kasus ini.
+    function _applyIncrementalPatch(group, payloads) {
+        try {
+            if (group === 'transaksi') return _patchTransaksiGroup(payloads);
+            if (group === 'riwayatInput') return _patchRiwayatInputGroup(payloads);
+        } catch (e) {
+            console.warn('Patch realtime gagal untuk grup', group, '- fallback full fetch:', e.message);
+        }
+        return false;
+    }
+
+    function _patchTransaksiGroup(payloads) {
+        const list = appData.riwayatTransaksi;
+        const parentPayloads = payloads.filter(p => p.table === 'transaksi');
+        const itemPayloads = payloads.filter(p => p.table === 'transaksi_item');
+
+        for (const p of parentPayloads) {
+            if (p.eventType === 'INSERT') {
+                const t = p.new;
+                if (!list.some(x => x.id === t.id)) {
+                    list.push({
+                        id: t.id, vendor: t.vendor, brand: t.brand, model: t.model,
+                        harga: t.harga || 0, hargaModal: t.harga_modal || 0, status: t.status,
+                        orderCode: t.order_code || null,
+                        tanggal: t.tanggal, jam: t.jam,
+                        items: []
+                    });
+                }
+            } else if (p.eventType === 'UPDATE') {
+                const t = p.new;
+                const idx = list.findIndex(x => x.id === t.id);
+                if (idx === -1) return false; // belum ada lokal, aman-nya fallback full fetch
+                list[idx] = {
+                    id: t.id, vendor: t.vendor, brand: t.brand, model: t.model,
+                    harga: t.harga || 0, hargaModal: t.harga_modal || 0, status: t.status,
+                    orderCode: t.order_code || null,
+                    tanggal: t.tanggal, jam: t.jam,
+                    items: list[idx].items // pertahankan item yang sudah ada
+                };
+            } else if (p.eventType === 'DELETE') {
+                const idx = list.findIndex(x => x.id === p.old.id);
+                if (idx !== -1) list.splice(idx, 1);
+            }
+        }
+
+        for (const p of itemPayloads) {
+            if (p.eventType === 'INSERT') {
+                const i = p.new;
+                const parent = list.find(x => x.id === i.transaksi_id);
+                if (!parent) return false; // parent belum ada lokal -> fallback full fetch
+                if (!parent.items.some(x => x.id === i.id)) {
+                    parent.items.push({ id: i.id, warna: i.warna, ukuran: i.ukuran, qty: i.qty, ssk: i.ssk });
+                }
+            } else if (p.eventType === 'UPDATE') {
+                const i = p.new;
+                const parent = list.find(x => x.id === i.transaksi_id);
+                if (!parent) return false;
+                const iidx = parent.items.findIndex(x => x.id === i.id);
+                const itemData = { id: i.id, warna: i.warna, ukuran: i.ukuran, qty: i.qty, ssk: i.ssk };
+                if (iidx === -1) parent.items.push(itemData); else parent.items[iidx] = itemData;
+            } else if (p.eventType === 'DELETE') {
+                // payload.old DELETE default cuma berisi primary key (id), tanpa transaksi_id,
+                // jadi cari & hapus item itu di SEMUA parent (bukan lookup by transaksi_id).
+                for (const parent of list) {
+                    const iidx = parent.items.findIndex(x => x.id === p.old.id);
+                    if (iidx !== -1) { parent.items.splice(iidx, 1); break; }
+                }
+            }
+        }
+
+        list.sort((a, b) => b.id - a.id); // urutan tampil tetap: terbaru dulu
+        return true;
+    }
+
+    function _patchRiwayatInputGroup(payloads) {
+        const list = appData.riwayatInput;
+        const parentPayloads = payloads.filter(p => p.table === 'riwayat_input');
+        const itemPayloads = payloads.filter(p => p.table === 'riwayat_input_item');
+
+        for (const p of parentPayloads) {
+            if (p.eventType === 'INSERT') {
+                const r = p.new;
+                if (!list.some(x => x.id === r.id)) {
+                    list.push({
+                        id: r.id, mode: r.mode, brand: r.brand, model: r.model,
+                        keterangan: r.keterangan || '',
+                        tanggal: r.tanggal, jam: r.jam,
+                        items: []
+                    });
+                }
+            } else if (p.eventType === 'UPDATE') {
+                const r = p.new;
+                const idx = list.findIndex(x => x.id === r.id);
+                if (idx === -1) return false;
+                list[idx] = {
+                    id: r.id, mode: r.mode, brand: r.brand, model: r.model,
+                    keterangan: r.keterangan || '',
+                    tanggal: r.tanggal, jam: r.jam,
+                    items: list[idx].items
+                };
+            } else if (p.eventType === 'DELETE') {
+                const idx = list.findIndex(x => x.id === p.old.id);
+                if (idx !== -1) list.splice(idx, 1);
+            }
+        }
+
+        for (const p of itemPayloads) {
+            if (p.eventType === 'INSERT') {
+                const i = p.new;
+                const parent = list.find(x => x.id === i.riwayat_input_id);
+                if (!parent) return false;
+                if (!parent.items.some(x => x.id === i.id)) {
+                    parent.items.push({ id: i.id, warna: i.warna, ukuran: i.ukuran, qty: i.qty });
+                }
+            } else if (p.eventType === 'UPDATE') {
+                const i = p.new;
+                const parent = list.find(x => x.id === i.riwayat_input_id);
+                if (!parent) return false;
+                const iidx = parent.items.findIndex(x => x.id === i.id);
+                const itemData = { id: i.id, warna: i.warna, ukuran: i.ukuran, qty: i.qty };
+                if (iidx === -1) parent.items.push(itemData); else parent.items[iidx] = itemData;
+            } else if (p.eventType === 'DELETE') {
+                for (const parent of list) {
+                    const iidx = parent.items.findIndex(x => x.id === p.old.id);
+                    if (iidx !== -1) { parent.items.splice(iidx, 1); break; }
+                }
+            }
+        }
+
+        list.sort((a, b) => b.id - a.id);
+        return true;
+    }
 
     // Debounce + kumpulkan grup yang "kotor" (berubah): kalau ada banyak perubahan sekaligus
     // (misal 1 transaksi + beberapa item), cukup fetch & render grup terkait sekali saja,
     // dan HANYA grup yang benar-benar berubah — bukan semua 11 tabel & semua tampilan.
     let _dirtyGroups = new Set();
+    let _realtimePayloadQueue = [];
     function onRealtimeChange(payload) {
         const group = REALTIME_TABLE_GROUP[payload.table];
         if (group) _dirtyGroups.add(group);
+        _realtimePayloadQueue.push(payload);
         clearTimeout(_realtimeDebounceTimer);
         _realtimeDebounceTimer = setTimeout(async () => {
             const groups = [..._dirtyGroups];
             _dirtyGroups.clear();
+            const payloads = _realtimePayloadQueue;
+            _realtimePayloadQueue = [];
             try {
-                // 1) Tarik ulang HANYA data grup yang berubah (paralel)
-                await Promise.all(groups.map(g => REALTIME_GROUP_HANDLERS[g]?.fetch?.()));
-                // 2) Render HANYA bagian UI yang datanya berubah
+                // 1) Grup yang bisa ditambal langsung dari payload (tanpa network fetch)
+                const patchedOk = new Set();
+                groups.forEach(g => {
+                    if (INCREMENTAL_PATCH_GROUPS.has(g)) {
+                        const groupPayloads = payloads.filter(p => REALTIME_TABLE_GROUP[p.table] === g);
+                        if (_applyIncrementalPatch(g, groupPayloads)) patchedOk.add(g);
+                    }
+                });
+                // 2) Sisanya (termasuk yang gagal ditambal & butuh fallback) tetap full-fetch
+                const groupsToFetch = groups.filter(g => !patchedOk.has(g));
+                await Promise.all(groupsToFetch.map(g => REALTIME_GROUP_HANDLERS[g]?.fetch?.()));
+                // 3) Render semua grup yang berubah (baik yang ditambal maupun yang di-fetch ulang)
                 groups.forEach(g => REALTIME_GROUP_HANDLERS[g]?.render?.());
             } catch (e) {
                 console.warn('Realtime refresh gagal:', e.message);
@@ -5062,6 +5074,42 @@ function hitungStokSemuaBrandDanModel() {
     });
 }
 
+// PERF: bungkus semua hitungan berat yang dipakai renderStokDashboard() (total masuk/retur/
+// keluar, jumlah model unik, stok per brand, rekap vendor) dalam SATU cache yang otomatis
+// kosong setiap kali appData.riwayatInput/appData.riwayatTransaksi benar-benar berubah
+// (lihat _invalidateStokItemCache & watcher-nya di atas). Jadi kalau renderStokDashboard()
+// dipanggil berkali-kali tanpa ada perubahan data riil di antaranya (misal cuma pindah tab
+// atau modal ditutup), tidak perlu scan ulang seluruh riwayat dari nol.
+function _getStokDashboardAggregate() {
+    if (_stokDashboardCache) return _stokDashboardCache;
+
+    let totalMasuk = 0, totalRetur = 0, totalKeluar = 0;
+    appData.riwayatInput.forEach(d => {
+        const qty = d.items.reduce((s, i) => s + i.qty, 0);
+        if (d.mode === 'retur') totalRetur += qty; else totalMasuk += qty;
+    });
+    appData.riwayatTransaksi.forEach(d => {
+        const qty = d.items.reduce((s, i) => s + i.qty, 0);
+        totalKeluar += qty;
+    });
+    const uniqueModels = new Set();
+    appData.riwayatInput.forEach(d => { if (d.model) uniqueModels.add(String(d.model).trim().toUpperCase()); });
+
+    const brandStokRaw = hitungStokSemuaBrandDanModel();
+
+    const vendorMap = {};
+    appData.riwayatTransaksi.forEach(d => {
+        if (!vendorMap[d.vendor]) vendorMap[d.vendor] = { lunasNominal: 0, credit: 0 };
+        const qty = d.items.reduce((s, i) => s + i.qty, 0);
+        const nominal = qty * (d.harga || 0);
+        if (d.status === 'lunas') vendorMap[d.vendor].lunasNominal += nominal;
+        else vendorMap[d.vendor].credit++;
+    });
+
+    _stokDashboardCache = { totalMasuk, totalRetur, totalKeluar, uniqueModelCount: uniqueModels.size, brandStokRaw, vendorMap };
+    return _stokDashboardCache;
+}
+
 // Hitung stok bersih = stok DB - qty yang sudah dipakai di baris lain dalam form transaksi aktif
 function hitungStokEfektifTrx(modelNama, warnaNama, ukuranNama, kecualiRowId, brandNama, brandId) {
     let stokDB = hitungStokItem(modelNama, warnaNama, ukuranNama, brandNama, brandId);
@@ -5224,22 +5272,13 @@ function updateSSK(tab, rowId) {
 }
 
     function renderStokDashboard() {
-        let totalMasuk = 0, totalRetur = 0, totalKeluar = 0;
-        appData.riwayatInput.forEach(d => {
-            const qty = d.items.reduce((s, i) => s + i.qty, 0);
-            if (d.mode === 'retur') totalRetur += qty; else totalMasuk += qty;
-        });
-        appData.riwayatTransaksi.forEach(d => {
-            const qty = d.items.reduce((s, i) => s + i.qty, 0);
-            totalKeluar += qty;
-        });
+        const _agg = _getStokDashboardAggregate();
+        const { totalMasuk, totalRetur, totalKeluar, uniqueModelCount, vendorMap } = _agg;
         const stokAktif = totalMasuk - totalRetur - totalKeluar;
-        const uniqueModels = new Set();
-        appData.riwayatInput.forEach(d => { if (d.model) uniqueModels.add(String(d.model).trim().toUpperCase()); });
         const elProduk = document.getElementById('kpi-total-produk');
         const elStok = document.getElementById('kpi-total-stok');
         const elKeluar = document.getElementById('kpi-total-brand');
-        if (elProduk) { elProduk.textContent = uniqueModels.size.toLocaleString('id-ID'); elProduk.classList.remove('kpi-skel'); }
+        if (elProduk) { elProduk.textContent = uniqueModelCount.toLocaleString('id-ID'); elProduk.classList.remove('kpi-skel'); }
         if (elStok) { elStok.textContent = Math.max(0, stokAktif).toLocaleString('id-ID'); elStok.classList.remove('kpi-skel'); }
         if (elKeluar) { elKeluar.textContent = totalKeluar.toLocaleString('id-ID'); elKeluar.classList.remove('kpi-skel'); }
 
@@ -5255,9 +5294,10 @@ function updateSSK(tab, rowId) {
                 if (realtimeNoteEl) realtimeNoteEl.style.display = '';
             } else {
                 // PERF: dulu masterData.brand.map(b => hitungStokBrand(b.id) + full scan
-                // riwayatInput lagi per brand) — sekarang 1x hitung untuk semua brand sekaligus,
-                // hasil angkanya identik (lihat catatan di hitungStokSemuaBrandDanModel()).
-                const brandStok = hitungStokSemuaBrandDanModel()
+                // riwayatInput lagi per brand) — sekarang 1x hitung untuk semua brand sekaligus
+                // DAN hasilnya di-cache (lihat _getStokDashboardAggregate), hasil angkanya
+                // identik (lihat catatan di hitungStokSemuaBrandDanModel()).
+                const brandStok = _agg.brandStokRaw
                 // Hanya tampilkan brand yang benar-benar masih memiliki stok.
                 // Brand dengan stok 0 otomatis disembunyikan dari grid.
                 .filter(b => b.total > 0)
@@ -5282,7 +5322,7 @@ function updateSSK(tab, rowId) {
                         const isNegative = b.total < 0;
                         const cardClass = isNegative ? 'rp-brand-card rp-brand-card-negative' : 'rp-brand-card';
                         const orderNo = String(idx + 1).padStart(2, '0');
-                        return `<div onclick="openBrandDetail(${b.id}, '${String(b.nama).replace(/'/g, "\\'")}')" class="${cardClass}">
+                        return `<div onclick="openBrandDetail(${b.id}, '${jsAttr(b.nama)}')" class="${cardClass}">
                             <div class="rp-brand-icon-wrap">
                                 <div class="rp-brand-logo" aria-hidden="true"><svg class="rp-brand-line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 3.5 L4 6.2 L2 9.3 L4.6 11 L6 9.4 V19.5 A1 1 0 0 0 7 20.5 H17 A1 1 0 0 0 18 19.5 V9.4 L19.4 11 L22 9.3 L20 6.2 L15.5 3.5 A3.2 3.2 0 0 1 8.5 3.5 Z"/></svg></div>
                             </div>
@@ -5290,7 +5330,7 @@ function updateSSK(tab, rowId) {
                             <div class="rp-brand-copy">
                                 <div class="rp-brand-title-row">
                                     <span class="rp-brand-order">${orderNo}</span>
-                                    <span class="rp-brand-name">${b.nama}</span>
+                                    <span class="rp-brand-name">${escapeHtml(b.nama)}</span>
                                 </div>
                                 <div class="rp-brand-meta"><span class="rp-brand-stok-count">${b.total.toLocaleString('id-ID')} STOK</span> <span>•</span> ${b.modelCount.toLocaleString('id-ID')} MODEL</div>
                             </div>
@@ -5308,14 +5348,7 @@ function updateSSK(tab, rowId) {
                 vendorListEl.innerHTML = '<div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada transaksi vendor.</div>';
                 if (kpiVendorAktifEl) { kpiVendorAktifEl.textContent = '0'; kpiVendorAktifEl.classList.remove('kpi-skel'); }
             } else {
-                const vendorMap = {};
-                appData.riwayatTransaksi.forEach(d => {
-                    if (!vendorMap[d.vendor]) vendorMap[d.vendor] = { lunasNominal: 0, credit: 0 };
-                    const qty = d.items.reduce((s, i) => s + i.qty, 0);
-                    const nominal = qty * (d.harga || 0);
-                    if (d.status === 'lunas') vendorMap[d.vendor].lunasNominal += nominal;
-                    else vendorMap[d.vendor].credit++;
-                });
+                const vendorMap = _agg.vendorMap;
                 if (kpiVendorAktifEl) { kpiVendorAktifEl.textContent = Object.keys(vendorMap).length.toLocaleString('id-ID'); kpiVendorAktifEl.classList.remove('kpi-skel'); }
                 vendorListEl.innerHTML = Object.entries(vendorMap).sort(([a], [b]) => a.localeCompare(b, 'id', { sensitivity: 'base' })).map(([nama, stat]) => `
                     <div class="rounded-xl overflow-hidden transition-all border-2 border-borderDark" style="background:#06142B;">
@@ -6027,7 +6060,6 @@ function updateSSK(tab, rowId) {
     // ==================== COLLAPSE (accordion) ====================
     const collapseGroups = {
         'pelunasan-setting-collapse': 'pelunasan-setting-chevron',
-        'pin-collapse': 'pin-chevron',
         'backup-collapse': 'backup-chevron'
     };
 
@@ -6193,7 +6225,7 @@ function updateSSK(tab, rowId) {
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-lg brand-bg flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-truck-fast text-black text-xs"></i></div>
                     <div>
-                        <div class="text-[11px] font-bold text-black uppercase">${v.nama}</div>
+                        <div class="text-[11px] font-bold text-black uppercase">${escapeHtml(v.nama)}</div>
                         ${v.telp ? `<div class="text-[9px] text-black"><i class="fa-solid fa-phone mr-1"></i>${v.telp}</div>` : ''}
                     </div>
                 </div>
@@ -6238,7 +6270,7 @@ function updateSSK(tab, rowId) {
             <div class="flex items-center justify-between px-4 py-2.5 hover:bg-darkBg transition-colors">
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-lg brand-bg flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-tag text-black text-xs"></i></div>
-                    <div class="text-[11px] font-bold text-black">${b.nama}</div>
+                    <div class="text-[11px] font-bold text-black">${escapeHtml(b.nama)}</div>
                 </div>
                 <button onclick="hapusBrand(${b.id})" class="w-7 h-7 rounded-lg bg-red-500/10 border-2 border-red-500/30 text-red-400 flex items-center justify-center hover:bg-red-500/20 transition-colors flex-shrink-0"><i class="fa-regular fa-trash-can text-[10px]"></i></button>
             </div>`).join('');
@@ -6247,7 +6279,7 @@ function updateSSK(tab, rowId) {
         const sel = document.getElementById('model-pilih-brand');
         if (!sel) return;
         const cur = sel.value;
-        sel.innerHTML = '<option value="">-- Pilih Brand --</option>' + masterData.brand.map(b => `<option value="${b.id}" ${b.id==cur?'selected':''}>${b.nama}</option>`).join('');
+        sel.innerHTML = '<option value="">-- Pilih Brand --</option>' + masterData.brand.map(b => `<option value="${b.id}" ${b.id==cur?'selected':''}>${escapeHtml(b.nama)}</option>`).join('');
     }
 
     // ==================== MASTER DATA: MODEL ====================
@@ -6374,7 +6406,7 @@ function updateSSK(tab, rowId) {
         if (!item || item.querySelector('.edit-nama-input')) return;
         const namaEl = item.querySelector('.model-nama-display-' + id);
         namaEl.innerHTML = `<div class="flex items-center gap-1">
-            <input type="text" value="${m.nama}" class="edit-nama-input bg-darkBg border-2 border-[#7699C9] rounded px-1.5 py-0.5 text-[10px] text-black w-36 focus:outline-none">
+            <input type="text" value="${escapeHtml(m.nama)}" class="edit-nama-input bg-darkBg border-2 border-[#7699C9] rounded px-1.5 py-0.5 text-[10px] text-black w-36 focus:outline-none">
             <button onclick="renameModel(${id})" class="w-5 h-5 bg-green-500/20 border-2 border-green-500/40 text-green-400 rounded flex items-center justify-center"><i class="fa-solid fa-check text-[8px]"></i></button>
             <button onclick="batalEditNama(${id})" class="w-5 h-5 bg-gray-500/20 border-2 border-gray-500/40 text-black rounded flex items-center justify-center"><i class="fa-solid fa-xmark text-[8px]"></i></button>
         </div>`;
@@ -6466,7 +6498,7 @@ function updateSSK(tab, rowId) {
                 ${items.map(m => `
                     <div class="flex items-center justify-between py-1.5 border-b-2 border-borderDark last:border-0" id="model-item-${m.id}">
                         <div>
-                            <div class="text-[11px] font-bold text-black model-nama-display-${m.id}">${m.nama}</div>
+                            <div class="text-[11px] font-bold text-black model-nama-display-${m.id}">${escapeHtml(m.nama)}</div>
                             <div class="text-[9px] text-black model-harga-display-${m.id}">Jual: Rp ${m.harga ? m.harga.toLocaleString('id-ID') : '—'}</div>
                             <div class="text-[9px] text-black/70 model-modal-display-${m.id}">Modal: Rp ${m.hargaModal ? m.hargaModal.toLocaleString('id-ID') : '—'}</div>
                         </div>
@@ -6561,7 +6593,7 @@ function updateSSK(tab, rowId) {
                 <div class="flex items-center gap-3 flex-1 min-w-0">
                     <div class="w-8 h-8 rounded-lg flex-shrink-0 border-2 border-borderDark shadow-inner warna-swatch-${w.id}" style="background:${w.kode}"></div>
                     <div class="flex-1 min-w-0">
-                        <div class="text-[11px] font-bold text-black capitalize">${w.nama}</div>
+                        <div class="text-[11px] font-bold text-black capitalize">${escapeHtml(w.nama)}</div>
                         <div class="text-[9px] text-black uppercase warna-kode-label-${w.id}">${w.kode}</div>
                     </div>
                 </div>
@@ -6677,8 +6709,8 @@ function updateSSK(tab, rowId) {
         list.innerHTML = sortUkuran(masterData.ukuran).map(u => `
             <div class="flex items-center justify-between px-4 py-2.5 hover:bg-darkBg transition-colors">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg brand-bg flex items-center justify-center flex-shrink-0"><span class="text-black text-[10px] font-black">${u.nama.length <= 3 ? u.nama : u.nama.slice(0,2)}</span></div>
-                    <div class="text-[11px] font-bold text-black">${u.nama}</div>
+                    <div class="w-8 h-8 rounded-lg brand-bg flex items-center justify-center flex-shrink-0"><span class="text-black text-[10px] font-black">${escapeHtml(u.nama.length <= 3 ? u.nama : u.nama.slice(0,2))}</span></div>
+                    <div class="text-[11px] font-bold text-black">${escapeHtml(u.nama)}</div>
                 </div>
                 <button onclick="hapusUkuran(${u.id})" class="w-7 h-7 rounded-lg bg-red-500/10 border-2 border-red-500/30 text-red-400 flex items-center justify-center hover:bg-red-500/20 transition-colors flex-shrink-0"><i class="fa-regular fa-trash-can text-[10px]"></i></button>
             </div>`).join('');
@@ -7059,7 +7091,7 @@ function updateSSK(tab, rowId) {
         const dataTampil = _bebanSumberFilterInput === 'semua' ? _cacheBebanInput : _cacheBebanInput.filter(r => (r.sumber || 'ADMIN') === _bebanSumberFilterInput);
 
         if (dataTampil.length === 0) {
-            listEl.innerHTML = '<div class="text-center text-[10px] text-black/50 font-bold py-6">Belum ada catatan biaya' + (_bebanSumberFilterInput === 'semua' ? ' minggu ini.' : ' dari ' + _bebanSumberFilterInput + ' minggu ini.') + '</div>';
+            listEl.innerHTML = '<div class="text-center text-[10px] text-white/50 font-bold py-6">Belum ada catatan biaya' + (_bebanSumberFilterInput === 'semua' ? ' minggu ini.' : ' dari ' + _bebanSumberFilterInput + ' minggu ini.') + '</div>';
             return;
         }
 
@@ -7941,7 +7973,7 @@ function updateSSK(tab, rowId) {
 	            const btn = document.createElement('button');
 	            btn.type = 'button';
 	            btn.className = 'input-choice-btn' + (!_isInputPlaceholder(warnaAktif) && warnaAktif.toUpperCase() === w.nama.toUpperCase() ? ' active' : '');
-	            btn.innerHTML = `<span class="w-5 h-5 rounded-md border-2 border-white/20 flex-shrink-0" style="background:${w.kode}"></span><span class="truncate">${w.nama}</span>`;
+	            btn.innerHTML = `<span class="w-5 h-5 rounded-md border-2 border-white/20 flex-shrink-0" style="background:${escapeHtml(w.kode)}"></span><span class="truncate">${escapeHtml(w.nama)}</span>`;
 	            btn.onclick = () => {
 	                if (!trxSheetDraft) trxSheetDraft = getTrxRowData(rowId);
 	                trxSheetDraft.warna = w.nama;
@@ -8043,7 +8075,7 @@ function updateSSK(tab, rowId) {
 	            <button type="button" onclick="openTrxVariasiSheet(${it.id})" class="flex items-center gap-2 px-2.5 py-2 rounded-lg bg-white border-2 border-borderDark text-left hover:border-[#7699C9] transition-colors">
 	                <div class="w-5 h-5 rounded-md flex-shrink-0 border border-black/10" style="background:${it.kode || '#888'}"></div>
 	                <div class="min-w-0 flex-1 flex items-center gap-1 text-[10px] font-bold text-black truncate">
-	                    <span class="truncate">${it.warna}</span><span class="text-black/40">/</span><span class="truncate">${it.ukuran}</span>
+	                    <span class="truncate">${escapeHtml(it.warna)}</span><span class="text-black/40">/</span><span class="truncate">${escapeHtml(it.ukuran)}</span>
 	                </div>
 	                <span class="text-[9px] font-black brand-text flex-shrink-0">${it.qty} pcs</span>
 	            </button>`).join('');
@@ -8895,8 +8927,8 @@ function updateSSK(tab, rowId) {
                 <div class="min-w-0 flex-1 flex items-start gap-2">
                     <div class="w-4 flex-shrink-0 pt-0.5 text-center text-[9px] font-black text-black">${noUrut}</div>
                     <div class="min-w-0 flex-1">
-                        <div class="text-[10px] font-bold text-black truncate leading-tight">${r.model}</div>
-                        <div class="text-[8px] text-black/70 leading-tight">${r.brand} • ${r.qty} pcs terjual</div>
+                        <div class="text-[10px] font-bold text-black truncate leading-tight">${escapeHtml(r.model)}</div>
+                        <div class="text-[8px] text-black/70 leading-tight">${escapeHtml(r.brand)} • ${r.qty} pcs terjual</div>
                     </div>
                 </div>
                 <div class="text-right flex-shrink-0 ml-2">
@@ -8989,13 +9021,13 @@ function updateSSK(tab, rowId) {
         const list = document.getElementById('riwayat-input-list');
         if (!list) return;
         if (appData.riwayatInput.length === 0) {
-            list.innerHTML = '<div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada data input.</div>';
+            list.innerHTML = '<div class="text-center text-white/60 text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada data input.</div>';
             return;
         }
         const { dari, sampai } = getFilterRange();
         const filtered = appData.riwayatInput.filter(d => tanggalDalamRange(d.tanggal, dari, sampai) && (_filterInputMode === 'semua' || d.mode === _filterInputMode));
         if (filtered.length === 0) {
-            list.innerHTML = '<div class="text-center text-black text-xs mt-10"><i class="fa-solid fa-calendar-xmark text-3xl mb-2 opacity-50"></i><br>Tidak ada data di rentang tanggal ini.</div>';
+            list.innerHTML = '<div class="text-center text-white/60 text-xs mt-10"><i class="fa-solid fa-calendar-xmark text-3xl mb-2 opacity-50"></i><br>Tidak ada data di rentang tanggal ini.</div>';
             return;
         }
         const inputKorup = filtered.filter(_isInputKorup);
@@ -9033,7 +9065,7 @@ function updateSSK(tab, rowId) {
             const uid = 'ri-' + (d.id || idx);
             const noUrut = riPageOffset + idx + 1;
             return `<div class="flex items-start gap-2">
-                <div class="w-6 flex-shrink-0 pt-2.5 text-center text-[10px] font-black text-black">${noUrut}</div>
+                <div class="w-6 flex-shrink-0 pt-2.5 text-center text-[10px] font-black text-white/60">${noUrut}</div>
                 <div id="card-${uid}" class="flex-1 min-w-0 bg-cardBg rounded-lg border-2 border-borderDark overflow-hidden">
                     <div class="text-center text-black text-xs py-3 opacity-60">Memuat...</div>
                 </div>
@@ -9064,7 +9096,7 @@ function updateSSK(tab, rowId) {
                     cardEl.innerHTML = `<div class="flex items-center justify-between px-3 py-2">
                         <div class="flex-1 min-w-0 mr-2">
                             <div class="flex items-center gap-1.5">
-                                <span class="text-[10px] font-black text-black truncate">${d.brand} — ${d.model}</span>
+                                <span class="text-[10px] font-black text-black truncate">${escapeHtml(d.brand)} — ${escapeHtml(d.model)}</span>
                                 <span class="text-[8px] font-black px-1.5 py-0.5 rounded border-2 flex-shrink-0 ${badgeClass}">${badgeText}</span>
                             </div>
                             <div class="flex items-center gap-2 mt-0.5">
@@ -9074,15 +9106,15 @@ function updateSSK(tab, rowId) {
                         </div>
                     </div>
                     <div id="${uid}-body" class="px-3 pb-2.5 border-t-2 border-borderDark">
-                        ${isRetur && d.keterangan && !/^ARSIP OTOMATIS/i.test(d.keterangan) ? `<div class="text-[9px] text-red-400 italic pt-1.5"><i class="fa-solid fa-comment-dots mr-1"></i>${d.keterangan}</div>` : ''}
+                        ${isRetur && d.keterangan && !/^ARSIP OTOMATIS/i.test(d.keterangan) ? `<div class="text-[9px] text-red-400 italic pt-1.5"><i class="fa-solid fa-comment-dots mr-1"></i>${escapeHtml(d.keterangan)}</div>` : ''}
                         <div class="grid grid-cols-2 gap-x-3 gap-y-2 pt-2">
                             ${d.items.map((i, iIdx) => `
                             <div class="flex items-center justify-between gap-1.5 py-1 border-b border-borderDark/40">
                                 <div class="min-w-0">
-                                    <div class="text-[8.5px] text-black/55 font-bold uppercase truncate">${i.warna} / ${i.ukuran}</div>
+                                    <div class="text-[8.5px] text-black/55 font-bold uppercase truncate">${escapeHtml(i.warna)} / ${escapeHtml(i.ukuran)}</div>
                                     <div class="text-[12px] text-black font-black leading-tight">${i.qty} <span class="text-[8px] font-bold text-black/45 normal-case">pcs</span></div>
                                 </div>
-                                <button onclick="event.stopPropagation();bukaModalEditInputItem(${d.id},'${d.model}','${i.warna}','${i.ukuran}',${i.qty},${iIdx},'${d.mode}')"
+                                <button onclick="event.stopPropagation();bukaModalEditInputItem(${d.id},'${jsAttr(d.model)}','${jsAttr(i.warna)}','${jsAttr(i.ukuran)}',${i.qty},${iIdx},'${jsAttr(d.mode)}')"
                                     class="w-6 h-6 rounded-full flex items-center justify-center text-black/35 hover:text-yellow-400 hover:bg-yellow-500/10 transition-colors flex-shrink-0"
                                     title="Edit qty">
                                     <i class="fa-solid fa-pen text-[8.5px]"></i>
@@ -9140,13 +9172,13 @@ function updateSSK(tab, rowId) {
         if (!list) return;
         const masukDataFull = appData.riwayatInput.filter(d => d.mode !== 'retur');
         if (masukDataFull.length === 0) {
-            list.innerHTML = '<div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada data input.</div>';
+            list.innerHTML = '<div class="text-center text-white/60 text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada data input.</div>';
             return;
         }
         const { dari, sampai } = getFilterRange();
         const filtered = masukDataFull.filter(d => tanggalDalamRange(d.tanggal, dari, sampai));
         if (filtered.length === 0) {
-            list.innerHTML = '<div class="text-center text-black text-xs mt-10"><i class="fa-solid fa-calendar-xmark text-3xl mb-2 opacity-50"></i><br>Tidak ada data di rentang tanggal ini.</div>';
+            list.innerHTML = '<div class="text-center text-white/60 text-xs mt-10"><i class="fa-solid fa-calendar-xmark text-3xl mb-2 opacity-50"></i><br>Tidak ada data di rentang tanggal ini.</div>';
             return;
         }
         const totalPages = Math.max(1, Math.ceil(filtered.length / RI_ONLY_PAGE_SIZE));
@@ -9156,11 +9188,11 @@ function updateSSK(tab, rowId) {
 
         list.innerHTML = pageItems.map((d) => {
             const totalQty = d.items.reduce((s, i) => s + i.qty, 0);
-            const itemsSummary = d.items.map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black whitespace-nowrap">${i.warna}/${i.ukuran}:<b class="text-black">${i.qty}</b></span>`).join('');
+            const itemsSummary = d.items.map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black whitespace-nowrap">${escapeHtml(i.warna)}/${escapeHtml(i.ukuran)}:<b class="text-black">${i.qty}</b></span>`).join('');
             return `<div class="bg-cardBg rounded-xl p-3 flex items-start justify-between gap-2 border-2 border-borderDark">
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between gap-1.5">
-                        <span class="text-[10px] font-black text-black truncate min-w-0 flex-1">${d.brand} — ${d.model}</span>
+                        <span class="text-[10px] font-black text-black truncate min-w-0 flex-1">${escapeHtml(d.brand)} — ${escapeHtml(d.model)}</span>
                         <span class="text-[8px] font-black px-1.5 py-0.5 rounded border-2 flex-shrink-0 bg-green-500/20 text-green-400 border-green-500/40">↓ MASUK</span>
                     </div>
                     <div class="text-[9px] text-black/60 font-bold mt-0.5">${d.tanggal} ${d.jam} <span class="brand-text">• ${totalQty} pcs</span></div>
@@ -9200,13 +9232,13 @@ function updateSSK(tab, rowId) {
         if (!list) return;
         const returDataFull = appData.riwayatInput.filter(d => d.mode === 'retur');
         if (returDataFull.length === 0) {
-            list.innerHTML = '<div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada data retur.</div>';
+            list.innerHTML = '<div class="text-center text-white/60 text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada data retur.</div>';
             return;
         }
         const { dari, sampai } = getFilterRange();
         const filtered = returDataFull.filter(d => tanggalDalamRange(d.tanggal, dari, sampai));
         if (filtered.length === 0) {
-            list.innerHTML = '<div class="text-center text-black text-xs mt-10"><i class="fa-solid fa-calendar-xmark text-3xl mb-2 opacity-50"></i><br>Tidak ada data di rentang tanggal ini.</div>';
+            list.innerHTML = '<div class="text-center text-white/60 text-xs mt-10"><i class="fa-solid fa-calendar-xmark text-3xl mb-2 opacity-50"></i><br>Tidak ada data di rentang tanggal ini.</div>';
             return;
         }
         const totalPages = Math.max(1, Math.ceil(filtered.length / RR_ONLY_PAGE_SIZE));
@@ -9216,14 +9248,14 @@ function updateSSK(tab, rowId) {
 
         list.innerHTML = pageItems.map((d) => {
             const totalQty = d.items.reduce((s, i) => s + i.qty, 0);
-            const itemsSummary = d.items.map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black whitespace-nowrap">${i.warna}/${i.ukuran}:<b class="text-black">${i.qty}</b></span>`).join('');
+            const itemsSummary = d.items.map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black whitespace-nowrap">${escapeHtml(i.warna)}/${escapeHtml(i.ukuran)}:<b class="text-black">${i.qty}</b></span>`).join('');
             return `<div class="bg-cardBg rounded-xl p-3 flex items-start justify-between gap-2 border-2 border-red-500/40">
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-1.5">
-                        <span class="text-[10px] font-black text-black truncate">${d.brand} — ${d.model}</span>
+                        <span class="text-[10px] font-black text-black truncate">${escapeHtml(d.brand)} — ${escapeHtml(d.model)}</span>
                         <span class="text-[8px] font-black px-1.5 py-0.5 rounded border-2 flex-shrink-0 bg-red-500/20 text-red-400 border-red-500/40">↩ RETUR</span>
                     </div>
-                    <div class="text-[9px] text-black/60 font-bold mt-0.5">${d.tanggal} ${d.jam} <span class="text-red-400">• ${totalQty} pcs</span>${d.keterangan && !/^ARSIP OTOMATIS/i.test(d.keterangan) ? ' • ' + d.keterangan : ''}</div>
+                    <div class="text-[9px] text-black/60 font-bold mt-0.5">${d.tanggal} ${d.jam} <span class="text-red-400">• ${totalQty} pcs</span>${d.keterangan && !/^ARSIP OTOMATIS/i.test(d.keterangan) ? ' • ' + escapeHtml(d.keterangan) : ''}</div>
                     <div class="flex gap-1 flex-wrap mt-1">${itemsSummary}</div>
                 </div>
                 <button onclick="bukaPilihItemRetur(${d.id})" class="w-7 h-7 rounded-lg bg-yellow-500/10 hover:bg-yellow-500/20 border-2 border-yellow-500/30 flex items-center justify-center text-yellow-400 text-[10px] flex-shrink-0" title="Edit qty">
@@ -9261,14 +9293,14 @@ function updateSSK(tab, rowId) {
 
             const info = document.createElement('div');
             info.style.cssText = 'font-size:11px;color:#000;margin-bottom:10px;';
-            info.innerHTML = `<b style="color:#fff;">${record.brand} — ${record.model}</b><br><span style="font-size:9px;color:#9fb0c8;">Pilih item yang mau diedit qty-nya:</span>`;
+            info.innerHTML = `<b style="color:#fff;">${escapeHtml(record.brand)} — ${escapeHtml(record.model)}</b><br><span style="font-size:9px;color:#9fb0c8;">Pilih item yang mau diedit qty-nya:</span>`;
 
             const listWrap = document.createElement('div');
             listWrap.style.cssText = 'display:flex;flex-direction:column;gap:6px;max-height:260px;overflow-y:auto;';
             record.items.forEach((i, iIdx) => {
                 const row = document.createElement('div');
                 row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:8px;background:#06142B;border:1px solid rgba(118,153,201,.34);border-radius:8px;padding:8px 10px;cursor:pointer;';
-                row.innerHTML = `<span style="font-size:11px;color:#eaf1fb;">${i.warna} / ${i.ukuran}: <b>${i.qty}</b> pcs</span><i class="fa-solid fa-chevron-right" style="font-size:9px;color:#7699C9;"></i>`;
+                row.innerHTML = `<span style="font-size:11px;color:#eaf1fb;">${escapeHtml(i.warna)} / ${escapeHtml(i.ukuran)}: <b>${i.qty}</b> pcs</span><i class="fa-solid fa-chevron-right" style="font-size:9px;color:#7699C9;"></i>`;
                 row.onclick = () => {
                     _modal.close();
                     setTimeout(() => bukaModalEditInputItem(record.id, record.model, i.warna, i.ukuran, i.qty, iIdx, record.mode), 200);
@@ -9450,13 +9482,13 @@ function updateSSK(tab, rowId) {
         const nextDisabled = currentPage >= totalPages;
         return `
             <div class="flex items-center justify-between gap-2 mt-3 mb-2 px-1">
-                <div class="text-[9px] text-black/60 font-bold whitespace-nowrap">${totalItems} ${itemLabel}</div>
+                <div class="text-[9px] text-white/60 font-bold whitespace-nowrap">${totalItems} ${itemLabel}</div>
                 <div class="flex items-center gap-1.5">
                     <button onclick="${onPageChangeFn}(${currentPage - 1})" ${prevDisabled ? 'disabled' : ''}
                         class="w-7 h-7 rounded-lg border-2 border-borderDark flex items-center justify-center text-[10px] ${prevDisabled ? 'opacity-30 cursor-not-allowed' : 'bg-cardBg active:scale-95'} transition-transform">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
-                    <div class="text-[10px] font-black text-black px-2 whitespace-nowrap">${currentPage} / ${totalPages}</div>
+                    <div class="text-[10px] font-black text-white px-2 whitespace-nowrap">${currentPage} / ${totalPages}</div>
                     <button onclick="${onPageChangeFn}(${currentPage + 1})" ${nextDisabled ? 'disabled' : ''}
                         class="w-7 h-7 rounded-lg border-2 border-borderDark flex items-center justify-center text-[10px] ${nextDisabled ? 'opacity-30 cursor-not-allowed' : 'bg-cardBg active:scale-95'} transition-transform">
                         <i class="fa-solid fa-chevron-right"></i>
@@ -9689,7 +9721,7 @@ function updateSSK(tab, rowId) {
                                             <span class="text-[12px] font-black text-orange-400 uppercase tracking-wide truncate"><i class="fa-solid fa-truck-fast text-[10px] mr-1"></i>${vendorLabel}</span>
                                             <span class="px-2 py-0.5 ${statusClass} border-2 text-[9px] font-black rounded tracking-wider flex-shrink-0">${isLunas ? 'LUNAS' : 'CREDIT'}</span>
                                         </div>
-                                        <div class="text-[11px] font-black text-white uppercase truncate mt-0.5">${d.brand || '-'} / ${d.model || '-'}</div>
+                                        <div class="text-[11px] font-black text-white uppercase truncate mt-0.5">${escapeHtml(d.brand) || '-'} / ${escapeHtml(d.model) || '-'}</div>
                                         <div class="flex items-center gap-2 mt-0.5 flex-wrap">
                                             <span class="text-[10px] brand-text font-black">${totalQty} pcs${totalNominal > 0 ? ' • Rp ' + totalNominal.toLocaleString('id-ID') : ''}</span>
                                             <span class="text-[9px] text-white/60 ml-auto">${d.tanggal || ''} ${d.jam || ''}</span>
@@ -9697,7 +9729,7 @@ function updateSSK(tab, rowId) {
                                     </div>
                                 </div>
                                 <div id="${uid}-body" class="px-3 pb-2.5 border-t" style="border-color:${accentBorder};">
-                                    <div class="flex flex-wrap gap-1 pt-2">${items.map((i, iIdx) => `<span class="text-[10px] bg-darkBg border rounded px-2 py-0.5 text-white/80" style="border-color:${accentBorder};">${i.warna} / ${i.ukuran}: <span class="text-white font-bold">${i.qty}</span></span>`).join('')}</div>
+                                    <div class="flex flex-wrap gap-1 pt-2">${items.map((i, iIdx) => `<span class="text-[10px] bg-darkBg border rounded px-2 py-0.5 text-white/80" style="border-color:${accentBorder};">${escapeHtml(i.warna)} / ${escapeHtml(i.ukuran)}: <span class="text-white font-bold">${i.qty}</span></span>`).join('')}</div>
                                     ${isLunas ? (
                                         hasBayarSebagianTrx
                                         ? '<p class="text-[9px] text-white/60 text-center mt-2"><i class="fa-solid fa-lock text-[8px] mr-1"></i>Transaksi LUNAS tidak dapat diedit atau dihapus. Vendor ini pakai Bayar Sebagian &mdash; kembalikan lewat tab BAYAR SEBAGIAN.</p>'
@@ -9916,7 +9948,7 @@ function updateSSK(tab, rowId) {
             grandTotal += totalNominal;
             grandTotalQty += row.qty;
             return `<tr style="border-bottom:1px solid #e5e7eb;">
-                <td style="padding:8px 12px;font-weight:700;color:#111;text-align:center;">${row.model}</td>
+                <td style="padding:8px 12px;font-weight:700;color:#111;text-align:center;">${escapeHtml(row.model)}</td>
                 <td style="padding:8px 12px;text-align:center;color:#111;">${row.qty}</td>
                 <td style="padding:8px 12px;text-align:center;color:#111;">Rp ${row.harga.toLocaleString('id-ID')}</td>
                 <td style="padding:8px 12px;text-align:center;font-weight:900;color:#111;">Rp ${totalNominal.toLocaleString('id-ID')}</td>
@@ -10107,9 +10139,9 @@ function updateSSK(tab, rowId) {
             const ukuranCells = ukuranSet.map(u => `<td class="td-qty" style="color:#111;">${r.ukuran[u] || '-'}</td>`).join('');
             const rowTotal = ukuranSet.reduce((s, u) => s + (r.ukuran[u] || 0), 0);
             return `<tr style="border-bottom:1px solid #e5e7eb;">
-                <td class="td-muted">${r.brand}</td>
-                <td class="td-model">${r.model}</td>
-                <td class="td-data">${r.warna}</td>
+                <td class="td-muted">${escapeHtml(r.brand)}</td>
+                <td class="td-model">${escapeHtml(r.model)}</td>
+                <td class="td-data">${escapeHtml(r.warna)}</td>
                 ${ukuranCells}
                 <td class="td-qty" style="color:#111;font-weight:900;">${rowTotal} pcs</td>
             </tr>`;
@@ -10206,7 +10238,7 @@ function updateSSK(tab, rowId) {
         const infoHeader = document.createElement('div');
         infoHeader.style.cssText = 'margin-bottom:10px;';
         infoHeader.innerHTML = `<div style="color:#ff8c00;font-size:11px;font-weight:900;letter-spacing:1px;margin-bottom:4px;">EDIT QTY TRANSAKSI</div>
-            <div style="color:#000;font-size:10px;">${trx.brand} / ${trx.model}</div>
+            <div style="color:#000;font-size:10px;">${escapeHtml(trx.brand)} / ${escapeHtml(trx.model)}</div>
             <div style="color:#000;font-size:9px;margin-top:2px;">⚠️ Qty diubah → stok otomatis menyesuaikan</div>`;
 
         const itemsContainer = document.createElement('div');
@@ -10219,7 +10251,7 @@ function updateSSK(tab, rowId) {
             row.style.cssText = 'background:#06142B;border:1px solid #7699C9;border-radius:8px;padding:8px 10px;';
             row.innerHTML = `
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                    <span style="color:#eaf1fb;font-size:11px;font-weight:700;">${item.warna} / ${item.ukuran}</span>
+                    <span style="color:#eaf1fb;font-size:11px;font-weight:700;">${escapeHtml(item.warna)} / ${escapeHtml(item.ukuran)}</span>
                     <span style="color:#eaf1fb;font-size:9px;">Stok tersedia: <b style="color:#d97706;">${stokSaatIni}</b> + qty ini <b style="color:#16a34a;">${item.qty}</b> = maks <b style="color:#eaf1fb;">${maxQty}</b></span>
                 </div>
                 <div style="display:flex;align-items:center;justify-content:center;gap:8px;">
@@ -10439,7 +10471,7 @@ function updateSSK(tab, rowId) {
 
             const header = document.createElement('div');
             header.style.cssText = 'margin-bottom:10px;';
-            header.innerHTML = `<div style="color:#1a1d24;font-size:11px;font-weight:700;margin-bottom:2px;">${trx.brand} / ${trx.model}</div>
+            header.innerHTML = `<div style="color:#1a1d24;font-size:11px;font-weight:700;margin-bottom:2px;">${escapeHtml(trx.brand)} / ${escapeHtml(trx.model)}</div>
                 <div style="color:#000;font-size:9px;">Pilih item yang akan dihapus (qty kembali ke stok)</div>`;
             msgEl.appendChild(header);
 
@@ -10464,7 +10496,7 @@ function updateSSK(tab, rowId) {
                             _updateHapusTrxBtn();
                         ">
                     <div style="flex:1;">
-                        <div id="hapus-item-label-${idx}" style="color:#fff;font-size:11px;font-weight:700;">${item.warna} / ${item.ukuran}</div>
+                        <div id="hapus-item-label-${idx}" style="color:#fff;font-size:11px;font-weight:700;">${escapeHtml(item.warna)} / ${escapeHtml(item.ukuran)}</div>
                         <div id="hapus-item-sub-${idx}" style="color:#e5b8b8;font-size:10px;">${item.qty} pcs → kembali ke stok</div>
                     </div>
                     <span style="color:#f87171;font-size:10px;font-weight:900;">${item.qty} pcs</span>`;
@@ -10669,7 +10701,7 @@ function updateSSK(tab, rowId) {
                         <div class="flex items-center justify-between py-1 border-b-2 border-borderDark last:border-0">
                             <div>
                                 <div class="text-[9px] font-bold text-green-400">+Rp ${p.jumlah.toLocaleString('id-ID')}</div>
-                                <div class="text-[8px] text-black">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + p.keterangan : ''}</div>
+                                <div class="text-[8px] text-black">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + escapeHtml(p.keterangan) : ''}</div>
                             </div>
                             ${!hasBayarSebagian ? `<button onclick="hapusPelunasan(${p.id}, ${t.id})" class="w-6 h-6 rounded bg-red-500/10 border-2 border-red-500/30 text-red-400 flex items-center justify-center hover:bg-red-500/20 transition-colors flex-shrink-0"><i class="fa-solid fa-xmark text-[8px]"></i></button>` : ''}
                         </div>`).join('')
@@ -10685,7 +10717,7 @@ function updateSSK(tab, rowId) {
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-2">
                                     <span class="px-2 py-0.5 ${isLunas ? 'bg-green-600 text-white border-green-700' : 'bg-red-600 text-white border-red-700'} border-2 text-[9px] font-black rounded tracking-wider flex-shrink-0">${isLunas ? 'LUNAS' : 'CREDIT'}</span>
-                                    <span class="text-[11px] font-black text-white uppercase truncate">${t.brand} / ${t.model}</span>
+                                    <span class="text-[11px] font-black text-white uppercase truncate">${escapeHtml(t.brand)} / ${escapeHtml(t.model)}</span>
                                 </div>
                                 <div class="flex items-center gap-2 mt-0.5 flex-wrap">
                                     <span class="text-[10px] brand-text font-black">${totalQty} pcs • Rp ${totalNominal.toLocaleString('id-ID')}</span>
@@ -10702,17 +10734,17 @@ function updateSSK(tab, rowId) {
                     <div class="flex items-center gap-2.5 px-3 py-2.5 select-none">
                         <div class="flex flex-col items-center gap-1 flex-shrink-0">
                             <span class="text-[9px] font-black text-white/70">${noUrut}</span>
-                            <div onclick="event.stopPropagation();togglePilihPelunasan(${t.id}, ${sisaHutang}, '${t.vendor}', '${uid}')"
+                            <div onclick="event.stopPropagation();togglePilihPelunasan(${t.id}, ${sisaHutang}, '${jsAttr(t.vendor)}', '${jsAttr(uid)}')"
                                  id="chk-${uid}"
                                  class="w-5 h-5 rounded border-4 border-gray-600 flex items-center justify-center cursor-pointer transition-all">
                             </div>
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center justify-between gap-2">
-                                <span class="text-[11px] font-black text-white uppercase truncate">${t.brand} / ${t.model}</span>
+                                <span class="text-[11px] font-black text-white uppercase truncate">${escapeHtml(t.brand)} / ${escapeHtml(t.model)}</span>
                                 <div class="flex items-center gap-1.5 flex-shrink-0">
                                     ${!isLunas ? `<span class="px-2 py-0.5 bg-red-600 text-white border-red-700 border-2 text-[9px] font-black rounded tracking-wider">CREDIT</span>
-                                    <button onclick="event.stopPropagation();simpanPelunasan(${t.id}, '${t.vendor}', ${sisaHutang}, this)" class="px-2 py-0.5 bg-green-500 hover:bg-green-400 text-black border-green-700 border-2 text-[9px] font-black rounded tracking-wider transition-colors">LUNAS</button>`
+                                    <button onclick="event.stopPropagation();simpanPelunasan(${t.id}, '${jsAttr(t.vendor)}', ${sisaHutang}, this)" class="px-2 py-0.5 bg-green-500 hover:bg-green-400 text-black border-green-700 border-2 text-[9px] font-black rounded tracking-wider transition-colors">LUNAS</button>`
                                     : `<span class="px-2 py-0.5 bg-green-600 text-white border-green-700 border-2 text-[9px] font-black rounded tracking-wider">LUNAS</span>`}
                                 </div>
                             </div>
@@ -10796,7 +10828,7 @@ function updateSSK(tab, rowId) {
                             ${riwayatBayarSebagianVendorTampil.length > 0 ? riwayatBayarSebagianVendorTampil.map(p => `
                             <div class="py-1.5 border-b-2 border-borderDark last:border-0">
                                 <div class="text-[9px] font-bold text-green-400">+Rp ${p.jumlah.toLocaleString('id-ID')}</div>
-                                <div class="text-[8px] text-black">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + p.keterangan : ''}</div>
+                                <div class="text-[8px] text-black">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + escapeHtml(p.keterangan) : ''}</div>
                             </div>`).join('') : '<div class="text-[9px] text-black italic py-1">Belum ada pembayaran dalam 2 minggu terakhir.</div>'}
                             ${riwayatBayarSebagianVendor.length > riwayatBayarSebagianVendorTampil.length ? `<div class="text-[8px] text-black italic pt-1.5 flex items-center gap-1"><i class="fa-solid fa-clock-rotate-left"></i> Pembayaran lebih lama disembunyikan (>2 minggu). Aktifkan "Tampilkan Semua Riwayat" di Tab Master untuk melihatnya.</div>` : ''}
                         </div>
@@ -11243,7 +11275,7 @@ function updateSSK(tab, rowId) {
             // Riwayat item
             const itemsHtml = items.map(p => `
                 <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1);">
-                    <div style="font-family:Montserrat,sans-serif;font-size:9px;color:rgba(255,255,255,0.6);">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + p.keterangan : ''}</div>
+                    <div style="font-family:Montserrat,sans-serif;font-size:9px;color:rgba(255,255,255,0.6);">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + escapeHtml(p.keterangan) : ''}</div>
                     <div style="font-family:Montserrat,sans-serif;font-weight:900;font-size:11px;color:#22c55e;">+Rp ${p.jumlah.toLocaleString('id-ID')}</div>
                 </div>`).join('');
 
@@ -11600,7 +11632,7 @@ function updateSSK(tab, rowId) {
             const nominal = qty * t.harga;
             grandTotal += nominal; grandQty += qty;
             return `<tr style="border-bottom:1px solid #e5e7eb;">
-                <td style="padding:7px 10px;font-weight:700;color:#111;text-align:left;">${t.brand} / ${t.model}</td>
+                <td style="padding:7px 10px;font-weight:700;color:#111;text-align:left;">${escapeHtml(t.brand)} / ${escapeHtml(t.model)}</td>
                 <td style="padding:7px 10px;text-align:center;color:#111;">${qty}</td>
                 <td style="padding:7px 10px;text-align:center;color:#111;">Rp ${t.harga.toLocaleString('id-ID')}</td>
                 <td style="padding:7px 10px;text-align:center;font-weight:900;color:#111;">Rp ${nominal.toLocaleString('id-ID')}</td>
@@ -11611,7 +11643,7 @@ function updateSSK(tab, rowId) {
         const riwayatRows = riwayatBayar.map(p => `
             <tr style="border-bottom:1px solid #e5e7eb;">
                 <td style="padding:6px 10px;color:#111;">${p.tanggal} ${p.jam}</td>
-                <td style="padding:6px 10px;color:#000;">${p.keterangan || 'BAYAR SEBAGIAN'}</td>
+                <td style="padding:6px 10px;color:#000;">${escapeHtml(p.keterangan) || 'BAYAR SEBAGIAN'}</td>
                 <td style="padding:6px 10px;text-align:right;font-weight:900;color:#16a34a;">Rp ${p.jumlah.toLocaleString('id-ID')}</td>
             </tr>`).join('');
 
