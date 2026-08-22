@@ -2006,20 +2006,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
     min-height: 0;
 }
 
-/* Fixed BACK tetap kecil dan konsisten dengan tema */
-#tab-stok.rp-stock-screen #action-bar-brand-detail{
-    bottom: 84px !important;
-    padding: 8px 10px 9px !important;
-    border-top-width: 1px !important;
-}
-
-#tab-stok.rp-stock-screen #action-bar-brand-detail button{
-    min-height: 42px !important;
-    padding: 0 !important;
-    border-radius: 12px !important;
-    font-size: 11px !important;
-}
-
 /* HP sangat kecil */
 @media (max-width:380px){
     #tab-stok.rp-stock-screen .rp-stock-compact-head,
@@ -2348,9 +2334,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
             <button id="print-btn-cetak" onclick="printOverlayCetak()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 10px;background:#2563eb;border:none;border-radius:14px;color:#fff;font-family:Montserrat,sans-serif;font-weight:900;font-size:14px;cursor:pointer;white-space:nowrap;">
                 <i class="fa-solid fa-print"></i> CETAK
             </button>
-            <button onclick="closePrintOverlay()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 10px;background:#ffffff;border:2px solid #1a1d24;border-radius:14px;color:#1a1d24;font-family:Montserrat,sans-serif;font-weight:900;font-size:14px;cursor:pointer;white-space:nowrap;">
-                <i class="fa-solid fa-arrow-left"></i> BACK
-            </button>
         </div>
     </div>
     <style>
@@ -2544,12 +2527,9 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                 <div id="stok-filter-panel" class="hidden flex-wrap gap-1.5 mt-1"></div>
                 <div id="stok-filter-label" class="hidden items-center gap-1.5 mt-0.5"><span class="text-[9px] text-black">Filter:</span><span id="stok-filter-label-text" class="text-[9px] font-bold brand-text"></span></div>
                 <div id="stok-detail-items" class="flex flex-col gap-1"></div>
-                <div style="height:calc(96px + env(safe-area-inset-bottom));flex-shrink:0;"></div>
+                <div style="height:calc(90px + env(safe-area-inset-bottom));flex-shrink:0;"></div>
             </div>
 
-            <div id="action-bar-brand-detail" class="hidden fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#06142B]/95 backdrop-blur-md border-t-4 border-[#7699C9] flex gap-2">
-                <button onclick="closeBrandDetail()" class="flex-1 font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:rgba(10,28,56,.9);border:2px solid var(--rp-orange);color:var(--rp-orange);"><i class="fa-solid fa-chevron-left"></i> BACK</button>
-            </div>
             <!-- Backdrop solid khusus zona navbar (0-84px dari bawah): #bottom-navbar sengaja
                  transparan (lihat CSS #bottom-navbar) supaya jadi navbar melayang di tab lain,
                  tapi itu bikin baris list stok yang lagi discroll tembus terlihat lewat celah
@@ -2557,6 +2537,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                  di bawah ikon navbar (z-45 lebih kecil dari navbar z-50) tapi di atas konten (z-20). -->
             <div id="stok-detail-nav-backdrop" class="hidden fixed bottom-0 left-0 right-0 bg-[#06142B]" style="z-index:45;height:calc(84px + env(safe-area-inset-bottom));"></div>
         </div>
+
 
         <!-- TAB INPUT DATA -->
         <div id="tab-input" class="tab-content hidden flex-col p-4 gap-4 relative z-10 rp-input-screen" >
@@ -2777,9 +2758,8 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                         </div>
                     </div>
                 </div>
-                <div class="input-sheet-actions grid grid-cols-[0.85fr_1.15fr] gap-2">
-                    <button type="button" onclick="closeTrxVariasiSheet()" class="py-3.5 rounded-xl bg-darkBg border-2 border-borderDark text-black font-black text-[12px] active:scale-95 transition-transform"><i class="fa-solid fa-arrow-left mr-1"></i> BACK</button>
-                    <button type="button" id="sheet-save-btn" onclick="saveTrxVariasiSheet()" class="py-3.5 rounded-xl brand-gradient-bg text-black font-black text-[12px] active:scale-95 transition-transform"><i class="fa-solid fa-check mr-1"></i> TAMBAHKAN</button>
+                <div class="input-sheet-actions">
+                    <button type="button" id="sheet-save-btn" onclick="saveTrxVariasiSheet()" class="w-full py-3.5 rounded-xl brand-gradient-bg text-black font-black text-[12px] active:scale-95 transition-transform"><i class="fa-solid fa-check mr-1"></i> TAMBAHKAN</button>
                 </div>
             </div>
         </div>
@@ -5568,8 +5548,6 @@ function updateSSK(tab, rowId) {
         detailView.classList.remove('hidden');
         detailView.classList.add('flex', 'slide-in');
         detailView.classList.remove('slide-out');
-        const backBar = document.getElementById('action-bar-brand-detail');
-        if (backBar) { backBar.classList.remove('hidden'); backBar.style.display = 'flex'; }
         const navBackdrop = document.getElementById('stok-detail-nav-backdrop');
         if (navBackdrop) { navBackdrop.classList.remove('hidden'); navBackdrop.style.display = 'block'; }
         window.scrollTo(0, 0);
@@ -5578,8 +5556,6 @@ function updateSSK(tab, rowId) {
     function closeBrandDetail() {
         const dashboard = document.getElementById('stok-dashboard-view');
         const detailView = document.getElementById('stok-detail-view');
-        const backBar = document.getElementById('action-bar-brand-detail');
-        if (backBar) { backBar.classList.add('hidden'); backBar.style.display = 'none'; }
         const navBackdrop = document.getElementById('stok-detail-nav-backdrop');
         if (navBackdrop) { navBackdrop.classList.add('hidden'); navBackdrop.style.display = 'none'; }
         if (!detailView.classList.contains('hidden')) {
@@ -6634,7 +6610,6 @@ function updateSSK(tab, rowId) {
             [
                 document.getElementById('action-bar-input'),
                 document.getElementById('action-bar-transaksi'),
-                document.getElementById('action-bar-brand-detail'),
                 document.getElementById('sticky-total-bar'),
                 document.querySelector('.fixed.bottom-0')
             ].forEach(el => {
