@@ -3016,7 +3016,7 @@ END $$;</textarea>
             <div id="riwayat-pelunasan-list" class="hidden flex-col gap-3"></div>
             <div id="riwayat-bayar-sebagian-list" class="hidden flex-col gap-3"></div>
             <div id="sticky-total-bar" class="hidden fixed left-0 items-center gap-3" style="bottom:14px;z-index:100;padding-left:26px;">
-                    <button onclick="batalPilihSemua()" class="rp-cetak-circle-btn rp-cetak-circle-btn-orange" style="position:relative;" title="Batal">
+                    <button onclick="batalPilihSemua()" id="btn-batal-terpilih" class="rp-cetak-circle-btn rp-cetak-circle-btn-orange opacity-40 cursor-not-allowed pointer-events-none" style="position:relative;" title="Batal">
                         <i class="fa-solid fa-xmark"></i>
                         <span id="selected-trx-count-badge" class="hidden vendor-notif-badge" style="position:absolute;top:-2px;right:-2px;"><span id="selected-trx-count">0</span></span>
                     </button>
@@ -10225,9 +10225,22 @@ function updateSSK(tab, rowId) {
         const countEl = document.getElementById('selected-trx-count');
         const badgeEl = document.getElementById('selected-trx-count-badge');
         const btnCetak = document.getElementById('btn-cetak-terpilih');
+        const btnBatal = document.getElementById('btn-batal-terpilih');
         if (countEl) countEl.textContent = count;
         if (badgeEl) badgeEl.classList.toggle('hidden', count === 0);
         const btnTagihan = document.getElementById('btn-tagihan-terpilih');
+
+        // Tombol Batal (X): sama seperti Tagihan/Surat Jalan, tidak ada gunanya
+        // (no-op) selama belum ada transaksi yang dicentang, jadi nonaktifkan juga.
+        if (btnBatal) {
+            if (count > 0) {
+                btnBatal.classList.remove('opacity-40','cursor-not-allowed','pointer-events-none');
+                btnBatal.classList.add('cursor-pointer');
+            } else {
+                btnBatal.classList.add('opacity-40','cursor-not-allowed','pointer-events-none');
+                btnBatal.classList.remove('cursor-pointer');
+            }
+        }
 
         // Cek apakah vendor yang dipilih punya bayar sebagian DAN ada transaksi terpilih yang masih CREDIT
         // (kalau semua yang dipilih sudah LUNAS, nominal sudah pasti/final, jadi TAGIHAN aman dicetak).
