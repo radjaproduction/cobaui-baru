@@ -1611,6 +1611,50 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 }
 </style>
 
+<style id="fix-stok-outer-scroll-lock">
+/* =========================================================
+   FIX: layar awal tab STOK (header, logo, 3 kartu KPI, judul
+   "STOK PER BRAND") masih bisa digeser/di-scroll ke atas.
+   Penyebabnya: 
+   1) .rp-stock-dashboard dipaksa min-height:100vh (lihat aturan
+      lama di atas), jadi tingginya SELALU >= layar penuh, padahal
+      dia harus mengikuti tinggi #tab-stok (flex:1) supaya pas.
+   2) #tab-stok sendiri masih overflow-y:auto, jadi begitu isinya
+      sedikit lebih tinggi dari layar, seluruh tab ikut ter-scroll.
+   Perbaikan: matikan scroll di #tab-stok itu sendiri, biarkan
+   .rp-stock-dashboard mengisi pas setinggi tab (bukan dipaksa
+   100vh), sehingga HANYA #stok-brand-list (sudah punya
+   overflow-y:auto sendiri, lihat #rp-stock-brand-scroll-cap) yang
+   bisa digeser. Layar DETAIL brand diberi tinggi pasti (bottom:0)
+   supaya overflow-y:auto miliknya sendiri jalan independen, tidak
+   lagi bergantung ke scroll milik #tab-stok.
+   ========================================================= */
+#tab-stok.rp-stock-screen{
+  overflow: hidden !important;
+}
+#tab-stok.rp-stock-screen .rp-stock-dashboard{
+  min-height: 0 !important;
+  height: 100% !important;
+}
+#tab-stok.rp-stock-screen .rp-stock-detail-compact-screen{
+  bottom: 0 !important;
+}
+/* "UPDATE STOK SECARA REALTIME" harus SELALU tampil, apapun jumlah
+   brand/kolom di STOK PER BRAND. Kunci hero, 3 KPI, judul section,
+   dan teks ini supaya tidak ikut "diperas" (flex-shrink) saat ruang
+   sempit — biarkan HANYA #stok-brand-card/#stok-brand-list yang
+   menyusut & scroll sendiri untuk menyerap sisa kelebihan tinggi. */
+#tab-stok.rp-stock-screen .rp-stock-hero,
+#tab-stok.rp-stock-screen .rp-stock-kpis,
+#tab-stok.rp-stock-screen .rp-stock-section-head,
+#tab-stok.rp-stock-screen .rp-brand-realtime-note{
+  flex-shrink: 0 !important;
+}
+#tab-stok.rp-stock-screen #stok-brand-card{
+  flex-shrink: 1 !important;
+}
+</style>
+
 <style id="fix-stok-header-top-line">
 /* Hilangkan garis/border/shadow yang terlihat tepat di atas header TAB STOK */
 #tab-stok.rp-stock-screen,
