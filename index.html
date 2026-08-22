@@ -1354,11 +1354,11 @@
 .rp-stock-fab-transaksi{bottom:176px;background:linear-gradient(145deg,#2955a3,#123566);box-shadow:0 12px 28px rgba(15,42,92,.4)}
 .rp-stock-fab-transaksi i{color:#fff}
 .rp-stock-fab-transaksi span{color:#fff}
-.rp-nav-toggle{position:fixed;right:26px;bottom:22px;width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:23px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .22s ease,background .22s ease,color .22s ease}
+.rp-nav-toggle{position:fixed;right:26px;bottom:14px;width:66px;height:66px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .22s ease,background .22s ease,color .22s ease}
 .rp-nav-toggle i{position:relative;top:2px}
 .rp-nav-toggle:active{transform:scale(.92)}
 .rp-nav-toggle.is-open{background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;border-color:rgba(255,177,26,.8)}
-.rp-back-toggle{position:fixed;right:96px;bottom:22px;width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:opacity .2s ease,transform .2s ease}
+.rp-back-toggle{position:fixed;right:104px;bottom:14px;width:66px;height:66px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:23px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:opacity .2s ease,transform .2s ease}
 .rp-back-toggle i{position:relative;top:1px}
 .rp-back-toggle:active{transform:scale(.92)}
 .rp-back-toggle.rp-back-hidden{opacity:0;transform:scale(.8);pointer-events:none}
@@ -1366,7 +1366,7 @@
 #sticky-total-bar.rp-back-hidden{opacity:0;transform:scale(.8);pointer-events:none}
 #action-bar-transaksi{transition:opacity .2s ease,transform .2s ease}
 #action-bar-transaksi.rp-back-hidden{opacity:0;transform:scale(.8);pointer-events:none}
-.rp-cetak-circle-btn{width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .2s ease,opacity .2s ease}
+.rp-cetak-circle-btn{width:66px;height:66px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .2s ease,opacity .2s ease}
 .rp-cetak-circle-btn-orange{background:linear-gradient(145deg,#ffb21a,#ff7300);border:0;color:#111;box-shadow:0 8px 22px rgba(255,115,0,.35)}
 .rp-cetak-circle-btn-orange.opacity-40{box-shadow:none}
 .rp-cetak-circle-btn:active{transform:scale(.92)}
@@ -2831,9 +2831,9 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
         <div class="tab-bottom-spacer" style="height:90px;flex-shrink:0;"></div>
         </div>
 
-        <!-- ACTION BAR: TRANSAKSI — bulat, sejajar tombol back (bottom:22px), rata kiri.
+        <!-- ACTION BAR: TRANSAKSI — bulat, sejajar tombol back (bottom:14px), rata kiri.
              Sama treatment-nya dgn #sticky-total-bar di tab RIWAYAT TRANSAKSI. -->
-        <div id="action-bar-transaksi" class="fixed left-0 items-center gap-3" style="bottom:22px;z-index:100;padding-left:26px;display:none">
+        <div id="action-bar-transaksi" class="fixed left-0 items-center gap-3" style="bottom:14px;z-index:100;padding-left:26px;display:none">
             <button onclick="clearTransaksi()" class="rp-cetak-circle-btn rp-cetak-circle-btn-orange" title="Clear">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -2965,7 +2965,7 @@ END $$;</textarea>
             <div id="riwayat-transaksi-list" class="hidden flex-col gap-2"></div>
             <div id="riwayat-pelunasan-list" class="hidden flex-col gap-3"></div>
             <div id="riwayat-bayar-sebagian-list" class="hidden flex-col gap-3"></div>
-            <div id="sticky-total-bar" class="hidden fixed left-0 items-center gap-3" style="bottom:22px;z-index:100;padding-left:26px;">
+            <div id="sticky-total-bar" class="hidden fixed left-0 items-center gap-3" style="bottom:14px;z-index:100;padding-left:26px;">
                     <button onclick="batalPilihSemua()" class="rp-cetak-circle-btn rp-cetak-circle-btn-orange" style="position:relative;" title="Batal">
                         <i class="fa-solid fa-xmark"></i>
                         <span id="selected-trx-count-badge" class="hidden vendor-notif-badge" style="position:absolute;top:-2px;right:-2px;"><span id="selected-trx-count">0</span></span>
