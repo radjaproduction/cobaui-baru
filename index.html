@@ -1054,7 +1054,7 @@
 
         /* ---------- TAB INPUT DATA: heading polos (mengikuti konsep rp-stock-heading) ---------- */
         #tab-input.rp-input-screen { background: var(--input-bg) !important; padding-top: 0; position: relative; isolation: isolate; }
-        #tab-input.rp-input-screen::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+        #tab-input.rp-input-screen::before{content:"";position:fixed;left:-16px;right:-16px;top:-16px;bottom:-16px;width:calc(100vw + 32px);height:calc(100vh + 32px);height:calc(100dvh + 32px);z-index:-2;filter:blur(6px);will-change:auto;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
         #tab-input.rp-input-screen::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
         .rp-input-heading { padding: 18px 2px 4px; flex-shrink: 0; }
         .rp-input-heading h1 { font-size: 30px; line-height: 1; font-weight: 900; letter-spacing: -.04em; margin: 0; color: #fff; }
@@ -1195,7 +1195,7 @@
 
         /* ---------- TAB TRANSAKSI: heading polos + background hero (sama konsep TAB INPUT DATA) ---------- */
         #tab-transaksi.rp-input-screen { background: var(--trx-bg) !important; padding-top: 0; position: relative; isolation: isolate; }
-        #tab-transaksi.rp-input-screen::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+        #tab-transaksi.rp-input-screen::before{content:"";position:fixed;left:-16px;right:-16px;top:-16px;bottom:-16px;width:calc(100vw + 32px);height:calc(100vh + 32px);height:calc(100dvh + 32px);z-index:-2;filter:blur(6px);will-change:auto;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
         #tab-transaksi.rp-input-screen::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
 
         #tab-transaksi .input-variation-card { background: var(--trx-row-bg) !important; border-color: var(--trx-border) !important; }
@@ -1266,7 +1266,7 @@
     </style>
 <style id="radja-stock-redesign">
 #tab-stok.rp-stock-screen{--rp-navy:#06142b;--rp-navy2:#0a1c38;--rp-panel:rgba(8,25,52,.78);--rp-border:rgba(118,153,201,.28);--rp-orange:#ff8c00;--rp-blue:#2196f3;--rp-text:#f5f7fb;--rp-muted:#aebbd0;background:#06142b!important;color:var(--rp-text)!important;min-height:100vh;min-height:100dvh;overflow:hidden;padding:0 16px 96px;position:relative;isolation:isolate}
-#tab-stok.rp-stock-screen::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_stock_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}#tab-riwayat-input::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}#tab-riwayat-beban::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}#tab-riwayat-retur::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}#tab-riwayat::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}#tab-laba::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}#tab-master::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
+#tab-stok.rp-stock-screen::before{content:"";position:fixed;left:-16px;right:-16px;top:-16px;bottom:-16px;width:calc(100vw + 32px);height:calc(100vh + 32px);height:calc(100dvh + 32px);z-index:-2;filter:blur(6px);will-change:auto;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_stock_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}#tab-riwayat-input::before{content:"";position:fixed;left:-16px;right:-16px;top:-16px;bottom:-16px;width:calc(100vw + 32px);height:calc(100vh + 32px);height:calc(100dvh + 32px);z-index:-2;filter:blur(6px);will-change:auto;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}#tab-riwayat-beban::before{content:"";position:fixed;left:-16px;right:-16px;top:-16px;bottom:-16px;width:calc(100vw + 32px);height:calc(100vh + 32px);height:calc(100dvh + 32px);z-index:-2;filter:blur(6px);will-change:auto;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}#tab-riwayat-retur::before{content:"";position:fixed;left:-16px;right:-16px;top:-16px;bottom:-16px;width:calc(100vw + 32px);height:calc(100vh + 32px);height:calc(100dvh + 32px);z-index:-2;filter:blur(6px);will-change:auto;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}#tab-riwayat::before{content:"";position:fixed;left:-16px;right:-16px;top:-16px;bottom:-16px;width:calc(100vw + 32px);height:calc(100vh + 32px);height:calc(100dvh + 32px);z-index:-2;filter:blur(6px);will-change:auto;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}#tab-laba::before{content:"";position:fixed;left:-16px;right:-16px;top:-16px;bottom:-16px;width:calc(100vw + 32px);height:calc(100vh + 32px);height:calc(100dvh + 32px);z-index:-2;filter:blur(6px);will-change:auto;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}#tab-master::before{content:"";position:fixed;left:-16px;right:-16px;top:-16px;bottom:-16px;width:calc(100vw + 32px);height:calc(100vh + 32px);height:calc(100dvh + 32px);z-index:-2;filter:blur(6px);will-change:auto;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_transaksi_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
 #tab-stok.rp-stock-screen::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
 #tab-stok.rp-stock-screen .rp-stock-dashboard{min-height:100vh;min-height:100dvh;gap:0;position:relative}
 .rp-stock-hero{padding:0 0 18px;position:relative;z-index:30;}
@@ -9677,7 +9677,7 @@ function updateSSK(tab, rowId) {
     // supaya total nominal, ceklis "Semua" per vendor, dan cache (_vendorGroupCache) tetap
     // dihitung dari SELURUH data yang sudah difilter — bukan cuma data yang tampil di halaman aktif.
     let _rtPage = 1;
-    const RT_PAGE_SIZE = 8; // jumlah vendor yang ditampilkan per halaman di Riwayat Transaksi
+    const RT_PAGE_SIZE = 5; // jumlah vendor yang ditampilkan per halaman di Riwayat Transaksi (diturunkan dari 8 -> 5 biar tiap halaman lebih ringan)
 
     function rtGoToPage(page) {
         _rtPage = page;
@@ -9928,8 +9928,8 @@ function updateSSK(tab, rowId) {
                             const totalNominal = totalQty * (d.harga || 0);
                             const uid = 'rt-' + (d.id || idx);
                             const noUrut = idx + 1;
-                            return `<div id="card-${uid}" class="rounded-2xl border overflow-hidden transition-all" style="background:${accentBg};border-color:${accentBorder};backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
-                                <div class="flex items-center gap-2.5 px-3 py-2.5">
+                            return `<div id="card-${uid}" class="rounded-2xl border overflow-hidden" style="background:${accentBg};border-color:${accentBorder};content-visibility:auto;contain-intrinsic-size:0 64px;transition:border-color .15s ease;">
+                                <div class="flex items-center gap-2.5 px-3 py-2.5 cursor-pointer" onclick="toggleTrxCardDetail('${uid}')">
                                     <div class="flex flex-col items-center gap-1 flex-shrink-0">
                                         <span class="text-[9px] font-black text-white/70">${noUrut}</span>
                                         <div onclick="event.stopPropagation();togglePilihTrx(${d.id},'${uid}')" id="chk-${uid}" class="w-5 h-5 rounded border-4 border-gray-600 flex items-center justify-center cursor-pointer transition-all"></div>
@@ -9945,8 +9945,9 @@ function updateSSK(tab, rowId) {
                                             <span class="text-[9px] text-white/60 ml-auto">${d.tanggal || ''} ${d.jam || ''}</span>
                                         </div>
                                     </div>
+                                    <i id="${uid}-chevron" class="fa-solid fa-chevron-down text-[10px] text-white/40 flex-shrink-0" style="transition:transform .15s ease;"></i>
                                 </div>
-                                <div id="${uid}-body" class="px-3 pb-2.5 border-t" style="border-color:${accentBorder};">
+                                <div id="${uid}-body" class="hidden px-3 pb-2.5 border-t" style="border-color:${accentBorder};">
                                     <div class="flex flex-wrap gap-1 pt-2">${items.map((i, iIdx) => `<span class="text-[10px] bg-darkBg border rounded px-2 py-0.5 text-white/80" style="border-color:${accentBorder};">${i.warna} / ${i.ukuran}: <span class="text-white font-bold">${i.qty}</span></span>`).join('')}</div>
                                     ${isLunas ? (
                                         hasBayarSebagianTrx
@@ -9979,6 +9980,20 @@ function updateSSK(tab, rowId) {
         }
         requestAnimationFrame(renderNextVendor);
     }
+
+    // Kartu Riwayat Transaksi default TERTUTUP (cuma ringkasan) — detail item +
+    // tombol edit/hapus baru dirender kelihatan saat header kartu di-tap. Ini
+    // mengurangi jumlah elemen yang perlu di-paint sekaligus saat daftar panjang,
+    // selain manfaat content-visibility:auto yang sudah dipasang di kartunya.
+    function toggleTrxCardDetail(uid) {
+        const body = document.getElementById(uid + '-body');
+        const chevron = document.getElementById(uid + '-chevron');
+        if (!body) return;
+        const opening = body.classList.contains('hidden');
+        body.classList.toggle('hidden');
+        if (chevron) chevron.style.transform = opening ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+    window.toggleTrxCardDetail = toggleTrxCardDetail;
 
     const selectedTrxIds = new Set();
     let _vendorGroupCache = {};
@@ -10932,7 +10947,7 @@ function updateSSK(tab, rowId) {
                 if (hasBayarSebagian) {
                     return `<div class="flex items-start gap-2">
                         <div class="w-5 flex-shrink-0 pt-3 text-center text-[10px] font-black text-white">${noUrut}</div>
-                        <div id="card-${uid}" class="flex-1 min-w-0 rounded-lg border-2 overflow-hidden opacity-80" style="background:${accentBg};border-color:${accentBorder};backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
+                        <div id="card-${uid}" class="flex-1 min-w-0 rounded-lg border-2 overflow-hidden opacity-80" style="background:${accentBg};border-color:${accentBorder};content-visibility:auto;contain-intrinsic-size:0 140px;">
                         <div class="flex items-center gap-2.5 px-3 py-2.5 select-none">
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-2">
@@ -10950,7 +10965,7 @@ function updateSSK(tab, rowId) {
                 }
 
                 // FITUR BARU: Tambahkan checkbox untuk pelunasan parsial
-                return `<div id="card-${uid}" class="rounded-lg border overflow-hidden transition-all" style="background:${accentBg};border-color:${accentBorder};backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
+                return `<div id="card-${uid}" class="rounded-lg border overflow-hidden" style="background:${accentBg};border-color:${accentBorder};content-visibility:auto;contain-intrinsic-size:0 140px;transition:border-color .15s ease;">
                     <div class="flex items-center gap-2.5 px-3 py-2.5 select-none">
                         <div class="flex flex-col items-center gap-1 flex-shrink-0">
                             <span class="text-[9px] font-black text-white/70">${noUrut}</span>
