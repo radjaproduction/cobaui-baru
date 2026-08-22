@@ -1099,8 +1099,7 @@
         }
         #input-brand-selector:hover, #input-model-selector:hover, #btn-tambah-variasi-input:hover { background-color: var(--input-hover) !important; }
 
-        #action-bar-input button[onclick="clearInputData()"] { background: rgba(10,28,56,.9) !important; border: 1.5px solid var(--input-accent) !important; color: var(--input-accent) !important; box-shadow: none !important; }
-        #btn-simpan-input, #btn-simpan-beban-input { box-shadow: 0 4px 15px var(--input-shadow) !important; }
+        #btn-simpan-beban-input { box-shadow: 0 4px 15px var(--input-shadow) !important; }
 
         #tab-input .input-variation-card { background: var(--input-row-bg) !important; border-color: var(--input-border) !important; }
         #tab-input .input-variation-card.is-filled { background: linear-gradient(180deg, var(--input-choice-active), var(--input-row-bg) 72%) !important; }
@@ -1283,6 +1282,19 @@
         #tab-transaksi .input-variation-card.is-filled { background: linear-gradient(180deg, var(--trx-choice-active), var(--trx-row-bg) 72%) !important; }
         #tab-transaksi .input-row-index { background: var(--trx-row-index-bg) !important; border-color: var(--trx-row-index-border) !important; }
         #tab-transaksi .input-summary-pill { background: var(--trx-pill-bg) !important; border-color: var(--trx-border) !important; }
+        /* FIX kontras: kotak QTY/SSK & label-nya di TAB TRANSAKSI kadang render dengan
+           background putih bawaan browser (autofill/number-input default), bikin teks
+           putih tidak kebaca. Paksa tetap gelap + kontras, sama seperti TAB INPUT DATA. */
+        #tab-transaksi .input-warna-trigger-compact,
+        #tab-transaksi .input-ukuran-trigger-compact,
+        #tab-transaksi .input-ukuran-pill,
+        #tab-transaksi .input-inline-select,
+        #tab-transaksi .input-inline-qty,
+        #tab-transaksi .input-inline-ssk { background: var(--trx-bg) !important; border-color: var(--trx-border) !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+        #tab-transaksi .input-inline-label,
+        #tab-transaksi .input-row-title { color: var(--trx-accent) !important; }
+        #tab-transaksi .input-warna-swatch.active,
+        #tab-transaksi .input-ukuran-pill.active { border-color: var(--trx-accent) !important; box-shadow: 0 0 0 2px var(--trx-choice-active) !important; }
         #trx-variasi-sheet .input-sheet-section { background: var(--trx-section-bg) !important; border-color: var(--trx-border) !important; }
         #trx-variasi-sheet .input-choice-btn { background: var(--trx-bg) !important; border-color: var(--trx-border) !important; }
         #trx-variasi-sheet .input-choice-btn.active { background: var(--trx-choice-active) !important; border-color: var(--trx-accent) !important; }
@@ -1366,16 +1378,15 @@
 #sticky-total-bar.rp-back-hidden{opacity:0;transform:scale(.8);pointer-events:none}
 #action-bar-transaksi{transition:opacity .2s ease,transform .2s ease}
 #action-bar-transaksi.rp-back-hidden{opacity:0;transform:scale(.8);pointer-events:none}
+#action-bar-input{transition:opacity .2s ease,transform .2s ease}
+#action-bar-input.rp-back-hidden{opacity:0;transform:scale(.8);pointer-events:none}
 .rp-cetak-circle-btn{width:66px;height:66px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .2s ease,opacity .2s ease}
 .rp-cetak-circle-btn-orange{background:linear-gradient(145deg,#ffb21a,#ff7300);border:0;color:#111;box-shadow:0 8px 22px rgba(255,115,0,.35)}
 .rp-cetak-circle-btn-orange.opacity-40{box-shadow:none}
+/* Mode RETUR (tab INPUT DATA): tombol CLEAR/SIMPAN bulat ikut merah, serasi dgn tema RETUR. */
+#action-bar-input.rp-cetak-circle-btn-red-mode .rp-cetak-circle-btn-orange{background:linear-gradient(145deg,#f87171,#dc2626);box-shadow:0 8px 22px rgba(220,38,38,.4)}
+#action-bar-input.rp-cetak-circle-btn-red-mode .rp-cetak-circle-btn-orange.opacity-40{box-shadow:none}
 .rp-cetak-circle-btn:active{transform:scale(.92)}
-.rp-size-hint{position:fixed;left:18px;bottom:30px;z-index:90;pointer-events:none;opacity:1;transition:opacity .2s ease,transform .2s ease;}
-.rp-size-hint span{display:block;font-weight:900;letter-spacing:-.01em;line-height:1.2;}
-.rp-size-hint .rp-size-hint-l1{font-size:15px;color:#fff;}
-.rp-size-hint .rp-size-hint-l2{font-size:17px;color:var(--input-accent);max-width:230px;}
-body:not(.rp-navbar-collapsed) .rp-size-hint{opacity:0;transform:translateY(6px);}
-body:not([data-active-tab="input"]) .rp-size-hint{display:none;}
 #bottom-navbar{transition:opacity .18s ease;transform:none;opacity:1;background:transparent!important;border-top:0!important;box-shadow:none!important;backdrop-filter:none!important;padding-right:78px;box-sizing:border-box}
 #bottom-navbar.rp-navbar-hidden{opacity:0;pointer-events:none}
 /* Pastikan navbar tetap transparan walau tab aktif berubah warna (override rule per-tab di atas) */
@@ -2689,13 +2700,14 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
         <div class="tab-bottom-spacer" style="height:90px;flex-shrink:0;"></div>
         </div>
 
-        <!-- ACTION BAR: INPUT DATA (fixed above nav) -->
-        <div id="action-bar-input" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 border-t-0 flex gap-2 bg-[#06142B]/95 backdrop-blur-md" style="display:none;">
-            <button onclick="clearInputData()" class="flex-1 font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:rgba(10,28,56,.9);border:1.5px solid var(--input-accent);color:var(--input-accent);border-radius:16px;">
-                <i class="fa-solid fa-xmark"></i> CLEAR
+        <!-- ACTION BAR: INPUT DATA — bulat, sejajar tombol back (bottom:14px), rata kiri.
+             Sama treatment-nya dgn #action-bar-transaksi / #sticky-total-bar. -->
+        <div id="action-bar-input" class="fixed left-0 items-center gap-3" style="bottom:14px;z-index:100;padding-left:26px;display:none;">
+            <button onclick="clearInputData()" class="rp-cetak-circle-btn rp-cetak-circle-btn-orange" title="Clear">
+                <i class="fa-solid fa-xmark"></i>
             </button>
-            <button onclick="simpanInputData()" id="btn-simpan-input" disabled class="flex-[2] text-black font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform opacity-40 cursor-not-allowed" style="background:var(--input-gradient);border-radius:16px;box-shadow:0 4px 15px var(--input-shadow);">
-                <i class="fa-solid fa-floppy-disk"></i> <span id="btn-simpan-input-text">SIMPAN DATA MASUK</span>
+            <button onclick="simpanInputData()" id="btn-simpan-input" disabled class="rp-cetak-circle-btn rp-cetak-circle-btn-orange opacity-40 cursor-not-allowed" title="Simpan Data Masuk">
+                <i class="fa-solid fa-floppy-disk"></i>
             </button>
         </div>
         <!-- Backdrop solid khusus zona navbar tab INPUT (0-84px dari bawah): sama pola
@@ -2838,7 +2850,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <button id="btn-simpan-transaksi" onclick="simpanTransaksi()" disabled class="rp-cetak-circle-btn rp-cetak-circle-btn-orange opacity-40 cursor-not-allowed" title="Simpan Transaksi">
-                <i class="fa-solid fa-check-to-slot"></i>
+                <i class="fa-solid fa-floppy-disk"></i>
             </button>
         </div>
 
@@ -3404,12 +3416,6 @@ END $$;</textarea>
             <i class="fa-solid fa-bars"></i>
         </button>
 
-        <!-- Info ukuran: hanya tampil di tab Input Data, sembunyi saat menu navbar dibuka -->
-        <div class="rp-size-hint">
-            <span class="rp-size-hint-l1">TERSEDIA</span>
-            <span class="rp-size-hint-l2">BERBAGAI MACAM UKURAN</span>
-        </div>
-
         <!-- Bel notifikasi pesanan masuk sudah digabung ke badge tombol nav Riwayat di bawah,
              lihat #pesanan-bell-badge di dalam #nav-btn-riwayat. -->
 
@@ -3431,6 +3437,8 @@ END $$;</textarea>
         // Tombol CLEAR/SIMPAN TRANSAKSI (tab INPUT TRANSAKSI) — posisinya sekarang
         // sejajar tombol back juga, jadi ikut hilang saat menu dibuka.
         const trxActionBar = document.getElementById('action-bar-transaksi');
+        // Tombol CLEAR/SIMPAN DATA MASUK (tab INPUT DATA) — sama treatment-nya.
+        const inputActionBar = document.getElementById('action-bar-input');
         if (!nav || !toggle) return;
         let open = false;
         const setOpen = (value) => {
@@ -3454,6 +3462,7 @@ END $$;</textarea>
             // TRANSAKSI) ikut hilang dengan cara & animasi yang sama seperti BACK.
             if (cetakBar) cetakBar.classList.toggle('rp-back-hidden', open);
             if (trxActionBar) trxActionBar.classList.toggle('rp-back-hidden', open);
+            if (inputActionBar) inputActionBar.classList.toggle('rp-back-hidden', open);
         };
         toggle.addEventListener('click', () => setOpen(!open));
         nav.querySelectorAll('.nav-btn').forEach(btn => {
@@ -6695,6 +6704,9 @@ function updateSSK(tab, rowId) {
         // yang harus dievaluasi ulang tiap ada perubahan DOM di dalam #tab-input.
         const tabInputEl = document.getElementById('tab-input');
         if (tabInputEl) tabInputEl.classList.toggle('rp-mode-retur-active', mode === 'retur');
+        // Tombol CLEAR/SIMPAN bulat (action-bar-input) ikut jadi merah saat mode RETUR
+        // aktif, biar serasi dengan tema merah RETUR STOK; kembali orange di mode lain.
+        if (actionBar) actionBar.classList.toggle('rp-cetak-circle-btn-red-mode', mode === 'retur');
 
         if (mode === 'beban') {
             if (banner) { banner.classList.add('hidden'); banner.classList.remove('flex'); }
@@ -7674,10 +7686,10 @@ function updateSSK(tab, rowId) {
         if (!list.children.length || list.children[0].id !== 'trx-row-' + id) return;
         const pristine = _isTrxRowPristine(id);
         if (pristine) {
-            btn.className = 'w-10 h-10 rounded-lg flex items-center justify-center border-2 border-borderDark bg-darkBg text-black/30 cursor-not-allowed transition-colors';
+            btn.className = 'w-6 h-6 rounded-full flex items-center justify-center border border-borderDark bg-darkBg text-black/30 cursor-not-allowed transition-colors flex-shrink-0';
             btn.onclick = null;
         } else {
-            btn.className = 'w-10 h-10 rounded-lg flex items-center justify-center border-2 border-[#ef4444]/50 bg-[#ef4444]/15 text-[#ef4444] cursor-pointer hover:bg-[#ef4444]/25 transition-colors';
+            btn.className = 'w-6 h-6 rounded-full flex items-center justify-center border border-[#ef4444]/50 bg-[#ef4444]/15 text-[#ef4444] cursor-pointer hover:bg-[#ef4444]/25 transition-colors flex-shrink-0';
             btn.onclick = () => hapusRowTrx(id);
         }
     }
