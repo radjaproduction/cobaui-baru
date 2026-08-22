@@ -1586,6 +1586,31 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 }
 </style>
 
+<style id="rp-stock-brand-scroll-cap">
+/* =========================================================
+   STOK PER BRAND — scroll HANYA aktif di dalam kotak list ini,
+   dibatasi maksimal tampil 5 baris.
+   - Kalau brand <=5: tinggi kotak mengikuti isi, TIDAK ada scroll
+     (max-height cuma jadi plafon, bukan tinggi paksa).
+   - Kalau brand >5: kelebihannya di-scroll di dalam kotak ini saja,
+     header + 3 KPI + judul section di atasnya tetap diam di tempat
+     (karena tinggi total halaman jadi tidak pernah membengkak lagi).
+   Tinggi 1 baris = tinggi kartu (88px, lihat .rp-brand-card di atas)
+   + gap antar kartu (8px mobile / 9px >=700px).
+   ========================================================= */
+#tab-stok.rp-stock-screen .rp-brand-list{
+  max-height: calc(5 * 88px + 4 * 8px) !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+@media (min-width:700px){
+  /* Layout 2 kolom: 5 item = 3 baris (item ke-5 sendirian di baris ke-3) */
+  #tab-stok.rp-stock-screen .rp-brand-list{
+    max-height: calc(3 * 88px + 2 * 9px) !important;
+  }
+}
+</style>
+
 <style id="fix-stok-header-top-line">
 /* Hilangkan garis/border/shadow yang terlihat tepat di atas header TAB STOK */
 #tab-stok.rp-stock-screen,
