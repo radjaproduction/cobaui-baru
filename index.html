@@ -1252,31 +1252,6 @@
 <style id="radja-stock-redesign">
 #tab-stok.rp-stock-screen{--rp-navy:#06142b;--rp-navy2:#0a1c38;--rp-panel:rgba(8,25,52,.78);--rp-border:rgba(118,153,201,.28);--rp-orange:#ff8c00;--rp-blue:#2196f3;--rp-text:#f5f7fb;--rp-muted:#aebbd0;background:#06142b!important;color:var(--rp-text)!important;min-height:100vh;min-height:100dvh;overflow:hidden;padding:0 16px 96px;position:relative;isolation:isolate}
 #tab-stok.rp-stock-screen::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('radja_stock_background.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
-/* ==================== BACKGROUND HALAMAN TAMBAHAN ====================
-   Pola identik dengan tab-stok/tab-input/tab-transaksi di atas — pseudo-element
-   ::before (gambar + gradient kiri-kanan biar teks tetap kebaca) dan ::after
-   (gradient atas-bawah, menggelapkan bagian bawah). File gambar TIDAK di-embed
-   di sini, taruh sejajar dengan index.html (folder yang sama):
-     tab-riwayat-input -> bck1.png
-     tab-riwayat-beban -> bck2.png
-     tab-riwayat-retur -> bck3.png
-     tab-riwayat       -> bck4.png
-     tab-laba          -> bck5.png
-     tab-master        -> bck6.png
-   Kalau nama/ekstensi filenya beda, tinggal ganti url('bckN.png') di bawah. */
-#tab-riwayat-input.tab-content,#tab-riwayat-beban.tab-content,#tab-riwayat-retur.tab-content,#tab-riwayat.tab-content,#tab-laba.tab-content,#tab-master.tab-content{background:#06142b!important;position:relative;isolation:isolate}
-#tab-riwayat-input::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('bck1.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
-#tab-riwayat-input::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
-#tab-riwayat-beban::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('bck2.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
-#tab-riwayat-beban::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
-#tab-riwayat-retur::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('bck3.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
-#tab-riwayat-retur::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
-#tab-riwayat::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('bck4.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
-#tab-riwayat::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
-#tab-laba::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('bck5.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
-#tab-laba::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
-#tab-master::before{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-2;background-image:linear-gradient(90deg,rgba(4,16,35,1) 0%,rgba(4,16,35,.8) 42%,rgba(4,16,35,.4) 100%),url('bck6.png');background-size:cover;background-position:center center;background-repeat:no-repeat;pointer-events:none}
-#tab-master::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
 #tab-stok.rp-stock-screen::after{content:"";position:fixed;left:0;right:0;top:0;bottom:0;width:100vw;height:100vh;height:100dvh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,14,31,.22) 0%,rgba(3,14,31,.62) 55%,#06142b 92%)}
 #tab-stok.rp-stock-screen .rp-stock-dashboard{min-height:100vh;min-height:100dvh;gap:0;position:relative}
 .rp-stock-hero{padding:0 0 18px;position:relative;z-index:30;}
@@ -3356,23 +3331,6 @@ END $$;</textarea>
 
     let sbClient = null;
 
-    // Escape teks bebas dari user (keterangan, nama brand/model/vendor/dst) sebelum
-    // ditulis ke innerHTML — mencegah stored XSS kalau user isi keterangan/nama dengan
-    // tag HTML/script (mis. <img src=x onerror=...>). Pakai di SEMUA titik yang
-    // menyisipkan field user ke template HTML, bukan cuma yang sudah ketahuan berisiko.
-    function escapeHtml(str) {
-        return String(str ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
-    }
-    // Untuk nilai yang disisipkan ke dalam string JS berkutip-satu DI DALAM atribut HTML
-    // (mis. onclick="fn('${..}')") — escape dulu sebagai string JS (backslash & kutip satu),
-    // BARU escape sebagai atribut HTML. Urutan ini penting: browser men-decode entity HTML
-    // pada atribut SEBELUM menjalankannya sebagai JS, jadi hasil akhirnya tetap string JS
-    // yang valid & aman walau nilainya mengandung kutip satu/dua atau tag.
-    function jsAttr(str) {
-        return escapeHtml(String(str ?? '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"));
-    }
-
-
     // ==================== FETCH TANPA LIMIT (ANTI TERPOTONG) ====================
     // Supabase/PostgREST membatasi hasil query max 1000 baris per request secara default.
     // Kalau tabel (misal riwayat_input_item) sudah punya >1000 baris, select('*') biasa
@@ -3385,7 +3343,7 @@ END $$;</textarea>
     // untuk menjamin urutan yang konsisten saat melakukan paginasi, mencegah data
     // terlewat (race condition) jika ada data baru masuk saat proses fetch berjalan.
     async function fetchAllRows(table, selectStr = '*') {
-        const PAGE = 5000; // diperbesar dari 1000 -> lebih sedikit round-trip ke server untuk tabel besar
+        const PAGE = 1000;
         let from = 0;
         let all = [];
         while (true) {
@@ -3825,8 +3783,7 @@ END $$;`;
     // pop/shift/sort/reverse) pada array yang sedang dipakai — jadi tidak perlu diinvalidate
     // manual satu-satu di setiap tempat data riwayat diubah.
     let _stokItemCache = new Map();
-    let _stokDashboardCache = null; // cache hasil agregat dashboard stok (lihat _getStokDashboardAggregate di bawah)
-    function _invalidateStokItemCache() { _stokItemCache.clear(); _stokDashboardCache = null; }
+    function _invalidateStokItemCache() { _stokItemCache.clear(); }
     function _watchRiwayatArray(arr) {
         if (!arr || arr.__stokWatched) return arr;
         ['push', 'unshift', 'splice', 'pop', 'shift', 'sort', 'reverse'].forEach(method => {
@@ -3884,10 +3841,10 @@ END $$;`;
 
             setLoadingText('MEMUAT RIWAYAT TRANSAKSI...', 45);
             const [riDataRaw, riItemsData, trxDataRaw, trxItemsData] = await withTimeout(Promise.all([
-                fetchAllRows('riwayat_input', 'id,mode,brand,model,keterangan,tanggal,jam'),
-                fetchAllRows('riwayat_input_item', 'id,riwayat_input_id,warna,ukuran,qty'),
-                fetchAllRows('transaksi', 'id,vendor,brand,model,harga,harga_modal,status,order_code,tanggal,jam'),
-                fetchAllRows('transaksi_item', 'id,transaksi_id,warna,ukuran,qty,ssk'),
+                fetchAllRows('riwayat_input', '*'),
+                fetchAllRows('riwayat_input_item', '*'),
+                fetchAllRows('transaksi', '*'),
+                fetchAllRows('transaksi_item', '*'),
             ]), TIMEOUT_MS, 'Muat riwayat');
             // Urutan tampil: terbaru dulu
             const ri = { data: [...riDataRaw].sort((a, b) => b.id - a.id) };
@@ -3981,8 +3938,8 @@ END $$;`;
     }
     async function fetchRiwayatInputData() {
         const [riData, riItemsData] = await Promise.all([
-            fetchAllRows('riwayat_input', 'id,mode,brand,model,keterangan,tanggal,jam'),
-            fetchAllRows('riwayat_input_item', 'id,riwayat_input_id,warna,ukuran,qty'),
+            fetchAllRows('riwayat_input', '*'),
+            fetchAllRows('riwayat_input_item', '*'),
         ]);
         const riItemsMap = {};
         riItemsData.forEach(i => {
@@ -4003,8 +3960,8 @@ END $$;`;
     }
     async function fetchTransaksiData() {
         const [trxData, trxItemsData] = await Promise.all([
-            fetchAllRows('transaksi', 'id,vendor,brand,model,harga,harga_modal,status,order_code,tanggal,jam'),
-            fetchAllRows('transaksi_item', 'id,transaksi_id,warna,ukuran,qty,ssk'),
+            fetchAllRows('transaksi', '*'),
+            fetchAllRows('transaksi_item', '*'),
         ]);
         const trxItemsMap = {};
         trxItemsData.forEach(i => {
@@ -4612,28 +4569,18 @@ async function fetchBayarSebagianData() {
     let _realtimeReconnectTimer = null;
     let _realtimeReconnectDelay = 1000;
     let _realtimeReconnecting = false;
-    // Kapan tab terakhir di-background (dipakai visibilitychange di bawah untuk mengukur
-    // berapa lama tab tidak aktif — lihat REALTIME_QUICK_RESUME_MS).
-    let _backgroundedAt = null;
-    // Kalau tab cuma di-background SEBENTAR (di bawah nilai ini), koneksi WebSocket-nya
-    // hampir pasti masih hidup dan tidak ada perubahan berarti yang terlewat — jadi cukup
-    // pastikan channel-nya nyala lagi TANPA full-refetch semua grup (yang berat karena
-    // termasuk tabel riwayat_input & transaksi yang paling besar). Kalau di atas nilai ini,
-    // atau kalau memang genuine disconnect (CHANNEL_ERROR/TIMED_OUT/CLOSED/offline->online),
-    // tetap full-refetch semua grup seperti semula supaya tidak ada data yang kelewat.
-    const REALTIME_QUICK_RESUME_MS = 10000;
 
     function _scheduleRealtimeReconnect(reason) {
         if (_realtimeReconnectTimer) return; // sudah ada jadwal reconnect berjalan
         console.warn('⚠️ Realtime sync putus (' + reason + '), reconnect dalam ' + (_realtimeReconnectDelay / 1000) + 's...');
         _realtimeReconnectTimer = setTimeout(() => {
             _realtimeReconnectTimer = null;
-            _reconnectRealtimeSync(true); // channel benar-benar error/putus -> tidak tahu apa yang terlewat, full refresh
+            _reconnectRealtimeSync();
         }, _realtimeReconnectDelay);
         _realtimeReconnectDelay = Math.min(_realtimeReconnectDelay * 2, 30000);
     }
 
-    function _reconnectRealtimeSync(forceFull = true) {
+    function _reconnectRealtimeSync() {
         if (!sbClient || _realtimeReconnecting) return;
         _realtimeReconnecting = true; // tetap true sampai subscribe() baru selesai (lihat initRealtimeSync)
         try {
@@ -4643,7 +4590,6 @@ async function fetchBayarSebagianData() {
         } catch (e) { /* abaikan, channel lama mungkin sudah tidak valid */ }
         _realtimeChannel = null;
         initRealtimeSync();
-        if (!forceFull) return; // reconnect cepat (tab sempat background sebentar) — channel baru sudah cukup, skip full refetch semua grup
         // Setelah reconnect, tarik ulang semua data grup supaya perubahan yang mungkin
         // terlewat SAAT koneksi putus tetap ikut ter-update (bukan cuma yang terjadi setelahnya).
         _dirtyGroups = new Set(Object.keys(REALTIME_GROUP_HANDLERS));
@@ -4694,19 +4640,15 @@ async function fetchBayarSebagianData() {
     // atau saat browser mendeteksi internet baru nyambung lagi — dua situasi paling umum
     // yang bikin koneksi WebSocket Realtime putus diam-diam di HP.
     document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'hidden') {
-            _backgroundedAt = Date.now();
-        } else if (document.visibilityState === 'visible' && sbClient) {
+        if (document.visibilityState === 'visible' && sbClient) {
             _realtimeReconnectDelay = 1000; // tab aktif lagi = coba langsung, tanpa nunggu backoff lama
-            const elapsedMs = _backgroundedAt ? (Date.now() - _backgroundedAt) : Infinity;
-            _backgroundedAt = null;
-            _reconnectRealtimeSync(elapsedMs >= REALTIME_QUICK_RESUME_MS);
+            _reconnectRealtimeSync();
         }
     });
     window.addEventListener('online', () => {
         if (sbClient) {
             _realtimeReconnectDelay = 1000;
-            _reconnectRealtimeSync(true); // baru saja offline sungguhan -> durasinya tidak bisa dianggap aman, selalu full refresh
+            _reconnectRealtimeSync();
         }
     });
 
@@ -5081,42 +5023,6 @@ function hitungStokSemuaBrandDanModel() {
     });
 }
 
-// PERF: bungkus semua hitungan berat yang dipakai renderStokDashboard() (total masuk/retur/
-// keluar, jumlah model unik, stok per brand, rekap vendor) dalam SATU cache yang otomatis
-// kosong setiap kali appData.riwayatInput/appData.riwayatTransaksi benar-benar berubah
-// (lihat _invalidateStokItemCache & watcher-nya di atas). Jadi kalau renderStokDashboard()
-// dipanggil berkali-kali tanpa ada perubahan data riil di antaranya (misal cuma pindah tab
-// atau modal ditutup), tidak perlu scan ulang seluruh riwayat dari nol.
-function _getStokDashboardAggregate() {
-    if (_stokDashboardCache) return _stokDashboardCache;
-
-    let totalMasuk = 0, totalRetur = 0, totalKeluar = 0;
-    appData.riwayatInput.forEach(d => {
-        const qty = d.items.reduce((s, i) => s + i.qty, 0);
-        if (d.mode === 'retur') totalRetur += qty; else totalMasuk += qty;
-    });
-    appData.riwayatTransaksi.forEach(d => {
-        const qty = d.items.reduce((s, i) => s + i.qty, 0);
-        totalKeluar += qty;
-    });
-    const uniqueModels = new Set();
-    appData.riwayatInput.forEach(d => { if (d.model) uniqueModels.add(String(d.model).trim().toUpperCase()); });
-
-    const brandStokRaw = hitungStokSemuaBrandDanModel();
-
-    const vendorMap = {};
-    appData.riwayatTransaksi.forEach(d => {
-        if (!vendorMap[d.vendor]) vendorMap[d.vendor] = { lunasNominal: 0, credit: 0 };
-        const qty = d.items.reduce((s, i) => s + i.qty, 0);
-        const nominal = qty * (d.harga || 0);
-        if (d.status === 'lunas') vendorMap[d.vendor].lunasNominal += nominal;
-        else vendorMap[d.vendor].credit++;
-    });
-
-    _stokDashboardCache = { totalMasuk, totalRetur, totalKeluar, uniqueModelCount: uniqueModels.size, brandStokRaw, vendorMap };
-    return _stokDashboardCache;
-}
-
 // Hitung stok bersih = stok DB - qty yang sudah dipakai di baris lain dalam form transaksi aktif
 function hitungStokEfektifTrx(modelNama, warnaNama, ukuranNama, kecualiRowId, brandNama, brandId) {
     let stokDB = hitungStokItem(modelNama, warnaNama, ukuranNama, brandNama, brandId);
@@ -5279,13 +5185,22 @@ function updateSSK(tab, rowId) {
 }
 
     function renderStokDashboard() {
-        const _agg = _getStokDashboardAggregate();
-        const { totalMasuk, totalRetur, totalKeluar, uniqueModelCount, vendorMap } = _agg;
+        let totalMasuk = 0, totalRetur = 0, totalKeluar = 0;
+        appData.riwayatInput.forEach(d => {
+            const qty = d.items.reduce((s, i) => s + i.qty, 0);
+            if (d.mode === 'retur') totalRetur += qty; else totalMasuk += qty;
+        });
+        appData.riwayatTransaksi.forEach(d => {
+            const qty = d.items.reduce((s, i) => s + i.qty, 0);
+            totalKeluar += qty;
+        });
         const stokAktif = totalMasuk - totalRetur - totalKeluar;
+        const uniqueModels = new Set();
+        appData.riwayatInput.forEach(d => { if (d.model) uniqueModels.add(String(d.model).trim().toUpperCase()); });
         const elProduk = document.getElementById('kpi-total-produk');
         const elStok = document.getElementById('kpi-total-stok');
         const elKeluar = document.getElementById('kpi-total-brand');
-        if (elProduk) { elProduk.textContent = uniqueModelCount.toLocaleString('id-ID'); elProduk.classList.remove('kpi-skel'); }
+        if (elProduk) { elProduk.textContent = uniqueModels.size.toLocaleString('id-ID'); elProduk.classList.remove('kpi-skel'); }
         if (elStok) { elStok.textContent = Math.max(0, stokAktif).toLocaleString('id-ID'); elStok.classList.remove('kpi-skel'); }
         if (elKeluar) { elKeluar.textContent = totalKeluar.toLocaleString('id-ID'); elKeluar.classList.remove('kpi-skel'); }
 
@@ -5301,10 +5216,9 @@ function updateSSK(tab, rowId) {
                 if (realtimeNoteEl) realtimeNoteEl.style.display = '';
             } else {
                 // PERF: dulu masterData.brand.map(b => hitungStokBrand(b.id) + full scan
-                // riwayatInput lagi per brand) — sekarang 1x hitung untuk semua brand sekaligus
-                // DAN hasilnya di-cache (lihat _getStokDashboardAggregate), hasil angkanya
-                // identik (lihat catatan di hitungStokSemuaBrandDanModel()).
-                const brandStok = _agg.brandStokRaw
+                // riwayatInput lagi per brand) — sekarang 1x hitung untuk semua brand sekaligus,
+                // hasil angkanya identik (lihat catatan di hitungStokSemuaBrandDanModel()).
+                const brandStok = hitungStokSemuaBrandDanModel()
                 // Hanya tampilkan brand yang benar-benar masih memiliki stok.
                 // Brand dengan stok 0 otomatis disembunyikan dari grid.
                 .filter(b => b.total > 0)
@@ -5329,7 +5243,7 @@ function updateSSK(tab, rowId) {
                         const isNegative = b.total < 0;
                         const cardClass = isNegative ? 'rp-brand-card rp-brand-card-negative' : 'rp-brand-card';
                         const orderNo = String(idx + 1).padStart(2, '0');
-                        return `<div onclick="openBrandDetail(${b.id}, '${jsAttr(b.nama)}')" class="${cardClass}">
+                        return `<div onclick="openBrandDetail(${b.id}, '${String(b.nama).replace(/'/g, "\\'")}')" class="${cardClass}">
                             <div class="rp-brand-icon-wrap">
                                 <div class="rp-brand-logo" aria-hidden="true"><svg class="rp-brand-line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 3.5 L4 6.2 L2 9.3 L4.6 11 L6 9.4 V19.5 A1 1 0 0 0 7 20.5 H17 A1 1 0 0 0 18 19.5 V9.4 L19.4 11 L22 9.3 L20 6.2 L15.5 3.5 A3.2 3.2 0 0 1 8.5 3.5 Z"/></svg></div>
                             </div>
@@ -5337,7 +5251,7 @@ function updateSSK(tab, rowId) {
                             <div class="rp-brand-copy">
                                 <div class="rp-brand-title-row">
                                     <span class="rp-brand-order">${orderNo}</span>
-                                    <span class="rp-brand-name">${escapeHtml(b.nama)}</span>
+                                    <span class="rp-brand-name">${b.nama}</span>
                                 </div>
                                 <div class="rp-brand-meta"><span class="rp-brand-stok-count">${b.total.toLocaleString('id-ID')} STOK</span> <span>•</span> ${b.modelCount.toLocaleString('id-ID')} MODEL</div>
                             </div>
@@ -5355,7 +5269,14 @@ function updateSSK(tab, rowId) {
                 vendorListEl.innerHTML = '<div class="text-center text-black text-[11px] py-8 flex flex-col items-center gap-2"><i class="fa-solid fa-inbox text-2xl opacity-40"></i>Belum ada transaksi vendor.</div>';
                 if (kpiVendorAktifEl) { kpiVendorAktifEl.textContent = '0'; kpiVendorAktifEl.classList.remove('kpi-skel'); }
             } else {
-                const vendorMap = _agg.vendorMap;
+                const vendorMap = {};
+                appData.riwayatTransaksi.forEach(d => {
+                    if (!vendorMap[d.vendor]) vendorMap[d.vendor] = { lunasNominal: 0, credit: 0 };
+                    const qty = d.items.reduce((s, i) => s + i.qty, 0);
+                    const nominal = qty * (d.harga || 0);
+                    if (d.status === 'lunas') vendorMap[d.vendor].lunasNominal += nominal;
+                    else vendorMap[d.vendor].credit++;
+                });
                 if (kpiVendorAktifEl) { kpiVendorAktifEl.textContent = Object.keys(vendorMap).length.toLocaleString('id-ID'); kpiVendorAktifEl.classList.remove('kpi-skel'); }
                 vendorListEl.innerHTML = Object.entries(vendorMap).sort(([a], [b]) => a.localeCompare(b, 'id', { sensitivity: 'base' })).map(([nama, stat]) => `
                     <div class="rounded-xl overflow-hidden transition-all border-2 border-borderDark" style="background:#06142B;">
@@ -6232,7 +6153,7 @@ function updateSSK(tab, rowId) {
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-lg brand-bg flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-truck-fast text-black text-xs"></i></div>
                     <div>
-                        <div class="text-[11px] font-bold text-black uppercase">${escapeHtml(v.nama)}</div>
+                        <div class="text-[11px] font-bold text-black uppercase">${v.nama}</div>
                         ${v.telp ? `<div class="text-[9px] text-black"><i class="fa-solid fa-phone mr-1"></i>${v.telp}</div>` : ''}
                     </div>
                 </div>
@@ -6277,7 +6198,7 @@ function updateSSK(tab, rowId) {
             <div class="flex items-center justify-between px-4 py-2.5 hover:bg-darkBg transition-colors">
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-lg brand-bg flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-tag text-black text-xs"></i></div>
-                    <div class="text-[11px] font-bold text-black">${escapeHtml(b.nama)}</div>
+                    <div class="text-[11px] font-bold text-black">${b.nama}</div>
                 </div>
                 <button onclick="hapusBrand(${b.id})" class="w-7 h-7 rounded-lg bg-red-500/10 border-2 border-red-500/30 text-red-400 flex items-center justify-center hover:bg-red-500/20 transition-colors flex-shrink-0"><i class="fa-regular fa-trash-can text-[10px]"></i></button>
             </div>`).join('');
@@ -6286,7 +6207,7 @@ function updateSSK(tab, rowId) {
         const sel = document.getElementById('model-pilih-brand');
         if (!sel) return;
         const cur = sel.value;
-        sel.innerHTML = '<option value="">-- Pilih Brand --</option>' + masterData.brand.map(b => `<option value="${b.id}" ${b.id==cur?'selected':''}>${escapeHtml(b.nama)}</option>`).join('');
+        sel.innerHTML = '<option value="">-- Pilih Brand --</option>' + masterData.brand.map(b => `<option value="${b.id}" ${b.id==cur?'selected':''}>${b.nama}</option>`).join('');
     }
 
     // ==================== MASTER DATA: MODEL ====================
@@ -6413,7 +6334,7 @@ function updateSSK(tab, rowId) {
         if (!item || item.querySelector('.edit-nama-input')) return;
         const namaEl = item.querySelector('.model-nama-display-' + id);
         namaEl.innerHTML = `<div class="flex items-center gap-1">
-            <input type="text" value="${escapeHtml(m.nama)}" class="edit-nama-input bg-darkBg border-2 border-[#7699C9] rounded px-1.5 py-0.5 text-[10px] text-black w-36 focus:outline-none">
+            <input type="text" value="${m.nama}" class="edit-nama-input bg-darkBg border-2 border-[#7699C9] rounded px-1.5 py-0.5 text-[10px] text-black w-36 focus:outline-none">
             <button onclick="renameModel(${id})" class="w-5 h-5 bg-green-500/20 border-2 border-green-500/40 text-green-400 rounded flex items-center justify-center"><i class="fa-solid fa-check text-[8px]"></i></button>
             <button onclick="batalEditNama(${id})" class="w-5 h-5 bg-gray-500/20 border-2 border-gray-500/40 text-black rounded flex items-center justify-center"><i class="fa-solid fa-xmark text-[8px]"></i></button>
         </div>`;
@@ -6505,7 +6426,7 @@ function updateSSK(tab, rowId) {
                 ${items.map(m => `
                     <div class="flex items-center justify-between py-1.5 border-b-2 border-borderDark last:border-0" id="model-item-${m.id}">
                         <div>
-                            <div class="text-[11px] font-bold text-black model-nama-display-${m.id}">${escapeHtml(m.nama)}</div>
+                            <div class="text-[11px] font-bold text-black model-nama-display-${m.id}">${m.nama}</div>
                             <div class="text-[9px] text-black model-harga-display-${m.id}">Jual: Rp ${m.harga ? m.harga.toLocaleString('id-ID') : '—'}</div>
                             <div class="text-[9px] text-black/70 model-modal-display-${m.id}">Modal: Rp ${m.hargaModal ? m.hargaModal.toLocaleString('id-ID') : '—'}</div>
                         </div>
@@ -6600,7 +6521,7 @@ function updateSSK(tab, rowId) {
                 <div class="flex items-center gap-3 flex-1 min-w-0">
                     <div class="w-8 h-8 rounded-lg flex-shrink-0 border-2 border-borderDark shadow-inner warna-swatch-${w.id}" style="background:${w.kode}"></div>
                     <div class="flex-1 min-w-0">
-                        <div class="text-[11px] font-bold text-black capitalize">${escapeHtml(w.nama)}</div>
+                        <div class="text-[11px] font-bold text-black capitalize">${w.nama}</div>
                         <div class="text-[9px] text-black uppercase warna-kode-label-${w.id}">${w.kode}</div>
                     </div>
                 </div>
@@ -6716,8 +6637,8 @@ function updateSSK(tab, rowId) {
         list.innerHTML = sortUkuran(masterData.ukuran).map(u => `
             <div class="flex items-center justify-between px-4 py-2.5 hover:bg-darkBg transition-colors">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg brand-bg flex items-center justify-center flex-shrink-0"><span class="text-black text-[10px] font-black">${escapeHtml(u.nama.length <= 3 ? u.nama : u.nama.slice(0,2))}</span></div>
-                    <div class="text-[11px] font-bold text-black">${escapeHtml(u.nama)}</div>
+                    <div class="w-8 h-8 rounded-lg brand-bg flex items-center justify-center flex-shrink-0"><span class="text-black text-[10px] font-black">${u.nama.length <= 3 ? u.nama : u.nama.slice(0,2)}</span></div>
+                    <div class="text-[11px] font-bold text-black">${u.nama}</div>
                 </div>
                 <button onclick="hapusUkuran(${u.id})" class="w-7 h-7 rounded-lg bg-red-500/10 border-2 border-red-500/30 text-red-400 flex items-center justify-center hover:bg-red-500/20 transition-colors flex-shrink-0"><i class="fa-regular fa-trash-can text-[10px]"></i></button>
             </div>`).join('');
@@ -7980,7 +7901,7 @@ function updateSSK(tab, rowId) {
 	            const btn = document.createElement('button');
 	            btn.type = 'button';
 	            btn.className = 'input-choice-btn' + (!_isInputPlaceholder(warnaAktif) && warnaAktif.toUpperCase() === w.nama.toUpperCase() ? ' active' : '');
-	            btn.innerHTML = `<span class="w-5 h-5 rounded-md border-2 border-white/20 flex-shrink-0" style="background:${escapeHtml(w.kode)}"></span><span class="truncate">${escapeHtml(w.nama)}</span>`;
+	            btn.innerHTML = `<span class="w-5 h-5 rounded-md border-2 border-white/20 flex-shrink-0" style="background:${w.kode}"></span><span class="truncate">${w.nama}</span>`;
 	            btn.onclick = () => {
 	                if (!trxSheetDraft) trxSheetDraft = getTrxRowData(rowId);
 	                trxSheetDraft.warna = w.nama;
@@ -8082,7 +8003,7 @@ function updateSSK(tab, rowId) {
 	            <button type="button" onclick="openTrxVariasiSheet(${it.id})" class="flex items-center gap-2 px-2.5 py-2 rounded-lg bg-white border-2 border-borderDark text-left hover:border-[#7699C9] transition-colors">
 	                <div class="w-5 h-5 rounded-md flex-shrink-0 border border-black/10" style="background:${it.kode || '#888'}"></div>
 	                <div class="min-w-0 flex-1 flex items-center gap-1 text-[10px] font-bold text-black truncate">
-	                    <span class="truncate">${escapeHtml(it.warna)}</span><span class="text-black/40">/</span><span class="truncate">${escapeHtml(it.ukuran)}</span>
+	                    <span class="truncate">${it.warna}</span><span class="text-black/40">/</span><span class="truncate">${it.ukuran}</span>
 	                </div>
 	                <span class="text-[9px] font-black brand-text flex-shrink-0">${it.qty} pcs</span>
 	            </button>`).join('');
@@ -8934,8 +8855,8 @@ function updateSSK(tab, rowId) {
                 <div class="min-w-0 flex-1 flex items-start gap-2">
                     <div class="w-4 flex-shrink-0 pt-0.5 text-center text-[9px] font-black text-black">${noUrut}</div>
                     <div class="min-w-0 flex-1">
-                        <div class="text-[10px] font-bold text-black truncate leading-tight">${escapeHtml(r.model)}</div>
-                        <div class="text-[8px] text-black/70 leading-tight">${escapeHtml(r.brand)} • ${r.qty} pcs terjual</div>
+                        <div class="text-[10px] font-bold text-black truncate leading-tight">${r.model}</div>
+                        <div class="text-[8px] text-black/70 leading-tight">${r.brand} • ${r.qty} pcs terjual</div>
                     </div>
                 </div>
                 <div class="text-right flex-shrink-0 ml-2">
@@ -9103,7 +9024,7 @@ function updateSSK(tab, rowId) {
                     cardEl.innerHTML = `<div class="flex items-center justify-between px-3 py-2">
                         <div class="flex-1 min-w-0 mr-2">
                             <div class="flex items-center gap-1.5">
-                                <span class="text-[10px] font-black text-black truncate">${escapeHtml(d.brand)} — ${escapeHtml(d.model)}</span>
+                                <span class="text-[10px] font-black text-black truncate">${d.brand} — ${d.model}</span>
                                 <span class="text-[8px] font-black px-1.5 py-0.5 rounded border-2 flex-shrink-0 ${badgeClass}">${badgeText}</span>
                             </div>
                             <div class="flex items-center gap-2 mt-0.5">
@@ -9113,15 +9034,15 @@ function updateSSK(tab, rowId) {
                         </div>
                     </div>
                     <div id="${uid}-body" class="px-3 pb-2.5 border-t-2 border-borderDark">
-                        ${isRetur && d.keterangan && !/^ARSIP OTOMATIS/i.test(d.keterangan) ? `<div class="text-[9px] text-red-400 italic pt-1.5"><i class="fa-solid fa-comment-dots mr-1"></i>${escapeHtml(d.keterangan)}</div>` : ''}
+                        ${isRetur && d.keterangan && !/^ARSIP OTOMATIS/i.test(d.keterangan) ? `<div class="text-[9px] text-red-400 italic pt-1.5"><i class="fa-solid fa-comment-dots mr-1"></i>${d.keterangan}</div>` : ''}
                         <div class="grid grid-cols-2 gap-x-3 gap-y-2 pt-2">
                             ${d.items.map((i, iIdx) => `
                             <div class="flex items-center justify-between gap-1.5 py-1 border-b border-borderDark/40">
                                 <div class="min-w-0">
-                                    <div class="text-[8.5px] text-black/55 font-bold uppercase truncate">${escapeHtml(i.warna)} / ${escapeHtml(i.ukuran)}</div>
+                                    <div class="text-[8.5px] text-black/55 font-bold uppercase truncate">${i.warna} / ${i.ukuran}</div>
                                     <div class="text-[12px] text-black font-black leading-tight">${i.qty} <span class="text-[8px] font-bold text-black/45 normal-case">pcs</span></div>
                                 </div>
-                                <button onclick="event.stopPropagation();bukaModalEditInputItem(${d.id},'${jsAttr(d.model)}','${jsAttr(i.warna)}','${jsAttr(i.ukuran)}',${i.qty},${iIdx},'${jsAttr(d.mode)}')"
+                                <button onclick="event.stopPropagation();bukaModalEditInputItem(${d.id},'${d.model}','${i.warna}','${i.ukuran}',${i.qty},${iIdx},'${d.mode}')"
                                     class="w-6 h-6 rounded-full flex items-center justify-center text-black/35 hover:text-yellow-400 hover:bg-yellow-500/10 transition-colors flex-shrink-0"
                                     title="Edit qty">
                                     <i class="fa-solid fa-pen text-[8.5px]"></i>
@@ -9195,11 +9116,11 @@ function updateSSK(tab, rowId) {
 
         list.innerHTML = pageItems.map((d) => {
             const totalQty = d.items.reduce((s, i) => s + i.qty, 0);
-            const itemsSummary = d.items.map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black whitespace-nowrap">${escapeHtml(i.warna)}/${escapeHtml(i.ukuran)}:<b class="text-black">${i.qty}</b></span>`).join('');
+            const itemsSummary = d.items.map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black whitespace-nowrap">${i.warna}/${i.ukuran}:<b class="text-black">${i.qty}</b></span>`).join('');
             return `<div class="bg-cardBg rounded-xl p-3 flex items-start justify-between gap-2 border-2 border-borderDark">
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between gap-1.5">
-                        <span class="text-[10px] font-black text-black truncate min-w-0 flex-1">${escapeHtml(d.brand)} — ${escapeHtml(d.model)}</span>
+                        <span class="text-[10px] font-black text-black truncate min-w-0 flex-1">${d.brand} — ${d.model}</span>
                         <span class="text-[8px] font-black px-1.5 py-0.5 rounded border-2 flex-shrink-0 bg-green-500/20 text-green-400 border-green-500/40">↓ MASUK</span>
                     </div>
                     <div class="text-[9px] text-black/60 font-bold mt-0.5">${d.tanggal} ${d.jam} <span class="brand-text">• ${totalQty} pcs</span></div>
@@ -9255,14 +9176,14 @@ function updateSSK(tab, rowId) {
 
         list.innerHTML = pageItems.map((d) => {
             const totalQty = d.items.reduce((s, i) => s + i.qty, 0);
-            const itemsSummary = d.items.map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black whitespace-nowrap">${escapeHtml(i.warna)}/${escapeHtml(i.ukuran)}:<b class="text-black">${i.qty}</b></span>`).join('');
+            const itemsSummary = d.items.map(i => `<span class="text-[8px] bg-darkBg border-2 border-borderDark rounded px-1.5 py-0.5 text-black whitespace-nowrap">${i.warna}/${i.ukuran}:<b class="text-black">${i.qty}</b></span>`).join('');
             return `<div class="bg-cardBg rounded-xl p-3 flex items-start justify-between gap-2 border-2 border-red-500/40">
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-1.5">
-                        <span class="text-[10px] font-black text-black truncate">${escapeHtml(d.brand)} — ${escapeHtml(d.model)}</span>
+                        <span class="text-[10px] font-black text-black truncate">${d.brand} — ${d.model}</span>
                         <span class="text-[8px] font-black px-1.5 py-0.5 rounded border-2 flex-shrink-0 bg-red-500/20 text-red-400 border-red-500/40">↩ RETUR</span>
                     </div>
-                    <div class="text-[9px] text-black/60 font-bold mt-0.5">${d.tanggal} ${d.jam} <span class="text-red-400">• ${totalQty} pcs</span>${d.keterangan && !/^ARSIP OTOMATIS/i.test(d.keterangan) ? ' • ' + escapeHtml(d.keterangan) : ''}</div>
+                    <div class="text-[9px] text-black/60 font-bold mt-0.5">${d.tanggal} ${d.jam} <span class="text-red-400">• ${totalQty} pcs</span>${d.keterangan && !/^ARSIP OTOMATIS/i.test(d.keterangan) ? ' • ' + d.keterangan : ''}</div>
                     <div class="flex gap-1 flex-wrap mt-1">${itemsSummary}</div>
                 </div>
                 <button onclick="bukaPilihItemRetur(${d.id})" class="w-7 h-7 rounded-lg bg-yellow-500/10 hover:bg-yellow-500/20 border-2 border-yellow-500/30 flex items-center justify-center text-yellow-400 text-[10px] flex-shrink-0" title="Edit qty">
@@ -9300,14 +9221,14 @@ function updateSSK(tab, rowId) {
 
             const info = document.createElement('div');
             info.style.cssText = 'font-size:11px;color:#000;margin-bottom:10px;';
-            info.innerHTML = `<b style="color:#fff;">${escapeHtml(record.brand)} — ${escapeHtml(record.model)}</b><br><span style="font-size:9px;color:#9fb0c8;">Pilih item yang mau diedit qty-nya:</span>`;
+            info.innerHTML = `<b style="color:#fff;">${record.brand} — ${record.model}</b><br><span style="font-size:9px;color:#9fb0c8;">Pilih item yang mau diedit qty-nya:</span>`;
 
             const listWrap = document.createElement('div');
             listWrap.style.cssText = 'display:flex;flex-direction:column;gap:6px;max-height:260px;overflow-y:auto;';
             record.items.forEach((i, iIdx) => {
                 const row = document.createElement('div');
                 row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:8px;background:#06142B;border:1px solid rgba(118,153,201,.34);border-radius:8px;padding:8px 10px;cursor:pointer;';
-                row.innerHTML = `<span style="font-size:11px;color:#eaf1fb;">${escapeHtml(i.warna)} / ${escapeHtml(i.ukuran)}: <b>${i.qty}</b> pcs</span><i class="fa-solid fa-chevron-right" style="font-size:9px;color:#7699C9;"></i>`;
+                row.innerHTML = `<span style="font-size:11px;color:#eaf1fb;">${i.warna} / ${i.ukuran}: <b>${i.qty}</b> pcs</span><i class="fa-solid fa-chevron-right" style="font-size:9px;color:#7699C9;"></i>`;
                 row.onclick = () => {
                     _modal.close();
                     setTimeout(() => bukaModalEditInputItem(record.id, record.model, i.warna, i.ukuran, i.qty, iIdx, record.mode), 200);
@@ -9728,7 +9649,7 @@ function updateSSK(tab, rowId) {
                                             <span class="text-[12px] font-black text-orange-400 uppercase tracking-wide truncate"><i class="fa-solid fa-truck-fast text-[10px] mr-1"></i>${vendorLabel}</span>
                                             <span class="px-2 py-0.5 ${statusClass} border-2 text-[9px] font-black rounded tracking-wider flex-shrink-0">${isLunas ? 'LUNAS' : 'CREDIT'}</span>
                                         </div>
-                                        <div class="text-[11px] font-black text-white uppercase truncate mt-0.5">${escapeHtml(d.brand) || '-'} / ${escapeHtml(d.model) || '-'}</div>
+                                        <div class="text-[11px] font-black text-white uppercase truncate mt-0.5">${d.brand || '-'} / ${d.model || '-'}</div>
                                         <div class="flex items-center gap-2 mt-0.5 flex-wrap">
                                             <span class="text-[10px] brand-text font-black">${totalQty} pcs${totalNominal > 0 ? ' • Rp ' + totalNominal.toLocaleString('id-ID') : ''}</span>
                                             <span class="text-[9px] text-white/60 ml-auto">${d.tanggal || ''} ${d.jam || ''}</span>
@@ -9736,7 +9657,7 @@ function updateSSK(tab, rowId) {
                                     </div>
                                 </div>
                                 <div id="${uid}-body" class="px-3 pb-2.5 border-t" style="border-color:${accentBorder};">
-                                    <div class="flex flex-wrap gap-1 pt-2">${items.map((i, iIdx) => `<span class="text-[10px] bg-darkBg border rounded px-2 py-0.5 text-white/80" style="border-color:${accentBorder};">${escapeHtml(i.warna)} / ${escapeHtml(i.ukuran)}: <span class="text-white font-bold">${i.qty}</span></span>`).join('')}</div>
+                                    <div class="flex flex-wrap gap-1 pt-2">${items.map((i, iIdx) => `<span class="text-[10px] bg-darkBg border rounded px-2 py-0.5 text-white/80" style="border-color:${accentBorder};">${i.warna} / ${i.ukuran}: <span class="text-white font-bold">${i.qty}</span></span>`).join('')}</div>
                                     ${isLunas ? (
                                         hasBayarSebagianTrx
                                         ? '<p class="text-[9px] text-white/60 text-center mt-2"><i class="fa-solid fa-lock text-[8px] mr-1"></i>Transaksi LUNAS tidak dapat diedit atau dihapus. Vendor ini pakai Bayar Sebagian &mdash; kembalikan lewat tab BAYAR SEBAGIAN.</p>'
@@ -9955,7 +9876,7 @@ function updateSSK(tab, rowId) {
             grandTotal += totalNominal;
             grandTotalQty += row.qty;
             return `<tr style="border-bottom:1px solid #e5e7eb;">
-                <td style="padding:8px 12px;font-weight:700;color:#111;text-align:center;">${escapeHtml(row.model)}</td>
+                <td style="padding:8px 12px;font-weight:700;color:#111;text-align:center;">${row.model}</td>
                 <td style="padding:8px 12px;text-align:center;color:#111;">${row.qty}</td>
                 <td style="padding:8px 12px;text-align:center;color:#111;">Rp ${row.harga.toLocaleString('id-ID')}</td>
                 <td style="padding:8px 12px;text-align:center;font-weight:900;color:#111;">Rp ${totalNominal.toLocaleString('id-ID')}</td>
@@ -10146,9 +10067,9 @@ function updateSSK(tab, rowId) {
             const ukuranCells = ukuranSet.map(u => `<td class="td-qty" style="color:#111;">${r.ukuran[u] || '-'}</td>`).join('');
             const rowTotal = ukuranSet.reduce((s, u) => s + (r.ukuran[u] || 0), 0);
             return `<tr style="border-bottom:1px solid #e5e7eb;">
-                <td class="td-muted">${escapeHtml(r.brand)}</td>
-                <td class="td-model">${escapeHtml(r.model)}</td>
-                <td class="td-data">${escapeHtml(r.warna)}</td>
+                <td class="td-muted">${r.brand}</td>
+                <td class="td-model">${r.model}</td>
+                <td class="td-data">${r.warna}</td>
                 ${ukuranCells}
                 <td class="td-qty" style="color:#111;font-weight:900;">${rowTotal} pcs</td>
             </tr>`;
@@ -10245,7 +10166,7 @@ function updateSSK(tab, rowId) {
         const infoHeader = document.createElement('div');
         infoHeader.style.cssText = 'margin-bottom:10px;';
         infoHeader.innerHTML = `<div style="color:#ff8c00;font-size:11px;font-weight:900;letter-spacing:1px;margin-bottom:4px;">EDIT QTY TRANSAKSI</div>
-            <div style="color:#000;font-size:10px;">${escapeHtml(trx.brand)} / ${escapeHtml(trx.model)}</div>
+            <div style="color:#000;font-size:10px;">${trx.brand} / ${trx.model}</div>
             <div style="color:#000;font-size:9px;margin-top:2px;">⚠️ Qty diubah → stok otomatis menyesuaikan</div>`;
 
         const itemsContainer = document.createElement('div');
@@ -10258,7 +10179,7 @@ function updateSSK(tab, rowId) {
             row.style.cssText = 'background:#06142B;border:1px solid #7699C9;border-radius:8px;padding:8px 10px;';
             row.innerHTML = `
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                    <span style="color:#eaf1fb;font-size:11px;font-weight:700;">${escapeHtml(item.warna)} / ${escapeHtml(item.ukuran)}</span>
+                    <span style="color:#eaf1fb;font-size:11px;font-weight:700;">${item.warna} / ${item.ukuran}</span>
                     <span style="color:#eaf1fb;font-size:9px;">Stok tersedia: <b style="color:#d97706;">${stokSaatIni}</b> + qty ini <b style="color:#16a34a;">${item.qty}</b> = maks <b style="color:#eaf1fb;">${maxQty}</b></span>
                 </div>
                 <div style="display:flex;align-items:center;justify-content:center;gap:8px;">
@@ -10478,7 +10399,7 @@ function updateSSK(tab, rowId) {
 
             const header = document.createElement('div');
             header.style.cssText = 'margin-bottom:10px;';
-            header.innerHTML = `<div style="color:#1a1d24;font-size:11px;font-weight:700;margin-bottom:2px;">${escapeHtml(trx.brand)} / ${escapeHtml(trx.model)}</div>
+            header.innerHTML = `<div style="color:#1a1d24;font-size:11px;font-weight:700;margin-bottom:2px;">${trx.brand} / ${trx.model}</div>
                 <div style="color:#000;font-size:9px;">Pilih item yang akan dihapus (qty kembali ke stok)</div>`;
             msgEl.appendChild(header);
 
@@ -10503,7 +10424,7 @@ function updateSSK(tab, rowId) {
                             _updateHapusTrxBtn();
                         ">
                     <div style="flex:1;">
-                        <div id="hapus-item-label-${idx}" style="color:#fff;font-size:11px;font-weight:700;">${escapeHtml(item.warna)} / ${escapeHtml(item.ukuran)}</div>
+                        <div id="hapus-item-label-${idx}" style="color:#fff;font-size:11px;font-weight:700;">${item.warna} / ${item.ukuran}</div>
                         <div id="hapus-item-sub-${idx}" style="color:#e5b8b8;font-size:10px;">${item.qty} pcs → kembali ke stok</div>
                     </div>
                     <span style="color:#f87171;font-size:10px;font-weight:900;">${item.qty} pcs</span>`;
@@ -10708,7 +10629,7 @@ function updateSSK(tab, rowId) {
                         <div class="flex items-center justify-between py-1 border-b-2 border-borderDark last:border-0">
                             <div>
                                 <div class="text-[9px] font-bold text-green-400">+Rp ${p.jumlah.toLocaleString('id-ID')}</div>
-                                <div class="text-[8px] text-black">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + escapeHtml(p.keterangan) : ''}</div>
+                                <div class="text-[8px] text-black">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + p.keterangan : ''}</div>
                             </div>
                             ${!hasBayarSebagian ? `<button onclick="hapusPelunasan(${p.id}, ${t.id})" class="w-6 h-6 rounded bg-red-500/10 border-2 border-red-500/30 text-red-400 flex items-center justify-center hover:bg-red-500/20 transition-colors flex-shrink-0"><i class="fa-solid fa-xmark text-[8px]"></i></button>` : ''}
                         </div>`).join('')
@@ -10724,7 +10645,7 @@ function updateSSK(tab, rowId) {
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-2">
                                     <span class="px-2 py-0.5 ${isLunas ? 'bg-green-600 text-white border-green-700' : 'bg-red-600 text-white border-red-700'} border-2 text-[9px] font-black rounded tracking-wider flex-shrink-0">${isLunas ? 'LUNAS' : 'CREDIT'}</span>
-                                    <span class="text-[11px] font-black text-white uppercase truncate">${escapeHtml(t.brand)} / ${escapeHtml(t.model)}</span>
+                                    <span class="text-[11px] font-black text-white uppercase truncate">${t.brand} / ${t.model}</span>
                                 </div>
                                 <div class="flex items-center gap-2 mt-0.5 flex-wrap">
                                     <span class="text-[10px] brand-text font-black">${totalQty} pcs • Rp ${totalNominal.toLocaleString('id-ID')}</span>
@@ -10741,17 +10662,17 @@ function updateSSK(tab, rowId) {
                     <div class="flex items-center gap-2.5 px-3 py-2.5 select-none">
                         <div class="flex flex-col items-center gap-1 flex-shrink-0">
                             <span class="text-[9px] font-black text-white/70">${noUrut}</span>
-                            <div onclick="event.stopPropagation();togglePilihPelunasan(${t.id}, ${sisaHutang}, '${jsAttr(t.vendor)}', '${jsAttr(uid)}')"
+                            <div onclick="event.stopPropagation();togglePilihPelunasan(${t.id}, ${sisaHutang}, '${t.vendor}', '${uid}')"
                                  id="chk-${uid}"
                                  class="w-5 h-5 rounded border-4 border-gray-600 flex items-center justify-center cursor-pointer transition-all">
                             </div>
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center justify-between gap-2">
-                                <span class="text-[11px] font-black text-white uppercase truncate">${escapeHtml(t.brand)} / ${escapeHtml(t.model)}</span>
+                                <span class="text-[11px] font-black text-white uppercase truncate">${t.brand} / ${t.model}</span>
                                 <div class="flex items-center gap-1.5 flex-shrink-0">
                                     ${!isLunas ? `<span class="px-2 py-0.5 bg-red-600 text-white border-red-700 border-2 text-[9px] font-black rounded tracking-wider">CREDIT</span>
-                                    <button onclick="event.stopPropagation();simpanPelunasan(${t.id}, '${jsAttr(t.vendor)}', ${sisaHutang}, this)" class="px-2 py-0.5 bg-green-500 hover:bg-green-400 text-black border-green-700 border-2 text-[9px] font-black rounded tracking-wider transition-colors">LUNAS</button>`
+                                    <button onclick="event.stopPropagation();simpanPelunasan(${t.id}, '${t.vendor}', ${sisaHutang}, this)" class="px-2 py-0.5 bg-green-500 hover:bg-green-400 text-black border-green-700 border-2 text-[9px] font-black rounded tracking-wider transition-colors">LUNAS</button>`
                                     : `<span class="px-2 py-0.5 bg-green-600 text-white border-green-700 border-2 text-[9px] font-black rounded tracking-wider">LUNAS</span>`}
                                 </div>
                             </div>
@@ -10835,7 +10756,7 @@ function updateSSK(tab, rowId) {
                             ${riwayatBayarSebagianVendorTampil.length > 0 ? riwayatBayarSebagianVendorTampil.map(p => `
                             <div class="py-1.5 border-b-2 border-borderDark last:border-0">
                                 <div class="text-[9px] font-bold text-green-400">+Rp ${p.jumlah.toLocaleString('id-ID')}</div>
-                                <div class="text-[8px] text-black">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + escapeHtml(p.keterangan) : ''}</div>
+                                <div class="text-[8px] text-black">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + p.keterangan : ''}</div>
                             </div>`).join('') : '<div class="text-[9px] text-black italic py-1">Belum ada pembayaran dalam 2 minggu terakhir.</div>'}
                             ${riwayatBayarSebagianVendor.length > riwayatBayarSebagianVendorTampil.length ? `<div class="text-[8px] text-black italic pt-1.5 flex items-center gap-1"><i class="fa-solid fa-clock-rotate-left"></i> Pembayaran lebih lama disembunyikan (>2 minggu). Aktifkan "Tampilkan Semua Riwayat" di Tab Master untuk melihatnya.</div>` : ''}
                         </div>
@@ -11282,7 +11203,7 @@ function updateSSK(tab, rowId) {
             // Riwayat item
             const itemsHtml = items.map(p => `
                 <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1);">
-                    <div style="font-family:Montserrat,sans-serif;font-size:9px;color:rgba(255,255,255,0.6);">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + escapeHtml(p.keterangan) : ''}</div>
+                    <div style="font-family:Montserrat,sans-serif;font-size:9px;color:rgba(255,255,255,0.6);">${p.tanggal} ${p.jam}${p.keterangan ? ' • ' + p.keterangan : ''}</div>
                     <div style="font-family:Montserrat,sans-serif;font-weight:900;font-size:11px;color:#22c55e;">+Rp ${p.jumlah.toLocaleString('id-ID')}</div>
                 </div>`).join('');
 
@@ -11639,7 +11560,7 @@ function updateSSK(tab, rowId) {
             const nominal = qty * t.harga;
             grandTotal += nominal; grandQty += qty;
             return `<tr style="border-bottom:1px solid #e5e7eb;">
-                <td style="padding:7px 10px;font-weight:700;color:#111;text-align:left;">${escapeHtml(t.brand)} / ${escapeHtml(t.model)}</td>
+                <td style="padding:7px 10px;font-weight:700;color:#111;text-align:left;">${t.brand} / ${t.model}</td>
                 <td style="padding:7px 10px;text-align:center;color:#111;">${qty}</td>
                 <td style="padding:7px 10px;text-align:center;color:#111;">Rp ${t.harga.toLocaleString('id-ID')}</td>
                 <td style="padding:7px 10px;text-align:center;font-weight:900;color:#111;">Rp ${nominal.toLocaleString('id-ID')}</td>
@@ -11650,7 +11571,7 @@ function updateSSK(tab, rowId) {
         const riwayatRows = riwayatBayar.map(p => `
             <tr style="border-bottom:1px solid #e5e7eb;">
                 <td style="padding:6px 10px;color:#111;">${p.tanggal} ${p.jam}</td>
-                <td style="padding:6px 10px;color:#000;">${escapeHtml(p.keterangan) || 'BAYAR SEBAGIAN'}</td>
+                <td style="padding:6px 10px;color:#000;">${p.keterangan || 'BAYAR SEBAGIAN'}</td>
                 <td style="padding:6px 10px;text-align:right;font-weight:900;color:#16a34a;">Rp ${p.jumlah.toLocaleString('id-ID')}</td>
             </tr>`).join('');
 
