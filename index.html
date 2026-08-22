@@ -4641,6 +4641,7 @@ async function fetchBayarSebagianData() {
     // REALTIME_GROUP_HANDLERS (vendor/transaksi/dst) dan tidak menyentuh status pesanan ini.
     async function _resyncPesananState() {
         if (!sbClient) return;
+        const _menungguCodesBefore = JSON.stringify(Array.from(_pesananMenungguCodes).sort());
         try {
             const { data, error } = await sbClient.from(PESANAN_TABLE).select('id, order_code, items, note, stage').eq('stage', 0);
             if (!error && data) {
@@ -4662,9 +4663,34 @@ async function fetchBayarSebagianData() {
             }
         } catch (e) { console.warn('[Resync pesanan] Gagal cek pesanan:', e.message); }
         // Riwayat Transaksi bergantung pada _pesananMenungguCodes yang baru saja disegarkan
-        // di atas (lihat filter di renderRiwayatTransaksi) — render ulang supaya transaksi yang
-        // baru dikonfirmasi langsung nongol tanpa perlu nunggu grup 'transaksi' ikut berubah.
-        if (typeof _renderRiwayatTransaksiOri === 'function') _renderRiwayatTransaksiOri();
+        // di atas (lihat filter di renderRiwayatTransaksi) — render ulang HANYA kalau set kode
+        // "Menunggu" itu benar-benar berubah dibanding sebelum fungsi ini jalan. Sebelumnya
+        // render selalu dijalankan tanpa cek, jadi tiap fungsi ini dipanggil (tiap 20 detik lewat
+        // poll fallback) list Riwayat Transaksi ikut "berkedip" walau tidak ada order Menunggu
+        // yang berubah sama sekali.
+        const _menungguCodesAfter = JSON.stringify(Array.from(_pesananMenungguCodes).sort());
+        if (_menungguCodesAfter !== _menungguCodesBefore && typeof _renderRiwayatTransaksiOri === 'function') {
+            _renderRiwayatTransaksiOri();
+        }
+    }
+
+    // Ambil array data mentah yang jadi "sumber kebenaran" untuk grup tertentu, dipakai untuk
+    // dibandingkan sebelum/sesudah fetch (lihat _pesananPollFallback) — supaya render HANYA
+    // dijalankan kalau datanya memang berubah. Grup tanpa array jelas (pengaturan, bebanOperasional)
+    // sengaja dikembalikan null -> tetap render seperti biasa (datanya jarang berubah & murah).
+    function _getGroupSnapshotData(g) {
+        switch (g) {
+            case 'vendor': return masterData.vendor;
+            case 'brand': return masterData.brand;
+            case 'model': return masterData.model;
+            case 'warna': return masterData.warna;
+            case 'ukuran': return masterData.ukuran;
+            case 'riwayatInput': return appData.riwayatInput;
+            case 'transaksi': return appData.riwayatTransaksi;
+            case 'pelunasan': return appData.pelunasan;
+            case 'bayarSebagian': return appData.bayarSebagian;
+            default: return null;
+        }
     }
 
     async function _pesananPollFallback() {
@@ -4672,10 +4698,23 @@ async function fetchBayarSebagianData() {
         await _resyncPesananState();
         // Sekalian refresh grup data lain (Riwayat Transaksi, dst) — jaring pengaman yang sama
         // untuk kasus event realtime transaksi/transaksi_item yang mungkin ikut kelewat.
+        // PENTING: render HANYA dijalankan kalau data grup itu memang benar-benar berubah
+        // dibanding sebelum fetch (dibandingkan lewat snapshot JSON) — sebelumnya SEMUA grup
+        // selalu di-render ulang di sini tiap 20 detik walau datanya identik, bikin list
+        // Riwayat Transaksi "berkedip" terus-menerus padahal tidak ada perubahan apapun.
         try {
             const groups = Object.keys(REALTIME_GROUP_HANDLERS);
+            const before = {};
+            groups.forEach(g => {
+                const snap = _getGroupSnapshotData(g);
+                before[g] = snap ? JSON.stringify(snap) : null;
+            });
             await Promise.all(groups.map(g => REALTIME_GROUP_HANDLERS[g]?.fetch?.()));
-            groups.forEach(g => REALTIME_GROUP_HANDLERS[g]?.render?.());
+            groups.forEach(g => {
+                const snap = _getGroupSnapshotData(g);
+                const after = snap ? JSON.stringify(snap) : null;
+                if (before[g] === null || after !== before[g]) REALTIME_GROUP_HANDLERS[g]?.render?.();
+            });
         } catch (e) { console.warn('[Poll fallback] Gagal refresh data:', e.message); }
     }
     function _startPesananPollFallback() {
