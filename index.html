@@ -579,7 +579,6 @@
             color: #0a1c38;
             letter-spacing: -.02em;
             overflow: hidden;
-            animation: rpLogoPulse 1.9s ease-in-out infinite;
         }
         .rp-loader-logo-img {
             width: 68%;
@@ -595,10 +594,6 @@
         }
         @keyframes rpRingSpin { to { transform: rotate(360deg); } }
         @keyframes rpRingSpinReverse { to { transform: rotate(-360deg); } }
-        @keyframes rpLogoPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
         .rp-loader-brand {
             text-align: center;
             display: flex;
@@ -621,7 +616,7 @@
             text-transform: uppercase;
         }
         .loading-status {
-            display: block;
+            display: none;
             min-height: 16px;
             color: rgba(226,235,248,.82);
             font-size: 10px;
@@ -1359,11 +1354,17 @@
 .rp-brand-realtime-note{margin:16px 4px 4px;padding:0;background:none;border:0;color:#fff;font-size:30px;line-height:1;letter-spacing:-.04em;font-weight:900;text-align:left}
 .rp-brand-realtime-note span{display:block;color:var(--rp-orange)}
 .rp-stock-fab{position:fixed;right:18px;bottom:92px;width:72px;height:72px;border:0;border-radius:50%;background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:900;box-shadow:0 12px 28px rgba(255,115,0,.35);z-index:70}.rp-stock-fab i{font-size:21px;line-height:1}.rp-stock-fab span{font-size:8px}
-.rp-stock-fab-transaksi{bottom:176px;background:linear-gradient(145deg,#1c3d7a,#0a1f45);box-shadow:0 12px 28px rgba(15,42,92,.4)}
+.rp-stock-fab-transaksi{bottom:176px;background:linear-gradient(145deg,#2955a3,#123566);box-shadow:0 12px 28px rgba(15,42,92,.4)}
+.rp-stock-fab-transaksi i{color:#fff}
+.rp-stock-fab-transaksi span{color:#fff}
 .rp-nav-toggle{position:fixed;right:26px;bottom:22px;width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:23px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .22s ease,background .22s ease,color .22s ease}
 .rp-nav-toggle i{position:relative;top:2px}
 .rp-nav-toggle:active{transform:scale(.92)}
 .rp-nav-toggle.is-open{background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;border-color:rgba(255,177,26,.8)}
+.rp-back-toggle{position:fixed;right:96px;bottom:22px;width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:opacity .2s ease,transform .2s ease}
+.rp-back-toggle i{position:relative;top:1px}
+.rp-back-toggle:active{transform:scale(.92)}
+.rp-back-toggle.rp-back-hidden{opacity:0;transform:scale(.8);pointer-events:none}
 .rp-size-hint{position:fixed;left:18px;bottom:30px;z-index:90;pointer-events:none;opacity:1;transition:opacity .2s ease,transform .2s ease;}
 .rp-size-hint span{display:block;font-weight:900;letter-spacing:-.01em;line-height:1.2;}
 .rp-size-hint .rp-size-hint-l1{font-size:15px;color:#fff;}
@@ -2147,19 +2148,19 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 #beban-form-wrapper .summary-card #beban-input-periode-label{font-size:8px!important;color:rgba(255,255,255,.62)!important}
 
 /* admin/owner compact segmented KPI */
-#beban-form-wrapper>div.bg-cardBg.rounded-xl.border-2.border-borderDark{
+#tab-riwayat-beban>div.bg-cardBg.rounded-xl.border-2.border-borderDark{
   min-height:62px;
   border:1px solid rgba(118,153,201,.30)!important;
   border-radius:14px!important;
   background:rgba(8,27,57,.78)!important;
   padding:8px!important;
 }
-#beban-form-wrapper>div.bg-cardBg.rounded-xl.border-2.border-borderDark .text-\[8px\]{font-size:7px!important}
-#beban-form-wrapper>div.bg-cardBg.rounded-xl.border-2.border-borderDark .text-\[13px\]{font-size:12px!important;color:#fff!important;margin-top:2px}
-#beban-form-wrapper>div.bg-cardBg.rounded-xl.border-2.border-borderDark .w-px{background:rgba(118,153,201,.25)!important;height:32px!important}
+#tab-riwayat-beban>div.bg-cardBg.rounded-xl.border-2.border-borderDark .text-\[8px\]{font-size:7px!important}
+#tab-riwayat-beban>div.bg-cardBg.rounded-xl.border-2.border-borderDark .text-\[13px\]{font-size:12px!important;color:#fff!important;margin-top:2px}
+#tab-riwayat-beban>div.bg-cardBg.rounded-xl.border-2.border-borderDark .w-px{background:rgba(118,153,201,.25)!important;height:32px!important}
 
 /* filter */
-#beban-form-wrapper .flex.items-center.gap-1\.5 button{
+#tab-riwayat-beban .flex.items-center.gap-1\.5 button{
   height:31px!important;padding:0!important;border-radius:9px!important;
   font-size:8px!important;border-width:1px!important;
   color:#dbe6f5!important;
@@ -2170,12 +2171,12 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
    "bg-darkBg" (lihat setBebanSumberFilterInput). Aturan ini dibuat mengikuti status
    itu — bukan menempel permanen ke satu ID saja — supaya ADMIN & OWNER ikut berubah
    warna biru saat diklik/aktif, sama seperti SEMUA. */
-#beban-form-wrapper .flex.items-center.gap-1\.5 button:not(.bg-darkBg){background:linear-gradient(90deg,#42a5f5,#1e88e5)!important;color:#111!important;border-color:rgba(33,150,243,.55)!important}
+#tab-riwayat-beban .flex.items-center.gap-1\.5 button:not(.bg-darkBg){background:linear-gradient(90deg,#42a5f5,#1e88e5)!important;color:#111!important;border-color:rgba(33,150,243,.55)!important}
 
 /* history heading */
-#beban-form-wrapper .flex.items-center.gap-2.px-1{padding:3px 2px 1px!important}
-#beban-form-wrapper .flex.items-center.gap-2.px-1 i{color:#2196f3!important;font-size:11px!important}
-#beban-form-wrapper .flex.items-center.gap-2.px-1 span{font-size:10px!important;color:#f4f7fb!important}
+#tab-riwayat-beban .flex.items-center.gap-2.px-1{padding:3px 2px 1px!important}
+#tab-riwayat-beban .flex.items-center.gap-2.px-1 i{color:#2196f3!important;font-size:11px!important}
+#tab-riwayat-beban .flex.items-center.gap-2.px-1 span{font-size:10px!important;color:#f4f7fb!important}
 
 /* history rows */
 #beban-input-list{gap:6px!important}
@@ -2653,53 +2654,6 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                         <button id="btn-simpan-beban-input" onclick="simpanBebanInput()" class="w-full brand-gradient-bg text-black font-black text-[13px] py-3.5 rounded-xl flex justify-center items-center gap-2 shadow-[0_4px_15px_rgba(33,150,243,0.35)]"><i class="fa-solid fa-floppy-disk"></i> SIMPAN BIAYA</button>
                     </div>
                 </div>
-
-                <div id="beban-input-tabel-missing" class="hidden bg-red-500/10 border-2 border-red-500/30 rounded-xl px-4 py-3">
-                    <div class="text-[10px] font-black text-red-500 mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i>TABEL BELUM ADA</div>
-                    <div class="text-[9px] text-black/80 leading-relaxed mb-2">Tabel <b>beban_operasional</b> belum ada di database ini. Jalankan SQL ini sekali di Supabase SQL Editor:</div>
-                    <textarea readonly class="w-full text-[8px] font-mono bg-white border border-red-300 rounded-lg p-2" rows="6" onclick="this.select()">CREATE TABLE IF NOT EXISTS beban_operasional (
-    id bigint generated by default as identity primary key,
-    kategori text not null,
-    keterangan text,
-    nominal integer default 0,
-    tanggal text not null,
-    sumber text default 'ADMIN',
-    foto text,
-    created_at timestamptz default now()
-);
-ALTER TABLE beban_operasional ADD COLUMN IF NOT EXISTS sumber text default 'ADMIN';
-ALTER TABLE beban_operasional ADD COLUMN IF NOT EXISTS foto text;
-ALTER TABLE beban_operasional DISABLE ROW LEVEL SECURITY;
-DO $$
-BEGIN
-  BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE beban_operasional; EXCEPTION WHEN duplicate_object THEN NULL; END;
-END $$;</textarea>
-                    <button onclick="loadBebanInputList()" class="w-full mt-2 py-2 text-[9px] font-black rounded-lg text-white" style="background:linear-gradient(90deg,#16a34a,#22c55e);"><i class="fa-solid fa-rotate mr-1"></i> SUDAH DIJALANKAN, CEK LAGI</button>
-                </div>
-
-                <div class="bg-cardBg rounded-xl border-2 border-borderDark px-3 py-2.5 flex items-center justify-between">
-                    <div class="text-center flex-1">
-                        <div class="text-[8px] font-black text-blue-600 tracking-wider">TOTAL DARI ADMIN</div>
-                        <div id="beban-total-admin" class="text-[13px] font-black text-black">Rp 0</div>
-                    </div>
-                    <div class="w-px h-8 bg-borderDark flex-shrink-0"></div>
-                    <div class="text-center flex-1">
-                        <div class="text-[8px] font-black text-purple-600 tracking-wider">TOTAL DARI OWNER</div>
-                        <div id="beban-total-owner" class="text-[13px] font-black text-black">Rp 0</div>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-1.5">
-                    <button id="beban-sumber-semua" onclick="setBebanSumberFilterInput('semua')" class="flex-1 py-1.5 rounded-lg text-[8.5px] font-black text-black border-2 border-borderDark" style="background:linear-gradient(90deg,#2196f3,#64b5f6);">SEMUA</button>
-                    <button id="beban-sumber-admin" onclick="setBebanSumberFilterInput('ADMIN')" class="flex-1 py-1.5 rounded-lg text-[8.5px] font-black text-black bg-darkBg border-2 border-borderDark">ADMIN</button>
-                    <button id="beban-sumber-owner" onclick="setBebanSumberFilterInput('OWNER')" class="flex-1 py-1.5 rounded-lg text-[8.5px] font-black text-black bg-darkBg border-2 border-borderDark">OWNER</button>
-                </div>
-
-                <div class="flex items-center gap-2 px-1">
-                    <i class="fa-solid fa-clock-rotate-left brand-text text-xs"></i>
-                    <span class="text-[11px] font-black text-black tracking-wide">RIWAYAT BIAYA (MINGGU INI)</span>
-                </div>
-                <div id="beban-input-list" class="flex flex-col gap-2"></div>
             </div>
 
             <div id="input-brandmodel-wrapper" class="rp-input-select-panel">
@@ -2929,6 +2883,54 @@ END $$;</textarea>
                 <h1>Riwayat <span>Beban</span></h1>
                 <p>Riwayat beban operasional yang sudah dicatat.</p>
             </div>
+
+            <div id="beban-input-tabel-missing" class="hidden bg-red-500/10 border-2 border-red-500/30 rounded-xl px-4 py-3">
+                <div class="text-[10px] font-black text-red-500 mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i>TABEL BELUM ADA</div>
+                <div class="text-[9px] text-black/80 leading-relaxed mb-2">Tabel <b>beban_operasional</b> belum ada di database ini. Jalankan SQL ini sekali di Supabase SQL Editor:</div>
+                <textarea readonly class="w-full text-[8px] font-mono bg-white border border-red-300 rounded-lg p-2" rows="6" onclick="this.select()">CREATE TABLE IF NOT EXISTS beban_operasional (
+    id bigint generated by default as identity primary key,
+    kategori text not null,
+    keterangan text,
+    nominal integer default 0,
+    tanggal text not null,
+    sumber text default 'ADMIN',
+    foto text,
+    created_at timestamptz default now()
+);
+ALTER TABLE beban_operasional ADD COLUMN IF NOT EXISTS sumber text default 'ADMIN';
+ALTER TABLE beban_operasional ADD COLUMN IF NOT EXISTS foto text;
+ALTER TABLE beban_operasional DISABLE ROW LEVEL SECURITY;
+DO $$
+BEGIN
+  BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE beban_operasional; EXCEPTION WHEN duplicate_object THEN NULL; END;
+END $$;</textarea>
+                <button onclick="loadBebanInputList()" class="w-full mt-2 py-2 text-[9px] font-black rounded-lg text-white" style="background:linear-gradient(90deg,#16a34a,#22c55e);"><i class="fa-solid fa-rotate mr-1"></i> SUDAH DIJALANKAN, CEK LAGI</button>
+            </div>
+
+            <div class="bg-cardBg rounded-xl border-2 border-borderDark px-3 py-2.5 flex items-center justify-between">
+                <div class="text-center flex-1">
+                    <div class="text-[8px] font-black text-blue-600 tracking-wider">TOTAL DARI ADMIN</div>
+                    <div id="beban-total-admin" class="text-[13px] font-black text-black">Rp 0</div>
+                </div>
+                <div class="w-px h-8 bg-borderDark flex-shrink-0"></div>
+                <div class="text-center flex-1">
+                    <div class="text-[8px] font-black text-purple-600 tracking-wider">TOTAL DARI OWNER</div>
+                    <div id="beban-total-owner" class="text-[13px] font-black text-black">Rp 0</div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-1.5">
+                <button id="beban-sumber-semua" onclick="setBebanSumberFilterInput('semua')" class="flex-1 py-1.5 rounded-lg text-[8.5px] font-black text-black border-2 border-borderDark" style="background:linear-gradient(90deg,#2196f3,#64b5f6);">SEMUA</button>
+                <button id="beban-sumber-admin" onclick="setBebanSumberFilterInput('ADMIN')" class="flex-1 py-1.5 rounded-lg text-[8.5px] font-black text-black bg-darkBg border-2 border-borderDark">ADMIN</button>
+                <button id="beban-sumber-owner" onclick="setBebanSumberFilterInput('OWNER')" class="flex-1 py-1.5 rounded-lg text-[8.5px] font-black text-black bg-darkBg border-2 border-borderDark">OWNER</button>
+            </div>
+
+            <div class="flex items-center gap-2 px-1">
+                <i class="fa-solid fa-clock-rotate-left brand-text text-xs"></i>
+                <span class="text-[11px] font-black text-black tracking-wide">RIWAYAT BIAYA (MINGGU INI)</span>
+            </div>
+            <div id="beban-input-list" class="flex flex-col gap-2"></div>
+        <div class="tab-bottom-spacer" style="height:90px;flex-shrink:0;"></div>
         </div>
 
         <!-- TAB RIWAYAT RETUR -->
@@ -3396,6 +3398,12 @@ END $$;</textarea>
             </div>
         </div>
 
+        <!-- TOMBOL BACK: di sebelah kiri tombol menu hamburger. Otomatis hilang
+             (rp-back-hidden) saat menu navbar dibuka, lihat initFloatingNavbar(). -->
+        <button type="button" id="rp-back-toggle" class="rp-back-toggle" aria-label="Kembali">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
         <!-- FLOATING MENU TOGGLE: membuka/menutup navbar utama -->
         <button type="button" id="rp-nav-toggle" class="rp-nav-toggle" aria-label="Buka menu navigasi" aria-expanded="false">
             <i class="fa-solid fa-bars"></i>
@@ -3421,6 +3429,7 @@ END $$;</textarea>
     (function initFloatingNavbar(){
         const nav = document.getElementById('bottom-navbar');
         const toggle = document.getElementById('rp-nav-toggle');
+        const backBtn = document.getElementById('rp-back-toggle');
         if (!nav || !toggle) return;
         let open = false;
         const setOpen = (value) => {
@@ -3438,11 +3447,18 @@ END $$;</textarea>
             toggle.setAttribute('aria-expanded', String(open));
             toggle.setAttribute('aria-label', open ? 'Tutup menu navigasi' : 'Buka menu navigasi');
             toggle.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+            // Tombol BACK otomatis hilang selama menu navbar terbuka.
+            if (backBtn) backBtn.classList.toggle('rp-back-hidden', open);
         };
         toggle.addEventListener('click', () => setOpen(!open));
         nav.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', () => setTimeout(() => setOpen(false), 120));
         });
+        if (backBtn) {
+            backBtn.addEventListener('click', () => {
+                if (typeof _performBackAction === 'function') _performBackAction();
+            });
+        }
         setOpen(false);
     })();
 
@@ -5208,6 +5224,9 @@ function updateSSK(tab, rowId) {
             if (tabName === 'stok') _renderStokDashboardOri();
             if (tabName === 'riwayat-input') {
                 if (typeof renderRiwayatInputTab === 'function') renderRiwayatInputTab();
+            }
+            if (tabName === 'riwayat-beban') {
+                if (typeof loadBebanInputList === 'function') loadBebanInputList();
             }
             if (tabName === 'riwayat-retur') {
                 // Beda dgn tab Riwayat Transaksi (default periode mingguan): tab ini
@@ -12277,9 +12296,10 @@ function updateSSK(tab, rowId) {
 
     _pushBackState();
 
-    window.addEventListener('popstate', function(e) {
-        _pushBackState();
-
+    // Logika "kembali" dipakai bersama oleh tombol hardware back Android (event
+    // popstate) dan tombol BACK di layar (#rp-back-toggle, di sebelah kiri tombol
+    // menu hamburger) supaya perilakunya selalu konsisten di kedua jalur.
+    function _performBackAction() {
         const dropdownPopup = document.getElementById('ukuran-dropdown-popup') ||
                               document.getElementById('generic-dropdown-popup');
         if (dropdownPopup) { dropdownPopup.remove(); return; }
@@ -12328,7 +12348,13 @@ function updateSSK(tab, rowId) {
 
         // Tidak ada lagi yang bisa di-back-kan; tombol back tidak melakukan apa-apa
         // (fungsi keluar aplikasi via tombol back dihapus sesuai permintaan).
+    }
+
+    window.addEventListener('popstate', function(e) {
+        _pushBackState();
+        _performBackAction();
     });
+
 
     </script>
 
