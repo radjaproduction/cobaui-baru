@@ -106,10 +106,25 @@
                     })
                     .catch(err => console.log('❌ SW error:', err));
 
-                // Setelah SW baru ambil alih kontrol (setelah SKIP_WAITING), reload sekali biar app pakai versi baru
+                // Setelah SW baru ambil alih kontrol (setelah SKIP_WAITING), reload sekali biar app pakai versi baru.
+                // PENTING: controllerchange JUGA ikut terpicu di KUNJUNGAN PERTAMA — begitu SW yang baru
+                // saja ter-install selesai activate dan memanggil self.clients.claim() (lihat service-worker.js),
+                // controller berubah dari "tidak ada" -> "ada" walau ini bukan update sama sekali. Kalau tidak
+                // dijaga, itu memicu location.reload() paksa di tengah proses load data pertama kali (bar
+                // loading keliatan "reset", gambar background jadi lambat karena kerja render+fetch dobel).
+                // Solusi: hanya reload kalau HALAMAN INI sebelumnya SUDAH dikontrol SW lain (berarti memang
+                // pergantian versi/update sungguhan), bukan saat klaim kontrol pertama kali.
+                let _hadControllerAtLoad = !!navigator.serviceWorker.controller;
                 let _swAlreadyRefreshed = false;
                 navigator.serviceWorker.addEventListener('controllerchange', () => {
                     if (_swAlreadyRefreshed) return;
+                    if (!_hadControllerAtLoad) {
+                        // Klaim kontrol pertama kali (baru install) — bukan update, jangan reload.
+                        // Setelah ini halaman sudah dianggap "terkontrol", jadi controllerchange
+                        // BERIKUTNYA (kalau ada) barulah dianggap update sungguhan.
+                        _hadControllerAtLoad = true;
+                        return;
+                    }
                     _swAlreadyRefreshed = true;
                     location.reload();
                 });
