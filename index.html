@@ -1262,9 +1262,8 @@
 
         #trx-vendor-selector:hover, #trx-brand-selector:hover, #trx-model-selector:hover, #btn-tambah-variasi-trx:hover { background-color: var(--trx-hover) !important; }
 
-        #action-bar-transaksi { background: rgba(10,28,56,.95) !important; border-top-color: var(--trx-border) !important; }
-        #action-bar-transaksi button[onclick="clearTransaksi()"] { background: rgba(10,28,56,.9) !important; border: 1.5px solid var(--trx-accent) !important; color: var(--trx-accent) !important; box-shadow: none !important; }
-        #btn-simpan-transaksi { box-shadow: 0 4px 15px var(--trx-shadow) !important; }
+        /* action-bar-transaksi kini berisi tombol bulat mengambang (lihat rp-cetak-circle-btn-orange),
+           jadi background bar solid & border khusus clearTransaksi tidak lagi dipakai. */
 
         /* ---------- TAB TRANSAKSI: teks putih di atas navy (sama seperti TAB INPUT DATA) ---------- */
         #tab-transaksi.rp-input-screen .text-black { color: #eef3fb !important; }
@@ -1307,8 +1306,6 @@
         #tab-transaksi .brand-gradient-bg *,
         #action-bar-transaksi .brand-gradient-bg,
         #action-bar-transaksi .brand-gradient-bg *,
-        #action-bar-transaksi button[onclick="clearTransaksi()"],
-        #action-bar-transaksi button[onclick="clearTransaksi()"] *,
         #trx-variasi-sheet .brand-gradient-bg,
         #trx-variasi-sheet .brand-gradient-bg * {
             color: #ffffff !important;
@@ -1365,6 +1362,14 @@
 .rp-back-toggle i{position:relative;top:1px}
 .rp-back-toggle:active{transform:scale(.92)}
 .rp-back-toggle.rp-back-hidden{opacity:0;transform:scale(.8);pointer-events:none}
+#sticky-total-bar{transition:opacity .2s ease,transform .2s ease}
+#sticky-total-bar.rp-back-hidden{opacity:0;transform:scale(.8);pointer-events:none}
+#action-bar-transaksi{transition:opacity .2s ease,transform .2s ease}
+#action-bar-transaksi.rp-back-hidden{opacity:0;transform:scale(.8);pointer-events:none}
+.rp-cetak-circle-btn{width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .2s ease,opacity .2s ease}
+.rp-cetak-circle-btn-orange{background:linear-gradient(145deg,#ffb21a,#ff7300);border:0;color:#111;box-shadow:0 8px 22px rgba(255,115,0,.35)}
+.rp-cetak-circle-btn-orange.opacity-40{box-shadow:none}
+.rp-cetak-circle-btn:active{transform:scale(.92)}
 .rp-size-hint{position:fixed;left:18px;bottom:30px;z-index:90;pointer-events:none;opacity:1;transition:opacity .2s ease,transform .2s ease;}
 .rp-size-hint span{display:block;font-weight:900;letter-spacing:-.01em;line-height:1.2;}
 .rp-size-hint .rp-size-hint-l1{font-size:15px;color:#fff;}
@@ -2826,13 +2831,14 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
         <div class="tab-bottom-spacer" style="height:90px;flex-shrink:0;"></div>
         </div>
 
-        <!-- ACTION BAR: TRANSAKSI (fixed above nav) -->
-        <div id="action-bar-transaksi" class="fixed bottom-[84px] left-0 right-0 z-40 px-3 pb-3 pt-3 bg-[#06142B]/95 backdrop-blur-md border-t-0 flex gap-2" style="display:none">
-            <button onclick="clearTransaksi()" class="flex-1 font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform" style="background:rgba(10,28,56,.9);border:1.5px solid var(--trx-accent);color:var(--trx-accent);border-radius:16px;">
-                <i class="fa-solid fa-xmark"></i> CLEAR
+        <!-- ACTION BAR: TRANSAKSI — bulat, sejajar tombol back (bottom:22px), rata kiri.
+             Sama treatment-nya dgn #sticky-total-bar di tab RIWAYAT TRANSAKSI. -->
+        <div id="action-bar-transaksi" class="fixed left-0 items-center gap-3" style="bottom:22px;z-index:100;padding-left:26px;display:none">
+            <button onclick="clearTransaksi()" class="rp-cetak-circle-btn rp-cetak-circle-btn-orange" title="Clear">
+                <i class="fa-solid fa-xmark"></i>
             </button>
-            <button id="btn-simpan-transaksi" onclick="simpanTransaksi()" disabled class="flex-[2] text-black font-black text-[13px] py-3.5 flex justify-center items-center gap-2 active:scale-95 transition-transform opacity-40 cursor-not-allowed" style="background:var(--trx-gradient);border-radius:16px;box-shadow:0 4px 15px var(--trx-shadow);">
-                <i class="fa-solid fa-check-to-slot"></i> <span>SIMPAN TRANSAKSI</span>
+            <button id="btn-simpan-transaksi" onclick="simpanTransaksi()" disabled class="rp-cetak-circle-btn rp-cetak-circle-btn-orange opacity-40 cursor-not-allowed" title="Simpan Transaksi">
+                <i class="fa-solid fa-check-to-slot"></i>
             </button>
         </div>
 
@@ -2959,12 +2965,21 @@ END $$;</textarea>
             <div id="riwayat-transaksi-list" class="hidden flex-col gap-2"></div>
             <div id="riwayat-pelunasan-list" class="hidden flex-col gap-3"></div>
             <div id="riwayat-bayar-sebagian-list" class="hidden flex-col gap-3"></div>
-            <div id="sticky-total-bar" class="hidden fixed bottom-[84px] left-0 right-0 w-full bg-[#06142B]/95 backdrop-blur-md border-t-4 border-[#7699C9] px-3 pb-3 pt-3 flex items-center z-40 gap-2">
-                    <span id="selected-trx-count" class="hidden">0</span>
-                    <button onclick="batalPilihSemua()" class="flex-1 justify-center text-black font-black text-[13px] py-3.5 rounded-xl flex items-center gap-2 active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347)">BATAL</button>
-                    <button onclick="buatSuratTagihan()" id="btn-tagihan-terpilih" class="flex-1 justify-center text-black font-black text-[13px] py-3.5 rounded-xl flex items-center gap-2 opacity-40 cursor-not-allowed active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347)"><i class="fa-solid fa-file-invoice"></i> TAGIHAN</button>
-                    <button onclick="cetakTerpilih()" id="btn-cetak-terpilih" class="flex-1 justify-center text-black font-black text-[13px] py-3.5 rounded-xl flex items-center gap-2 opacity-40 cursor-not-allowed active:scale-95 transition-transform" style="background:linear-gradient(90deg,#ff8c00,#ffb347)"><i class="fa-solid fa-truck-fast"></i> SURAT JALAN</button>
+            <div id="sticky-total-bar" class="hidden fixed left-0 items-center gap-3" style="bottom:22px;z-index:100;padding-left:26px;">
+                    <button onclick="batalPilihSemua()" class="rp-cetak-circle-btn rp-cetak-circle-btn-orange" style="position:relative;" title="Batal">
+                        <i class="fa-solid fa-xmark"></i>
+                        <span id="selected-trx-count-badge" class="hidden vendor-notif-badge" style="position:absolute;top:-2px;right:-2px;"><span id="selected-trx-count">0</span></span>
+                    </button>
+                    <button onclick="buatSuratTagihan()" id="btn-tagihan-terpilih" class="rp-cetak-circle-btn rp-cetak-circle-btn-orange opacity-40 cursor-not-allowed" title="Tagihan"><i class="fa-solid fa-file-invoice"></i></button>
+                    <button onclick="cetakTerpilih()" id="btn-cetak-terpilih" class="rp-cetak-circle-btn rp-cetak-circle-btn-orange opacity-40 cursor-not-allowed" title="Surat Jalan"><i class="fa-solid fa-truck-fast"></i></button>
             </div>
+
+            <!-- Backdrop solid khusus zona navbar tab RIWAYAT (0-84px dari bawah): sama pola
+                 dengan #input-tab-nav-backdrop / #trx-tab-nav-backdrop, supaya konten (pill
+                 warna/ukuran) yang discroll tidak "bocor" tembus di celah navbar transparan +
+                 tombol BACK/menu/BATAL-TAGIHAN-SURAT JALAN yang melayang (z-100). Backdrop
+                 sendiri z-35: di bawah semua tombol melayang, di atas konten kartu biasa. -->
+            <div id="riwayat-tab-nav-backdrop" class="fixed bottom-0 left-0 right-0 bg-[#06142B]" style="z-index:35;height:calc(112px + env(safe-area-inset-bottom));pointer-events:none;"></div>
 
         <div id="riwayat-bottom-spacer" style="height:90px;flex-shrink:0;"></div>
         </div>
@@ -3410,6 +3425,12 @@ END $$;</textarea>
         const nav = document.getElementById('bottom-navbar');
         const toggle = document.getElementById('rp-nav-toggle');
         const backBtn = document.getElementById('rp-back-toggle');
+        // Tombol BATAL/TAGIHAN/SURAT JALAN (tab RIWAYAT TRANSAKSI) ikut hilang
+        // saat menu navbar dibuka, perlakuannya sama seperti tombol BACK.
+        const cetakBar = document.getElementById('sticky-total-bar');
+        // Tombol CLEAR/SIMPAN TRANSAKSI (tab INPUT TRANSAKSI) — posisinya sekarang
+        // sejajar tombol back juga, jadi ikut hilang saat menu dibuka.
+        const trxActionBar = document.getElementById('action-bar-transaksi');
         if (!nav || !toggle) return;
         let open = false;
         const setOpen = (value) => {
@@ -3429,6 +3450,10 @@ END $$;</textarea>
             toggle.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
             // Tombol BACK otomatis hilang selama menu navbar terbuka.
             if (backBtn) backBtn.classList.toggle('rp-back-hidden', open);
+            // Tombol BATAL/TAGIHAN/SURAT JALAN (kalau sedang tampil di tab RIWAYAT
+            // TRANSAKSI) ikut hilang dengan cara & animasi yang sama seperti BACK.
+            if (cetakBar) cetakBar.classList.toggle('rp-back-hidden', open);
+            if (trxActionBar) trxActionBar.classList.toggle('rp-back-hidden', open);
         };
         toggle.addEventListener('click', () => setOpen(!open));
         nav.querySelectorAll('.nav-btn').forEach(btn => {
@@ -5670,16 +5695,13 @@ function updateSSK(tab, rowId) {
         _rrOnlyPage = 1;
     }
 
-    // Spacer di bawah list tab Riwayat harus lebih tinggi saat #sticky-total-bar (BATAL/TAGIHAN/SURAT
-    // JALAN) sedang tampil, supaya item terakhir tidak ketutupan permanen oleh bar itu + nav bar
-    // (dulu spacer selalu 90px flat sehingga saat totalBar aktif, halaman kehabisan ruang scroll
-    // sebelum item terakhir sempat naik melewati kedua bar fixed tsb).
+    // Spacer di bawah list tab Riwayat: sekarang BATAL/TAGIHAN/SURAT JALAN sudah jadi tombol
+    // bulat kecil sejajar tombol BACK/menu (bukan bar lebar lagi), jadi cukup ruang standar
+    // 90px yang sama dipakai untuk menghindari item terakhir ketutupan navbar melayang.
     function _updateRiwayatBottomSpacer() {
         const spacer = document.getElementById('riwayat-bottom-spacer');
-        const totalBar = document.getElementById('sticky-total-bar');
         if (!spacer) return;
-        const barVisible = !!(totalBar && !totalBar.classList.contains('hidden'));
-        spacer.style.height = barVisible ? '170px' : '90px';
+        spacer.style.height = '90px';
     }
 
     // subTab: 'input' | 'transaksi' (alias masuk grup, default KREDIT) | 'kredit' | 'lunas' | 'pelunasan' | 'bayar-sebagian'
@@ -9421,24 +9443,19 @@ function updateSSK(tab, rowId) {
                 : `<div id="vg-badge-${vendorKey}"></div>`;
 
             return `<div class="mb-2" data-vendor-group="${vendor}">
-                <div class="rp-vendor-card">
-                    <div class="rp-vendor-card-head">
-                        <div class="flex items-center gap-2.5 min-w-0">
-                            <div class="rp-vendor-card-icon"><i class="fa-solid fa-truck-fast"></i></div>
-                            <div class="min-w-0">
-                                <div class="flex items-center gap-1.5">
-                                    <div class="rp-vendor-card-name truncate">${vendorLabel}</div>
-                                    ${tampilkanBadgeCicil ? '<span style="background:rgba(220,38,38,0.85);" class="text-[9px] font-black text-white px-1.5 py-0.5 rounded-md tracking-wide flex items-center gap-0.5 whitespace-nowrap flex-shrink-0"><i class="fa-solid fa-hand-holding-dollar text-[8px]"></i> CICIL</span>' : ''}
-                                </div>
-                                <div class="rp-vendor-card-meta">${trxCount} transaksi • Rp ${totalNominalVendor.toLocaleString('id-ID')}</div>
-                            </div>
+                <div class="flex items-start justify-between gap-2 px-1 pb-1.5">
+                    <div class="min-w-0">
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[10px] font-black text-black/50 uppercase tracking-wide truncate">${vendorLabel}</span>
+                            ${tampilkanBadgeCicil ? '<span style="background:rgba(220,38,38,0.85);" class="text-[9px] font-black text-white px-1.5 py-0.5 rounded-md tracking-wide flex items-center gap-0.5 whitespace-nowrap flex-shrink-0"><i class="fa-solid fa-hand-holding-dollar text-[8px]"></i> CICIL</span>' : ''}
                         </div>
-                        <div class="flex items-center gap-2 flex-shrink-0">
-                            ${badgeHtml}
-                            <button id="pilih-semua-${vendorKey}" onclick="pilihSemuaVendor('${vendor}')" class="rp-vendor-select-btn">
-                                ✓ Semua
-                            </button>
-                        </div>
+                        <div class="text-[9px] text-black/40 font-bold mt-0.5">${trxCount} transaksi • Rp ${totalNominalVendor.toLocaleString('id-ID')}</div>
+                    </div>
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                        ${badgeHtml}
+                        <button id="pilih-semua-${vendorKey}" onclick="pilihSemuaVendor('${vendor}')" class="rp-vendor-select-btn">
+                            ✓ Semua
+                        </button>
                     </div>
                 </div>
                 <div id="vg-body-${vendorKey}" class="flex flex-col gap-2 mt-2">
@@ -9466,6 +9483,7 @@ function updateSSK(tab, rowId) {
             try {
                 if (bodyEl) {
                     const trxList = vendorGroups[vendor] || [];
+                    const vendorLabel = String(vendor || '').trim() ? vendor : 'VENDOR TIDAK DIKETAHUI';
                     const hasBayarSebagianTrx = appData.pelunasan.some(p => p.vendor === vendor && (p.transaksi_id === null || p.transaksi_id === undefined));
                     const cards = trxList.map((d, idx) => {
                         try {
@@ -9476,16 +9494,18 @@ function updateSSK(tab, rowId) {
                             const totalNominal = totalQty * (d.harga || 0);
                             const uid = 'rt-' + (d.id || idx);
                             const noUrut = idx + 1;
-                            return `<div class="flex items-start gap-2">
-                                <div class="w-5 flex-shrink-0 pt-3 text-center text-[10px] font-black text-black">${noUrut}</div>
-                                <div id="card-${uid}" class="flex-1 min-w-0 bg-cardBg rounded-lg border-2 border-borderDark overflow-hidden transition-all">
+                            return `<div id="card-${uid}" class="bg-cardBg rounded-lg border-2 border-borderDark overflow-hidden transition-all">
                                 <div class="flex items-center gap-2.5 px-3 py-2.5">
-                                    <div onclick="event.stopPropagation();togglePilihTrx(${d.id},'${uid}')" id="chk-${uid}" class="w-5 h-5 rounded border-4 border-gray-600 flex items-center justify-center flex-shrink-0 cursor-pointer transition-all"></div>
+                                    <div class="flex flex-col items-center gap-1 flex-shrink-0">
+                                        <span class="text-[9px] font-black text-white/70">${noUrut}</span>
+                                        <div onclick="event.stopPropagation();togglePilihTrx(${d.id},'${uid}')" id="chk-${uid}" class="w-5 h-5 rounded border-4 border-gray-600 flex items-center justify-center cursor-pointer transition-all"></div>
+                                    </div>
                                     <div class="flex-1 min-w-0">
-                                        <div class="flex items-center gap-2">
+                                        <div class="flex items-center justify-between gap-2">
+                                            <span class="text-[12px] font-black text-orange-400 uppercase tracking-wide truncate"><i class="fa-solid fa-truck-fast text-[10px] mr-1"></i>${vendorLabel}</span>
                                             <span class="px-2 py-0.5 ${statusClass} border-2 text-[9px] font-black rounded tracking-wider flex-shrink-0">${isLunas ? 'LUNAS' : 'CREDIT'}</span>
-                                            <span class="text-[11px] font-black text-black uppercase truncate">${d.brand || '-'} / ${d.model || '-'}</span>
                                         </div>
+                                        <div class="text-[11px] font-black text-black uppercase truncate mt-0.5">${d.brand || '-'} / ${d.model || '-'}</div>
                                         <div class="flex items-center gap-2 mt-0.5 flex-wrap">
                                             <span class="text-[10px] brand-text font-black">${totalQty} pcs${totalNominal > 0 ? ' • Rp ' + totalNominal.toLocaleString('id-ID') : ''}</span>
                                             <span class="text-[9px] text-black ml-auto">${d.tanggal || ''} ${d.jam || ''}</span>
@@ -9494,9 +9514,9 @@ function updateSSK(tab, rowId) {
                                 </div>
                                 <div id="${uid}-body" class="px-3 pb-2.5 border-t-2 border-borderDark">
                                     <div class="flex flex-wrap gap-1 pt-2">${items.map((i, iIdx) => `<span class="text-[10px] bg-darkBg border-2 border-borderDark rounded px-2 py-0.5 text-black">${i.warna} / ${i.ukuran}: <span class="text-black font-bold">${i.qty}</span></span>`).join('')}</div>
-                                    <div class="flex gap-2 mt-2.5">
-                                        <button onclick="event.stopPropagation();bukaEditQtyTrx(${d.id})" class="${isLunas ? 'opacity-30 cursor-not-allowed' : 'hover:bg-blue-500/20 cursor-pointer'} flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border-2 border-blue-500/40 bg-blue-500/10 text-blue-400 text-[10px] font-bold transition-colors" ${isLunas ? 'disabled' : ''}><i class="fa-solid fa-pen-to-square text-[9px]"></i> EDIT QTY</button>
-                                        <button onclick="event.stopPropagation();hapusTrxRiwayat(${d.id})" class="${isLunas ? 'opacity-30 cursor-not-allowed' : 'hover:bg-red-500/20 cursor-pointer'} flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border-2 border-red-500/40 bg-red-500/10 text-red-400 text-[10px] font-bold transition-colors" ${isLunas ? 'disabled' : ''}><i class="fa-regular fa-trash-can text-[9px]"></i> HAPUS</button>
+                                    <div class="flex justify-end gap-2 mt-2.5">
+                                        <button onclick="event.stopPropagation();bukaEditQtyTrx(${d.id})" title="Edit Qty" class="${isLunas ? 'opacity-30 cursor-not-allowed' : 'hover:bg-blue-500/20 cursor-pointer'} w-9 h-9 flex items-center justify-center rounded-lg border-2 border-blue-500/40 bg-blue-500/10 text-blue-400 transition-colors" ${isLunas ? 'disabled' : ''}><i class="fa-solid fa-pen-to-square text-[12px]"></i></button>
+                                        <button onclick="event.stopPropagation();hapusTrxRiwayat(${d.id})" title="Hapus" class="${isLunas ? 'opacity-30 cursor-not-allowed' : 'hover:bg-red-500/20 cursor-pointer'} w-9 h-9 flex items-center justify-center rounded-lg border-2 border-red-500/40 bg-red-500/10 text-red-400 transition-colors" ${isLunas ? 'disabled' : ''}><i class="fa-regular fa-trash-can text-[12px]"></i></button>
                                     </div>
                                     ${isLunas ? (
                                         hasBayarSebagianTrx
@@ -9505,7 +9525,7 @@ function updateSSK(tab, rowId) {
                                            <p class="text-[9px] text-black text-center mt-1"><i class="fa-solid fa-lock text-[8px] mr-1"></i>Transaksi LUNAS tidak dapat diedit atau dihapus.</p>`
                                     ) : ''}
                                 </div>
-                            </div></div>`;
+                            </div>`;
                         } catch (cardErr) {
                             console.warn('Lewati 1 transaksi rusak (vendor: ' + vendor + ', id: ' + (d && d.id) + '):', cardErr.message);
                             return '';
@@ -9610,8 +9630,10 @@ function updateSSK(tab, rowId) {
     function updateCetakBar() {
         const count = selectedTrxIds.size;
         const countEl = document.getElementById('selected-trx-count');
+        const badgeEl = document.getElementById('selected-trx-count-badge');
         const btnCetak = document.getElementById('btn-cetak-terpilih');
         if (countEl) countEl.textContent = count;
+        if (badgeEl) badgeEl.classList.toggle('hidden', count === 0);
         const btnTagihan = document.getElementById('btn-tagihan-terpilih');
 
         // Cek apakah vendor yang dipilih punya bayar sebagian DAN ada transaksi terpilih yang masih CREDIT
