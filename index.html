@@ -1271,7 +1271,7 @@
 .rp-stock-fab-pesanan i{color:#fff}
 .rp-stock-fab-pesanan span{color:#fff}
 .rp-stock-fab-pesanan .vendor-notif-badge{position:absolute;top:-4px;right:-4px;}
-.rp-nav-toggle{position:fixed;right:26px;bottom:14px;width:66px;height:66px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .22s ease,background .22s ease,color .22s ease}
+.rp-nav-toggle{position:fixed;right:21px;bottom:14px;width:66px;height:66px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(10,28,56,.96);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:100;box-shadow:0 8px 22px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .22s ease,background .22s ease,color .22s ease}
 .rp-nav-toggle i{position:relative;top:2px}
 .rp-nav-toggle:active{transform:scale(.92)}
 .rp-nav-toggle.is-open{background:linear-gradient(145deg,#ffb21a,#ff7300);color:#111;border-color:rgba(255,177,26,.8)}
@@ -1307,6 +1307,16 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
 #bottom-navbar .nav-btn:nth-child(3){transition-delay:.26s}
 #bottom-navbar .nav-btn:nth-child(2){transition-delay:.32s}
 #bottom-navbar .nav-btn:nth-child(1){transition-delay:.38s}
+/* PERBAIKAN: nth-child di atas ikut menghitung item yang sudah di-hide (Transaksi, Riwayat
+   Input/Beban/Retur), jadi urutan delay-nya kacau (Stok & Input Data malah paling lambat
+   muncul, sedangkan Riwayat/Laba/Master instan tanpa delay) — bikin buka menu terasa lambat.
+   Di-override pakai selector ID langsung untuk item yang benar-benar tampil, dengan total
+   delay yang jauh lebih singkat supaya menu terasa responsif. */
+#bottom-navbar #nav-btn-master{transition-delay:0s}
+#bottom-navbar #nav-btn-laba{transition-delay:.04s}
+#bottom-navbar #nav-btn-riwayat{transition-delay:.08s}
+#bottom-navbar #nav-btn-input{transition-delay:.12s}
+#bottom-navbar #nav-btn-stok{transition-delay:.16s}
 #bottom-navbar:not(.rp-stagger-in) .nav-btn{transition-delay:0s!important}
 #tab-stok.rp-stock-screen .kpi-skel{min-width:30px;color:transparent!important}#tab-stok.rp-stock-screen .rp-stock-dashboard{padding-bottom:10px}@media (min-width:520px){.rp-brand-list{grid-template-columns:repeat(3,minmax(0,1fr))}.rp-stock-kpis{gap:12px}.rp-stock-heading h1{font-size:34px}.rp-input-heading h1{font-size:34px}}
 </style>
@@ -3207,47 +3217,47 @@ END $$;</textarea>
         <!-- BOTTOM NAV -->
         <div id="bottom-navbar" class="fixed bottom-0 w-full brand-gradient-bg border-t-2 border-[#e07800] flex justify-center items-center pt-3 z-50 rp-navbar-hidden" style="padding-bottom: max(16px, env(safe-area-inset-bottom)); gap: 6px;">
             <div id="nav-btn-stok" onclick="switchTab('stok')" class="nav-btn active flex flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000] bg-black/20 border-2 border-black/20 w-11 h-9 rounded-lg flex items-center justify-center shadow-lg"><i class="fa-solid fa-boxes-stacked text-xl"></i></div>
-                <span class="nav-text text-[9px] font-black text-[#000000]">Stok</span>
+                <div class="icon-box text-[#000000] bg-black/20 border-2 border-black/20 w-12 h-12 rounded-full flex items-center justify-center shadow-lg"><i class="fa-solid fa-boxes-stacked text-2xl"></i></div>
+                <span class="nav-text text-[10px] font-black text-[#000000]">Stok</span>
             </div>
             <div id="nav-btn-input" onclick="switchTab('input')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-house text-xl"></i></div>
-                <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Input Data</span>
+                <div class="icon-box text-[#000000]/60 w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-house text-2xl"></i></div>
+                <span class="nav-text text-[10px] text-[#000000]/60 font-normal">Input Data</span>
             </div>
-            <div id="nav-btn-transaksi" onclick="switchTab('transaksi')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-handshake text-xl"></i></div>
-                <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Transaksi</span>
+            <div id="nav-btn-transaksi" onclick="switchTab('transaksi')" class="nav-btn inactive hidden flex-col items-center gap-1 cursor-pointer">
+                <div class="icon-box text-[#000000]/60 w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-handshake text-2xl"></i></div>
+                <span class="nav-text text-[10px] text-[#000000]/60 font-normal">Transaksi</span>
             </div>
             <div id="nav-btn-riwayat-input" onclick="switchTab('riwayat-input')" class="nav-btn inactive hidden flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-clipboard-list text-xl"></i></div>
-                <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Riwayat Input</span>
+                <div class="icon-box text-[#000000]/60 w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-clipboard-list text-2xl"></i></div>
+                <span class="nav-text text-[10px] text-[#000000]/60 font-normal">Riwayat Input</span>
             </div>
             <div id="nav-btn-riwayat-beban" onclick="switchTab('riwayat-beban')" class="nav-btn inactive hidden flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-money-bill-wave text-xl"></i></div>
-                <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Riwayat Beban</span>
+                <div class="icon-box text-[#000000]/60 w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-money-bill-wave text-2xl"></i></div>
+                <span class="nav-text text-[10px] text-[#000000]/60 font-normal">Riwayat Beban</span>
             </div>
             <div id="nav-btn-riwayat-retur" onclick="switchTab('riwayat-retur')" class="nav-btn inactive hidden flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-rotate-left text-xl"></i></div>
-                <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Riwayat Retur</span>
+                <div class="icon-box text-[#000000]/60 w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-rotate-left text-2xl"></i></div>
+                <span class="nav-text text-[10px] text-[#000000]/60 font-normal">Riwayat Retur</span>
             </div>
             <div id="nav-btn-riwayat" onclick="onNavRiwayatClick()" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center relative">
-                    <i class="fa-solid fa-clock-rotate-left text-xl"></i>
+                <div class="icon-box text-[#000000]/60 w-12 h-12 rounded-full flex items-center justify-center relative">
+                    <i class="fa-solid fa-clock-rotate-left text-2xl"></i>
                     <!-- Badge notifikasi pesanan SUDAH DIPINDAH ke tombol FAB "Pesanan" (lihat
                          #fab-pesanan-badge di tab Stok) — elemen ini dibiarkan tersembunyi
                          permanen (lihat _updatePesananBellBadge di script) supaya id lama yang
                          mungkin masih dirujuk di tempat lain tidak error, tanpa tampil di sini lagi. -->
                     <div id="pesanan-bell-badge" class="vendor-notif-badge hidden" style="position:absolute; top:-6px; right:-6px;">0</div>
                 </div>
-                <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Riwayat</span>
+                <span class="nav-text text-[10px] text-[#000000]/60 font-normal">Riwayat</span>
             </div>
             <div id="nav-btn-laba" onclick="switchTab('laba')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-sack-dollar text-xl"></i></div>
-                <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Laba</span>
+                <div class="icon-box text-[#000000]/60 w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-sack-dollar text-2xl"></i></div>
+                <span class="nav-text text-[10px] text-[#000000]/60 font-normal">Laba</span>
             </div>
             <div id="nav-btn-master" onclick="switchTab('master')" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
-                <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-database text-xl"></i></div>
-                <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Master</span>
+                <div class="icon-box text-[#000000]/60 w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-database text-2xl"></i></div>
+                <span class="nav-text text-[10px] text-[#000000]/60 font-normal">Master</span>
             </div>
         </div>
 
@@ -5607,14 +5617,14 @@ function updateSSK(tab, rowId) {
             document.getElementById('tab-' + t).classList.add('hidden');
             document.getElementById('tab-' + t).classList.remove('flex');
             let btn = document.getElementById('nav-btn-' + t);
-            btn.querySelector('.icon-box').className = "icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center";
-            btn.querySelector('.nav-text').className = "nav-text text-[9px] text-[#000000]/60 font-normal";
+            btn.querySelector('.icon-box').className = "icon-box text-[#000000]/60 w-12 h-12 rounded-full flex items-center justify-center";
+            btn.querySelector('.nav-text').className = "nav-text text-[10px] text-[#000000]/60 font-normal";
         });
         document.getElementById('tab-' + tabName).classList.remove('hidden');
         document.getElementById('tab-' + tabName).classList.add('flex');
         let activeBtn = document.getElementById('nav-btn-' + tabName);
-        activeBtn.querySelector('.icon-box').className = "icon-box text-[#000000] bg-black/20 border-2 border-black/20 w-11 h-9 rounded-lg flex items-center justify-center shadow-lg";
-        activeBtn.querySelector('.nav-text').className = "nav-text text-[9px] font-black text-[#000000]";
+        activeBtn.querySelector('.icon-box').className = "icon-box text-[#000000] bg-black/20 border-2 border-black/20 w-12 h-12 rounded-full flex items-center justify-center shadow-lg";
+        activeBtn.querySelector('.nav-text').className = "nav-text text-[10px] font-black text-[#000000]";
 
         // Tampilkan/sembunyikan action bar sesuai tab aktif
         const barInput = document.getElementById('action-bar-input');
@@ -9683,8 +9693,8 @@ function updateSSK(tab, rowId) {
         }
 
         if (elLunas) {
-            const jumlahLunas = (appData.pelunasan || []).filter(p =>
-                tanggalDalamRange(p.tanggal, fDari, fSampai)
+            const jumlahLunas = (appData.riwayatTransaksi || []).filter(d =>
+                d.status === 'lunas' && tanggalDalamRange(d.tanggal, fDari, fSampai)
             ).length;
             elLunas.textContent = jumlahLunas.toLocaleString('id-ID');
         }
