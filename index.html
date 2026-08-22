@@ -3233,9 +3233,10 @@ END $$;</textarea>
             <div id="nav-btn-riwayat" onclick="onNavRiwayatClick()" class="nav-btn inactive flex flex-col items-center gap-1 cursor-pointer">
                 <div class="icon-box text-[#000000]/60 w-11 h-9 rounded-lg flex items-center justify-center relative">
                     <i class="fa-solid fa-clock-rotate-left text-xl"></i>
-                    <!-- Badge jumlah pesanan menunggu dari app Pesanan — gabung ke tombol Riwayat
-                         supaya admin cukup satu kali tekan: langsung pindah tab Riwayat sekalian
-                         "ngeh" ada pesanan baru, tanpa perlu tombol lonceng terpisah. -->
+                    <!-- Badge notifikasi pesanan SUDAH DIPINDAH ke tombol FAB "Pesanan" (lihat
+                         #fab-pesanan-badge di tab Stok) — elemen ini dibiarkan tersembunyi
+                         permanen (lihat _updatePesananBellBadge di script) supaya id lama yang
+                         mungkin masih dirujuk di tempat lain tidak error, tanpa tampil di sini lagi. -->
                     <div id="pesanan-bell-badge" class="vendor-notif-badge hidden" style="position:absolute; top:-6px; right:-6px;">0</div>
                 </div>
                 <span class="nav-text text-[9px] text-[#000000]/60 font-normal">Riwayat</span>
@@ -4228,19 +4229,14 @@ async function fetchBayarSebagianData() {
     }
 
     function _updatePesananBellBadge() {
-        const badge = document.getElementById('pesanan-bell-badge');
-        if (badge) {
-            if (pesananMenungguCount > 0) {
-                badge.textContent = pesananMenungguCount > 99 ? '99+' : String(pesananMenungguCount);
-                badge.classList.remove('hidden');
-            } else {
-                badge.classList.add('hidden');
-            }
-        }
-        // Ring animation ditempel ke tombol nav Riwayat itu sendiri (bukan tombol lonceng
-        // terpisah lagi), supaya kelihatan "hidup" selama masih ada pesanan menunggu.
-        const navBtn = document.getElementById('nav-btn-riwayat');
-        if (navBtn) navBtn.classList.toggle('pesanan-bell-ring', pesananMenungguCount > 0);
+        // Badge lonceng di tombol Riwayat SENGAJA tidak dipakai lagi — notifikasi pesanan
+        // baru (badge angka + ring animasi) sekarang HANYA muncul di tombol FAB "Pesanan"
+        // (lihat _refreshFabPesananBadge()), supaya Riwayat kembali jadi tombol netral.
+        const oldBadge = document.getElementById('pesanan-bell-badge');
+        if (oldBadge) oldBadge.classList.add('hidden');
+        // Ring animation & badge sekarang ditempel ke tombol FAB "Pesanan" (bukan Riwayat lagi)
+        // — lihat _refreshFabPesananBadge() di bawah, supaya notifikasi pesanan baru nyantol
+        // di tombol yang memang dipakai buat proses pesanan, bukan di Riwayat.
         // Nyalakan/matikan repeat alarm mengikuti ada-tidaknya pesanan yang masih menunggu.
         if (pesananMenungguCount > 0) _startPesananRepeatAlarm();
         else _stopPesananRepeatAlarm();
@@ -4258,13 +4254,9 @@ async function fetchBayarSebagianData() {
         _refreshFabPesananBadge();
     }
 
-    // Dipanggil dari tombol nav Riwayat (yang menyatu dengan bel/badge pesanan). Kalau masih
-    // tab) — supaya admin bisa hentikan alarm dari sini juga, tanpa wajib buka app Pesanan.
+    // Riwayat sekarang jadi tombol nav biasa lagi — notifikasi/konfirmasi pesanan baru
+    // dipindah sepenuhnya ke tombol FAB "Pesanan" (lihat fab-pesanan di tab Stok).
     function onNavRiwayatClick() {
-        if (pesananMenungguCount > 0) {
-            bukaPopupPesananKonfirmasi();
-            return;
-        }
         switchTab('riwayat');
     }
 
@@ -4424,11 +4416,19 @@ async function fetchBayarSebagianData() {
             if (!sbClient) { showToast('❌ Tidak ada koneksi ke server'); return; }
             if (btnEl) { btnEl.disabled = true; btnEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>'; }
             try {
-                const { error } = await sbClient.from(PESANAN_TABLE).update({ stage: 1 }).eq('order_code', orderCode);
+                const { data: updRows, error } = await sbClient.from(PESANAN_TABLE).update({ stage: 1 }).eq('order_code', orderCode).select('id');
                 if (error) throw error;
                 showToast('✅ Pesanan ' + orderCode + ' dikonfirmasi');
-                // pesananMenungguCount & badge lonceng ikut ter-update otomatis lewat
-                // onPesananRealtimeChange (event UPDATE stage 0 -> 1).
+                // JANGAN cuma pasrah nunggu event Realtime UPDATE buat mematikan alarm — kadang
+                // echo-nya telat/nggak nyampe (koneksi Realtime kurang stabil), jadi update
+                // pesananMenungguCount & badge LANGSUNG di sini juga begitu DB sukses diubah.
+                // Order id-nya didaftarkan ke _pesananProcessedIds supaya event Realtime yang
+                // (mungkin) tetap nyusul nanti, atau polling fallback, tidak menghitungnya dobel.
+                if (updRows && updRows.length) {
+                    updRows.forEach(r => { if (r.id != null) _pesananProcessedIds.add(r.id); });
+                }
+                pesananMenungguCount = Math.max(0, pesananMenungguCount - 1);
+                _updatePesananBellBadge();
                 const orders = await _fetchAktifPesananOrders();
                 _renderRincianPesananList(orders);
             } catch (e) {
@@ -4552,14 +4552,62 @@ async function fetchBayarSebagianData() {
     // Dipanggil sekali dari masukApp(): tampilkan bel, minta izin Notification, dan hitung
     // dulu berapa pesanan yang SUDAH menunggu (jaga-jaga kalau ada order masuk selagi app
     // Inventory ini tertutup) — tanpa bunyi alarm untuk hitungan awal ini.
+    // PENTING: id-id pesanan yang sudah kehitung di awal ini didaftarkan ke _pesananProcessedIds,
+    // supaya nanti _pesananPollFallback() (jaring pengaman polling) tidak menganggapnya "baru"
+    // dan membunyikan alarm ulang untuk pesanan yang sebenarnya sudah diketahui sejak awal buka app.
     async function initPesananNotif() {
         _requestPesananNotifPermission();
         if (!sbClient) { _updatePesananBellBadge(); return; }
         try {
-            const { count, error } = await sbClient.from(PESANAN_TABLE).select('*', { count: 'exact', head: true }).eq('stage', 0);
-            if (!error) pesananMenungguCount = count || 0;
+            const { data, error } = await sbClient.from(PESANAN_TABLE).select('id').eq('stage', 0);
+            if (!error) {
+                pesananMenungguCount = (data || []).length;
+                (data || []).forEach(o => { if (o.id != null) _pesananProcessedIds.add(o.id); });
+            }
         } catch (e) { console.warn('Gagal cek pesanan menunggu:', e.message); }
         _updatePesananBellBadge();
+        _startPesananPollFallback();
+    }
+
+    // ==================== JARING PENGAMAN: POLLING FALLBACK ====================
+    // Kadang koneksi WebSocket Realtime "zombie" — status di client masih kelihatan
+    // tersambung, padahal koneksi aslinya sudah putus diam-diam (umum terjadi di browser HP
+    // saat tab dibiarkan lama tanpa disentuh, meski app tidak benar-benar ditutup). Akibatnya
+    // notifikasi pesanan baru & update Riwayat Transaksi baru muncul setelah app ditutup-buka
+    // ulang (yang memaksa reload data dari awal). Sebagai jaring pengaman, cek ulang manual ke
+    // server tiap 20 detik SELAMA halaman sedang aktif/visible — independen dari status socket
+    // Realtime, jadi tetap dapat notifikasi & data ter-update walau koneksi realtime diam-diam mati.
+    const PESANAN_POLL_FALLBACK_MS = 20000;
+    let _pesananPollTimer = null;
+    async function _pesananPollFallback() {
+        if (!sbClient || document.visibilityState !== 'visible') return;
+        try {
+            const { data, error } = await sbClient.from(PESANAN_TABLE).select('id, order_code, items, note, stage').eq('stage', 0);
+            if (!error && data) {
+                const baru = data.filter(o => o.id != null && !_pesananProcessedIds.has(o.id));
+                pesananMenungguCount = data.length;
+                baru.forEach(o => {
+                    _pesananProcessedIds.add(o.id);
+                    if (_pesananProcessedIds.size > 200) { const first = _pesananProcessedIds.values().next().value; _pesananProcessedIds.delete(first); }
+                });
+                _updatePesananBellBadge();
+                if (baru.length > 0 && !pesananNotifMuted) {
+                    baru.forEach(o => { showToast('📦 Pesanan baru masuk: ' + (o.order_code || '-')); _showPesananSystemNotif(o); });
+                    _speakPesananAlarm(baru.length > 1 ? 'Ada ' + baru.length + ' pesanan masuk, harap segera dibuka' : 'Ada pesanan masuk, harap segera dibuka');
+                }
+            }
+        } catch (e) { console.warn('[Poll fallback] Gagal cek pesanan:', e.message); }
+        // Sekalian refresh grup data lain (Riwayat Transaksi, dst) — jaring pengaman yang sama
+        // untuk kasus event realtime transaksi/transaksi_item yang mungkin ikut kelewat.
+        try {
+            const groups = Object.keys(REALTIME_GROUP_HANDLERS);
+            await Promise.all(groups.map(g => REALTIME_GROUP_HANDLERS[g]?.fetch?.()));
+            groups.forEach(g => REALTIME_GROUP_HANDLERS[g]?.render?.());
+        } catch (e) { console.warn('[Poll fallback] Gagal refresh data:', e.message); }
+    }
+    function _startPesananPollFallback() {
+        if (_pesananPollTimer) return;
+        _pesananPollTimer = setInterval(_pesananPollFallback, PESANAN_POLL_FALLBACK_MS);
     }
 
     // Auto-reconnect: kalau koneksi Realtime putus (jaringan sempat hilang, tab di-background
