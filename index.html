@@ -2610,8 +2610,7 @@ body[data-active-tab] #bottom-navbar{background:transparent!important;border-top
                             </svg>
                         </div>
                         <div class="rp-stock-actions">
-                            <button type="button" class="rp-stock-icon-btn" aria-label="Notifikasi"><i class="fa-solid fa-bell"></i><span class="rp-stock-badge">0</span></button>
-                            <button type="button" class="rp-stock-icon-btn" aria-label="Cari"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button type="button" id="header-sound-toggle" class="rp-stock-icon-btn" aria-label="Status suara notifikasi" onclick="togglePesananNotifMute()"><i id="header-sound-icon" class="fa-solid fa-bell"></i></button>
                         </div>
                     </div>
                     </div>
@@ -5000,7 +4999,6 @@ async function fetchBayarSebagianData() {
     // supaya nanti _pesananPollFallback() (jaring pengaman polling) tidak menganggapnya "baru"
     // dan membunyikan alarm ulang untuk pesanan yang sebenarnya sudah diketahui sejak awal buka app.
     async function initPesananNotif() {
-        _requestPesananNotifPermission();
         if (!sbClient) { _updatePesananBellBadge(); return; }
         try {
             const { data, error } = await sbClient.from(PESANAN_TABLE).select('id, order_code').eq('stage', 0);
@@ -6685,6 +6683,10 @@ function updateSSK(tab, rowId) {
     // misal HP di lantai produksi tetap mau bunyi, tapi HP admin di kantor mau dimatiin.
     var pesananNotifMuted = false;
     function togglePesananNotifMute() {
+        if ('Notification' in window && Notification.permission === 'default') {
+            _requestPesananNotifPermission();
+            return;
+        }
         setPesananNotifMuted(!pesananNotifMuted);
     }
     function setPesananNotifMuted(muted) {
@@ -6692,14 +6694,20 @@ function updateSSK(tab, rowId) {
         const toggle = document.getElementById('pesanan-notif-toggle');
         const knob = document.getElementById('pesanan-notif-toggle-knob');
         const label = document.getElementById('pesanan-notif-toggle-label');
+        const headerBtn = document.getElementById('header-sound-toggle');
+        const headerIcon = document.getElementById('header-sound-icon');
         if (!muted) {
             if (toggle) toggle.style.background = 'var(--brand-main)';
             if (knob) knob.style.transform = 'translateX(28px)';
             if (label) label.textContent = 'Aktif: Bunyi & getar saat ada pesanan baru';
+            if (headerIcon) headerIcon.className = 'fa-solid fa-bell';
+            if (headerBtn) { headerBtn.style.color = 'var(--rp-orange)'; headerBtn.style.borderColor = 'var(--rp-orange)'; headerBtn.setAttribute('aria-label', 'Suara notifikasi aktif, tap untuk mematikan'); }
         } else {
             if (toggle) toggle.style.background = '#35507a';
             if (knob) knob.style.transform = 'translateX(0)';
             if (label) label.textContent = 'Nonaktif: Diam di HP ini (bel & badge tetap tampil)';
+            if (headerIcon) headerIcon.className = 'fa-solid fa-bell-slash';
+            if (headerBtn) { headerBtn.style.color = '#eef3fb'; headerBtn.style.borderColor = 'rgba(255,255,255,.2)'; headerBtn.setAttribute('aria-label', 'Suara notifikasi mati, tap untuk mengaktifkan'); }
         }
         localStorage.setItem('pesanan_notif_muted', muted ? '1' : '0');
     }
